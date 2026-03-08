@@ -11,7 +11,17 @@ public class Heroi {
 
     //Métodos
     public void receberDano (int dano) {
-
+        if(this.getEscudo() > 0) {
+            int danoEfetivo = dano - escudo;
+            if (dano < this.getEscudo()){
+                escudo -= dano;
+            } else {
+                this.vida -= danoEfetivo;
+                this.escudo = 0;
+            }
+        } else {
+            vida -= dano;
+        }
     }
     
     public void atacar() {
