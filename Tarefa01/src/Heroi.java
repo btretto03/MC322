@@ -23,11 +23,11 @@ public class Heroi {
             vida -= dano;
         }
     }
-    
-    public void atacar() {
 
+    public void ganharEscudo(int escudo) {
+        
     }
-
+    
     public boolean estaVivo() {
         if(this.getVida() > 0) {
             return true;
