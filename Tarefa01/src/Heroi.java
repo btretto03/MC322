@@ -25,7 +25,7 @@ public class Heroi {
     }
 
     public void ganharEscudo(int escudo) {
-        
+        this.escudo += escudo;
     }
     
     public boolean estaVivo() {
