@@ -10,7 +10,7 @@ public class Inimigo {
         this.escudo = escudo;
     }
     */
-   
+
     //Métodos
     public void receberDano (int dano) {
         int escudoAtual = this.getEscudo();
@@ -28,8 +28,8 @@ public class Inimigo {
     }
 
     public void atacar(Heroi atacado) {
-        this.forca = 3 + nextInt(5); //numero aleatorio para o ataque no range de 3 até 7
-        alvo.receberDano(this.forca);
+        this.forca = (int) (Math.random() * 5) + 3; //numero aleatorio para o ataque no range de 3 até 7
+        atacado.receberDano(this.forca);
     }
 
     public boolean estaVivo() {
@@ -46,7 +46,7 @@ public class Inimigo {
     }
 
     public void setNome(String nome) {
-        this.nome = this.nome;
+        this.nome = nome;
     }
 
     public int getVida() {
