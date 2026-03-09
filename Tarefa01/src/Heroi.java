@@ -30,7 +30,7 @@ public class Heroi {
         this.escudo += escudo;
     }
     
-    public boolean estaVivo() { //Filosófico
+    public boolean estaVivo() {
         if(this.getVida() > 0) {
             return true;
         } else {

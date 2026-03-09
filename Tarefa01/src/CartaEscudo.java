@@ -1,5 +1,5 @@
 public class CartaEscudo {
-    private String nome = "Escudo(pensar em um nome melhor)";
+    private String nome = "Escudo";
     private int custo = 2; // dnv podemos mudar
 
     /*public CartaEscudo(String nome, int custo) {

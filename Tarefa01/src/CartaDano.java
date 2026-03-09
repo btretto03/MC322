@@ -1,5 +1,5 @@
 public class CartaDano {
-    private String nome = "Golpe(pensar em um nome melhor)";
+    private String nome = "Golpe";
     private int custo = 2; //podemos mudar esses valores, só to colocando e depois com ele pronto testamos como ficar melhor da pra ver pra ser aleatorio tambem(achei legal como fiz no ataque do inimigo)
 
     /*public CartaDano(String nome, int custo) {
