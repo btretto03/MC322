@@ -3,11 +3,11 @@ public class Heroi {
     private int vida = 20;
     private int escudo  = 0;
     
-    public Heroi(String nome, int vida, int escudo) { //construtor
+    /*public Heroi(String nome, int vida, int escudo) { //construtor
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
-    }
+    } Comentei o método construtor porque acho que não precisa já que os valores são inicializados diretamente */
 
     //Métodos
     public void receberDano (int dano) {

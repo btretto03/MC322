@@ -4,12 +4,13 @@ public class Inimigo {
     private int escudo  = 0;
     private int forca = 0;
     
-    public Inimigo(String nome, int vida, int escudo) { //construtor
+    /*public Inimigo(String nome, int vida, int escudo) { //construtor
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
     }
-
+    */
+   
     //Métodos
     public void receberDano (int dano) {
         int escudoAtual = this.getEscudo();
