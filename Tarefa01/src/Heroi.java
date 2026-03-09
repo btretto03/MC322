@@ -2,6 +2,7 @@ public class Heroi {
     private String nome = "Alex Poatan"; //#Chama
     private int vida = 20;
     private int escudo  = 0;
+    private int energia = 3;
     
     /*public Heroi(String nome, int vida, int escudo) { //construtor
         this.nome = nome;
@@ -60,6 +61,14 @@ public class Heroi {
 
     public void setEscudo(int escudo) {
         this.escudo = escudo;
+    }
+
+    public int getEnergia() {
+        return energia;
+    }
+
+    public void setEnergia(int energia) {
+        this.energia = energia;
     }
     
 }
