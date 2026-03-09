@@ -41,15 +41,15 @@ public class Inimigo {
 
     //getters e setters
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = this.nome;
     }
 
     public int getVida() {
-        return vida;
+        return this.vida;
     }
 
     public void setVida(int vida) {
@@ -57,7 +57,7 @@ public class Inimigo {
     }
 
     public int getEscudo() {
-        return escudo;
+        return this.escudo;
     }
 
     public void setEscudo(int escudo) {

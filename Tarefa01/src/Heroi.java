@@ -39,7 +39,7 @@ public class Heroi {
 
     //getters e setters
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -47,7 +47,7 @@ public class Heroi {
     }
 
     public int getVida() {
-        return vida;
+        return this.vida;
     }
 
     public void setVida(int vida) {
@@ -55,7 +55,7 @@ public class Heroi {
     }
 
     public int getEscudo() {
-        return escudo;
+        return this.escudo;
     }
 
     public void setEscudo(int escudo) {
