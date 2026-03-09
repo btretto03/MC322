@@ -11,16 +11,17 @@ public class Heroi {
 
     //Métodos
     public void receberDano (int dano) {
-        if(this.getEscudo() > 0) {
-            int danoEfetivo = dano - escudo;
-            if (dano < this.getEscudo()){
-                escudo -= dano;
+        int escudoAtual  = this.getEscudo();
+        if(escudoAtual > 0) {
+            int danoEfetivo = dano - escudoAtual;
+            if (dano < escudoAtual){
+                this.escudo -= dano;
             } else {
                 this.vida -= danoEfetivo;
                 this.escudo = 0;
             }
         } else {
-            vida -= dano;
+            this.vida -= dano;
         }
     }
 
@@ -28,7 +29,7 @@ public class Heroi {
         this.escudo += escudo;
     }
     
-    public boolean estaVivo() {
+    public boolean estaVivo() { //Filosófico
         if(this.getVida() > 0) {
             return true;
         } else {
