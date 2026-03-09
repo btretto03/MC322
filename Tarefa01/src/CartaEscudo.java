@@ -6,8 +6,8 @@ public class CartaEscudo {
         this.nome = nome;
         this.custo = custo;
     }
-    public void usar() {
-
+    public void usar(Heroi heroi) {
+        heroi.setEscudo(heroi.getEscudo() + 3);
     }
 
     //getters e setters

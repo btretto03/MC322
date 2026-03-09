@@ -6,8 +6,10 @@ public class CartaDano {
         this.nome = nome;
         this.custo = custo;
     }
-    public void usar() {
 
+    public void usar(Inimigo atacado) {  
+        int dano = (int) (Math.random() * 5) + 3; //Gera um numero aleatorio para o dano no range de 3 até 7
+        atacado.receberDano(dano);
     }
 
     //getters e setters
@@ -26,7 +28,4 @@ public class CartaDano {
     public void setCusto(int custo) {
         this.custo = custo;
     }
-    
-
-
 }
