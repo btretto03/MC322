@@ -2,7 +2,7 @@
 
 **Desenvolvido por:**
 * Bruno Antonio Tretto - RA: 268060
-* João Felipe Denadai Madeira - RA: XXX
+* João Felipe Denadai Madeira - RA: 258477
 
 ## 📌 Sobre o Projeto
 O objetivo deste laboratório foi desenvolver um sistema de batalhas via terminal, fortemente inspirado na logística do jogo "Slay the Spire". Para isso aplicamos os conceitos iniciais da disciplina de Programação Orientada a Objetos (POO), como a construção de classes, a definição de atributos e métodos.
@@ -21,3 +21,4 @@ Na raiz do repositório, execute o comando abaixo. Ele gerará os arquivos compi
 ```bash
 javac -d bin $(find src -name "*.java")
 java -cp bin App
+```
