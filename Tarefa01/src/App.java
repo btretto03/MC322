@@ -7,18 +7,18 @@ public class App {
         Scanner inputs = new Scanner(System.in); //leitura de dados do usuário
 
         String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda", "Uppercut", "Cruzado de esquerda"}; //pensei nisso pra quando formos printar que ele usou um ataque fazer um loop nessa lista, só pra ficar uns nomes diferentes... mesma coisa na de baixo
-        // List<CartaDano> Ataques = new ArrayList<>();
-        // for(int i = 0; i < nomeAtaques.length; i++){
-        //     int custo = (int) (Math.random() * 3) + 1;
-        //     Ataques.add(new CartaDano(nomeAtaques[i], custo));
-        // }
+         List<CartaDano> Ataques = new ArrayList<>();
+         for(int i = 0; i < nomeAtaques.length; i++){
+             int custo = (int) (Math.random() * 3) + 1;
+             Ataques.add(new CartaDano(nomeAtaques[i], custo));
+         }
         
         String[] nomeEscudos = {"Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás"};
-        // List<CartaEscudo> Escudos = new ArrayList<>();
-        // for(int i = 0; i < nomeEscudos.length; i++){
-        //     int custo = (int) (Math.random() * 3) + 1;
-        //     Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
-        // }
+         List<CartaEscudo> Escudos = new ArrayList<>();
+         for(int i = 0; i < nomeEscudos.length; i++){
+             int custo = (int) (Math.random() * 3) + 1;
+             Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
+         }
 
         Heroi alex = new Heroi();
         Inimigo jon = new Inimigo();
@@ -26,17 +26,6 @@ public class App {
         while(true) {
             alex.setEnergia(3); //energia do poatan é resetada a cada turno
 
-            List<CartaDano> Ataques = new ArrayList<>();
-            for(int i = 0; i < nomeAtaques.length; i++){
-                int custo = (int) (Math.random() * 3) + 1;
-                Ataques.add(new CartaDano(nomeAtaques[i], custo));
-            }
-
-            List<CartaEscudo> Escudos = new ArrayList<>();
-            for(int i = 0; i < nomeEscudos.length; i++){
-                int custo = (int) (Math.random() * 3) + 1;
-                Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
-            }
 
             if (alex.estaVivo() == true && jon.estaVivo() == true) { //Os dois vivos
                 String vidaAlex = String.format("Alex está com %d de vida", alex.getVida());
@@ -70,12 +59,12 @@ public class App {
                         CartaEscudo escudoEscolhido = Escudos.get(num - i);
                         escudoEscolhido.usar(alex);
                         alex.setEnergia(alex.getEnergia() - escudoEscolhido.getCusto());
-                        Escudos.remove(num - i);
+                        
                     } else if (num >= 0 || num <= i){
                         CartaDano ataqueEscolhido = Ataques.get(num);
                         ataqueEscolhido.usar(jon);
                         alex.setEnergia(alex.getEnergia() - ataqueEscolhido.getCusto());
-                        Ataques.remove(num);
+                        
                     } else{
                         System.out.println("Selecione um valor válido.");
                         continue;
