@@ -27,8 +27,10 @@ public class App {
             alex.setEnergia(3); //energia do poatan é resetada a cada turno
 
             if (alex.estaVivo() == true && jon.estaVivo() == true) { //Os dois vivos
-                String vida = String.format("Alex está com %d de vida", alex.getVida());
-                System.out.println(vida);
+                String vidaAlex = String.format("Alex está com %d de vida", alex.getVida());
+                String vidaJon = String.format("Jon está com %d de vida", jon.getVida());
+                System.out.println(vidaAlex + "\n");
+                System.out.println(vidaJon + "\n");
 
                 while (alex.getEnergia() > 0) {
                     System.out.println("Energia disponpivel: " + alex.getEnergia());
@@ -70,11 +72,17 @@ public class App {
                     // break;
                 }
 
-            break;
+                jon.atacar(alex);
 
-            } else if (alex.estaVivo() == true && jon.estaVivo() == false) { //Jon morreu
+            // break;
+
+            } 
+            if (alex.estaVivo() == true && jon.estaVivo() == false) { //Jon morreu
+                System.out.println("Alex ganhou!!");
                 break;
-            } else if (alex.estaVivo() == false && jon.estaVivo() == true){ //Alex morreu
+            }
+            if (alex.estaVivo() == false && jon.estaVivo() == true){ //Alex morreu
+                System.out.println("Alex perdeu...");
                 break;
             }
             
