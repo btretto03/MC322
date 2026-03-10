@@ -20,3 +20,4 @@ Na raiz do repositório, execute o comando abaixo. Ele gerará os arquivos compi
 
 ```bash
 javac -d bin $(find src -name "*.java")
+java -cp bin App
