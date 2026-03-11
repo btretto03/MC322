@@ -56,7 +56,7 @@ public class App {
         }
 
         Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
-        Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
+        Inimigo inimigo = new Inimigo(escolhainimigo, 3, 0);
 
         String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda"};
         List<CartaDano> Ataques = new ArrayList<>();
@@ -154,15 +154,15 @@ public class App {
                 limparTela();
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
-                System.out.println("===============================================================");
-                System.out.println("🏆 VITÓRIA! " + escolhaheroi + " Parabéns, você foi o campeão! 🏆");
-                System.out.println("=======================================");
+                System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
+                System.out.println("\u001B[48;5;193m" + "🏆 VITÓRIA! " + escolhaheroi + " Parabéns, você foi o campeão! 🏆" + "\u001B[48;5;193m");
+                System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
                 break;
             }
             if (heroi.estaVivo() == false && inimigo.estaVivo() == true){ //Heroi morreu
-                System.out.println("=======================================");
-                System.out.println("💀 DERROTA... " + escolhaheroi + " Tente novamente. 💀");
-                System.out.println("=======================================");
+                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "💀 DERROTA... " + escolhaheroi + " perdeu. Tente novamente. 💀" + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
                 break;
             }
             
