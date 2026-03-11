@@ -56,7 +56,7 @@ public class App {
         }
 
         Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
-        Inimigo inimigo = new Inimigo(escolhainimigo, 3, 0);
+        Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
 
         String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda"};
         List<CartaDano> Ataques = new ArrayList<>();
