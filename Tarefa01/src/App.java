@@ -11,12 +11,12 @@ public class App {
         Scanner inputs = new Scanner(System.in); //leitura de dados do usuário
         String escolhaheroi, escolhainimigo;
 
-        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m"); //Print inicial
         System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
 
         System.out.println();
-        System.out.println("Escolha o seu lutador: "); //Escolha do heroi
+        System.out.println("Escolha o seu lutador: ");
         System.out.println("[1] 🗿 Alex Poatan \n[2] 🕷️  Anderson Silva\n[3] 🥋 Fabrício Werdun");
         int escolha = inputs.nextInt();
         limparTela();
@@ -138,14 +138,14 @@ public class App {
                     
                 }
 
-                System.out.println("🔥 SEU COMBO NESTE Round 🔥");
+                System.out.println(" 🥊SUAS AÇÕES NESSE ROUND🥊");
                 for (int i = 0; i < acoesDoRound.size(); i++) {
                     System.out.println(acoesDoRound.get(i));
                 }
 
                 inimigo.atacar(heroi);
                 System.out.println();
-                System.out.println("Digite 0 para continuar para o próximo round...");
+                System.out.println("Digite 0 para continuar a luta...");
                 int continuar = inputs.nextInt();
                 while (continuar != 0) { //Forçar o usuario digitar 0 para continuar para que mostre seus ataques
                     System.out.print("Valor inválido! Digite 0 para continuar: ");
