@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
+        public static void limparTela() {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        }
         public static void main(String[] args)  {
         Scanner inputs = new Scanner(System.in); //leitura de dados do usuário
         String escolhaheroi, escolhainimigo;
@@ -15,6 +19,8 @@ public class App {
         System.out.println("Escolha o seu lutador: "); //Escolha do heroi
         System.out.println("[1] 🗿 Alex Poatan \n[2] 🕷️  Anderson Silva\n[3] 🥋 Fabrício Werdun");
         int escolha = inputs.nextInt();
+        limparTela();
+
         switch (escolha) {
             case 1:
                 escolhaheroi = "Alex Poatan";
@@ -33,9 +39,10 @@ public class App {
         System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
         System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
         int escolha2 = inputs.nextInt();
+        limparTela();
         switch (escolha2) {
             case 1:
-                escolhainimigo = "Chael Sonnen";
+                escolhainimigo = "Vitor Belfort";
                 break;
             case 2:
                 escolhainimigo = "Popó";
@@ -67,13 +74,13 @@ public class App {
         System.out.println();
         System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
         while(true) { //Loop da luta
-            heroi.setEnergia(5); //energia do poatan é resetada a cada turno
+            heroi.setEnergia(5); //energia do poatan é resetada a cada Round
 
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
                 
                 System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "               NOVO TURNO               " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
                 System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
                 
                 String vidaHeroi = String.format("🟩 %s: ❤️ %d HP | 🛡️ %d Escudo", escolhaheroi, heroi.getVida(), heroi.getEscudo());
@@ -81,10 +88,10 @@ public class App {
                 System.out.println(vidaHeroi);
                 System.out.println(vidaInimigo + "\n");
 
-                List<String> acoesDoTurno = new ArrayList<>();
+                List<String> acoesDoRound = new ArrayList<>();
 
                 while (heroi.getEnergia() > 0) {
-                    System.out.println("⚡ Energia disponível: " + heroi.getEnergia() + "/5");
+                    System.out.println("🔋 Energia disponível: " + heroi.getEnergia() + "/5");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
                     int i = 0;
@@ -106,13 +113,14 @@ public class App {
                     System.out.println("---------------------------------------");
                     System.out.print("Escolha o número da carta: ");
                     int num = inputs.nextInt();
+                    limparTela();
 
                     if (num >= i){
                         CartaEscudo escudoEscolhido = Escudos.get(num - i);
                         escudoEscolhido.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - escudoEscolhido.getCusto());
                         
-                        acoesDoTurno.add("✨ Defesa ativada: " + escudoEscolhido.getNome());
+                        acoesDoRound.add("✨ Defesa ativada: " + escudoEscolhido.getNome());
                         System.out.println(); 
                         
                     } else if (num >= 0 || num <= i){
@@ -120,7 +128,7 @@ public class App {
                         ataqueEscolhido.usar(inimigo);
                         heroi.setEnergia(heroi.getEnergia() - ataqueEscolhido.getCusto());
                         
-                        acoesDoTurno.add("💥 Ataque desferido: " + ataqueEscolhido.getNome());
+                        acoesDoRound.add("💥 Ataque desferido: " + ataqueEscolhido.getNome());
                         System.out.println(); 
                         
                     } else{
@@ -130,8 +138,8 @@ public class App {
                     
                 }
                 
-                System.out.println("🔥 SEU COMBO NESTE TURNO 🔥");
-                for (String acao : acoesDoTurno) {
+                System.out.println("🔥 SEU COMBO NESTE Round 🔥");
+                for (String acao : acoesDoRound) {
                     System.out.println(acao);
                 }
                 System.out.println("---------------------------------------");
