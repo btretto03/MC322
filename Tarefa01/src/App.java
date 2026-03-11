@@ -3,14 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args)  {
+        public static void main(String[] args)  {
         Scanner inputs = new Scanner(System.in); //leitura de dados do usuário
         String escolhaheroi, escolhainimigo;
 
-        System.out.println("==================================================");
-        System.out.println("         🥊 BEM-VINDO AO CLUBE DA LUTA 🥊");
-        System.out.println("==================================================");
-
+        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                                                  \n" + "\u001B[0m");
 
         System.out.println();
         System.out.println("Escolha o seu lutador: "); //Escolha do heroi
@@ -65,25 +64,34 @@ public class App {
             int custo = i + 1;
             Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
         }
-        System.out.println("\n🔥 A LUTA VAI COMEÇAR! 🔥\n");
-        while(true) {
+        System.out.println();
+        System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
+        while(true) { //Loop da luta
             heroi.setEnergia(5); //energia do poatan é resetada a cada turno
 
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
-                String vidaHeroi = String.format("Heroi está com %d de vida", heroi.getVida());
-                String vidaInimigo = String.format("Inimigo está com %d de vida", inimigo.getVida());
-                System.out.println(vidaHeroi + "\n");
+                
+                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "               NOVO TURNO               " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
+                
+                String vidaHeroi = String.format("🟩 %s: ❤️ %d HP | 🛡️ %d Escudo", escolhaheroi, heroi.getVida(), heroi.getEscudo());
+                String vidaInimigo = String.format("🟥 %s: ❤️ %d HP", escolhainimigo, inimigo.getVida());
+                System.out.println(vidaHeroi);
                 System.out.println(vidaInimigo + "\n");
 
-                while (heroi.getEnergia() > 0) {
-                    System.out.println("Energia disponpivel: " + heroi.getEnergia());
+                List<String> acoesDoTurno = new ArrayList<>();
 
+                while (heroi.getEnergia() > 0) {
+                    System.out.println("⚡ Energia disponível: " + heroi.getEnergia() + "/5");
+                    System.out.println("---------------------------------------");
+                    System.out.println("Suas opções de ação:");
                     int i = 0;
                     for(; i < Ataques.size(); i++){ 
                         CartaDano ataqueAtual = Ataques.get(i);
                         if (ataqueAtual.getCusto() <= heroi.getEnergia()){
-                            String ataqueDisponivel = String.format("%d - %s - Custo: %d", i, ataqueAtual.getNome(), ataqueAtual.getCusto());
+                            String ataqueDisponivel = String.format("[%d] ⚔️ %s (Custo: %d)", i, ataqueAtual.getNome(), ataqueAtual.getCusto());
                             System.out.println(ataqueDisponivel);
                         }
                     }
@@ -91,11 +99,12 @@ public class App {
                     for(int j = 0; j < Escudos.size(); j++){ 
                         CartaEscudo escudoAtual = Escudos.get(j);
                         if (escudoAtual.getCusto() <= heroi.getEnergia()){
-                            String ataqueDisponivel = String.format("%d - %s - Custo: %d", j + i, escudoAtual.getNome(), escudoAtual.getCusto());
+                            String ataqueDisponivel = String.format("[%d] 🛡️ %s (Custo: %d)", j + i, escudoAtual.getNome(), escudoAtual.getCusto());
                             System.out.println(ataqueDisponivel);
                         }
                     }
-
+                    System.out.println("---------------------------------------");
+                    System.out.print("Escolha o número da carta: ");
                     int num = inputs.nextInt();
 
                     if (num >= i){
@@ -103,27 +112,44 @@ public class App {
                         escudoEscolhido.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - escudoEscolhido.getCusto());
                         
+                        acoesDoTurno.add("✨ Defesa ativada: " + escudoEscolhido.getNome());
+                        System.out.println(); 
+                        
                     } else if (num >= 0 || num <= i){
                         CartaDano ataqueEscolhido = Ataques.get(num);
                         ataqueEscolhido.usar(inimigo);
                         heroi.setEnergia(heroi.getEnergia() - ataqueEscolhido.getCusto());
                         
+                        acoesDoTurno.add("💥 Ataque desferido: " + ataqueEscolhido.getNome());
+                        System.out.println(); 
+                        
                     } else{
-                        System.out.println("Selecione um valor válido.");
+                        System.out.println("\n❌ Selecione um valor válido.\n");
                         continue;
                     }
                     
                 }
+                
+                System.out.println("🔥 SEU COMBO NESTE TURNO 🔥");
+                for (String acao : acoesDoTurno) {
+                    System.out.println(acao);
+                }
+                System.out.println("---------------------------------------");
 
                 inimigo.atacar(heroi);
+                System.out.println();
 
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
-                System.out.println("Heroi ganhou!!");
+                System.out.println("=======================================");
+                System.out.println("🏆 VITÓRIA! " + escolhaheroi + " Parabéns, você foi o campeão! 🏆");
+                System.out.println("=======================================");
                 break;
             }
             if (heroi.estaVivo() == false && inimigo.estaVivo() == true){ //Heroi morreu
-                System.out.println("Inimigo ganhou!!");
+                System.out.println("=======================================");
+                System.out.println("💀 DERROTA... " + escolhaheroi + " Tente novamente. 💀");
+                System.out.println("=======================================");
                 break;
             }
             
