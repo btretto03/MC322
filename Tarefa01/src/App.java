@@ -132,7 +132,7 @@ public class App {
                         System.out.println(); 
                         
                     } else{
-                        System.out.println("\n❌ Selecione um valor válido.\n");
+                        System.out.println("\nPor favor, Selecione um valor válido.\n");
                         continue;
                     }
                     
