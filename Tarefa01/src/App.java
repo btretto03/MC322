@@ -13,7 +13,7 @@ public class App {
 
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                  \n" + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
 
         System.out.println();
         System.out.println("Escolha o seu lutador: "); //Escolha do heroi
