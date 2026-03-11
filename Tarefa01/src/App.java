@@ -137,19 +137,24 @@ public class App {
                     }
                     
                 }
-                
+
                 System.out.println("🔥 SEU COMBO NESTE Round 🔥");
-                for (String acao : acoesDoRound) {
-                    System.out.println(acao);
+                for (int i = 0; i < acoesDoRound.size(); i++) {
+                    System.out.println(acoesDoRound.get(i));
                 }
-                System.out.println("---------------------------------------");
 
                 inimigo.atacar(heroi);
                 System.out.println();
-
+                System.out.println("Digite 0 para continuar para o próximo round...");
+                int continuar = inputs.nextInt();
+                while (continuar != 0) { //Forçar o usuario digitar 0 para continuar para que mostre seus ataques
+                    System.out.print("Valor inválido! Digite 0 para continuar: ");
+                    continuar = inputs.nextInt();
+                }
+                limparTela();
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
-                System.out.println("=======================================");
+                System.out.println("===============================================================");
                 System.out.println("🏆 VITÓRIA! " + escolhaheroi + " Parabéns, você foi o campeão! 🏆");
                 System.out.println("=======================================");
                 break;
