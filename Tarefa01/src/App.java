@@ -7,8 +7,14 @@ public class App {
         Scanner inputs = new Scanner(System.in); //leitura de dados do usuário
         String escolhaheroi, escolhainimigo;
 
+        System.out.println("==================================================");
+        System.out.println("         🥊 BEM-VINDO AO CLUBE DA LUTA 🥊");
+        System.out.println("==================================================");
+
+
+        System.out.println();
         System.out.println("Escolha o seu lutador: "); //Escolha do heroi
-        System.out.println("1 - Alex Poatan\n2 - Anderson Silva\n3 - Fabrício Werdun");
+        System.out.println("[1] 🗿 Alex Poatan \n[2] 🕷️  Anderson Silva\n[3] 🥋 Fabrício Werdun");
         int escolha = inputs.nextInt();
         switch (escolha) {
             case 1:
@@ -21,12 +27,12 @@ public class App {
                 escolhaheroi = "Fabrício Werdun";
                 break;
             default:
-                System.out.println("Escolha inválida. O lutador será Alex Poatan por padrão.");
+                System.out.println("⚠️Escolha inválida. O lutador será Alex Poatan por padrão.");
                 escolhaheroi = "Alex Poatan";
         }
          
         System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
-        System.out.println("1 - Chael Sonnen\n2 - Popó\n3 - Jon Jones");
+        System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
         int escolha2 = inputs.nextInt();
         switch (escolha2) {
             case 1:
@@ -39,7 +45,7 @@ public class App {
                 escolhainimigo = "Jon Jones";
                 break;
             default:
-                System.out.println("Escolha inválida. O lutador será Popó por padrão.");
+                System.out.println("⚠️Escolha inválida. O lutador será Popó por padrão.");
                 escolhainimigo = "Popó";
         }
 
@@ -59,7 +65,7 @@ public class App {
             int custo = i + 1;
             Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
         }
-
+        System.out.println("\n🔥 A LUTA VAI COMEÇAR! 🔥\n");
         while(true) {
             heroi.setEnergia(5); //energia do poatan é resetada a cada turno
 
