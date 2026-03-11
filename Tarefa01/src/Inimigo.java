@@ -28,7 +28,7 @@ public class Inimigo {
     }
 
     public void atacar(Heroi atacado) {
-        this.forca = (int) (Math.random() * 5) + 3; //numero aleatorio para o ataque no range de 3 até 7
+        this.forca = (int) (Math.random() * 5) + 6; //numero aleatorio para o ataque no range de 6 até 10
         atacado.receberDano(this.forca);
     }
 
