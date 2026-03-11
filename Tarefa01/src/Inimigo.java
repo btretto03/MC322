@@ -1,15 +1,15 @@
 public class Inimigo {
-    private String nome = "Jon Jones"; //#Goat
-    private int vida = 20;
-    private int escudo  = 0;
+    private String nome; //
+    private int vida;
+    private int escudo;
     private int forca = 0;
     
-    /*public Inimigo(String nome, int vida, int escudo) { //construtor
+    public Inimigo(String nome, int vida, int escudo) { //construtor
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
     }
-    */
+    
 
     //Métodos
     public void receberDano (int dano) {

@@ -1,14 +1,14 @@
 public class Heroi {
-    private String nome = "Alex Poatan"; //#Chama
-    private int vida = 20;
-    private int escudo  = 0;
-    private int energia = 3;
+    private String nome; 
+    private int vida;
+    private int escudo;
+    private int energia;
     
-    /*public Heroi(String nome, int vida, int escudo) { //construtor
+    public Heroi(String nome, int vida, int escudo) { //construtor
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
-    } Comentei o método construtor porque acho que não precisa já que os valores são inicializados diretamente */
+    } 
 
     //Métodos
     public void receberDano (int dano) {
