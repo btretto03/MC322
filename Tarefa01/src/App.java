@@ -83,8 +83,8 @@ public class App {
                 System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
                 System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
                 
-                String vidaHeroi = String.format("🟩 %s: ❤️ %d HP | 🛡️ %d Escudo", escolhaheroi, heroi.getVida(), heroi.getEscudo());
-                String vidaInimigo = String.format("🟥 %s: ❤️ %d HP", escolhainimigo, inimigo.getVida());
+                String vidaHeroi = String.format("🟩 %s: ❤️  %d VIDA", escolhaheroi, heroi.getVida());
+                String vidaInimigo = String.format("🟥 %s: ❤️  %d VIDA", escolhainimigo, inimigo.getVida());
                 System.out.println(vidaHeroi);
                 System.out.println(vidaInimigo + "\n");
 
