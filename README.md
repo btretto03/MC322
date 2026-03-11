@@ -12,7 +12,6 @@ Para esta implementação, adaptamos a dinâmica de combate para o universo do U
 ## 🪜 Estrutura do projeto
 ```
 .
-├── bin/
 ├── README.md
 └── src
     ├── App.java
@@ -23,8 +22,6 @@ Para esta implementação, adaptamos a dinâmica de combate para o universo do U
 ```
 Onde:
 - src — contém todos os arquivos .java do projeto
-- lib — pasta reservada para dependências externas (não utilizada neste projeto)
-- bin — arquivos .class gerados após a compilação
 
 
 ## 🚀 Como compilar e executar
