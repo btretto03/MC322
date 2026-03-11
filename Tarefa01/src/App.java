@@ -43,25 +43,25 @@ public class App {
                 escolhainimigo = "Popó";
         }
 
-        Heroi heroi = new Heroi(escolhaheroi, 100, 0);
-        Inimigo inimigo = new Inimigo(escolhainimigo, 100, 0);
+        Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
+        Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
 
-        String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda", "Uppercut", "Cruzado de esquerda"};
-         List<CartaDano> Ataques = new ArrayList<>();
-         for(int i = 0; i < nomeAtaques.length; i++){
-             int custo = (int) (Math.random() * 3) + 1;
-             Ataques.add(new CartaDano(nomeAtaques[i], custo));
-         }
+        String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda"};
+        List<CartaDano> Ataques = new ArrayList<>();
+        for (int i = 0; i < nomeAtaques.length; i ++){
+            int custo = i + 1;
+            Ataques.add(new CartaDano(nomeAtaques[i], custo));
+        }
         
         String[] nomeEscudos = {"Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás"};
-         List<CartaEscudo> Escudos = new ArrayList<>();
-         for(int i = 0; i < nomeEscudos.length; i++){
-             int custo = (int) (Math.random() * 3) + 1;
-             Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
-         }
+        List<CartaEscudo> Escudos = new ArrayList<>();
+        for (int i = 0; i < nomeEscudos.length; i ++){
+            int custo = i + 1;
+            Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
+        }
 
         while(true) {
-            heroi.setEnergia(3); //energia do poatan é resetada a cada turno
+            heroi.setEnergia(5); //energia do poatan é resetada a cada turno
 
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
@@ -107,12 +107,9 @@ public class App {
                         continue;
                     }
                     
-                    // break;
                 }
 
                 inimigo.atacar(heroi);
-
-            // break;
 
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
