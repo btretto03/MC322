@@ -77,17 +77,14 @@ public class App {
         ArrayList <Carta> pilhaCompra = new ArrayList<>();
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
         pilhaCompra = Baralho;
+
         while(true) { //Loop da luta
+            heroi.setEnergia(100); //energia do heroi é resetada a cada Round
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
                 int cartaaleatoria = (int) (Math.random() * Baralho.size());
                 mao.add(pilhaCompra.remove(cartaaleatoria));
             }
-
-            
-            
-            
-            heroi.setEnergia(100); //energia do heroi é resetada a cada Round
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
                 
@@ -107,21 +104,11 @@ public class App {
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
                     int i = 0;
-                    for(; i < Baralho.size(); i++){ 
-                        CartaDano ataqueAtual = Ataques.get(i);
-                        if (ataqueAtual.getCusto() <= heroi.getEnergia()){
-                            String ataqueDisponivel = String.format("[%d] ⚔️ %s (Custo: %d)", i, ataqueAtual.getNome(), ataqueAtual.getCusto());
-                            System.out.println(ataqueDisponivel);
-                        }
+                    for(; i < mao.size(); i ++){ 
+                        Carta cartaAtual = mao.get(i);
+                        cartaAtual.printRodada(i);
                     }
                         
-                    for(int j = 0; j < Escudos.size(); j++){ 
-                        CartaEscudo escudoAtual = Escudos.get(j);
-                        if (escudoAtual.getCusto() <= heroi.getEnergia()){
-                            String ataqueDisponivel = String.format("[%d] 🛡️ %s (Custo: %d)", j + i, escudoAtual.getNome(), escudoAtual.getCusto());
-                            System.out.println(ataqueDisponivel);
-                        }
-                    }
                     System.out.println("---------------------------------------");
                     System.out.print("Escolha o número da carta: ");
                     int num = inputs.nextInt();

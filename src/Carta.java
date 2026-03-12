@@ -9,6 +9,8 @@ public abstract class Carta {
 
     public abstract void usar (Entidade usuário);
 
+    public abstract void printRodada (int indice);
+
     //getters e setters
     public String getNome() {
         return nome;
