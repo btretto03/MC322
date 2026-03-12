@@ -1,4 +1,4 @@
-public class Entidade {
+public abstract class Entidade {
     protected String nome; 
     protected int vida;
     protected int escudo;
@@ -7,6 +7,34 @@ public class Entidade {
         this.nome = nome;
         this.vida = vida;
         this.escudo = escudo;
+    }
+
+    //Métodos
+    public void receberDano (int dano) {
+        int escudoAtual = this.getEscudo();
+        if(escudoAtual > 0) {
+            int danoEfetivo = dano - escudoAtual;
+            if (dano < escudoAtual){
+                this.escudo -= dano;
+            } else {
+                this.vida -= danoEfetivo;
+                this.escudo = 0;
+            }
+        } else {
+            this.vida -= dano;
+        }
+    }
+
+    public boolean estaVivo() {
+        if(this.getVida() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void ganharEscudo(int escudo) {
+        this.escudo += escudo;
     }
 
     //Getters e setters
@@ -32,28 +60,5 @@ public class Entidade {
 
     public void setEscudo(int escudo) {
         this.escudo = escudo;
-    }
-
-    public void receberDano (int dano) {
-        int escudoAtual = this.getEscudo();
-        if(escudoAtual > 0) {
-            int danoEfetivo = dano - escudoAtual;
-            if (dano < escudoAtual){
-                this.escudo -= dano;
-            } else {
-                this.vida -= danoEfetivo;
-                this.escudo = 0;
-            }
-        } else {
-            this.vida -= dano;
-        }
-    }
-
-    public boolean estaVivo() {
-        if(this.getVida() > 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

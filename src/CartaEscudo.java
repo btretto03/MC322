@@ -4,7 +4,8 @@ public class CartaEscudo extends Carta {
         super(nome, custo);
     }
     
-    public void usar(Heroi heroi) {
+    @Override
+    public void usar(Entidade heroi) {
         heroi.setEscudo(heroi.getEscudo() + 3);
     }
 }

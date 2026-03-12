@@ -4,11 +4,6 @@ public class Heroi extends Entidade {
     public Heroi(String nome, int vida, int escudo) { //construtor
         super(nome, vida, escudo);
     }
-
-    //Métodos
-    public void ganharEscudo(int escudo) {
-        this.escudo += escudo;
-    }
     
     //Getters e Setters
     public int getEnergia() {

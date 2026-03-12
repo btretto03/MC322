@@ -1,4 +1,4 @@
-public class Carta {
+public abstract class Carta {
     protected String nome ;
     protected int custo; 
     
@@ -6,6 +6,8 @@ public class Carta {
         this.nome = nome;
         this.custo = custo;
     }
+
+    public abstract void usar (Entidade usuário);
 
     //getters e setters
     public String getNome() {
