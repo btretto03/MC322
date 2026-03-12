@@ -1,6 +1,6 @@
 public class Carta {
-    private String nome ;
-    private int custo; 
+    protected String nome ;
+    protected int custo; 
     
     public Carta(String nome, int custo) {
         this.nome = nome;
