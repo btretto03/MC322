@@ -58,23 +58,36 @@ public class App {
         Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
         Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
 
+        ArrayList<Carta> Baralho = new ArrayList<>();
         String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda", "Jab", "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora"};
-        List<CartaDano> Ataques = new ArrayList<>();
         for (int i = 0; i < nomeAtaques.length; i ++){
             int custo = i + 1;
-            Ataques.add(new CartaDano(nomeAtaques[i], custo));
+            Baralho.add(new CartaDano(nomeAtaques[i], custo));
         }
         
         String[] nomeEscudos = {"Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", "Guarda alta", "Guarda baixa", "Correr",};
-        List<CartaEscudo> Escudos = new ArrayList<>();
         for (int i = 0; i < nomeEscudos.length; i ++){
             int custo = i + 1;
-            Escudos.add(new CartaEscudo(nomeEscudos[i], custo));
+            Baralho.add(new CartaEscudo(nomeEscudos[i], custo));
         }
         System.out.println();
         System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
+
+
+        ArrayList <Carta> pilhaCompra = new ArrayList<>();
+        ArrayList <Carta> pilhaDescarte = new ArrayList<>();
+        pilhaCompra = Baralho;
         while(true) { //Loop da luta
-            heroi.setEnergia(5); //energia do poatan é resetada a cada Round
+            ArrayList <Carta> mao = new ArrayList<>();
+            for (int i = 0;i < 4; i ++) {
+                int cartaaleatoria = (int) (Math.random() * Baralho.size());
+                mao.add(pilhaCompra.remove(cartaaleatoria));
+            }
+
+            
+            
+            
+            heroi.setEnergia(100); //energia do heroi é resetada a cada Round
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
                 
@@ -87,14 +100,14 @@ public class App {
                 System.out.println(vidaHeroi);
                 System.out.println(vidaInimigo + "\n");
 
-                List<String> acoesDoRound = new ArrayList<>();
+                ArrayList<String> acoesDoRound = new ArrayList<>();
 
                 while (heroi.getEnergia() > 0) {
                     System.out.println("🔋 Energia disponível: " + heroi.getEnergia() + "/5");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
                     int i = 0;
-                    for(; i < Ataques.size(); i++){ 
+                    for(; i < Baralho.size(); i++){ 
                         CartaDano ataqueAtual = Ataques.get(i);
                         if (ataqueAtual.getCusto() <= heroi.getEnergia()){
                             String ataqueDisponivel = String.format("[%d] ⚔️ %s (Custo: %d)", i, ataqueAtual.getNome(), ataqueAtual.getCusto());
