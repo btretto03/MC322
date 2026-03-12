@@ -58,14 +58,14 @@ public class App {
         Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
         Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
 
-        String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda"};
+        String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda", "Jab", "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora"};
         List<CartaDano> Ataques = new ArrayList<>();
         for (int i = 0; i < nomeAtaques.length; i ++){
             int custo = i + 1;
             Ataques.add(new CartaDano(nomeAtaques[i], custo));
         }
         
-        String[] nomeEscudos = {"Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás"};
+        String[] nomeEscudos = {"Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", "Guarda alta", "Guarda baixa", "Correr",};
         List<CartaEscudo> Escudos = new ArrayList<>();
         for (int i = 0; i < nomeEscudos.length; i ++){
             int custo = i + 1;
@@ -75,7 +75,6 @@ public class App {
         System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
         while(true) { //Loop da luta
             heroi.setEnergia(5); //energia do poatan é resetada a cada Round
-
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
                 
