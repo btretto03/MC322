@@ -7,54 +7,16 @@ public class App {
             System.out.print("\033[H\033[2J");
             System.out.flush();
         }
+        public static Scanner inputs = new Scanner(System.in); //leitura de dados do usuário(definido como static para ser acessível em outros métodos e classes)
         public static void main(String[] args)  {
-        Scanner inputs = new Scanner(System.in); //leitura de dados do usuário
-        String escolhaheroi, escolhainimigo;
 
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m"); //Print inicial
         System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
-
-        System.out.println();
-        System.out.println("Escolha o seu lutador: ");
-        System.out.println("[1] 🗿 Alex Poatan \n[2] 🕷️  Anderson Silva\n[3] 🥋 Fabrício Werdun");
-        int escolha = inputs.nextInt();
-        limparTela();
-
-        switch (escolha) {
-            case 1:
-                escolhaheroi = "Alex Poatan";
-                break;
-            case 2:
-                escolhaheroi = "Anderson Silva";
-                break;
-            case 3:
-                escolhaheroi = "Fabrício Werdun";
-                break;
-            default:
-                System.out.println("⚠️Escolha inválida. O lutador será Alex Poatan por padrão.");
-                escolhaheroi = "Alex Poatan";
-        }
-         
-        System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
-        System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
-        int escolha2 = inputs.nextInt();
-        limparTela();
-        switch (escolha2) {
-            case 1:
-                escolhainimigo = "Vitor Belfort";
-                break;
-            case 2:
-                escolhainimigo = "Popó";
-                break;
-            case 3:
-                escolhainimigo = "Jon Jones";
-                break;
-            default:
-                System.out.println("⚠️Escolha inválida. O lutador será Popó por padrão.");
-                escolhainimigo = "Popó";
-        }
-
+       
+        String escolhaheroi = Heroi.escolherHeroi();
+        String escolhainimigo = Inimigo.escolherInimigo();
+        
         Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
         Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
 
@@ -81,7 +43,7 @@ public class App {
         while(true) { //Loop da luta
             heroi.setEnergia(100); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
-            
+
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
                 int cartaaleatoria = (int) (Math.random() * Baralho.size());
@@ -113,6 +75,9 @@ public class App {
                         
                     System.out.println("---------------------------------------");
                     System.out.print("Escolha o número da carta: ");
+
+                    //System.out.println("Caso queira passar a vez digite passar"); Tem que implementar isso aqui dps ver como fazer
+
                     int num = inputs.nextInt();
                     limparTela();
 

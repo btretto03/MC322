@@ -5,6 +5,30 @@ public class Inimigo extends Entidade {
         super(nome, vida, escudo);
     }
     
+    public static String escolherInimigo() {
+    String escolhainimigo;
+    System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
+        System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
+        int escolha2 = App.inputs.nextInt();
+        App.limparTela();
+        switch (escolha2) {
+            case 1:
+                escolhainimigo = "Vitor Belfort";
+                break;
+            case 2:
+                escolhainimigo = "Popó";
+                break;
+            case 3:
+                escolhainimigo = "Jon Jones";
+                break;
+            default:
+                System.out.println("⚠️Escolha inválida. O lutador será Popó por padrão.");
+                escolhainimigo = "Popó";
+        }
+        return escolhainimigo;
+    }
+
+
     //Métodos
     public void atacar(Heroi atacado) {
         this.forca = (int) (Math.random() * 5) + 6; //numero aleatorio para o ataque no range de 6 até 10
