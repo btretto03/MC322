@@ -3,39 +3,38 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-        public static void limparTela() {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-        }
-        public static Scanner inputs = new Scanner(System.in); //leitura de dados do usuário(definido como static para ser acessível em outros métodos e classes)
-        public static void main(String[] args)  {
-
+    public static void limparTela() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+    public static Scanner inputs = new Scanner(System.in); //leitura de dados do usuário(definido como static para ser acessível em outros métodos e classes)
+    public static void main(String[] args)  {
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m"); //Print inicial
         System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
-       
+    
         String escolhaheroi = Heroi.escolherHeroi();
         String escolhainimigo = Inimigo.escolherInimigo();
-        
         Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
         Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
 
         ArrayList<Carta> Baralho = new ArrayList<>();
-        String[] nomeAtaques = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda", "Jab", "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora"};
-        for (int i = 0; i < nomeAtaques.length; i ++){
-            int custo = i + 1;
-            Baralho.add(new CartaDano(nomeAtaques[i], custo));
+        String[] nomeCartas = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda", "Jab", "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora", "Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", "Guarda alta", "Guarda baixa", "Correr",};
+        int custo = 1;
+
+        for (int i = 0; i < nomeCartas.length; i++) {
+            if (i < 10) {
+                Baralho.add(new CartaDano(nomeCartas[i], custo));
+            } else {
+                Baralho.add(new CartaEscudo(nomeCartas[i], custo));
+            }
+            custo ++; 
+            if (custo > 4) { //limita o custo das cartas em 4
+                custo = 1; 
+            }
         }
-        
-        String[] nomeEscudos = {"Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", "Guarda alta", "Guarda baixa", "Correr",};
-        for (int i = 0; i < nomeEscudos.length; i ++){
-            int custo = i + 1;
-            Baralho.add(new CartaEscudo(nomeEscudos[i], custo));
-        }
-        System.out.println();
+
         System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
-
-
         ArrayList <Carta> pilhaCompra = new ArrayList<>();
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
         pilhaCompra = Baralho;
@@ -127,8 +126,6 @@ public class App {
                 Inimigo.printInimigoVenceu(inimigo);
                 break;
             }
-            
-
         }
         inputs.close(); 
     }  
