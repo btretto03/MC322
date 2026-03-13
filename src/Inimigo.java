@@ -28,6 +28,11 @@ public class Inimigo extends Entidade {
         return escolhainimigo;
     }
 
+    public static void printInimigoVenceu(Inimigo inimigo) {
+        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "💀 DERROTA... " + inimigo.getNome() + " venceu. Tente novamente. 💀" + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+    }
 
     //Métodos
     public void atacar(Heroi atacado) {

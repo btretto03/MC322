@@ -120,15 +120,11 @@ public class App {
                 limparTela();
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
-                System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
-                System.out.println("\u001B[48;5;193m" + "🏆 VITÓRIA! " + escolhaheroi + " Parabéns, você foi o campeão! 🏆" + "\u001B[48;5;193m");
-                System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
+                Heroi.printHeroiVenceu(heroi);
                 break;
             }
             if (heroi.estaVivo() == false && inimigo.estaVivo() == true){ //Heroi morreu
-                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "💀 DERROTA... " + escolhaheroi + " perdeu. Tente novamente. 💀" + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+                Inimigo.printInimigoVenceu(inimigo);
                 break;
             }
             
