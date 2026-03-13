@@ -80,6 +80,8 @@ public class App {
 
         while(true) { //Loop da luta
             heroi.setEnergia(100); //energia do heroi é resetada a cada Round
+            heroi.setEscudo(0); //resetando escudo a 0 em cada round
+            
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
                 int cartaaleatoria = (int) (Math.random() * Baralho.size());
