@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Heroi extends Entidade {
     private int energia;
     
@@ -10,7 +12,7 @@ public class Heroi extends Entidade {
         System.out.println("Escolha o seu herói: "); //Escolha do heroi
         System.out.println("[1] 🏆 Alex Poatan\n[2] 🥋 Anderson Silva\n[3] 🥊 Fabrício Werdum");
         int escolha1 = App.inputs.nextInt();
-        App.limparTela();
+        // App.limparTela();
         switch (escolha1) {
             case 1:
                 escolhaheroi = "Alex Poatan";
@@ -32,6 +34,22 @@ public class Heroi extends Entidade {
         System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
         System.out.println("\u001B[48;5;193m" + "🏆 VITÓRIA! " + heroi.getNome() + " Parabéns, você foi o campeão! 🏆" + "\u001B[48;5;193m");
         System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
+    }
+
+    public boolean verificaMao (ArrayList<Carta> mao){
+        int cartasInvalidas = 0;
+        for (Carta i : mao){
+            if (i.getCusto() > this.getEnergia()){
+                cartasInvalidas++;
+            }
+        }
+        if (cartasInvalidas == mao.size()){
+            System.out.println("\n🪫 Energia insuficiente. Rodada finalizada.\n");
+            System.out.println("---------------------------------------");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //Getters e Setters

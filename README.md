@@ -17,6 +17,8 @@ Para esta implementação, adaptamos a dinâmica de combate para o universo do U
     ├── App.java
     ├── CartaDano.java
     ├── CartaEscudo.java
+    ├── Carta.java
+    ├── Entidade.java
     ├── Heroi.java
     └── Inimigo.java
 ```

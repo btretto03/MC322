@@ -1,6 +1,7 @@
+import java.util.ArrayList;
+
 public class Inimigo extends Entidade {
-    private int forca = 0;
-    
+
     public Inimigo(String nome, int vida, int escudo) { //construtor
         super(nome, vida, escudo);
     }
@@ -34,9 +35,12 @@ public class Inimigo extends Entidade {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
-    //Métodos
-    public void atacar(Heroi atacado) {
-        this.forca = (int) (Math.random() * 5) + 6; //numero aleatorio para o ataque no range de 6 até 10
-        atacado.receberDano(this.forca);
-    }    
+    public void anuncio(ArrayList<String> acoesRound){
+        System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
+        for(int i = 0; i < acoesRound.size(); i++){
+            System.out.println(acoesRound.get(i));
+        }
+        acoesRound.clear();
+    }
+  
 }

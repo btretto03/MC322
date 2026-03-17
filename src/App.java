@@ -51,7 +51,7 @@ public class App {
                     }
                 }
                 if (pilhaCompra.size() > 0) {
-                    int cartaaleatoria = (int) (Math.random() * pilhaCompra.size());
+                    int cartaaleatoria = (int) (Math.random() * pilhaCompra.size()); //"Embaralhamento"
                     mao.add(pilhaCompra.remove(cartaaleatoria));
                 }
             }
@@ -67,7 +67,8 @@ public class App {
                 System.out.println(vidaHeroi);
                 System.out.println(vidaInimigo + "\n");
 
-                ArrayList<String> acoesDoRound = new ArrayList<>();
+                ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
+                ArrayList<String> acoesDoRoundInimigo = new ArrayList<>();
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     System.out.println("🔋 Energia disponível: " + heroi.getEnergia() + "/5");
@@ -80,6 +81,14 @@ public class App {
                     }
                         
                     System.out.println("---------------------------------------");
+
+                    if (!heroi.verificaMao(mao)){
+                        while (mao.size() > 0) {
+                            pilhaDescarte.add(mao.remove(0));
+                        }
+                        break;
+                    }
+
                     System.out.print("Escolha o número da carta: ");
 
                     System.out.println("Caso queira passar a vez digite -1");
@@ -88,12 +97,11 @@ public class App {
 
                     limparTela();
 
-
                     if (num == -1){
                         limparTela();
                         break;
                     }
-                    if (num >= mao.size()) {
+                    if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
                         int numpassar;
                         limparTela();
                         System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
@@ -111,14 +119,14 @@ public class App {
                         cartaEscolhida.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRound.add("✨ Defesa ativada: " + cartaEscolhida.getNome());
+                        acoesDoRoundHeroi.add("✨ Defesa ativada: " + cartaEscolhida.getNome());
                         System.out.println(); 
                         
                     } else if (cartaEscolhida instanceof CartaDano){
                         cartaEscolhida.usar(inimigo);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRound.add("💥 Ataque desferido: " + cartaEscolhida.getNome());
+                        acoesDoRoundHeroi.add("💥 Ataque desferido: " + cartaEscolhida.getNome());
                         System.out.println(); 
                         
                     } else{
@@ -128,23 +136,43 @@ public class App {
                     
                 }
 
+                limparTela();
                 System.out.println(" 🥊SUAS AÇÕES NESSE ROUND🥊");
-                for (int i = 0; i < acoesDoRound.size(); i++) {
-                    System.out.println(acoesDoRound.get(i));
+                for (int i = 0; i < acoesDoRoundHeroi.size(); i++) {
+                    System.out.println(acoesDoRoundHeroi.get(i));
                 }
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
                 }
 
-                inimigo.atacar(heroi);
-                System.out.println();
+                // inimigo.atacar(heroi);
+                for (int i = 0; i < 2; i++){
+                    int cartaaleatoria = (int) (Math.random() * Baralho.size());
+                    Carta cartaEscolhida = Baralho.get(cartaaleatoria);
+
+                    if (cartaEscolhida instanceof CartaEscudo){
+                        cartaEscolhida.usar(inimigo);
+                        
+                        acoesDoRoundInimigo.add("✨ Defesa do inimigo ativada: " + cartaEscolhida.getNome());
+                        System.out.println(); 
+                        
+                    } else if (cartaEscolhida instanceof CartaDano){
+                        cartaEscolhida.usar(heroi);
+                        
+                        acoesDoRoundInimigo.add("💥 Ataque desferido pelo inimigo: " + cartaEscolhida.getNome());
+                        System.out.println();
+                    }
+                }
+
+                inimigo.anuncio(acoesDoRoundInimigo);
+
                 System.out.println("Digite 0 para continuar a luta...");
                 int continuar = inputs.nextInt();
                 while (continuar != 0) { //Forçar o usuario digitar 0 para continuar para que mostre seus ataques
                     System.out.print("Valor inválido! Digite 0 para continuar: ");
                     continuar = inputs.nextInt();
                 }
-                limparTela();
+                // limparTela();
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                 Heroi.printHeroiVenceu(heroi);
