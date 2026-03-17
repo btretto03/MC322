@@ -82,7 +82,7 @@ public class App {
                     System.out.println("---------------------------------------");
                     System.out.print("Escolha o número da carta: ");
 
-                    System.out.println("Caso queira passar a vez digite -1"); //Tem que implementar isso aqui dps ver como fazer
+                    System.out.println("Caso queira passar a vez digite -1");
 
                     int num = inputs.nextInt();
 
@@ -90,7 +90,18 @@ public class App {
 
 
                     if (num == -1){
+                        limparTela();
                         break;
+                    }
+                    if (num >= mao.size()) {
+                        int numpassar;
+                        limparTela();
+                        System.out.println("⚠️ Opção inválida! Digite -1 para continuar");
+                        numpassar = inputs.nextInt();
+                        while (numpassar != -1) {
+                            numpassar = inputs.nextInt();
+                        }
+                        continue;
                     }
 
                     Carta cartaEscolhida = mao.remove(num);
