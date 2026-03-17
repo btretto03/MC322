@@ -51,7 +51,7 @@ public class App {
                     }
                 }
                 if (pilhaCompra.size() > 0) {
-                    int cartaaleatoria = (int) (Math.random() * Baralho.size());
+                    int cartaaleatoria = (int) (Math.random() * pilhaCompra.size());
                     mao.add(pilhaCompra.remove(cartaaleatoria));
                 }
             }
@@ -121,7 +121,7 @@ public class App {
                 for (int i = 0; i < acoesDoRound.size(); i++) {
                     System.out.println(acoesDoRound.get(i));
                 }
-                while (mao.size() > 0) { //oq sobrou na mao vai pro descarte
+                while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
                 }
 
