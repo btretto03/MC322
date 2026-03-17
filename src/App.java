@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -62,7 +61,7 @@ public class App {
 
                 ArrayList<String> acoesDoRound = new ArrayList<>();
 
-                while (heroi.getEnergia() > 0) {
+                while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     System.out.println("🔋 Energia disponível: " + heroi.getEnergia() + "/5");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
@@ -75,25 +74,32 @@ public class App {
                     System.out.println("---------------------------------------");
                     System.out.print("Escolha o número da carta: ");
 
-                    //System.out.println("Caso queira passar a vez digite passar"); Tem que implementar isso aqui dps ver como fazer
+                    System.out.println("Caso queira passar a vez digite -1"); //Tem que implementar isso aqui dps ver como fazer
 
                     int num = inputs.nextInt();
+
                     limparTela();
 
-                    if (num >= i){
-                        CartaEscudo escudoEscolhido = Escudos.get(num - i);
-                        escudoEscolhido.usar(heroi);
-                        heroi.setEnergia(heroi.getEnergia() - escudoEscolhido.getCusto());
+
+                    if (num == -1){
+                        break;
+                    }
+
+                    Carta cartaEscolhida = mao.remove(num);
+                    pilhaDescarte.add(cartaEscolhida);
+
+                    if (cartaEscolhida instanceof CartaEscudo){
+                        cartaEscolhida.usar(heroi);
+                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRound.add("✨ Defesa ativada: " + escudoEscolhido.getNome());
+                        acoesDoRound.add("✨ Defesa ativada: " + cartaEscolhida.getNome());
                         System.out.println(); 
                         
-                    } else if (num >= 0 || num <= i){
-                        CartaDano ataqueEscolhido = Ataques.get(num);
-                        ataqueEscolhido.usar(inimigo);
-                        heroi.setEnergia(heroi.getEnergia() - ataqueEscolhido.getCusto());
+                    } else if (cartaEscolhida instanceof CartaDano){
+                        cartaEscolhida.usar(inimigo);
+                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRound.add("💥 Ataque desferido: " + ataqueEscolhido.getNome());
+                        acoesDoRound.add("💥 Ataque desferido: " + cartaEscolhida.getNome());
                         System.out.println(); 
                         
                     } else{
