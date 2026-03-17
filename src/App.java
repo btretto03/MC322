@@ -96,7 +96,7 @@ public class App {
                     if (num >= mao.size()) {
                         int numpassar;
                         limparTela();
-                        System.out.println("⚠️ Opção inválida! Digite -1 para continuar");
+                        System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
                         numpassar = inputs.nextInt();
                         while (numpassar != -1) {
                             numpassar = inputs.nextInt();
