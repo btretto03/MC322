@@ -34,18 +34,26 @@ public class App {
         }
 
         System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
-        ArrayList <Carta> pilhaCompra = new ArrayList<>();
+        ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
-        pilhaCompra = Baralho;
 
         while(true) { //Loop da luta
-            heroi.setEnergia(100); //energia do heroi é resetada a cada Round
+            heroi.setEnergia(5); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
 
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
-                int cartaaleatoria = (int) (Math.random() * Baralho.size());
-                mao.add(pilhaCompra.remove(cartaaleatoria));
+                if (pilhaCompra.size() ==0) {
+                    System.out.println("🔄 Baralho vazio! Voltando o descarte para a pilha");
+                    while (pilhaDescarte.size() > 0) {
+                        Carta cartaAux = pilhaDescarte.remove(0);
+                        pilhaCompra.add(cartaAux);
+                    }
+                }
+                if (pilhaCompra.size() > 0) {
+                    int cartaaleatoria = (int) (Math.random() * Baralho.size());
+                    mao.add(pilhaCompra.remove(cartaaleatoria));
+                }
             }
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
@@ -112,6 +120,9 @@ public class App {
                 System.out.println(" 🥊SUAS AÇÕES NESSE ROUND🥊");
                 for (int i = 0; i < acoesDoRound.size(); i++) {
                     System.out.println(acoesDoRound.get(i));
+                }
+                while (mao.size() > 0) { //oq sobrou na mao vai pro descarte
+                    pilhaDescarte.add(mao.remove(0));
                 }
 
                 inimigo.atacar(heroi);
