@@ -115,25 +115,9 @@ public class App {
                     Carta cartaEscolhida = mao.remove(num);
                     pilhaDescarte.add(cartaEscolhida);
 
-                    if (cartaEscolhida instanceof CartaEscudo){
-                        cartaEscolhida.usar(heroi);
-                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
-                        
-                        acoesDoRoundHeroi.add("✨ Defesa ativada: " + cartaEscolhida.getNome());
-                        System.out.println(); 
-                        
-                    } else if (cartaEscolhida instanceof CartaDano){
-                        cartaEscolhida.usar(inimigo);
-                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
-                        
-                        acoesDoRoundHeroi.add("💥 Ataque desferido: " + cartaEscolhida.getNome());
-                        System.out.println(); 
-                        
-                    } else{
-                        System.out.println("\nPor favor, Selecione um valor válido.\n");
-                        continue;
-                    }
-                    
+                    cartaEscolhida.usar(heroi, inimigo);
+                    heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
+                    System.out.println();
                 }
 
                 limparTela();
@@ -151,16 +135,14 @@ public class App {
                     Carta cartaEscolhida = Baralho.get(cartaaleatoria);
 
                     if (cartaEscolhida instanceof CartaEscudo){
-                        cartaEscolhida.usar(inimigo);
+                        cartaEscolhida.usar(heroi, inimigo);
                         
                         acoesDoRoundInimigo.add("✨ Defesa do inimigo ativada: " + cartaEscolhida.getNome());
-                        System.out.println(); 
                         
                     } else if (cartaEscolhida instanceof CartaDano){
-                        cartaEscolhida.usar(heroi);
+                        cartaEscolhida.usar(heroi, inimigo);
                         
                         acoesDoRoundInimigo.add("💥 Ataque desferido pelo inimigo: " + cartaEscolhida.getNome());
-                        System.out.println();
                     }
                 }
 

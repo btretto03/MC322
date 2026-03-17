@@ -4,9 +4,9 @@ public class CartaEscudo extends Carta {
         super(nome, custo);
     }
     
-    @Override
-    public void usar(Entidade heroi) {
-        heroi.setEscudo(heroi.getEscudo() + 3);
+    public void usar(Heroi heroi, Inimigo inimigo) {
+    heroi.ganharEscudo(3);
+    System.out.println("✨ Defesa ativada: " + this.getNome());
     }
 
     public void printRodada (int indice){
