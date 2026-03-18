@@ -6,11 +6,12 @@ public class CartaEscudo extends Carta {
     
     @Override
     public int usar(Entidade alvo) {
-    alvo.ganharEscudo(3);
-    return 3;
+        int escudo = this.getCusto();
+        alvo.ganharEscudo(escudo);
+        return escudo;
     }
 
     public void printRodada (int indice){
-        System.out.println( String.format("[%d] 🛡️ %s (Custo: %d)", indice, this.getNome(), this.getCusto()));
+        System.out.println( String.format("[%d] 🛡️ %s (Custo: %d | Escudo: %d)", indice, this.getNome(), this.getCusto(), this.getCusto()));
     }
 }

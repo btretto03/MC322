@@ -39,7 +39,7 @@ public class App {
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
 
         while(true) { //Loop da luta
-            heroi.setEnergia(5); //energia do heroi é resetada a cada Round
+            heroi.setEnergia(6); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
             
             ArrayList <Carta> mao = new ArrayList<>();

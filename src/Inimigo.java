@@ -43,11 +43,11 @@ public class Inimigo extends Entidade {
             int acao = (int) (Math.random() * 2);
 
             if (acao == 0) {
-                this.dano += (int) (Math.random() * 5) + 5;
+                this.dano += (int) (Math.random() * 4) + 2;
                 System.out.println(this.getNome() + " pretende atacar causando " + this.dano + " de dano!");
                 
             } else {
-                this.escudo += (int) (Math.random() * 3) + 3;
+                this.escudo += (int) (Math.random() * 3) + 2;
                 System.out.println(this.getNome() + " pretende se defender com " + this.escudo + " de escudo!"); 
             }
         }
