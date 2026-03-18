@@ -1,10 +1,10 @@
-import java.util.ArrayList;
-
 public class Inimigo extends Entidade {
 
+
     public Inimigo(String nome, int vida, int escudo) { //construtor
-        super(nome, vida, escudo);
-    }
+    super(nome, vida, escudo);
+
+}
     
     public static String escolherInimigo() {
     String escolhainimigo;
@@ -35,12 +35,22 @@ public class Inimigo extends Entidade {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
-    public void anuncio(ArrayList<String> acoesRound){
-        System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
-        for(int i = 0; i < acoesRound.size(); i++){
-            System.out.println(acoesRound.get(i));
-        }
-        acoesRound.clear();
+    public void anuncio(Heroi heroi) {
+    System.out.println();
+    System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
+    int acao = (int) (Math.random() * 2);
+
+    if (acao == 0) {
+        int dano = (int) (Math.random() * 5) + 5;
+        System.out.println(this.getNome() + " pretende atacar causando " + dano + " de dano!");
+        heroi.receberDano((int) (Math.random() * 5) + 5);
+        System.out.println("💥 " + this.getNome() + " conseguiu atacar, causando " + dano + " de dano!");
+
+    } else {
+        int escudoGanho = (int) (Math.random() * 3) + 3;
+        System.out.println(this.getNome() + " pretende se defender!");
+        System.out.println("🛡️ " + this.getNome() + " ganhou " + escudoGanho + " de escudo!");
     }
+}
   
 }

@@ -68,7 +68,6 @@ public class App {
                 System.out.println(vidaInimigo + "\n");
 
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
-                ArrayList<String> acoesDoRoundInimigo = new ArrayList<>();
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     System.out.println("🔋 Energia disponível: " + heroi.getEnergia() + "/5");
@@ -115,9 +114,25 @@ public class App {
                     Carta cartaEscolhida = mao.remove(num);
                     pilhaDescarte.add(cartaEscolhida);
 
-                    cartaEscolhida.usar(heroi, inimigo);
-                    heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
-                    System.out.println();
+                    if (cartaEscolhida instanceof CartaEscudo){
+                        cartaEscolhida.usar(heroi, inimigo);
+                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
+                        
+                        acoesDoRoundHeroi.add("✨ Defesa ativada: " + cartaEscolhida.getNome());
+                        System.out.println(); 
+                        
+                    } else if (cartaEscolhida instanceof CartaDano){
+                        cartaEscolhida.usar(heroi, inimigo);
+                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
+                        
+                        acoesDoRoundHeroi.add("💥 Ataque desferido: " + cartaEscolhida.getNome());
+                        System.out.println(); 
+                        
+                    } else{
+                        System.out.println("\nPor favor, Selecione um valor válido.\n");
+                        continue;
+                    }
+                    
                 }
 
                 limparTela();
@@ -129,24 +144,7 @@ public class App {
                     pilhaDescarte.add(mao.remove(0));
                 }
 
-                // inimigo.atacar(heroi);
-                for (int i = 0; i < 2; i++){
-                    int cartaaleatoria = (int) (Math.random() * Baralho.size());
-                    Carta cartaEscolhida = Baralho.get(cartaaleatoria);
-
-                    if (cartaEscolhida instanceof CartaEscudo){
-                        cartaEscolhida.usar(heroi, inimigo);
-                        
-                        acoesDoRoundInimigo.add("✨ Defesa do inimigo ativada: " + cartaEscolhida.getNome());
-                        
-                    } else if (cartaEscolhida instanceof CartaDano){
-                        cartaEscolhida.usar(heroi, inimigo);
-                        
-                        acoesDoRoundInimigo.add("💥 Ataque desferido pelo inimigo: " + cartaEscolhida.getNome());
-                    }
-                }
-
-                inimigo.anuncio(acoesDoRoundInimigo);
+                inimigo.anuncio(heroi);
 
                 System.out.println("Digite 0 para continuar a luta...");
                 int continuar = inputs.nextInt();
