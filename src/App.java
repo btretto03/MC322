@@ -83,10 +83,10 @@ public class App {
                     
                     if (!heroi.verificaMao(mao)){
                         int numpassar;
-                        System.out.println("---------------------------------------");
-                        System.out.println("\n🪫 Energia insuficiente. Rodada finalizada.\n");
-                        System.out.println("---------------------------------------");
-                        System.out.println("⚠️ Acabou sua energia e a rodada foi finalizada! Digite 0 para continuar");
+                        System.out.println("-------------------------------------------------");
+                        System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
+                        System.out.println("-------------------------------------------------");
+                        System.out.println("⚠️Digite 0 para continuar");
                         numpassar = inputs.nextInt();
                         while (numpassar != 0) {
                             numpassar = inputs.nextInt();
