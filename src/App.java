@@ -5,6 +5,7 @@ public class App {
     public static void limparTela() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+        
     }
     public static Scanner inputs = new Scanner(System.in); //leitura de dados do usuário(definido como static para ser acessível em outros métodos e classes)
     public static void main(String[] args)  {
@@ -40,6 +41,7 @@ public class App {
         while(true) { //Loop da luta
             heroi.setEnergia(5); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
+            
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
                 if (pilhaCompra.size() ==0) {
@@ -57,36 +59,36 @@ public class App {
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
+                int vidaInimigoInicio = inimigo.getVida();
+                limparTela();
+                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
                 
-                while (heroi.getEnergia() > 0 && mao.size() > 0) {
-                    limparTela();
-                    System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-                    System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
-                    System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-                    
-                    String vidaHeroi = String.format("🟩 %s: ❤️  %d VIDA", escolhaheroi, heroi.getVida());
-                    String vidaInimigo = String.format("🟥 %s: ❤️  %d VIDA", escolhainimigo, inimigo.getVida());
-                    System.out.println(vidaHeroi);
-                    System.out.println(vidaInimigo + "\n");
+                String vidaHeroi = String.format("🟩 %s: ❤️  %d VIDA", escolhaheroi, heroi.getVida());
+                String vidaInimigo = String.format("🟥 %s: ❤️  %d VIDA", escolhainimigo, inimigo.getVida());
+                System.out.println(vidaHeroi);
+                System.out.println(vidaInimigo + "\n");
 
-                
-                    System.out.println("🔋 Energia disponível: " + heroi.getEnergia() + "/5");
+                inimigo.anuncio();                
+
+                while (heroi.getEnergia() > 0 && mao.size() > 0) {
+                    System.out.println("\n \n🔋 Energia disponível: " + heroi.getEnergia() + "/5");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
+                                        
                     int i = 0;
                     for(; i < mao.size(); i ++){ 
                         Carta cartaAtual = mao.get(i);
                         cartaAtual.printRodada(i);
                     }
-                        
-                    
-                    
+                
                     if (!heroi.verificaMao(mao)){
                         int numpassar;
                         System.out.println("-------------------------------------------------");
                         System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
                         System.out.println("-------------------------------------------------");
-                        System.out.println("⚠️ Digite 0 para continuar");
+                        System.out.println("⚠️ Digite 0 para continuar \n \n");
                         numpassar = inputs.nextInt();
                         while (numpassar != 0) {
                             numpassar = inputs.nextInt();
@@ -136,12 +138,17 @@ public class App {
                     }
                     
                 }
+                int vidaInimigoFim = inimigo.getVida();
+                int vidaInimigoRemovida = vidaInimigoInicio - vidaInimigoFim;
 
                 limparTela();
-                System.out.println(" 🥊SUAS AÇÕES NESSE ROUND🥊");
+                System.out.println("\n 🥊SUAS AÇÕES NESSE ROUND🥊");
                 for (int i = 0; i < acoesDoRoundHeroi.size(); i++) {
                     System.out.println(acoesDoRoundHeroi.get(i));
                 }
+
+                System.out.println("\n Vida removida do inimigo nesse round: " + vidaInimigoRemovida);
+
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
                 }

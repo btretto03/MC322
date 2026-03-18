@@ -1,5 +1,5 @@
 public class Inimigo extends Entidade {
-
+    private int dano = 0;
 
     public Inimigo(String nome, int vida, int escudo) { //construtor
     super(nome, vida, escudo);
@@ -7,9 +7,9 @@ public class Inimigo extends Entidade {
 }
     
     public static String escolherInimigo() {
-    String escolhainimigo;
-    App.limparTela();
-    System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
+        String escolhainimigo;
+        App.limparTela();
+        System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
         System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
         int escolha2 = App.inputs.nextInt();
         switch (escolha2) {
@@ -35,27 +35,47 @@ public class Inimigo extends Entidade {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
-    public void atacar(Heroi heroi) {
-    System.out.println();
-    System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
-    int acao = (int) (Math.random() * 2);
+    public void anuncio() {
+        System.out.println();
+        System.out.println(" 🥊PRETENÇÕES DO INIMIGO NESSE ROUND🥊");
+        System.out.println();
+        for (int i = 0; i < 2; i++){   
+            int acao = (int) (Math.random() * 2);
 
-    if (acao == 0) {
-        int dano = (int) (Math.random() * 5) + 5;
-        System.out.println(this.getNome() + " pretende atacar causando " + dano + " de dano!");
-        int vidaAnterior = heroi.getVida();
-        heroi.receberDano(dano);
-        int vidaAtual = heroi.getVida();
+            if (acao == 0) {
+                this.dano += (int) (Math.random() * 5) + 5;
+                System.out.println(this.getNome() + " pretende atacar causando " + this.dano + " de dano!");
+                
+            } else {
+                this.escudo += (int) (Math.random() * 3) + 3;
+                System.out.println(this.getNome() + " pretende se defender com " + this.escudo + " de escudo!"); 
+            }
+        }
 
-        int vidaRemovida = vidaAnterior - vidaAtual;
-
-        System.out.println("💥 " + this.getNome() + " conseguiu atacar, tirando " + vidaRemovida + " de vida do herói!");
-
-    } else {
-        int escudoGanho = (int) (Math.random() * 3) + 3;
-        System.out.println(this.getNome() + " pretende se defender!");
-        System.out.println("🛡️ " + this.getNome() + " ganhou " + escudoGanho + " de escudo!");
+        System.out.println();
     }
-}
+
+    public void atacar (Heroi alvo){
+        System.out.println();
+        System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
+        System.out.println();
+        
+        if (this.dano != 0){
+            int vidaAnterior = alvo.getVida();
+            alvo.receberDano(dano);
+            int vidaAtual = alvo.getVida();
+
+            int vidaRemovida = vidaAnterior - vidaAtual;
+
+            System.out.println("💥 " + this.getNome() + " conseguiu atacar, tirando " + vidaRemovida + " de vida do herói!");
+        }
+
+        if (this.escudo != 0){
+            System.out.println("🛡️ " + this.getNome() + " ganhou " + this.escudo + " de escudo!");
+        }
+
+        this.dano = 0;
+        this.escudo = 0;
+    }
   
 }

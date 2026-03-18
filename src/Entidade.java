@@ -1,7 +1,7 @@
 public class Entidade {
     protected String nome; 
     protected int vida;
-    protected int escudo;
+    protected int escudo = 0;
 
     public Entidade (String nome, int vida, int escudo){
         this.nome = nome;
