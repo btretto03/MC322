@@ -30,7 +30,7 @@ flowchart LR
 ```  
 
 > **Embaralhamento**  
-As listas não são embaralhadas no sentido de realizar um shuffle na posição das cartas. Nesse caso, nós optamos pela geração de números pseudo-aleatórios contidos no range da quantidade de cartas disponíveis para serem o índice de acesso no array de compra. 
+As listas não são embaralhadas no sentido de realizar um shuffle na posição das cartas dentro do array. Nesse caso, nós optamos pela geração de números pseudo-aleatórios contidos no range da quantidade de cartas disponíveis para serem o índice de acesso no array de compra, para simular a aleatoriedade causada por um embaralhamento. 
 
 ## 🪜 Estrutura do projeto
 ```
