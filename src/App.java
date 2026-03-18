@@ -119,16 +119,16 @@ public class App {
                     pilhaDescarte.add(cartaEscolhida);
 
                     if (cartaEscolhida instanceof CartaEscudo){
-                        cartaEscolhida.usar(heroi, inimigo);
+                        int escudoAdicionado = cartaEscolhida.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRoundHeroi.add("✨ Defesa ativada: " + cartaEscolhida.getNome());
+                        acoesDoRoundHeroi.add("✨ Defesa ativada: " + cartaEscolhida.getNome() + ". Foram adicionados " + escudoAdicionado + " de escudo.");
                         
                     } else if (cartaEscolhida instanceof CartaDano){
-                        cartaEscolhida.usar(heroi, inimigo);
+                        int danoCausado = cartaEscolhida.usar(inimigo);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRoundHeroi.add("💥 Ataque desferido: " + cartaEscolhida.getNome());
+                        acoesDoRoundHeroi.add("💥 Ataque desferido: " + cartaEscolhida.getNome() + " causando " + danoCausado + " de dano.");
                         
                     } else{
                         System.out.println("\nPor favor, Selecione um valor válido.\n");

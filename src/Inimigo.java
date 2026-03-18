@@ -43,8 +43,13 @@ public class Inimigo extends Entidade {
     if (acao == 0) {
         int dano = (int) (Math.random() * 5) + 5;
         System.out.println(this.getNome() + " pretende atacar causando " + dano + " de dano!");
+        int vidaAnterior = heroi.getVida();
         heroi.receberDano((int) (Math.random() * 5) + 5);
-        System.out.println("💥 " + this.getNome() + " conseguiu atacar, causando " + dano + " de dano!");
+        int vidaAtual = heroi.getVida();
+
+        int vidaRemovida = vidaAnterior - vidaAtual;
+
+        System.out.println("💥 " + this.getNome() + " conseguiu atacar, tirando " + vidaRemovida + " de vida do herói!");
 
     } else {
         int escudoGanho = (int) (Math.random() * 3) + 3;

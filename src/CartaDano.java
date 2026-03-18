@@ -4,10 +4,11 @@ public class CartaDano extends Carta{
         super(nome, custo);
     }
 
-    public void usar(Heroi heroi, Inimigo inimigo) {
+    @Override
+    public int usar(Entidade alvo) {
     int dano = (int) (Math.random() * 5) + 3;
-    inimigo.receberDano(dano);
-    // System.out.println("💥 Ataque desferido: " + this.getNome());
+    alvo.receberDano(dano);
+    return dano;
     }
 
     public void printRodada (int indice){

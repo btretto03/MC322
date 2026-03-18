@@ -7,7 +7,7 @@ public abstract class Carta {
         this.custo = custo;
     }
 
-    public abstract void usar(Heroi heroi, Inimigo inimigo);
+    public abstract int usar(Entidade alvo);
 
     public abstract void printRodada (int indice);
 

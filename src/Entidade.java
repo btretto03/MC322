@@ -1,4 +1,4 @@
-public abstract class Entidade {
+public class Entidade {
     protected String nome; 
     protected int vida;
     protected int escudo;
