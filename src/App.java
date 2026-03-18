@@ -86,7 +86,7 @@ public class App {
                         System.out.println("-------------------------------------------------");
                         System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
                         System.out.println("-------------------------------------------------");
-                        System.out.println("⚠️Digite 0 para continuar");
+                        System.out.println("⚠️ Digite 0 para continuar");
                         numpassar = inputs.nextInt();
                         while (numpassar != 0) {
                             numpassar = inputs.nextInt();
