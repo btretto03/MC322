@@ -147,7 +147,7 @@ public class App {
                 }
 
                 System.out.println("\n---------------------------------------");
-                inimigo.anuncio(heroi);
+                inimigo.atacar(heroi);
                 System.out.println("---------------------------------------\n");
 
                 System.out.println("Digite 0 para continuar a luta");

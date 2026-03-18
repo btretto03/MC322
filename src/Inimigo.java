@@ -35,7 +35,7 @@ public class Inimigo extends Entidade {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
-    public void anuncio(Heroi heroi) {
+    public void atacar(Heroi heroi) {
     System.out.println();
     System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
     int acao = (int) (Math.random() * 2);
