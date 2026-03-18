@@ -12,7 +12,6 @@ public class Heroi extends Entidade {
         System.out.println("Escolha o seu herói: "); //Escolha do heroi
         System.out.println("[1] 🏆 Alex Poatan\n[2] 🥋 Anderson Silva\n[3] 🥊 Fabrício Werdum");
         int escolha1 = App.inputs.nextInt();
-        // App.limparTela();
         switch (escolha1) {
             case 1:
                 escolhaheroi = "Alex Poatan";
@@ -44,8 +43,6 @@ public class Heroi extends Entidade {
             }
         }
         if (cartasInvalidas == mao.size()){
-            System.out.println("\n🪫 Energia insuficiente. Rodada finalizada.\n");
-            System.out.println("---------------------------------------");
             return false;
         } else {
             return true;

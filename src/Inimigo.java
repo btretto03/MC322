@@ -8,10 +8,10 @@ public class Inimigo extends Entidade {
     
     public static String escolherInimigo() {
     String escolhainimigo;
+    App.limparTela();
     System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
         System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
         int escolha2 = App.inputs.nextInt();
-        App.limparTela();
         switch (escolha2) {
             case 1:
                 escolhainimigo = "Vitor Belfort";

@@ -40,7 +40,6 @@ public class App {
         while(true) { //Loop da luta
             heroi.setEnergia(5); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
-
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
                 if (pilhaCompra.size() ==0) {
@@ -57,19 +56,20 @@ public class App {
             }
 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
-                
-                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-                
-                String vidaHeroi = String.format("🟩 %s: ❤️  %d VIDA", escolhaheroi, heroi.getVida());
-                String vidaInimigo = String.format("🟥 %s: ❤️  %d VIDA", escolhainimigo, inimigo.getVida());
-                System.out.println(vidaHeroi);
-                System.out.println(vidaInimigo + "\n");
-
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
-
+                
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
+                    limparTela();
+                    System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
+                    System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
+                    System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
+                    
+                    String vidaHeroi = String.format("🟩 %s: ❤️  %d VIDA", escolhaheroi, heroi.getVida());
+                    String vidaInimigo = String.format("🟥 %s: ❤️  %d VIDA", escolhainimigo, inimigo.getVida());
+                    System.out.println(vidaHeroi);
+                    System.out.println(vidaInimigo + "\n");
+
+                
                     System.out.println("🔋 Energia disponível: " + heroi.getEnergia() + "/5");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
@@ -79,25 +79,29 @@ public class App {
                         cartaAtual.printRodada(i);
                     }
                         
-                    System.out.println("---------------------------------------");
-
+                    
+                    
                     if (!heroi.verificaMao(mao)){
+                        int numpassar;
+                        System.out.println("---------------------------------------");
+                        System.out.println("\n🪫 Energia insuficiente. Rodada finalizada.\n");
+                        System.out.println("---------------------------------------");
+                        System.out.println("⚠️ Acabou sua energia e a rodada foi finalizada! Digite 0 para continuar");
+                        numpassar = inputs.nextInt();
+                        while (numpassar != 0) {
+                            numpassar = inputs.nextInt();
+                        }
                         while (mao.size() > 0) {
                             pilhaDescarte.add(mao.remove(0));
                         }
                         break;
                     }
 
-                    System.out.print("Escolha o número da carta: ");
-
-                    System.out.println("Caso queira passar a vez digite -1");
+                    System.out.println("Escolha o número da carta ou -1 para passar a vez");
 
                     int num = inputs.nextInt();
 
-                    limparTela();
-
                     if (num == -1){
-                        limparTela();
                         break;
                     }
                     if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
@@ -119,14 +123,12 @@ public class App {
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
                         acoesDoRoundHeroi.add("✨ Defesa ativada: " + cartaEscolhida.getNome());
-                        System.out.println(); 
                         
                     } else if (cartaEscolhida instanceof CartaDano){
                         cartaEscolhida.usar(heroi, inimigo);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
                         acoesDoRoundHeroi.add("💥 Ataque desferido: " + cartaEscolhida.getNome());
-                        System.out.println(); 
                         
                     } else{
                         System.out.println("\nPor favor, Selecione um valor válido.\n");
@@ -144,15 +146,16 @@ public class App {
                     pilhaDescarte.add(mao.remove(0));
                 }
 
+                System.out.println("\n---------------------------------------");
                 inimigo.anuncio(heroi);
+                System.out.println("---------------------------------------\n");
 
-                System.out.println("Digite 0 para continuar a luta...");
+                System.out.println("Digite 0 para continuar a luta");
                 int continuar = inputs.nextInt();
                 while (continuar != 0) { //Forçar o usuario digitar 0 para continuar para que mostre seus ataques
                     System.out.print("Valor inválido! Digite 0 para continuar: ");
                     continuar = inputs.nextInt();
                 }
-                // limparTela();
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                 Heroi.printHeroiVenceu(heroi);
