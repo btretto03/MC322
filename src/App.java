@@ -73,7 +73,7 @@ public class App {
                 inimigo.anuncio();                
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
-                    System.out.println("\n \n🔋 Energia disponível: " + heroi.getEnergia() + "/5");
+                    System.out.println("\n \n🔋 Energia disponível: " + heroi.getEnergia() + "/6");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
                                         
@@ -109,7 +109,11 @@ public class App {
                     if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
                         int numpassar;
                         limparTela();
-                        System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
+                        if(num >= mao.size()){
+                            System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
+                        } else {
+                            System.out.println("🪫 Infelizmente " + heroi.getNome() + " não tem energia suficiente para usar essa carta! Digite -1 para voltar a jogada");
+                        }
                         numpassar = inputs.nextInt();
                         while (numpassar != -1) {
                             numpassar = inputs.nextInt();
