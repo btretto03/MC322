@@ -93,15 +93,19 @@ public void anuncio(Heroi alvo) {
         }
         if (this.dano != 0){
             int vidaAnterior = alvo.getVida();
+            int escudoAnterior = alvo.getEscudo();
             alvo.receberDano(dano);
             int vidaAtual = alvo.getVida();
-
+            int escudoAtual = alvo.getEscudo();
             int vidaRemovida = vidaAnterior - vidaAtual;
+            int escudoRemovido = escudoAnterior - escudoAtual;
 
-            if (vidaRemovida == 0) {
-                System.out.println("🛡️ O inimigo atacou causando " + this.dano + " de dano, mas o escudo do herói absorveu todo o ataque!");
+            if (escudoRemovido > 0 && vidaRemovida > 0) {
+                System.out.println("💥 O ataque de " + this.dano + " derrubou a defesa do herói (absorveu " + escudoRemovido + ") e atingiu " + vidaRemovida + " de dano para a vida.");
+            } else if (escudoRemovido > 0 && vidaRemovida == 0) {
+                System.out.println("🛡️ O inimigo atacou causando " + this.dano + " de dano, mas a defesa absorveu tudo!");
             } else {
-                System.out.println("💥 " + this.getNome() + " conseguiu atacar, tirando " + vidaRemovida + " de vida do herói!");
+                System.out.println("💥 " + this.getNome() + " acertou em cheio, tirando " + vidaRemovida + " de vida do herói!");
             }
         }
 
