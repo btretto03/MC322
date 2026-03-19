@@ -35,23 +35,44 @@ public class Inimigo extends Entidade {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
-    public void anuncio() {
+    public void anuncio(Heroi alvo) {
         System.out.println();
         System.out.println(" 🥊PRETENÇÕES DO INIMIGO NESSE ROUND🥊");
         System.out.println();
+        int acao;
         for (int i = 0; i < 2; i++){   
-            int acao = (int) (Math.random() * 2);
-
-            if (acao == 0) {
-                this.dano += (int) (Math.random() * 4) + 2;
-                System.out.println(this.getNome() + " pretende atacar causando " + this.dano + " de dano!");
-                
+            if (alvo.getVida() <= 10 || alvo.getVida() > 20){ //prioriza ataque se o herói tiver pouca vida
+                acao = 0;
+            } else if (this.getVida() <= 10) {  //prioriza defesa se o inimigo tiver pouca vida
+                acao = 1;
             } else {
-                this.escudo += (int) (Math.random() * 3) + 2;
-                System.out.println(this.getNome() + " pretende se defender com " + this.escudo + " de escudo!"); 
+                acao = (int) (Math.random() * 2);
+            }
+
+            if (acao == 0) { //ataque
+                this.dano += (int) (Math.random() * 4) + 4;
+                String intensidade;
+                if (this.dano <= 5){
+                    intensidade = "um ataque leve";
+                } else if (this.dano <= 8){
+                    intensidade = "um ataque forte";
+                } else {
+                    intensidade = "um ataque devastador";
+                }
+                System.out.println("⚠️ " + this.getNome() + " prepara " + intensidade + " causando " + this.dano + " de dano!");
+            } else {
+                this.escudo += (int) (Math.random() * 4) + 3;
+                String intensidade;
+                if(this.escudo <= 5){
+                    intensidade = "uma guarda simples";
+                } else if (this.escudo <= 8){
+                    intensidade = "uma boa defesa";
+                } else {
+                    intensidade = "uma guarda impenetrável";
+                }
+                System.out.println("🛡️ " + this.getNome() + " levanta " + intensidade + " com " + this.escudo + " de escudo!");
             }
         }
-
         System.out.println();
     }
 

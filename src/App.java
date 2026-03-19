@@ -70,7 +70,7 @@ public class App {
                 System.out.println(vidaHeroi);
                 System.out.println(vidaInimigo + "\n");
 
-                inimigo.anuncio();                
+                inimigo.anuncio(heroi);                
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     System.out.println("\n \n🔋 Energia disponível: " + heroi.getEnergia() + "/6");
