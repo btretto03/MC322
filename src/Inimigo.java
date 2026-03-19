@@ -58,9 +58,9 @@ public void anuncio(Heroi alvo) {
 
         if (this.dano > 0) {
             String intensidade;
-            if (this.dano <= 5){
+            if (this.dano <= 4){
                 intensidade = "um ataque leve";
-            } else if (this.dano <= 8){
+            } else if (this.dano <= 9){
                 intensidade = "um ataque forte";
             } else {
                 intensidade = "um ataque devastador";
