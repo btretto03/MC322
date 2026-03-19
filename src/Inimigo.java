@@ -43,7 +43,7 @@ public void anuncio(Heroi alvo) {
         for (int i = 0; i < 2; i++){   
             if (alvo.getVida() <= 10 || alvo.getVida() > 20){ //prioriza ataque se o herói tiver pouca vida
                 acao = 0;
-            } else if (this.getVida() <= 10) {  //prioriza defesa se o inimigo tiver pouca vida
+            } else if (this.getVida() <= 5) {  //prioriza defesa se o inimigo tiver pouca vida
                 acao = 1;
             } else {
                 acao = (int) (Math.random() * 2);
@@ -88,6 +88,9 @@ public void anuncio(Heroi alvo) {
         System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
         System.out.println();
         
+        if (this.escudo != 0){
+            System.out.println("🛡️ " + this.getNome() + " ganhou " + this.escudo + " de escudo!");
+        }
         if (this.dano != 0){
             int vidaAnterior = alvo.getVida();
             alvo.receberDano(dano);
@@ -96,14 +99,10 @@ public void anuncio(Heroi alvo) {
             int vidaRemovida = vidaAnterior - vidaAtual;
 
             if (vidaRemovida == 0) {
-                System.out.println("🛡️ O escudo do herói absorveu todo o ataque!");
+                System.out.println("🛡️ O inimigo atacou causando " + this.dano + " de dano, mas o escudo do herói absorveu todo o ataque!");
             } else {
                 System.out.println("💥 " + this.getNome() + " conseguiu atacar, tirando " + vidaRemovida + " de vida do herói!");
             }
-        }
-
-        if (this.escudo != 0){
-            System.out.println("🛡️ " + this.getNome() + " ganhou " + this.escudo + " de escudo!");
         }
 
         this.dano = 0;
