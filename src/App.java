@@ -176,6 +176,12 @@ public class App {
                 Inimigo.printInimigoVenceu(inimigo);
                 break;
             }
+            if (heroi.estaVivo() == false && inimigo.estaVivo() == false){ //empate
+                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "                       EMPATE!                       " + "\u001B[0m");
+                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+                break;
+            }
         }
         inputs.close(); 
     }  
