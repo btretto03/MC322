@@ -35,7 +35,7 @@ public class Inimigo extends Entidade {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
-    public void anuncio(Heroi alvo) {
+public void anuncio(Heroi alvo) {
         System.out.println();
         System.out.println(" 🥊PRETENÇÕES DO INIMIGO NESSE ROUND🥊");
         System.out.println();
@@ -51,28 +51,35 @@ public class Inimigo extends Entidade {
 
             if (acao == 0) { //ataque
                 this.dano += (int) (Math.random() * 4) + 4;
-                String intensidade;
-                if (this.dano <= 5){
-                    intensidade = "um ataque leve";
-                } else if (this.dano <= 8){
-                    intensidade = "um ataque forte";
-                } else {
-                    intensidade = "um ataque devastador";
-                }
-                System.out.println("⚠️ " + this.getNome() + " prepara " + intensidade + " causando " + this.dano + " de dano!");
             } else {
                 this.escudo += (int) (Math.random() * 4) + 3;
-                String intensidade;
-                if(this.escudo <= 5){
-                    intensidade = "uma guarda simples";
-                } else if (this.escudo <= 8){
-                    intensidade = "uma boa defesa";
-                } else {
-                    intensidade = "uma guarda impenetrável";
-                }
-                System.out.println("🛡️ " + this.getNome() + " levanta " + intensidade + " com " + this.escudo + " de escudo!");
             }
         }
+
+        if (this.dano > 0) {
+            String intensidade;
+            if (this.dano <= 5){
+                intensidade = "um ataque leve";
+            } else if (this.dano <= 8){
+                intensidade = "um ataque forte";
+            } else {
+                intensidade = "um ataque devastador";
+            }
+            System.out.println("⚠️ " + this.getNome() + " prepara " + intensidade + " causando " + this.dano + " de dano!");
+        }
+
+        if (this.escudo > 0) {
+            String intensidade;
+            if(this.escudo <= 5){
+                intensidade = "uma guarda simples";
+            } else if (this.escudo <= 8){
+                intensidade = "uma boa defesa";
+            } else {
+                intensidade = "uma guarda impenetrável";
+            }
+            System.out.println("🛡️ " + this.getNome() + " levanta " + intensidade + " com " + this.escudo + " de escudo!");
+        }
+
         System.out.println();
     }
 
@@ -88,7 +95,11 @@ public class Inimigo extends Entidade {
 
             int vidaRemovida = vidaAnterior - vidaAtual;
 
-            System.out.println("💥 " + this.getNome() + " conseguiu atacar, tirando " + vidaRemovida + " de vida do herói!");
+            if (vidaRemovida == 0) {
+                System.out.println("🛡️ O escudo do herói absorveu todo o ataque!");
+            } else {
+                System.out.println("💥 " + this.getNome() + " conseguiu atacar, tirando " + vidaRemovida + " de vida do herói!");
+            }
         }
 
         if (this.escudo != 0){
