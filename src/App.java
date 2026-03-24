@@ -51,8 +51,8 @@ public class App {
                     while (pilhaDescarte.size() > 0) {
                         Carta cartaAux = pilhaDescarte.remove(0);
                         pilhaCompra.add(cartaAux);
-                        Collections.shuffle(pilhaCompra); //Adicionando o embaralhamento
                     }
+                    Collections.shuffle(pilhaCompra); //Adicionando o embaralhamento
                 }
                 if (pilhaCompra.size() > 0) {
                     int cartaaleatoria = (int) (Math.random() * pilhaCompra.size()); 
@@ -76,7 +76,6 @@ public class App {
                 inimigo.anuncio(heroi);                
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
-                    
                     System.out.println("\n \n🔋 Energia disponível: " + heroi.getEnergia() + "/6");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
