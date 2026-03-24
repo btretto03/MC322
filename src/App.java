@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class App {
@@ -44,15 +45,16 @@ public class App {
             
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
-                if (pilhaCompra.size() ==0) {
+                if (pilhaCompra.size() == 0) {
                     System.out.println("🔄 Baralho vazio! Voltando o descarte para a pilha");
                     while (pilhaDescarte.size() > 0) {
                         Carta cartaAux = pilhaDescarte.remove(0);
                         pilhaCompra.add(cartaAux);
+                        Collections.shuffle(pilhaCompra); //Adicionando o embaralhamento
                     }
                 }
                 if (pilhaCompra.size() > 0) {
-                    int cartaaleatoria = (int) (Math.random() * pilhaCompra.size()); //"Embaralhamento"
+                    int cartaaleatoria = (int) (Math.random() * pilhaCompra.size()); 
                     mao.add(pilhaCompra.remove(cartaaleatoria));
                 }
             }
