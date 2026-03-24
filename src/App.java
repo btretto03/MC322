@@ -42,6 +42,7 @@ public class App {
         while(true) { //Loop da luta
             heroi.setEnergia(6); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
+            inimigo.setEscudo(0); //resetando o escudo do inimigo
             
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
@@ -75,6 +76,7 @@ public class App {
                 inimigo.anuncio(heroi);                
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
+                    
                     System.out.println("\n \n🔋 Energia disponível: " + heroi.getEnergia() + "/6");
                     System.out.println("---------------------------------------");
                     System.out.println("Suas opções de ação:");
@@ -158,7 +160,11 @@ public class App {
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
                 }
-
+                if (inimigo.estaVivo() == false) { //Inimigo morreu antes de atacar
+                    limparTela();
+                    Heroi.printHeroiVenceu(heroi);
+                    return;
+                }
                 System.out.println("\n---------------------------------------");
                 inimigo.atacar(heroi);
                 System.out.println("---------------------------------------\n");
