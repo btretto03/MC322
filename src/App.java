@@ -131,13 +131,13 @@ public class App {
                         int escudoAdicionado = cartaEscolhida.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRoundHeroi.add("✨ Defesa ativada: " + cartaEscolhida.getNome() + ". Foram adicionados " + escudoAdicionado + " de escudo.");
+                        acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + escudoAdicionado + ".");
                         
                     } else if (cartaEscolhida instanceof CartaDano){
                         int danoCausado = cartaEscolhida.usar(inimigo);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
-                        acoesDoRoundHeroi.add("💥 Ataque desferido: " + cartaEscolhida.getNome() + " causando " + danoCausado + " de dano.");
+                        acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + danoCausado + ".");
                         
                     } else{
                         System.out.println("\nPor favor, Selecione um valor válido.\n");
