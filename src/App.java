@@ -8,7 +8,7 @@ public class App {
         System.out.flush();
         
     }
-    public static Scanner inputs = new Scanner(System.in); //leitura de dados do usuário(definido como static para ser acessível em outros métodos e classes)
+    public static Scanner inputs = new Scanner(System.in);
     public static void main(String[] args)  {
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m"); //Print inicial
         System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
