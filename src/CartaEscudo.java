@@ -1,7 +1,7 @@
 public class CartaEscudo extends Carta {
 
     public CartaEscudo(String nome, int custo) {
-        super(nome, custo);
+        super(nome, custo, "adicionando escudo");
     }
     
     @Override

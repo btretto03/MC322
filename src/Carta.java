@@ -1,10 +1,20 @@
 public abstract class Carta {
     protected String nome ;
     protected int custo; 
-    
-    public Carta(String nome, int custo) {
+    protected String descricao;
+
+    public Carta(String nome, int custo, String descricao) {
         this.nome = nome;
         this.custo = custo;
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public abstract int usar(Entidade alvo);

@@ -1,7 +1,7 @@
 public class CartaDano extends Carta{
    
     public CartaDano(String nome, int custo) {
-        super(nome, custo);
+        super(nome, custo, "Causando dano");
     }
 
     @Override
