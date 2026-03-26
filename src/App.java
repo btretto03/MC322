@@ -99,7 +99,7 @@ public class App {
                         } else {
                             System.out.println("🪫 Infelizmente " + heroi.getNome() + " não tem energia suficiente!");
                         }
-                        Prints.PrintsMain.digiteParaContinuar(inputs, 1);
+                        Prints.PrintsMain.digiteParaContinuar(inputs, -1);
                         continue;
                     }
 
