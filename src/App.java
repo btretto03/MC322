@@ -79,12 +79,8 @@ public class App {
                     PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao);
 
                     if (!heroi.verificaMao(mao)){
-                        int numpassar;
                         Prints.PrintsMain.printFimEnergia();
-                        numpassar = inputs.nextInt();
-                        while (numpassar != 0) {
-                            numpassar = inputs.nextInt();
-                        }
+                        Prints.PrintsMain.ZeroParaContinuar(inputs);
                         while (mao.size() > 0) {
                             pilhaDescarte.add(mao.remove(0));
                         }
