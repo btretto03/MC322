@@ -7,6 +7,7 @@ import Cartas.CartaDano;
 import Cartas.CartaEscudo;
 import Entidades.Heroi;
 import Entidades.Inimigo;
+import Prints.PrintsMain;
 
 public class App {
     public static void limparTela() {
@@ -67,26 +68,16 @@ public class App {
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
                 int vidaInimigoInicio = inimigo.getVida();
+
                 limparTela();
                 Prints.PrintsMain.printNovoRound();
-                String vidaHeroi = String.format("🟩 %s: ❤️  %d VIDA", escolhaheroi, heroi.getVida());
-                String vidaInimigo = String.format("🟥 %s: ❤️  %d VIDA", escolhainimigo, inimigo.getVida());
-                System.out.println(vidaHeroi);
-                System.out.println(vidaInimigo + "\n");
+                Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
 
                 inimigo.anuncio(heroi);                
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
-                    System.out.println("\n \n🔋 Energia disponível: " + heroi.getEnergia() + "/6");
-                    System.out.println("---------------------------------------");
-                    System.out.println("Suas opções de ação:");
-                                        
-                    int i = 0;
-                    for(; i < mao.size(); i ++){ 
-                        Carta cartaAtual = mao.get(i);
-                        cartaAtual.printRodada(i);
-                    }
-                
+                    PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao);
+
                     if (!heroi.verificaMao(mao)){
                         int numpassar;
                         Prints.PrintsMain.printFimEnergia();
@@ -100,13 +91,11 @@ public class App {
                         break;
                     }
 
-                    System.out.println("Escolha o número da carta ou -1 para passar a vez");
-
                     int num = inputs.nextInt();
-
                     if (num == -1){
                         break;
                     }
+
                     if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
                         int numpassar;
                         limparTela();
@@ -131,28 +120,14 @@ public class App {
                         
                         acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + escudoAdicionado + ".");
                         
-                    } else if (cartaEscolhida instanceof CartaDano){
-                        int danoCausado = cartaEscolhida.usar(inimigo);
+                    } else { 
+                        int valor = cartaEscolhida.usar(inimigo);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
-                        
-                        acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + danoCausado + ".");
-                        
-                    } else{
-                        System.out.println("\nPor favor, Selecione um valor válido.\n");
-                        continue;
+                        acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + ".");
                     }
-                    
                 }
-                int vidaInimigoFim = inimigo.getVida();
-                int vidaInimigoRemovida = vidaInimigoInicio - vidaInimigoFim;
-
                 limparTela();
-                System.out.println("\n 🥊SUAS AÇÕES NESSE ROUND🥊");
-                for (int i = 0; i < acoesDoRoundHeroi.size(); i++) {
-                    System.out.println(acoesDoRoundHeroi.get(i));
-                }
-
-                System.out.println("\n Vida removida do inimigo nesse round: " + vidaInimigoRemovida);
+                PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, vidaInimigoInicio - inimigo.getVida());
 
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
