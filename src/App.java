@@ -80,7 +80,7 @@ public class App {
 
                     if (!heroi.verificaMao(mao)){
                         Prints.PrintsMain.printFimEnergia();
-                        Prints.PrintsMain.ZeroParaContinuar(inputs);
+                        Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                         while (mao.size() > 0) {
                             pilhaDescarte.add(mao.remove(0));
                         }
@@ -93,17 +93,13 @@ public class App {
                     }
 
                     if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
-                        int numpassar;
                         limparTela();
                         if(num >= mao.size()){
-                            System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
+                            System.out.println("⚠️ Opção inválida!");
                         } else {
-                            System.out.println("🪫 Infelizmente " + heroi.getNome() + " não tem energia suficiente para usar essa carta! Digite -1 para voltar a jogada");
+                            System.out.println("🪫 Infelizmente " + heroi.getNome() + " não tem energia suficiente!");
                         }
-                        numpassar = inputs.nextInt();
-                        while (numpassar != -1) {
-                            numpassar = inputs.nextInt();
-                        }
+                        Prints.PrintsMain.digiteParaContinuar(inputs, 1);
                         continue;
                     }
 
@@ -137,7 +133,7 @@ public class App {
                 inimigo.atacar(heroi);
                 System.out.println("---------------------------------------\n");
 
-                Prints.PrintsMain.ZeroParaContinuar(inputs);
+                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                  Prints.PrintsMain.printHeroiVenceu(heroi);

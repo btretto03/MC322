@@ -62,13 +62,22 @@ public class PrintsMain {
         System.out.println("🪫 Infelizmente " + nome + " não tem energia suficiente! Digite -1 para voltar a jogada");
     }
 
-    public static void ZeroParaContinuar(java.util.Scanner inputs) {
-        System.out.println("Digite 0 para continuar a luta");
-        int continuar = inputs.nextInt();
-        while (continuar != 0) {
-            System.out.print("Valor inválido! Digite 0 para continuar: ");
+    public static void digiteParaContinuar(java.util.Scanner inputs, int caso) {
+        if (caso == 0) {
+            System.out.println("Digite 0 para continuar a luta");
+            int continuar = inputs.nextInt();
+            while (continuar != 0) {
+            System.out.print("⚠️ Valor inválido! Digite 0 para continuar: ");
             continuar = inputs.nextInt();
         }
+        } else {
+            System.out.println("Digite -1 para continuar a luta");
+            int continuar = inputs.nextInt();
+            while (continuar != -1) {
+                System.out.print("⚠️ Valor inválido! Digite -1 para voltar: ");
+                continuar = inputs.nextInt();
+            }
+         }
     }
 
     public static void printEmpate() {
