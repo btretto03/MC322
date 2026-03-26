@@ -141,12 +141,7 @@ public class App {
                 inimigo.atacar(heroi);
                 System.out.println("---------------------------------------\n");
 
-                System.out.println("Digite 0 para continuar a luta");
-                int continuar = inputs.nextInt();
-                while (continuar != 0) { //Forçar o usuario digitar 0 para continuar para que mostre seus ataques
-                    System.out.print("Valor inválido! Digite 0 para continuar: ");
-                    continuar = inputs.nextInt();
-                }
+                Prints.PrintsMain.printZeroParaContinuar(inputs);
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                  Prints.PrintsMain.printHeroiVenceu(heroi);

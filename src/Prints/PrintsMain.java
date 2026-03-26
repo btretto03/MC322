@@ -49,13 +49,6 @@ public class PrintsMain {
         }
         System.out.println("Escolha o número da carta ou -1 para passar a vez");
     }
-
-    public static void printEmpate() {
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                       EMPATE!                       " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
-    }
-
     public static void printErroOpcao() {
         System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
     }
@@ -70,12 +63,27 @@ public class PrintsMain {
         System.out.println("🪫 Infelizmente " + nome + " não tem energia suficiente! Digite -1 para voltar a jogada");
     }
 
+    public static void printZeroParaContinuar(java.util.Scanner inputs) {
+        System.out.println("Digite 0 para continuar a luta");
+        int continuar = inputs.nextInt();
+        while (continuar != 0) {
+            System.out.print("Valor inválido! Digite 0 para continuar: ");
+            continuar = inputs.nextInt();
+        }
+    }
+
+    public static void printEmpate() {
+        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                       EMPATE!                       " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+    }
+
     public static void printInimigoVenceu(Inimigo inimigo) {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "💀 DERROTA... " + inimigo.getNome() + " venceu. Tente novamente. 💀" + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
-    
+
     public static void printHeroiVenceu(Heroi heroi) {
         System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
         System.out.println("\u001B[48;5;193m" + "🏆 VITÓRIA! " + heroi.getNome() + " Parabéns, você foi o campeão! 🏆" + "\u001B[48;5;193m");
