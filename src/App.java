@@ -19,7 +19,7 @@ public class App {
         Prints.PrintsMain.printInicial();
     
         String escolhaheroi = Heroi.escolherHeroi(inputs);
-        String escolhainimigo = Inimigo.escolherInimigo();
+        String escolhainimigo = Inimigo.escolherInimigo(inputs);
         Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
         Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
 

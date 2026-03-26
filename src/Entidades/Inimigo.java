@@ -1,20 +1,22 @@
 package Entidades;
-import App;
 
 public class Inimigo extends Entidade {
     private int dano = 0;
 
     public Inimigo(String nome, int vida, int escudo) { //construtor
     super(nome, vida, escudo);
-
-}
+    }
     
-    public static String escolherInimigo() {
+    public static String escolherInimigo(java.util.Scanner inputs) {
         String escolhainimigo;
-        App.limparTela();
+
+        System.out.print("\033[H\033[2J"); //limpar tela
+        System.out.flush();
+
         System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
         System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
-        int escolha2 = App.inputs.nextInt();
+        
+        int escolha2 = inputs.nextInt();
         switch (escolha2) {
             case 1:
                 escolhainimigo = "Vitor Belfort"; //teste
