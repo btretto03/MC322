@@ -16,7 +16,7 @@ public class Inimigo extends Entidade {
         int escolha2 = App.inputs.nextInt();
         switch (escolha2) {
             case 1:
-                escolhainimigo = "Vitor Belfort";
+                escolhainimigo = "Vitor Belfort"; //teste
                 break;
             case 2:
                 escolhainimigo = "Popó";
