@@ -31,12 +31,6 @@ public class Heroi extends Entidade {
         return escolhaheroi;
     }
 
-    public static void printHeroiVenceu(Heroi heroi) {
-        System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
-        System.out.println("\u001B[48;5;193m" + "🏆 VITÓRIA! " + heroi.getNome() + " Parabéns, você foi o campeão! 🏆" + "\u001B[48;5;193m");
-        System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
-    }
-
     public boolean verificaMao (ArrayList<Carta> mao){
         int cartasInvalidas = 0;
         for (Carta i : mao){

@@ -159,7 +159,7 @@ public class App {
                 }
                 if (inimigo.estaVivo() == false) { //Inimigo morreu antes de atacar
                     limparTela();
-                    Heroi.printHeroiVenceu(heroi);
+                    Prints.PrintsMain.printHeroiVenceu(heroi);
                     return;
                 }
                 System.out.println("\n---------------------------------------");
@@ -174,11 +174,11 @@ public class App {
                 }
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
-                Heroi.printHeroiVenceu(heroi);
+                 Prints.PrintsMain.printHeroiVenceu(heroi);
                 break;
             }
             if (heroi.estaVivo() == false && inimigo.estaVivo() == true){ //Heroi morreu
-                Inimigo.printInimigoVenceu(inimigo);
+                Prints.PrintsMain.printInimigoVenceu(inimigo);
                 break;
             }
             if (heroi.estaVivo() == false && inimigo.estaVivo() == false){ //empate

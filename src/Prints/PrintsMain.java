@@ -1,4 +1,6 @@
 package Prints;
+import Entidades.Heroi;
+import Entidades.Inimigo;
 
 public class PrintsMain {
     public static void printInicial() {
@@ -36,4 +38,11 @@ public class PrintsMain {
         System.out.println("\u001B[48;5;210m" + "💀 DERROTA... " + inimigo.getNome() + " venceu. Tente novamente. 💀" + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
+    
+    public static void printHeroiVenceu(Heroi heroi) {
+        System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
+        System.out.println("\u001B[48;5;193m" + "🏆 VITÓRIA! " + heroi.getNome() + " Parabéns, você foi o campeão! 🏆" + "\u001B[48;5;193m");
+        System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
+    }
 }
+
