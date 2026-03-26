@@ -1,18 +1,19 @@
 package Entidades;
 import java.util.ArrayList;
 import Cartas.Carta;
+import Prints.PrintsEntidades;
 
 public class Heroi extends Entidade {
     private int energia;
     
     public Heroi(String nome, int vida, int escudo) { //construtor
         super(nome, vida, escudo);
+        this.energia = 6;
     }
 
     public static String escolherHeroi(java.util.Scanner inputs) {
         String escolhaheroi;
-        System.out.println("Escolha o seu herói: "); //Escolha do heroi
-        System.out.println("[1] 🏆 Alex Poatan\n[2] 🥋 Anderson Silva\n[3] 🥊 Fabrício Werdum");
+        PrintsEntidades.menuEscolhaHeroi();
         int escolha1 = inputs.nextInt();
         switch (escolha1) {
             case 1:

@@ -1,4 +1,5 @@
 package Entidades;
+import Prints.PrintsEntidades;
 
 public class Inimigo extends Entidade {
     private int dano = 0;
@@ -13,13 +14,11 @@ public class Inimigo extends Entidade {
         System.out.print("\033[H\033[2J"); //limpar tela
         System.out.flush();
 
-        System.out.println("Escolha o seu inimigo: "); //Escolha do inimigo
-        System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
-        
+        PrintsEntidades.menuEscolhaInimigo();
         int escolha2 = inputs.nextInt();
         switch (escolha2) {
             case 1:
-                escolhainimigo = "Vitor Belfort"; //teste
+                escolhainimigo = "Vitor Belfort";
                 break;
             case 2:
                 escolhainimigo = "Popó";
@@ -34,10 +33,7 @@ public class Inimigo extends Entidade {
         return escolhainimigo;
     }
 
-public void anuncio(Heroi alvo) {
-        System.out.println();
-        System.out.println(" 🥊PRETENÇÕES DO INIMIGO NESSE ROUND🥊");
-        System.out.println();
+    public void anuncio(Heroi alvo) {
         int acao;
         for (int i = 0; i < 2; i++){   
             if (alvo.getVida() <= 10 || alvo.getVida() > 20){ //prioriza ataque se o herói tiver pouca vida
@@ -54,60 +50,19 @@ public void anuncio(Heroi alvo) {
                 this.escudo += (int) (Math.random() * 4) + 3;
             }
         }
-
-        if (this.dano > 0) {
-            String intensidade;
-            if (this.dano <= 4){
-                intensidade = "um ataque leve";
-            } else if (this.dano <= 9){
-                intensidade = "um ataque forte";
-            } else {
-                intensidade = "um ataque devastador";
-            }
-            System.out.println("⚠️ " + this.getNome() + " prepara " + intensidade + " causando " + this.dano + " de dano!");
-        }
-
-        if (this.escudo > 0) {
-            String intensidade;
-            if(this.escudo <= 5){
-                intensidade = "uma guarda simples";
-            } else if (this.escudo <= 8){
-                intensidade = "uma boa defesa";
-            } else {
-                intensidade = "uma guarda impenetrável";
-            }
-            System.out.println("🛡️ " + this.getNome() + " levanta " + intensidade + " com " + this.escudo + " de escudo!");
-        }
-
-        System.out.println();
+        PrintsEntidades.printPretensoesInimigo(this.getNome(), this.dano, this.escudo);
     }
 
     public void atacar (Heroi alvo){
-        System.out.println();
-        System.out.println(" 🥊AÇÕES DO INIMIGO NESSE ROUND🥊");
-        System.out.println();
+        int vidaAnterior = alvo.getVida();
+        int escudoAnterior = alvo.getEscudo();
+
+        alvo.receberDano(dano);
+
+        int vidaRemovida = vidaAnterior - alvo.getVida();
+        int escudoRemovido = escudoAnterior - alvo.getEscudo();
         
-        if (this.escudo != 0){
-            System.out.println("🛡️ " + this.getNome() + " ganhou " + this.escudo + " de escudo!");
-        }
-        if (this.dano != 0){
-            int vidaAnterior = alvo.getVida();
-            int escudoAnterior = alvo.getEscudo();
-            alvo.receberDano(dano);
-            int vidaAtual = alvo.getVida();
-            int escudoAtual = alvo.getEscudo();
-            int vidaRemovida = vidaAnterior - vidaAtual;
-            int escudoRemovido = escudoAnterior - escudoAtual;
-
-            if (escudoRemovido > 0 && vidaRemovida > 0) {
-                System.out.println("💥 O ataque de " + this.dano + " derrubou a defesa do herói (absorveu " + escudoRemovido + ") e atingiu " + vidaRemovida + " de dano para a vida.");
-            } else if (escudoRemovido > 0 && vidaRemovida == 0) {
-                System.out.println("🛡️ O inimigo atacou causando " + this.dano + " de dano, mas a defesa absorveu tudo!");
-            } else {
-                System.out.println("💥 " + this.getNome() + " acertou em cheio, tirando " + vidaRemovida + " de vida do herói!");
-            }
-        }
-
+        PrintsEntidades.printAcoesInimigo(this.getNome(), this.dano, this.escudo, vidaRemovida, escudoRemovido);
         this.dano = 0;
         this.escudo = 0;
     }
