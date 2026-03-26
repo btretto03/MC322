@@ -1,3 +1,6 @@
+package Cartas;
+import Entidades.Entidade;
+
 public abstract class Carta {
     protected String nome ;
     protected int custo; 

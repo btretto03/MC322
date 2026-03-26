@@ -1,3 +1,5 @@
+import Entidades.Entidade;
+
 public class Inimigo extends Entidade {
     private int dano = 0;
 
@@ -27,12 +29,6 @@ public class Inimigo extends Entidade {
                 escolhainimigo = "Popó";
         }
         return escolhainimigo;
-    }
-
-    public static void printInimigoVenceu(Inimigo inimigo) {
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "💀 DERROTA... " + inimigo.getNome() + " venceu. Tente novamente. 💀" + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
 public void anuncio(Heroi alvo) {

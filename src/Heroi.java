@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import Cartas.Carta;
+import Entidades.Entidade;
+
 public class Heroi extends Entidade {
     private int energia;
     

@@ -1,3 +1,4 @@
+package Entidades;
 public class Entidade {
     protected String nome; 
     protected int vida;

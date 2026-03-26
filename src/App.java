@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import Cartas.Carta;
+import Cartas.CartaDano;
+import Cartas.CartaEscudo;
+
 public class App {
     public static void limparTela() {
         System.out.print("\033[H\033[2J");
@@ -10,9 +14,7 @@ public class App {
     }
     public static Scanner inputs = new Scanner(System.in);
     public static void main(String[] args)  {
-        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m"); //Print inicial
-        System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
+        Prints.PrintsMain.printInicial();
     
         String escolhaheroi = Heroi.escolherHeroi();
         String escolhainimigo = Inimigo.escolherInimigo();
@@ -35,7 +37,7 @@ public class App {
             }
         }
 
-        System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
+        Prints.PrintsMain.printInicioluta();
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
 
@@ -47,7 +49,7 @@ public class App {
             ArrayList <Carta> mao = new ArrayList<>();
             for (int i = 0;i < 4; i ++) {
                 if (pilhaCompra.size() == 0) {
-                    System.out.println("🔄 Baralho vazio! Voltando o descarte para a pilha");
+                    Prints.PrintsMain.printBaralhoVazio();
                     while (pilhaDescarte.size() > 0) {
                         Carta cartaAux = pilhaDescarte.remove(0);
                         pilhaCompra.add(cartaAux);
@@ -64,10 +66,7 @@ public class App {
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
                 int vidaInimigoInicio = inimigo.getVida();
                 limparTela();
-                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-                
+                Prints.PrintsMain.printNovoRound();
                 String vidaHeroi = String.format("🟩 %s: ❤️  %d VIDA", escolhaheroi, heroi.getVida());
                 String vidaInimigo = String.format("🟥 %s: ❤️  %d VIDA", escolhainimigo, inimigo.getVida());
                 System.out.println(vidaHeroi);
@@ -88,10 +87,7 @@ public class App {
                 
                     if (!heroi.verificaMao(mao)){
                         int numpassar;
-                        System.out.println("-------------------------------------------------");
-                        System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
-                        System.out.println("-------------------------------------------------");
-                        System.out.println("⚠️ Digite 0 para continuar \n \n");
+                        Prints.PrintsMain.printFimEnergia();
                         numpassar = inputs.nextInt();
                         while (numpassar != 0) {
                             numpassar = inputs.nextInt();
@@ -184,9 +180,7 @@ public class App {
                 break;
             }
             if (heroi.estaVivo() == false && inimigo.estaVivo() == false){ //empate
-                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "                       EMPATE!                       " + "\u001B[0m");
-                System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+                Prints.PrintsMain.printEmpate();
                 break;
             }
         }

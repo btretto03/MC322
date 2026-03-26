@@ -1,3 +1,6 @@
+package Cartas;
+import Entidades.Entidade;
+
 public class CartaEscudo extends Carta {
 
     public CartaEscudo(String nome, int custo) {
