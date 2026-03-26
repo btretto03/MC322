@@ -1,7 +1,6 @@
+package Entidades;
 import java.util.ArrayList;
-
 import Cartas.Carta;
-import Entidades.Entidade;
 
 public class Heroi extends Entidade {
     private int energia;
@@ -10,11 +9,11 @@ public class Heroi extends Entidade {
         super(nome, vida, escudo);
     }
 
-    public static String escolherHeroi() {
+    public static String escolherHeroi(java.util.Scanner inputs) {
         String escolhaheroi;
         System.out.println("Escolha o seu herói: "); //Escolha do heroi
         System.out.println("[1] 🏆 Alex Poatan\n[2] 🥋 Anderson Silva\n[3] 🥊 Fabrício Werdum");
-        int escolha1 = App.inputs.nextInt();
+        int escolha1 = inputs.nextInt();
         switch (escolha1) {
             case 1:
                 escolhaheroi = "Alex Poatan";

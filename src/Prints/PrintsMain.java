@@ -1,5 +1,4 @@
 package Prints;
-import Inimigo;
 
 public class PrintsMain {
     public static void printInicial() {

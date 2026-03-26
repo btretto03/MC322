@@ -1,4 +1,5 @@
-import Entidades.Entidade;
+package Entidades;
+import App;
 
 public class Inimigo extends Entidade {
     private int dano = 0;
