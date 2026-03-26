@@ -33,7 +33,6 @@ public class PrintsMain {
         System.out.println("-------------------------------------------------");
         System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
         System.out.println("-------------------------------------------------");
-        System.out.println("⚠️ Digite 0 para continuar \n \n"); 
     }
     public static void printStatus(String heroi, int vidaheroi, String inimigo, int vidaInimigo) {
         System.out.println(String.format("🟩 %s: ❤️  %d VIDA", heroi, vidaheroi));
