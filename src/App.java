@@ -141,7 +141,7 @@ public class App {
                 inimigo.atacar(heroi);
                 System.out.println("---------------------------------------\n");
 
-                Prints.PrintsMain.printZeroParaContinuar(inputs);
+                Prints.PrintsMain.ZeroParaContinuar(inputs);
             } 
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                  Prints.PrintsMain.printHeroiVenceu(heroi);
