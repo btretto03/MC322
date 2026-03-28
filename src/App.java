@@ -2,12 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import Cartas.Carta;
-import Cartas.CartaDano;
-import Cartas.CartaEscudo;
-import Entidades.Heroi;
-import Entidades.Inimigo;
-import Prints.PrintsMain;
+import Cartas.*; // '.*'importa todas as classes do pacote 
+import Entidades.*;
+import Prints.*;
+import Efeitos.*;
 
 public class App {
     public static void limparTela() {
@@ -72,6 +70,7 @@ public class App {
                 limparTela();
                 Prints.PrintsMain.printNovoRound();
                 Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
+                PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
 
                 inimigo.anuncio(heroi);                
 
@@ -133,8 +132,24 @@ public class App {
                 inimigo.atacar(heroi);
                 System.out.println("---------------------------------------\n");
 
-                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
-            } 
+                if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
+                    System.out.println("🧪 Os efeitos estão agindo...");
+
+                    for (int i = heroi.getListaEfeitos().size() - 1; i >= 0; i--) { //efeito no heroi
+                        Efeitos efeito = heroi.getListaEfeitos().get(i);
+                        PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
+                        efeito.aplicarEfeito();
+                        if (efeito.getAcumulos() <= 0) heroi.getListaEfeitos().remove(i);
+                    }
+                    for (int i = inimigo.getListaEfeitos().size() - 1; i >= 0; i--) { // efeito no inimigo
+                        Efeitos efeito = inimigo.getListaEfeitos().get(i);
+                        PrintsMain.printEfeitoAgindo(inimigo.getNome(), efeito.getNome(), efeito.getAcumulos());
+                        efeito.aplicarEfeito();
+                        if (efeito.getAcumulos() <= 0) inimigo.getListaEfeitos().remove(i);
+                    }
+                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                } 
+            }
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                  Prints.PrintsMain.printHeroiVenceu(heroi);
                 break;

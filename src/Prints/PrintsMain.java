@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import Cartas.Carta;
 import Entidades.Heroi;
 import Entidades.Inimigo;
+import Efeitos.Efeitos;
 
 public class PrintsMain {
     public static void printInicial() {
@@ -79,7 +80,31 @@ public class PrintsMain {
             }
          }
     }
+    
+    public static void printEfeitosLutadores(String nomeHeroi, ArrayList<Efeitos> efeitosHeroi, String nomeInimigo, ArrayList<Efeitos> efeitosInimigo) {
+        System.out.println("-------------------------------------------------");
+        System.out.print("🩸 Efeitos agindo em " + nomeHeroi.toUpperCase() + ": ");
 
+        if (efeitosHeroi.isEmpty()) {  
+            System.out.print("Sem ação de efeito! ");
+        }
+        for (int i = 0; i < efeitosHeroi.size(); i++) {
+            System.out.print("[" + efeitosHeroi.get(i).getString() + " " + efeitosHeroi.get(i).getAcumulos() + "x] ");
+        }
+    
+        System.out.print("\n🩸 Efeitos agindo em " + nomeInimigo.toUpperCase() + ": ");
+        if (efeitosInimigo.isEmpty()) {
+             System.out.print("Sem acção de efeito! ");
+        }
+        for (int i = 0; i < efeitosInimigo.size(); i++) {
+            System.out.print("[" + efeitosInimigo.get(i).getString() + " " + efeitosInimigo.get(i).getAcumulos() + "x] ");
+        }
+        System.out.println("\n-------------------------------------------------");
+}
+
+public static void printEfeitoAgindo(String nomeLutador, String nomeEfeito, int acumulos) {
+    System.out.println("⚡ " + nomeLutador + " está sob efeito de " + nomeEfeito + " (" + acumulos + "x)!");
+}
     public static void printEmpate() {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                       EMPATE!                       " + "\u001B[0m");
