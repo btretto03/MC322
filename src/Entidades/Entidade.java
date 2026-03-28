@@ -1,8 +1,13 @@
 package Entidades;
+import java.util.ArrayList;
+
+import Efeitos.Efeitos;
+
 public class Entidade {
     protected String nome; 
     protected int vida;
     protected int escudo = 0;
+    protected ArrayList<Efeitos> listaEfeitos = new ArrayList<>();
 
     public Entidade (String nome, int vida, int escudo){
         this.nome = nome;
@@ -36,11 +41,27 @@ public class Entidade {
 
     public void ganharEscudo(int escudo) {
         this.escudo += escudo;
+    }   
+
+    public void adicionarEfeito(Efeitos efeito) {
+        for (int i = 0; i < this.listaEfeitos.size(); i++) {
+            Efeitos efeitoLista = listaEfeitos.get(i);
+            if (efeitoLista.getNome().equals(efeito.getNome())) {
+                int soma = efeitoLista.getAcumulos() + efeito.getAcumulos();
+                efeitoLista.setAcumulos(soma);
+                return;
+            }
+        }
+        this.listaEfeitos.add(efeito);
     }
 
     //Getters e setters
     public String getNome() {
         return this.nome;
+    }   
+
+    public ArrayList<Efeitos> getListaEfeitos() {
+        return listaEfeitos;
     }
 
     public void setNome(String nome) {
