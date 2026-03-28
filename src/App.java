@@ -6,6 +6,7 @@ import Cartas.*; // '.*'importa todas as classes do pacote
 import Entidades.*;
 import Prints.*;
 import Efeitos.*;
+import Jogo.Manager;
 
 public class App {
     public static void limparTela() {
@@ -15,6 +16,7 @@ public class App {
     }
     public static Scanner inputs = new Scanner(System.in);
     public static void main(String[] args)  {
+        Manager juiz = new Manager();
         Prints.PrintsMain.printInicial();
     
         String escolhaheroi = Heroi.escolherHeroi(inputs);
@@ -37,6 +39,9 @@ public class App {
                 custo = 1; 
             }
         }
+        Baralho.add(new CartaEfeito("Corte de Cotovelo", 2, "Sangramento", juiz));
+        Baralho.add(new CartaEfeito("Provocação", 1, "Provocacao", juiz));
+        Baralho.add(new CartaEfeito("Adrenalina Pura", 3, "Adrenalina", juiz));
 
         Prints.PrintsMain.printInicioluta();
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
@@ -112,7 +117,11 @@ public class App {
                         acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + escudoAdicionado + ".");
                         
                     } else { 
-                        int valor = cartaEscolhida.usar(inimigo);
+                        Entidade alvoCarta = inimigo;
+                        if (cartaEscolhida instanceof CartaEfeito && cartaEscolhida.getNome().equals("Adrenalina")) {
+                            alvoCarta = heroi;
+                        }
+                        int valor = cartaEscolhida.usar(alvoCarta);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + ".");
                     }
@@ -134,18 +143,24 @@ public class App {
 
                 if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
                     System.out.println("🧪 Os efeitos estão agindo...");
+                    juiz.notificarSubscribers();
 
                     for (int i = heroi.getListaEfeitos().size() - 1; i >= 0; i--) { //efeito no heroi
                         Efeitos efeito = heroi.getListaEfeitos().get(i);
                         PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
-                        efeito.aplicarEfeito();
-                        if (efeito.getAcumulos() <= 0) heroi.getListaEfeitos().remove(i);
+                        
+                        if (efeito.getAcumulos() <= 0) {
+                            juiz.desinscrever(efeito);
+                            heroi.getListaEfeitos().remove(i);
+                        }
                     }
                     for (int i = inimigo.getListaEfeitos().size() - 1; i >= 0; i--) { // efeito no inimigo
                         Efeitos efeito = inimigo.getListaEfeitos().get(i);
                         PrintsMain.printEfeitoAgindo(inimigo.getNome(), efeito.getNome(), efeito.getAcumulos());
-                        efeito.aplicarEfeito();
-                        if (efeito.getAcumulos() <= 0) inimigo.getListaEfeitos().remove(i);
+                        if (efeito.getAcumulos() <= 0) {
+                            juiz.desinscrever(efeito);
+                            inimigo.getListaEfeitos().remove(i);
+                        }
                     }
                     Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                 } 
