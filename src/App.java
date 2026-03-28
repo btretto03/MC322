@@ -6,7 +6,7 @@ import Cartas.*; // '.*'importa todas as classes do pacote
 import Entidades.*;
 import Prints.*;
 import Efeitos.*;
-import Jogo.Manager;
+import Jogo.Publisher;
 
 public class App {
     public static void limparTela() {
@@ -16,7 +16,7 @@ public class App {
     }
     public static Scanner inputs = new Scanner(System.in);
     public static void main(String[] args)  {
-        Manager juiz = new Manager();
+        Publisher juiz = new Publisher();
         Prints.PrintsMain.printInicial();
     
         String escolhaheroi = Heroi.escolherHeroi(inputs);

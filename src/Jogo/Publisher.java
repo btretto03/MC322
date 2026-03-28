@@ -3,7 +3,7 @@ package Jogo;
 import java.util.ArrayList;
 import Efeitos.Subscriber;
 
-public class Manager {
+public class Publisher {
     private ArrayList<Subscriber> inscritos = new ArrayList<>();
 
     public void inscrever(Subscriber subs) {

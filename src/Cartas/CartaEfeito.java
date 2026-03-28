@@ -2,13 +2,13 @@ package Cartas;
 
 import Entidades.Entidade;
 import Efeitos.*;
-import Jogo.Manager;
+import Jogo.Publisher;
 
 public class CartaEfeito extends Carta {
     private String tipoEfeito;
-    private Manager gerenciador;
+    private Publisher gerenciador;
 
-    public CartaEfeito(String nome, int custo, String tipoEfeito, Manager gc) {
+    public CartaEfeito(String nome, int custo, String tipoEfeito, Publisher gc) {
         super(nome, custo, "Aplicando efeito");
         this.tipoEfeito = tipoEfeito;
         this.gerenciador = gc;
