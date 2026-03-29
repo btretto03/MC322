@@ -30,7 +30,7 @@ public class PrintsMain {
     }
 
     public static void printFimEnergia() {
-        System.out.println("-------------------------------------------------");
+        System.out.println("\n-------------------------------------------------");
         System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
         System.out.println("-------------------------------------------------");
     }
@@ -122,7 +122,7 @@ public class PrintsMain {
             System.out.print("Sem ação de efeito! ");
         }
         for (int i = 0; i < efeitosHeroi.size(); i++) {
-            System.out.print("[" + efeitosHeroi.get(i).getString() + " " + efeitosHeroi.get(i).getAcumulos() + "x] ");
+            System.out.print("[" + efeitosHeroi.get(i).getNome() + " " + efeitosHeroi.get(i).getAcumulos() + "x] ");
         }
     
         System.out.print("\n🩸 Efeitos agindo em " + nomeInimigo.toUpperCase() + ": ");
@@ -130,7 +130,7 @@ public class PrintsMain {
              System.out.print("Sem acção de efeito! ");
         }
         for (int i = 0; i < efeitosInimigo.size(); i++) {
-            System.out.print("[" + efeitosInimigo.get(i).getString() + " " + efeitosInimigo.get(i).getAcumulos() + "x] ");
+            System.out.print("[" + efeitosInimigo.get(i).getNome() + " " + efeitosInimigo.get(i).getAcumulos() + "x] ");
         }
         System.out.println("\n-------------------------------------------------");
     }
