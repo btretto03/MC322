@@ -39,10 +39,6 @@ public class App {
                 custo = 1; 
             }
         }
-        Baralho.add(new CartaEfeito("Corte no rosto", 2, "Sangramento", juiz));
-        Baralho.add(new CartaEfeito("Provocação", 1, "Provocacao", juiz));
-        Baralho.add(new CartaEfeito("Adrenalina", 3, "Adrenalina", juiz));
-
         Prints.PrintsMain.printInicioluta();
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
@@ -99,22 +95,38 @@ public class App {
                     }
 
                    if (num == 99 && furia >= 3) {
+                        limparTela();
                         Prints.PrintsMain.menuEfeito();
                         int escolha = inputs.nextInt();
 
                         if (escolha == 0) {
+                            limparTela();
                             System.out.println("❌ Efeito especial cancelado.");
                             continue;
                         }
 
-                        System.out.println("\n🔥 Qual carta da sua mão você quer usar o efeito?");
-                        System.out.print("Digite o número da carta: ");
+                        limparTela();
+                        System.out.println("\n🔥 Efeito especial selecionado! Em qual carta da sua mão você quer usá-lo?");
+                        System.out.println("Energia disponível: " + heroi.getEnergia() + "/6\n");
+                        
+                        for (int j = 0; j < mao.size(); j++) {
+                            mao.get(j).printRodada(j);
+                        }
+                        
+                        System.out.print("\nDigite o número da carta ou -1 para cancelar: ");
                         int numCarta = inputs.nextInt();
 
+                        if (numCarta == -1) {
+                            limparTela();
+                            System.out.println("❌ Especial cancelado.");
+                            continue;
+                        }
+
                         if (numCarta < 0 || numCarta >= mao.size() || mao.get(numCarta).getCusto() > heroi.getEnergia()) {
+                            limparTela();
                             System.out.println("⚠️ Carta inválida ou energia insuficiente! Especial cancelado.");
                             Prints.PrintsMain.digiteParaContinuar(inputs, 0);
-                            continue;
+                            continue; 
                         }
                         Carta cartaEscolhida = mao.remove(numCarta);
                         pilhaDescarte.add(cartaEscolhida);
@@ -151,6 +163,8 @@ public class App {
                             usouEfeito = 1; // Avisa o inimigo para retaliar
                             acoesDoRoundHeroi.add("⚡ O golpe embutiu " + efeito.getNome() + " (3x) no alvo!");
                         }
+                        
+                        limparTela();
                         continue;
                     }
 

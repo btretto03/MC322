@@ -82,16 +82,18 @@ public class PrintsMain {
     }
 
     public static void printEfeitoInimigo(String nomeInimigo, int tipo) {
-        System.out.println("\n💢💢💢 " + nomeInimigo.toUpperCase() + " não gostou do efeito especial que recebeu! 💢💢💢");
+        System.out.println("\n 🥊Efeito especial de retaliação do inimigo🥊");
+        System.out.println("💢 " + nomeInimigo.toUpperCase() + " ficou furioso porque você usou um Efeito Especial nele!");
+        
         switch (tipo) {
             case 1:
-                System.out.println("💀 O inimigo desferiu um golpe baixo! [Efeito: Sangramento]");
+                System.out.println("💀 " + nomeInimigo + " revidou com um golpe baixo! [Você recebeu Sangramento]");
                 break;
             case 2:
-                System.out.println("🎤 O inimigo começou a te xingar! [Efeito: Provocação]");
+                System.out.println("🎤 " + nomeInimigo + " começou a te xingar! [Sua defesa caiu - Efeito: Provocação]");
                 break;
             case 3:
-                System.out.println("💉 O inimigo usou uma substância ilícita! [Efeito: Adrenalina no Inimigo]");
+                System.out.println("💉 " + nomeInimigo + " usou uma substância suspeita! [Ele ganhou Adrenalina]");
                 break;
         }
         System.out.println("----------------------------------------");
