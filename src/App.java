@@ -39,14 +39,15 @@ public class App {
                 custo = 1; 
             }
         }
-        Baralho.add(new CartaEfeito("Corte de Cotovelo", 2, "Sangramento", juiz));
+        Baralho.add(new CartaEfeito("Corte no rosto", 2, "Sangramento", juiz));
         Baralho.add(new CartaEfeito("Provocação", 1, "Provocacao", juiz));
-        Baralho.add(new CartaEfeito("Adrenalina Pura", 3, "Adrenalina", juiz));
+        Baralho.add(new CartaEfeito("Adrenalina", 3, "Adrenalina", juiz));
 
         Prints.PrintsMain.printInicioluta();
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
-
+        int furia = 0; //Variável para o usuario usar um efeito
+        
         while(true) { //Loop da luta
             heroi.setEnergia(6); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
@@ -77,10 +78,11 @@ public class App {
                 Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
                 PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
 
-                inimigo.anuncio(heroi);                
+                inimigo.anuncio(heroi);     
 
+                 int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
-                    PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao);
+                    PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
 
                     if (!heroi.verificaMao(mao)){
                         Prints.PrintsMain.printFimEnergia();
@@ -94,6 +96,45 @@ public class App {
                     int num = inputs.nextInt();
                     if (num == -1){
                         break;
+                    }
+                    if (num == 99 && furia >= 3 && heroi.getEnergia() >= 1) {
+                        Prints.PrintsMain.menuEfeito();
+                        Entidade alvo = inimigo;
+                        int escolha = inputs.nextInt();
+                        Efeitos efeito = null;
+                        int usouEspecialAgora = 0; //flag local para saber se o especial foi usado pelo heroi
+                        switch (escolha) {
+                            case 1:
+                                efeito = new Sangramento("Sangramento", 3, inimigo);
+                                usouEspecialAgora = 1;
+                                break;
+                            case 2:
+                                efeito = new Provocacao("Provocacao", 3, inimigo);
+                                usouEspecialAgora = 1;
+
+                                break;
+                            case 3:
+                                efeito = new Adrenalina("Adrenalina", 3, heroi);
+                                alvo = heroi;
+                                usouEspecialAgora = 1;
+                                break;
+                            case 0:
+                                System.out.println("❌ Efeito especial cancelado.");
+                                break;
+                            default:
+                                System.out.println("⚠️ Opção inválida!");
+                                break;
+                            }
+                        
+                        if (usouEspecialAgora == 1 && efeito != null) {
+                            alvo.adicionarEfeito(efeito); 
+                            juiz.inscrever(efeito);
+                            heroi.setEnergia(heroi.getEnergia() - 1);
+                            furia = 0;
+                            usouEfeito = 1;
+                            acoesDoRoundHeroi.add("⚡ Efeito especial executado!");
+                        }
+                        continue;
                     }
 
                     if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
@@ -125,21 +166,33 @@ public class App {
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + ".");
                     }
+                    if (cartaEscolhida instanceof CartaDano) {
+                        if (furia < 3) { //toda vez que o heroi usa uma carta de dano ele ganha um ponto de furia (limite em 3)
+                            furia ++;
+                        }
+                    }
                 }
+
                 limparTela();
                 PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, vidaInimigoInicio - inimigo.getVida());
 
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
                 }
+
                 if (inimigo.estaVivo() == false) { //Inimigo morreu antes de atacar
                     limparTela();
                     Prints.PrintsMain.printHeroiVenceu(heroi);
                     return;
                 }
-                System.out.println("\n---------------------------------------");
+
+               
+                if (usouEfeito == 1) { // // Se o heroi usou efeito o inimigo tambem vai
+                    inimigo.usarEfeito(heroi, juiz);
+                    usouEfeito = 0;
+                    }
                 inimigo.atacar(heroi);
-                System.out.println("---------------------------------------\n");
+    
 
                 if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
                     System.out.println("🧪 Os efeitos estão agindo...");

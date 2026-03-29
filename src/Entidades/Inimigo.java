@@ -1,5 +1,8 @@
 package Entidades;
-import Prints.PrintsEntidades;
+
+import Prints.*;
+import Efeitos.*;
+import Jogo.Publisher;
 
 public class Inimigo extends Entidade {
     private int dano = 0;
@@ -66,5 +69,27 @@ public class Inimigo extends Entidade {
         this.dano = 0;
         this.escudo = 0;
     }
-  
+
+    public void usarEfeito(Heroi heroi, Publisher juiz) {
+        int tipoEfeito = (int) (Math.random() * 3) + 1;
+        PrintsMain.printEfeitoInimigo(this.getNome(), tipoEfeito);
+        
+        switch (tipoEfeito) {
+            case 1:
+                Efeitos sangramento = new Sangramento("Corte Profundo", 3, heroi);
+                heroi.adicionarEfeito(sangramento);
+                juiz.inscrever(sangramento);
+                break;
+            case 2:
+                Efeitos provocacao = new Provocacao("Humilhação", 2, heroi);
+                heroi.adicionarEfeito(provocacao);
+                juiz.inscrever(provocacao);
+                break;
+            case 3:
+                Efeitos adrenalina = new Adrenalina("Doping", 3, this); 
+                this.adicionarEfeito(adrenalina);
+                juiz.inscrever(adrenalina);
+                break;
+        }
+    }
 }

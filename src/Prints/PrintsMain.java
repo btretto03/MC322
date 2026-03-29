@@ -11,7 +11,6 @@ public class PrintsMain {
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
-
     }
 
     public static void printInicioluta() {
@@ -40,15 +39,22 @@ public class PrintsMain {
         System.out.println(String.format("🟥 %s: ❤️  %d VIDA\n", inimigo, vidaInimigo));
     }
 
-    public static void printEnergiaEMenu(int energia, ArrayList<Carta> mao) {
-        System.out.println("\n \n🔋 Energia disponível: " + energia + "/6");
-        System.out.println("---------------------------------------");
-        System.out.println("Suas opções de ação:");
+    public static void printEnergiaEMenu(int energia, ArrayList<Carta> mao, int furia) {
+        System.out.println("\n---------------------------------------");
+        System.out.println("🔋 Energia: " + energia + "/6   🔥 Fúria: " + getBarraFuria(furia));
+        
+        System.out.println("\nSuas opções:");
         for (int i = 0; i < mao.size(); i ++) {
             mao.get(i).printRodada(i);
         }
-        System.out.println("Escolha o número da carta ou -1 para passar a vez");
+        
+        if (furia >= 3) {
+            System.out.println("\n\u001B[41;1m [99] ⚡ LIBERAR GOLPE ESPECIAL (Custo: 1 Energia) \u001B[0m");
+        }
+        
+        System.out.print("\nEscolha uma carta ou -1 para passar: ");
     }
+
     public static void printErroOpcao() {
         System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
     }
@@ -63,6 +69,33 @@ public class PrintsMain {
         System.out.println("🪫 Infelizmente " + nome + " não tem energia suficiente! Digite -1 para voltar a jogada");
     }
 
+    public static void menuEfeito() {
+        System.out.println("\n\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.println("         ⚡ \u001B[31;1mGOLPE ESPECIAL\u001B[0m ⚡");
+        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.println(" [1] 🩸 Sangramento (Dano contínuo no inimigo)");
+        System.out.println(" [2] 🗣️ Provocação  (Reduz escudo do inimigo)");
+        System.out.println(" [3] 💉 Adrenalina  (Recupera sua vida)");
+        System.out.println(" [0] ❌ Cancelar");
+        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.print("Sua escolha: ");
+    }
+
+    public static void printEfeitoInimigo(String nomeInimigo, int tipo) {
+        System.out.println("\n💢💢💢 " + nomeInimigo.toUpperCase() + " não gostou do efeito especial que recebeu! 💢💢💢");
+        switch (tipo) {
+            case 1:
+                System.out.println("💀 O inimigo desferiu um golpe baixo! [Efeito: Sangramento]");
+                break;
+            case 2:
+                System.out.println("🎤 O inimigo começou a te xingar! [Efeito: Provocação]");
+                break;
+            case 3:
+                System.out.println("💉 O inimigo usou uma substância ilícita! [Efeito: Adrenalina no Inimigo]");
+                break;
+        }
+        System.out.println("----------------------------------------");
+    }
     public static void digiteParaContinuar(java.util.Scanner inputs, int caso) {
         if (caso == 0) {
             System.out.println("Digite 0 para continuar a luta");
@@ -100,11 +133,28 @@ public class PrintsMain {
             System.out.print("[" + efeitosInimigo.get(i).getString() + " " + efeitosInimigo.get(i).getAcumulos() + "x] ");
         }
         System.out.println("\n-------------------------------------------------");
-}
+    }
 
-public static void printEfeitoAgindo(String nomeLutador, String nomeEfeito, int acumulos) {
-    System.out.println("⚡ " + nomeLutador + " está sob efeito de " + nomeEfeito + " (" + acumulos + "x)!");
-}
+    public static String getBarraFuria(int furia) {
+        String barra = "";
+        int blocos = Math.min(furia, 3); 
+
+        if (blocos == 0) {
+            barra = "\u001B[37m[ ░░░░░░░░░░░░ ]\u001B[0m"; 
+        } else if (blocos == 1) {
+             barra = "\u001B[33m[ ████░░░░░░░░ ]\u001B[0m"; 
+        } else if (blocos == 2) {
+            barra = "\u001B[38;5;208m[ ████████░░░░ ]\u001B[0m"; 
+        } else {
+            barra = "\u001B[31m[ ████████████ ] MAX!\u001B[0m";
+        }
+        return barra;
+    }
+
+    public static void printEfeitoAgindo(String nomeLutador, String nomeEfeito, int acumulos) {
+        System.out.println("⚡ " + nomeLutador + " está sob efeito de " + nomeEfeito + " (" + acumulos + "x)!");
+    }
+
     public static void printEmpate() {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                       EMPATE!                       " + "\u001B[0m");
