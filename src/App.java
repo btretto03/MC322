@@ -21,8 +21,8 @@ public class App {
     
         String escolhaheroi = Heroi.escolherHeroi(inputs);
         String escolhainimigo = Inimigo.escolherInimigo(inputs);
-        Heroi heroi = new Heroi(escolhaheroi, 30, 0); //definindo as classes
-        Inimigo inimigo = new Inimigo(escolhainimigo, 30, 0);
+        Heroi heroi = new Heroi(escolhaheroi, 50, 0); //definindo as classes
+        Inimigo inimigo = new Inimigo(escolhainimigo, 50, 0);
 
         ArrayList<Carta> Baralho = new ArrayList<>();
         String[] nomeCartas = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda", "Jab", "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora", "Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", "Guarda alta", "Guarda baixa", "Correr",};
