@@ -95,6 +95,7 @@ public class App {
                     PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
                     
                     if (!heroi.verificaMao(mao)){
+                        limparTela();
                         Prints.PrintsMain.printFimEnergia();
                         Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                         while (mao.size() > 0) {
