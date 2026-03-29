@@ -98,6 +98,7 @@ public class PrintsMain {
         }
         System.out.println("----------------------------------------");
     }
+    
     public static void digiteParaContinuar(java.util.Scanner inputs, int caso) {
         if (caso == 0) {
             System.out.println("Digite 0 para continuar a luta");
@@ -118,7 +119,7 @@ public class PrintsMain {
     
     public static void printEfeitosLutadores(String nomeHeroi, ArrayList<Efeitos> efeitosHeroi, String nomeInimigo, ArrayList<Efeitos> efeitosInimigo) {
         System.out.println("-------------------------------------------------");
-        System.out.print("🩸 Efeitos agindo em " + nomeHeroi.toUpperCase() + ": ");
+        System.out.print("🩸 Efeitos agindo em " + nomeHeroi + ": ");
 
         if (efeitosHeroi.isEmpty()) {  
             System.out.print("Sem ação de efeito! ");
@@ -127,7 +128,7 @@ public class PrintsMain {
             System.out.print("[" + efeitosHeroi.get(i).getNome() + " " + efeitosHeroi.get(i).getAcumulos() + "x] ");
         }
     
-        System.out.print("\n🩸 Efeitos agindo em " + nomeInimigo.toUpperCase() + ": ");
+        System.out.print("\n🩸 Efeitos agindo em " + nomeInimigo + ": ");
         if (efeitosInimigo.isEmpty()) {
              System.out.print("Sem acção de efeito! ");
         }
