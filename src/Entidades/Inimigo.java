@@ -37,20 +37,22 @@ public class Inimigo extends Entidade {
     }
 
     public void anuncio(Heroi alvo) {
-        int acao;
-        for (int i = 0; i < 2; i++){   
-            if (alvo.getVida() <= 10 || alvo.getVida() > 20){ //prioriza ataque se o herói tiver pouca vida
-                acao = 0;
-            } else if (this.getVida() <= 5) {  //prioriza defesa se o inimigo tiver pouca vida
-                acao = 1;
-            } else {
-                acao = (int) (Math.random() * 2);
-            }
+        if (this.dano == 0 && this.escudo == 0) {
+            int acao;
+            for (int i = 0; i < 2; i++){   
+                if (alvo.getVida() <= 10 || alvo.getVida() > 20){ //prioriza ataque se o herói tiver pouca vida
+                    acao = 0;
+                } else if (this.getVida() <= 5) {  //prioriza defesa se o inimigo tiver pouca vida
+                    acao = 1;
+                } else {
+                    acao = (int) (Math.random() * 2);
+                }
 
-            if (acao == 0) { //ataque
-                this.dano += (int) (Math.random() * 4) + 4;
-            } else {
-                this.escudo += (int) (Math.random() * 4) + 3;
+                if (acao == 0) { //ataque
+                    this.dano += (int) (Math.random() * 4) + 4;
+                } else {
+                    this.escudo += (int) (Math.random() * 4) + 3;
+                }
             }
         }
         PrintsEntidades.printPretensoesInimigo(this.getNome(), this.dano, this.escudo);

@@ -49,7 +49,7 @@ public class PrintsMain {
         }
         
         if (furia >= 3) {
-            System.out.println("\n\u001B[41;1m [99] ⚡ LIBERAR GOLPE ESPECIAL (Custo: 1 Energia) \u001B[0m");
+            System.out.println("\n\u001B[41;1m [99] ⚡ Liberar efeito especial \u001B[0m");
         }
         
         System.out.print("\nEscolha uma carta ou -1 para passar: ");
@@ -71,7 +71,7 @@ public class PrintsMain {
 
     public static void menuEfeito() {
         System.out.println("\n\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
-        System.out.println("         ⚡ \u001B[31;1mGOLPE ESPECIAL\u001B[0m ⚡");
+        System.out.println("         ⚡ \u001B[31;1mEfeito especial\u001B[0m ⚡");
         System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
         System.out.println(" [1] 🩸 Sangramento (Dano contínuo no inimigo)");
         System.out.println(" [2] 🗣️ Provocação  (Reduz escudo do inimigo)");

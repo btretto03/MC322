@@ -68,18 +68,23 @@ public class App {
             if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
                 int vidaInimigoInicio = inimigo.getVida();
-
-                limparTela();
-                Prints.PrintsMain.printNovoRound();
-                Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
-                PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
-
-                inimigo.anuncio(heroi);     
-
                 int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
-                while (heroi.getEnergia() > 0 && mao.size() > 0) {
-                    PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
 
+                while (heroi.getEnergia() > 0 && mao.size() > 0) {
+                    limparTela();
+                    Prints.PrintsMain.printNovoRound();
+                    Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
+                    PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
+                    inimigo.anuncio(heroi);
+
+                    if (acoesDoRoundHeroi.size() > 0) {
+                        System.out.println("\n🥊 Suas ações neste round:");
+                        for (String acao : acoesDoRoundHeroi) {
+                            System.out.println("  " + acao);
+                        }
+                    }
+                    PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
+                    
                     if (!heroi.verificaMao(mao)){
                         Prints.PrintsMain.printFimEnergia();
                         Prints.PrintsMain.digiteParaContinuar(inputs, 0);
@@ -161,7 +166,7 @@ public class App {
                             juiz.inscrever(efeito);
                             furia -= 3; // Gasta a fúria
                             usouEfeito = 1; // Avisa o inimigo para retaliar
-                            acoesDoRoundHeroi.add("⚡ O golpe embutiu " + efeito.getNome() + " (3x) no alvo!");
+                            acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (3x) no alvo!");
                         }
                         
                         limparTela();
@@ -246,8 +251,10 @@ public class App {
                             inimigo.getListaEfeitos().remove(i);
                         }
                     }
-                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                 } 
+                
+                System.out.println();
+                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
             }
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                  Prints.PrintsMain.printHeroiVenceu(heroi);
