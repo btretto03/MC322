@@ -21,7 +21,6 @@ O objetivo deste projteo é desenvolver um sistema de batalhas via terminal, for
 ### Inimigo
 > O inimigo realiza golpes ou se defende baseando-se no cenário da partida: Caso a vida do herói seja muito alta ou, muito baixa ele prioriza os ataques, caso sua vida esteja muito baixa ele irá priorizar a sua defesa. Os seus valores de dano ou defesa são baseados em números pseudo-aleatórios. 
 
-
 ```mermaid
 flowchart LR
     id1["Pilha de compra"] 
@@ -41,12 +40,25 @@ As listas não são embaralhadas no sentido de realizar um shuffle na posição 
 ├── README.md
 └── src
     ├── App.java
-    ├── CartaDano.java
-    ├── CartaEscudo.java
-    ├── Carta.java
-    ├── Entidade.java
-    ├── Heroi.java
-    └── Inimigo.java
+    ├── Cartas
+    │   ├── Carta.java
+    │   ├── CartaDano.java
+    │   ├── CartaEfeito.java
+    │   └── CartaEscudo.java
+    ├── Efeitos
+    │   ├── Adrenalina.java
+    │   ├── Efeitos.java
+    │   ├── Provocacao.java
+    │   └── Sangramento.java
+    ├── Entidades
+    │   ├── Entidade.java
+    │   ├── Heroi.java
+    │   └── Inimigo.java
+    ├── Jogo
+    │   └── Publisher.java
+    └── Prints
+        ├── PrintsEntidades.java
+        └── PrintsMain.java
 ```
 Onde:
 - src — contém todos os arquivos .java do projeto
