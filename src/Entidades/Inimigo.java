@@ -79,17 +79,17 @@ public class Inimigo extends Entidade {
         switch (tipoEfeito) {
             case 1:
                 Efeitos sangramento = new Sangramento("Corte Profundo", 3, heroi);
-                heroi.adicionarEfeito(sangramento);
+                heroi.adicionarEfeito(sangramento, juiz);
                 juiz.inscrever(sangramento);
                 break;
             case 2:
                 Efeitos provocacao = new Provocacao("Humilhação", 2, heroi);
-                heroi.adicionarEfeito(provocacao);
+                heroi.adicionarEfeito(provocacao, juiz);
                 juiz.inscrever(provocacao);
                 break;
             case 3:
                 Efeitos adrenalina = new Adrenalina("Doping", 3, this); 
-                this.adicionarEfeito(adrenalina);
+                this.adicionarEfeito(adrenalina, juiz);
                 juiz.inscrever(adrenalina);
                 break;
         }

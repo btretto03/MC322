@@ -6,12 +6,12 @@ import Jogo.Publisher;
 
 public class CartaEfeito extends Carta {
     private String tipoEfeito;
-    private Publisher gerenciador;
+    private Publisher juiz;
 
-    public CartaEfeito(String nome, int custo, String tipoEfeito, Publisher gc) {
+    public CartaEfeito(String nome, int custo, String tipoEfeito, Publisher juiz) {
         super(nome, custo, "Aplicando efeito");
         this.tipoEfeito = tipoEfeito;
-        this.gerenciador = gc;
+        this.juiz = juiz;
     }
 
     @Override
@@ -28,8 +28,8 @@ public class CartaEfeito extends Carta {
         } else {
             novoEfeito = null; //sem esse else o java nao deixava compilar, mas na pratica isso n acontece pq os nomes estão pré estabelecidos
         }
-        alvo.adicionarEfeito(novoEfeito);
-        gerenciador.inscrever(novoEfeito);
+        alvo.adicionarEfeito(novoEfeito, juiz);
+        juiz.inscrever(novoEfeito);
         
         return novoEfeito.getAcumulos();
     }

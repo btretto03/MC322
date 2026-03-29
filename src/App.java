@@ -171,7 +171,7 @@ public class App {
                         }
 
                         if (efeito != null) {
-                            alvoEfeito.adicionarEfeito(efeito);
+                            alvoEfeito.adicionarEfeito(efeito, juiz);
                             juiz.inscrever(efeito);
                             furia -= 3; // Gasta a fúria
                             usouEfeito = 1; // Avisa o inimigo para retaliar

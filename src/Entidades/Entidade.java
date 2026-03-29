@@ -1,7 +1,8 @@
 package Entidades;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import Efeitos.Efeitos;
+import Jogo.Publisher;
 
 public class Entidade {
     protected String nome; 
@@ -43,8 +44,8 @@ public class Entidade {
         this.escudo += escudo;
     }   
 
-    public void adicionarEfeito(Efeitos efeito) {
-        for (int i = 0; i < this.listaEfeitos.size(); i++) {
+    public void adicionarEfeito(Efeitos efeito, Publisher juiz) {
+        for (int i = 0; i < this.listaEfeitos.size(); i ++) {
             Efeitos efeitoLista = listaEfeitos.get(i);
             if (efeitoLista.getNome().equals(efeito.getNome())) {
                 int soma = efeitoLista.getAcumulos() + efeito.getAcumulos();
@@ -53,6 +54,7 @@ public class Entidade {
             }
         }
         this.listaEfeitos.add(efeito);
+        juiz.inscrever(efeito);
     }
 
     //Getters e setters
