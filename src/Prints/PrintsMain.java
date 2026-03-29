@@ -165,15 +165,27 @@ public class PrintsMain {
     }
 
     public static void printInimigoVenceu(Inimigo inimigo) {
-        System.out.println("\u001B[48;5;210m" + "                                                       " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "💀 DERROTA... " + inimigo.getNome() + " venceu. Tente novamente. 💀" + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                       " + "\u001B[0m");
+        String nome = inimigo.getNome();
+        int tamanho = 44 + nome.length(); 
+        
+        String espacos = " ".repeat(tamanho); 
+        String mensagem = "  💀 DERROTA... " + nome + " venceu. Tente novamente. 💀  ";
+
+        System.out.println("\u001B[48;5;210m" + espacos + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + mensagem + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + espacos + "\u001B[0m");
     }
 
     public static void printHeroiVenceu(Heroi heroi) {
-        System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
-        System.out.println("\u001B[48;5;193m" + "🏆 VITÓRIA! " + heroi.getNome() + " Parabéns, você foi o campeão! 🏆" + "\u001B[48;5;193m");
-        System.out.println("\u001B[48;5;193m" + "                                                        " + "\u001B[0m");
+        String nome = heroi.getNome();
+        int tamanho = 49 + nome.length(); 
+        
+        String espacos = " ".repeat(tamanho); 
+        String mensagem = "  🏆 VITÓRIA! " + nome + " Parabéns, você foi o campeão! 🏆  ";
+
+        System.out.println("\u001B[48;5;193m" + espacos + "\u001B[0m");
+        System.out.println("\u001B[48;5;193m" + mensagem + "\u001B[0m");
+        System.out.println("\u001B[48;5;193m" + espacos + "\u001B[0m");
     }
 }
 
