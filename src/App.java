@@ -80,7 +80,7 @@ public class App {
 
                 inimigo.anuncio(heroi);     
 
-                 int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
+                int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
 
@@ -97,42 +97,59 @@ public class App {
                     if (num == -1){
                         break;
                     }
-                    if (num == 99 && furia >= 3 && heroi.getEnergia() >= 1) {
+
+                   if (num == 99 && furia >= 3) {
                         Prints.PrintsMain.menuEfeito();
-                        Entidade alvo = inimigo;
                         int escolha = inputs.nextInt();
+
+                        if (escolha == 0) {
+                            System.out.println("❌ Efeito especial cancelado.");
+                            continue;
+                        }
+
+                        System.out.println("\n🔥 Qual carta da sua mão você quer usar o efeito?");
+                        System.out.print("Digite o número da carta: ");
+                        int numCarta = inputs.nextInt();
+
+                        if (numCarta < 0 || numCarta >= mao.size() || mao.get(numCarta).getCusto() > heroi.getEnergia()) {
+                            System.out.println("⚠️ Carta inválida ou energia insuficiente! Especial cancelado.");
+                            Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                            continue;
+                        }
+                        Carta cartaEscolhida = mao.remove(numCarta);
+                        pilhaDescarte.add(cartaEscolhida);
+
+                        if (cartaEscolhida instanceof CartaEscudo) {
+                            int escudoAdicionado = cartaEscolhida.usar(heroi);
+                            acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + " (Potencializada): " + escudoAdicionado + " de escudo.");
+                        } else {
+                            int valor = cartaEscolhida.usar(inimigo);
+                            acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + " (Potencializada): " + valor + " de dano.");
+                        }
+                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
+
                         Efeitos efeito = null;
-                        int usouEspecialAgora = 0; //flag local para saber se o especial foi usado pelo heroi
+                        Entidade alvoEfeito = inimigo;
+
                         switch (escolha) {
                             case 1:
                                 efeito = new Sangramento("Sangramento", 3, inimigo);
-                                usouEspecialAgora = 1;
                                 break;
                             case 2:
                                 efeito = new Provocacao("Provocacao", 3, inimigo);
-                                usouEspecialAgora = 1;
-
                                 break;
                             case 3:
                                 efeito = new Adrenalina("Adrenalina", 3, heroi);
-                                alvo = heroi;
-                                usouEspecialAgora = 1;
+                                alvoEfeito = heroi;
                                 break;
-                            case 0:
-                                System.out.println("❌ Efeito especial cancelado.");
-                                break;
-                            default:
-                                System.out.println("⚠️ Opção inválida!");
-                                break;
-                            }
-                        
-                        if (usouEspecialAgora == 1 && efeito != null) {
-                            alvo.adicionarEfeito(efeito); 
+                        }
+
+                        if (efeito != null) {
+                            alvoEfeito.adicionarEfeito(efeito);
                             juiz.inscrever(efeito);
-                            heroi.setEnergia(heroi.getEnergia() - 1);
-                            furia = 0;
-                            usouEfeito = 1;
-                            acoesDoRoundHeroi.add("⚡ Efeito especial executado!");
+                            furia -= 3; // Gasta a fúria
+                            usouEfeito = 1; // Avisa o inimigo para retaliar
+                            acoesDoRoundHeroi.add("⚡ O golpe embutiu " + efeito.getNome() + " (3x) no alvo!");
                         }
                         continue;
                     }
