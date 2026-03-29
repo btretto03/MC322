@@ -43,7 +43,8 @@ public class App {
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
         int furia = 0; //Variável para o usuario usar um efeito
-        
+        int contadorRound = 1;
+
         while(true) { //Loop da luta
             heroi.setEnergia(6); //energia do heroi é resetada a cada Round
             heroi.setEscudo(0); //resetando escudo a 0 em cada round
@@ -71,14 +72,14 @@ public class App {
                 int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
 
                 limparTela();
-                Prints.PrintsMain.printNovoRound();
+                Prints.PrintsMain.printNovoRound(contadorRound);
                 inimigo.anuncio(heroi);
                 System.out.println();
                 Prints.PrintsMain.digiteParaContinuar(inputs, 0);
 
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     limparTela();
-                    Prints.PrintsMain.printNovoRound();
+                    Prints.PrintsMain.printNovoRound(contadorRound);
                     Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
 
                     if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
@@ -260,10 +261,11 @@ public class App {
                         }
                     }
                 } 
-
                 System.out.println();
                 Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                contadorRound++;
             }
+
             if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
                  Prints.PrintsMain.printHeroiVenceu(heroi);
                 break;

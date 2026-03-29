@@ -23,9 +23,9 @@ public class PrintsMain {
 
     }
 
-    public static void printNovoRound() {
+    public static void printNovoRound(int contadorRound) {
         System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "               NOVO ROUND               " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "               ROUND " + contadorRound + "                  " + "\u001B[0m");
         System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
     }
 
@@ -98,7 +98,7 @@ public class PrintsMain {
         }
         System.out.println("----------------------------------------");
     }
-    
+
     public static void digiteParaContinuar(java.util.Scanner inputs, int caso) {
         if (caso == 0) {
             System.out.println("Digite 0 para continuar a luta");
