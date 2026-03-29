@@ -70,12 +70,20 @@ public class App {
                 int vidaInimigoInicio = inimigo.getVida();
                 int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
 
+                limparTela();
+                Prints.PrintsMain.printNovoRound();
+                inimigo.anuncio(heroi);
+                System.out.println();
+                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     limparTela();
                     Prints.PrintsMain.printNovoRound();
                     Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
-                    PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
-                    inimigo.anuncio(heroi);
+
+                    if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
+                        PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
+                    }
 
                     if (acoesDoRoundHeroi.size() > 0) {
                         System.out.println("\n🥊 Suas ações neste round:");
@@ -252,7 +260,7 @@ public class App {
                         }
                     }
                 } 
-                
+
                 System.out.println();
                 Prints.PrintsMain.digiteParaContinuar(inputs, 0);
             }
