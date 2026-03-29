@@ -29,6 +29,11 @@ public class Inimigo extends Entidade {
             case 3:
                 escolhainimigo = "Jon Jones";
                 break;
+            case 4:
+                System.out.print("Digite o nome do inimigo:\n");
+                inputs.nextLine();
+                escolhainimigo = inputs.nextLine();
+                break;
             default:
                 System.out.println("⚠️Escolha inválida. O lutador será Popó por padrão.");
                 escolhainimigo = "Popó";

@@ -25,6 +25,11 @@ public class Heroi extends Entidade {
             case 3:
                 escolhaheroi = "Fabrício Werdum";
                 break;
+                case 4:
+                System.out.print("Digite o nome do herói:\n");
+                inputs.nextLine();
+                escolhaheroi = inputs.nextLine();
+                break;
             default:
                 System.out.println("⚠️Escolha inválida. O lutador será Alex Poatan por padrão.");
                 escolhaheroi = "Alex Poatan";

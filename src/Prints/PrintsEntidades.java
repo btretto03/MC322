@@ -4,12 +4,12 @@ public class PrintsEntidades {
 
     public static void menuEscolhaHeroi() {
         System.out.println("Escolha o seu herói: ");
-        System.out.println("[1] 🏆 Alex Poatan\n[2] 🥋 Anderson Silva\n[3] 🥊 Fabrício Werdum");
+        System.out.println("[1] 🏆 Alex Poatan\n[2] 🥋 Anderson Silva\n[3] 🥊 Fabrício Werdum\n[4] ⌨️ Quero digitar o nome");
     }
 
     public static void menuEscolhaInimigo() {
         System.out.println("Escolha o seu inimigo: ");
-        System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones");
+        System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones\n[4] ⌨️ Quero digitar o nome");
     }
 
     public static void printPretensoesInimigo(String nome, int dano, int escudo) {
