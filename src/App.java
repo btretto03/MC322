@@ -243,6 +243,14 @@ public class App {
                     System.out.println("🧪 Os efeitos estão agindo...");
                     juiz.notificarSubscribers();
 
+                    for (int i = heroi.getListaEfeitos().size() - 1; i >= 0;  i--) { //garante que o efeito seja removido da lista do heroi caso acabe a duração
+                        Efeitos efeito = heroi.getListaEfeitos().get(i);
+                        PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
+                    if (efeito.getAcumulos() == 0) {
+                        juiz.desinscrever(efeito);
+                        heroi.getListaEfeitos().remove(i);
+                        }
+                    }
                     for (int i = heroi.getListaEfeitos().size() - 1; i >= 0; i--) { //efeito no heroi
                         Efeitos efeito = heroi.getListaEfeitos().get(i);
                         PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
