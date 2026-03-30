@@ -40,6 +40,7 @@ public class App {
             }
         }
 
+        
         Prints.PrintsMain.printInicioluta();
 
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
@@ -165,7 +166,7 @@ public class App {
                             int valor = cartaEscolhida.usar(inimigo);
                             acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + " (Potencializada): " + valor + " de dano.");
                         }
-                        
+
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
 
                         Efeitos efeito = null;
