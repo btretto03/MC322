@@ -10,7 +10,10 @@ import Jogo.Publisher;
 
 public class App {
     public static void limparTela() {
-        System.out.print("\033[H\033[2J");
+        // System.out.print("\033[H\033[2J");
+        // System.out.flush();
+
+        System.out.print("\033[H\033[2J\033[3J");
         System.out.flush();
         
     }
@@ -20,6 +23,7 @@ public class App {
         Prints.PrintsMain.printInicial();
     
         String escolhaheroi = Heroi.escolherHeroi(inputs);
+        limparTela();
         String escolhainimigo = Inimigo.escolherInimigo(inputs);
         Heroi heroi = new Heroi(escolhaheroi, 50, 0); //definindo as classes
         Inimigo inimigo = new Inimigo(escolhainimigo, 50, 0);
@@ -40,7 +44,6 @@ public class App {
             }
         }
 
-        
         Prints.PrintsMain.printInicioluta();
 
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
@@ -56,7 +59,6 @@ public class App {
             ArrayList <Carta> mao = new ArrayList<>();
 
             for (int i = 0; i < 4; i ++) {
-                
                 if (pilhaCompra.size() == 0) {
                     Prints.PrintsMain.printBaralhoVazio();
                     while (pilhaDescarte.size() > 0) {
