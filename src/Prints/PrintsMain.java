@@ -60,9 +60,10 @@ public class PrintsMain {
     }
 
     public static void printAcoesDoRound(ArrayList<String> acoes, int dano) {
-        System.out.println("\n 🥊SUAS AÇÕES NESSE ROUND🥊");
+        System.out.println("\n 🥊SUAS AÇÕES NESSE ROUND🥊 \n");
         for (String acao : acoes) System.out.println(acao);
-        System.out.println("\n Vida removida do inimigo nesse round: " + dano);
+        System.out.println("\n 🩸 Vida removida do inimigo nesse round: " + dano);
+        System.out.println("----------------------------------------");
     }
 
     public static void printErroEnergia(String nome) {
@@ -78,12 +79,12 @@ public class PrintsMain {
         System.out.println(" [3] 💉 Adrenalina  (Recupera sua vida)");
         System.out.println(" [0] ❌ Cancelar");
         System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
-        System.out.print("Sua escolha: ");
+        System.out.print("Sua escolha: \n");
     }
 
     public static void printEfeitoInimigo(String nomeInimigo, int tipo) {
         System.out.println("\n 🥊Efeito especial de retaliação do inimigo🥊");
-        System.out.println("💢 " + nomeInimigo.toUpperCase() + " ficou furioso porque você usou um Efeito Especial nele!");
+        System.out.println("\n💢 " + nomeInimigo.toUpperCase() + " ficou furioso porque você usou um Efeito Especial nele!\n");
         
         switch (tipo) {
             case 1:
@@ -96,7 +97,7 @@ public class PrintsMain {
                 System.out.println("💉 " + nomeInimigo + " usou uma substância suspeita! [Ele ganhou Adrenalina]");
                 break;
         }
-        System.out.println("----------------------------------------");
+        System.out.println("\n----------------------------------------");
     }
 
     public static void digiteParaContinuar(java.util.Scanner inputs, int caso) {

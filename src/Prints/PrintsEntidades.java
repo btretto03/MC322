@@ -8,7 +8,7 @@ public class PrintsEntidades {
     }
 
     public static void menuEscolhaInimigo() {
-        System.out.println("Escolha o seu inimigo: ");
+        System.out.println("\nEscolha o seu inimigo: ");
         System.out.println("[1] 👻 Vitor Belfort\n[2] 🥊 Popó\n[3] 🦴 Jon Jones\n[4] ⌨️ Quero digitar o nome");
     }
 
@@ -24,7 +24,7 @@ public class PrintsEntidades {
         } else {
             intensidade = "um ataque devastador";
         }
-        System.out.println("⚠️ " + nome + " prepara " + intensidade + " causando " + dano + " de dano!");
+        System.out.println("⚠️ " + nome + " prepara " + intensidade + " causando " + dano + " de dano!\n");
     }
     
     if (escudo > 0) {
@@ -55,5 +55,6 @@ public class PrintsEntidades {
                 System.out.println("💥 " + nome + " acertou em cheio, tirando " + vidaRemovida + " de vida!");
             }
         }
+        System.out.println("----------------------------------------");
     }
 }
