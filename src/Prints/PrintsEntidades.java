@@ -13,7 +13,7 @@ public class PrintsEntidades {
     }
 
     public static void printPretensoesInimigo(String nome, int dano, int escudo) {
-    System.out.println("\n 🥊PRETENÇÕES DO INIMIGO NESSE ROUND🥊\n");
+    System.out.println("\n 🥊PRETENÇÕES DO " + nome + " NESSE ROUND🥊\n");
     
     if (dano > 0) {
         String intensidade;

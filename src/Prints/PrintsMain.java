@@ -34,9 +34,9 @@ public class PrintsMain {
         System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
         System.out.println("-------------------------------------------------");
     }
-    public static void printStatus(String heroi, int vidaheroi, String inimigo, int vidaInimigo) {
+    public static void printStatus(String heroi, int vidaheroi, ArrayList<Inimigo> inimigos) {
         System.out.println(String.format("🟩 %s: ❤️  %d VIDA", heroi, vidaheroi));
-        System.out.println(String.format("🟥 %s: ❤️  %d VIDA\n", inimigo, vidaInimigo));
+        inimigos.forEach(inimigo -> System.out.println(String.format("🟥 %s: ❤️  %d VIDA", inimigo.getNome(), inimigo.getVida())));
     }
 
     public static void printEnergiaEMenu(int energia, ArrayList<Carta> mao, int furia) {
@@ -59,10 +59,12 @@ public class PrintsMain {
         System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
     }
 
-    public static void printAcoesDoRound(ArrayList<String> acoes, int dano) {
+    public static void printAcoesDoRound(ArrayList<String> acoes, ArrayList<Inimigo> inimigos, int[] vidaInimigosInicio) {
         System.out.println("\n 🥊SUAS AÇÕES NESSE ROUND🥊 \n");
         for (String acao : acoes) System.out.println(acao);
-        System.out.println("\n 🩸 Vida removida do inimigo nesse round: " + dano);
+        for (int i = 0; i < inimigos.size(); i++){
+            System.out.println("\n 🩸 Vida removida do " + inimigos.get(i).getNome() + " nesse round: " + (vidaInimigosInicio[i] - inimigos.get(i).getVida()));
+        }
         System.out.println("----------------------------------------");
     }
 
@@ -131,7 +133,7 @@ public class PrintsMain {
     
         System.out.print("\n🩸 Efeitos agindo em " + nomeInimigo + ": ");
         if (efeitosInimigo.isEmpty()) {
-             System.out.print("Sem acção de efeito! ");
+             System.out.print("Sem ação de efeito! ");
         }
         for (int i = 0; i < efeitosInimigo.size(); i++) {
             System.out.print("[" + efeitosInimigo.get(i).getNome() + " " + efeitosInimigo.get(i).getAcumulos() + "x] ");
@@ -165,8 +167,15 @@ public class PrintsMain {
         System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 
-    public static void printInimigoVenceu(Inimigo inimigo) {
-        String nome = inimigo.getNome();
+    public static void printInimigoVenceu(ArrayList<Inimigo> inimigos) {
+        String nome;
+        
+        if (inimigos.size() > 1){
+            nome = String.format("%s e %s", inimigos.get(0).getNome(), inimigos.get(1).getNome());
+        } else{
+            nome = inimigos.get(0).getNome();
+        }
+
         int tamanho = 44 + nome.length(); 
         
         String espacos = " ".repeat(tamanho); 
@@ -187,6 +196,26 @@ public class PrintsMain {
         System.out.println("\u001B[48;5;193m" + espacos + "\u001B[0m");
         System.out.println("\u001B[48;5;193m" + mensagem + "\u001B[0m");
         System.out.println("\u001B[48;5;193m" + espacos + "\u001B[0m");
+    }
+
+    public static void printEscolhaAlvo (ArrayList<Inimigo> inimigos){
+        System.out.println("\n\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.println("         ⚡ \u001B[31;1mEscolha seu alvo\u001B[0m ⚡");
+        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+
+        for(int i = 0; i < inimigos.size(); i++){
+            System.out.println("[" + (i+1) + "]" + " " + inimigos.get(i).getNome() + "\n");
+        }
+
+        System.out.println(" [0] ❌ Cancelar");
+        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.print("Sua escolha: \n");
+    }
+
+    public static void printNovoInimigo(){
+        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                  NOVO INIMIGO                       " + "\u001B[0m");
+        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
     }
 }
 

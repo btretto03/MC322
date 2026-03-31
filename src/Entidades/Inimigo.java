@@ -8,7 +8,7 @@ public class Inimigo extends Entidade {
     private int dano = 0;
 
     public Inimigo(String nome, int vida, int escudo) { //construtor
-    super(nome, vida, escudo);
+        super(nome, vida, escudo);
     }
     
     public static String escolherInimigo(java.util.Scanner inputs) {

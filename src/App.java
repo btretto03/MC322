@@ -10,24 +10,62 @@ import Jogo.Publisher;
 
 public class App {
     public static void limparTela() {
-        // System.out.print("\033[H\033[2J");
-        // System.out.flush();
-
         System.out.print("\033[H\033[2J\033[3J");
         System.out.flush();
-        
     }
     public static Scanner inputs = new Scanner(System.in);
+
+    public static Inimigo escolherAlvo (ArrayList<Inimigo> inimigos){
+        if(inimigos.size() > 1){
+            Prints.PrintsMain.printEscolhaAlvo(inimigos);
+            int inimigoEscolhido = inputs.nextInt();
+
+            return inimigos.get(inimigoEscolhido - 1);
+        }
+        return inimigos.get(0);
+    }
+
+    public static boolean inimigosVivos (ArrayList<Inimigo> inimigos){
+        for (Inimigo inimigo : inimigos){
+            if (inimigo.estaVivo()){
+                return true;
+            }
+        }
+        return false;
+    }
     public static void main(String[] args)  {
         Publisher juiz = new Publisher();
         Prints.PrintsMain.printInicial();
     
+
+//----------------------------------INSTANCIAMENTO------------------------------------------
         String escolhaheroi = Heroi.escolherHeroi(inputs);
         limparTela();
         String escolhainimigo = Inimigo.escolherInimigo(inputs);
+        
         Heroi heroi = new Heroi(escolhaheroi, 50, 0); //definindo as classes
-        Inimigo inimigo = new Inimigo(escolhainimigo, 50, 0);
+        ArrayList<Inimigo> inimigos = new ArrayList<>();
+        // Inimigo inimigo = new Inimigo(escolhainimigo, 50, 0);
+        inimigos.add(new Inimigo(escolhainimigo, 50, 0));
 
+//----------------------------------DOIS INIMIGOS------------------------------------------
+        int inimigoSecundario = (int) (Math.random() * 2) + 1;
+
+        if (inimigoSecundario <= 3){ //se o valor aleatório for entre 0 e 3, cria um novo inimigo
+            Scanner pseudoInput = new Scanner(String.valueOf(inimigoSecundario));
+            String nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
+
+            while (nomeSecundario == escolhainimigo) {
+                inimigoSecundario = (int) (Math.random() * 2) + 1;
+                pseudoInput = new Scanner(String.valueOf(inimigoSecundario));
+                nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
+            }
+
+            inimigos.add(new Inimigo(nomeSecundario, 25, 0));
+            inimigos.get(0).setVida(25);
+        }
+
+//----------------------------------BARALHO E PILHAS------------------------------------------
         ArrayList<Carta> Baralho = new ArrayList<>();
         String[] nomeCartas = {"Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda", "Jab", "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora", "Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", "Guarda alta", "Guarda baixa", "Correr",};
         
@@ -49,12 +87,16 @@ public class App {
         ArrayList <Carta> pilhaCompra = new ArrayList<>(Baralho);
         ArrayList <Carta> pilhaDescarte = new ArrayList<>();
 
+//----------------------------------LUTA------------------------------------------
         int furia = 0; //Variável para o usuario usar um efeito
         int contadorRound = 1;
+
         while(true) { //Loop da luta
             heroi.setEnergia(6); //energia do heroi é resetada a cada Round
-            heroi.setEscudo(0); //resetando escudo a 0 em cada round
-            inimigo.setEscudo(0); //resetando o escudo do inimigo
+            
+            //resetando escudo a 0 em cada round
+            heroi.setEscudo(0); 
+            inimigos.forEach(inimigo -> inimigo.setEscudo(0));
             
             ArrayList <Carta> mao = new ArrayList<>();
 
@@ -73,34 +115,38 @@ public class App {
                 }
             }
 
-            if (heroi.estaVivo() == true && inimigo.estaVivo() == true) { //Os dois vivos
+            if (heroi.estaVivo() == true && inimigosVivos(inimigos)) { //Os dois vivos
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
-                int vidaInimigoInicio = inimigo.getVida();
+                int[] vidaInimigosInicio = new int[2];
+
+                for(int i = 0; i < inimigos.size(); i++){
+                    vidaInimigosInicio[i] = inimigos.get(i).getVida();
+                }
+
                 int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
 
                 limparTela();
-
                 Prints.PrintsMain.printNovoRound(contadorRound);
-
-                inimigo.anuncio(heroi);
-
+                inimigos.forEach(inimigo -> inimigo.anuncio(heroi));
                 Prints.PrintsMain.digiteParaContinuar(inputs, 0);
 
-                while (heroi.getEnergia() > 0 && mao.size() > 0) { //Loop de escolha das cartas para o usuário
-                    
+//----------------------------------ESCOLHAS USUÁRIO------------------------------------------
+                while (heroi.getEnergia() > 0 && mao.size() > 0) {
                     limparTela();
                     
                     Prints.PrintsMain.printNovoRound(contadorRound);
-                    Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), escolhainimigo, inimigo.getVida());
+                    Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), inimigos);
 
-                    if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
-                        PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
+                    for (Inimigo inimigo : inimigos){
+                        if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
+                            PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
+                        }
                     }
 
                     if (acoesDoRoundHeroi.size() > 0) {
                         System.out.println("\n🥊 Suas ações neste round:");
                         for (String acao : acoesDoRoundHeroi) {
-                            System.out.println("  " + acao);
+                            System.out.println("    " + acao);
                         }
                     }
                     PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
@@ -122,6 +168,7 @@ public class App {
                         break;
                     }
 
+//----------------------------------ESCOLHA EFEITOS------------------------------------------
                    if (num == 99 && furia >= 3) {
                         limparTela();
                         
@@ -134,52 +181,17 @@ public class App {
                             continue;
                         }
 
-                        limparTela();
-                        System.out.println("\n🔥 Efeito especial selecionado! Em qual carta da sua mão você quer usá-lo?");
-                        System.out.println("Energia disponível: " + heroi.getEnergia() + "/6\n");
-                        
-                        for (int j = 0; j < mao.size(); j++) {
-                            mao.get(j).printRodada(j);
-                        }
-                        
-                        System.out.print("\nDigite o número da carta ou -1 para cancelar: ");
-                        int numCarta = inputs.nextInt();
-
-                        if (numCarta == -1) {
-                            limparTela();
-                            System.out.println("❌ Especial cancelado.");
-                            continue;
-                        }
-
-                        if (numCarta < 0 || numCarta >= mao.size() || mao.get(numCarta).getCusto() > heroi.getEnergia()) {
-                            limparTela();
-                            System.out.println("⚠️ Carta inválida ou energia insuficiente! Especial cancelado.");
-                            Prints.PrintsMain.digiteParaContinuar(inputs, 0);
-                            continue; 
-                        }
-
-                        Carta cartaEscolhida = mao.remove(numCarta);
-                        pilhaDescarte.add(cartaEscolhida);
-
-                        if (cartaEscolhida instanceof CartaEscudo) {
-                            int escudoAdicionado = cartaEscolhida.usar(heroi);
-                            acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + " (Potencializada): " + escudoAdicionado + " de escudo.");
-                        } else {
-                            int valor = cartaEscolhida.usar(inimigo);
-                            acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + " (Potencializada): " + valor + " de dano.");
-                        }
-
-                        heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
-
                         Efeitos efeito = null;
-                        Entidade alvoEfeito = inimigo;
+                        Entidade alvoEfeito = heroi;
 
                         switch (escolha) {
                             case 1:
-                                efeito = new Sangramento("Sangramento", 3, inimigo);
+                                alvoEfeito = escolherAlvo(inimigos);
+                                efeito = new Sangramento("Sangramento", 3, alvoEfeito);
                                 break;
                             case 2:
-                                efeito = new Provocacao("Provocacao", 3, inimigo);
+                                alvoEfeito = escolherAlvo(inimigos);
+                                efeito = new Provocacao("Provocacao", 3, alvoEfeito);
                                 break;
                             case 3:
                                 efeito = new Adrenalina("Adrenalina", 3, heroi);
@@ -187,18 +199,20 @@ public class App {
                                 break;
                         }
 
+
                         if (efeito != null) {
                             alvoEfeito.adicionarEfeito(efeito, juiz);
                             juiz.inscrever(efeito);
                             furia -= 3; // Gasta a fúria
                             usouEfeito = 1; // Avisa o inimigo para retaliar
-                            acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (3x) no alvo!");
+                            acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (Por três rodadas) no alvo!");
                         }
                         
                         limparTela();
                         continue;
                     }
 
+//----------------------------------ESCOLHA INVÁLDA------------------------------------------
                     if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
                         limparTela();
                         if(num >= mao.size()){
@@ -210,6 +224,7 @@ public class App {
                         continue;
                     }
 
+//----------------------------------ESCOLHA VÁLIDA------------------------------------------
                     Carta cartaEscolhida = mao.remove(num);
                     pilhaDescarte.add(cartaEscolhida);
 
@@ -220,13 +235,14 @@ public class App {
                         acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + escudoAdicionado + ".");
                         
                     } else { 
-                        Entidade alvoCarta = inimigo;
-                        if (cartaEscolhida instanceof CartaEfeito && cartaEscolhida.getNome().equals("Adrenalina")) {
+                        Entidade alvoCarta = escolherAlvo(inimigos);
+                        limparTela();
+                       /*  if (cartaEscolhida instanceof CartaEfeito && cartaEscolhida.getNome().equals("Adrenalina")) {
                             alvoCarta = heroi;
-                        }
+                        } */
                         int valor = cartaEscolhida.usar(alvoCarta);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
-                        acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + ".");
+                        acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + " em " + alvoCarta.getNome() + ".");
                     }
                     if (cartaEscolhida instanceof CartaDano) {
                         if (furia < 3) { //toda vez que o heroi usa uma carta de dano ele ganha um ponto de furia (limite em 3)
@@ -236,13 +252,13 @@ public class App {
                 }
 
                 limparTela();
-                PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, vidaInimigoInicio - inimigo.getVida());
+                PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, inimigos, vidaInimigosInicio);
 
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
                 }
 
-                if (inimigo.estaVivo() == false) { //Inimigo morreu antes de atacar
+                if (!inimigosVivos(inimigos)) { //Inimigos morreram antes de atacar
                     limparTela();
                     Prints.PrintsMain.printHeroiVenceu(heroi);
                     return;
@@ -250,56 +266,60 @@ public class App {
 
                
                 if (usouEfeito == 1) { // // Se o heroi usou efeito o inimigo tambem vai
-                    inimigo.usarEfeito(heroi, juiz);
+                    inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> i.usarEfeito(heroi, juiz));
                     usouEfeito = 0;
                     }
-                inimigo.atacar(heroi);
-    
+                
 
-                if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
-                    System.out.println("🧪 Os efeitos estão agindo...");
-                    juiz.notificarSubscribers();
+                inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> i.atacar(heroi));    
 
-                    for (int i = heroi.getListaEfeitos().size() - 1; i >= 0;  i--) { //garante que o efeito seja removido da lista do heroi caso acabe a duração
-                        Efeitos efeito = heroi.getListaEfeitos().get(i);
-                        PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
-                    if (efeito.getAcumulos() == 0) {
-                        juiz.desinscrever(efeito);
-                        heroi.getListaEfeitos().remove(i);
+                for (Inimigo inimigo : inimigos){
+                    if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
+                        System.out.println("🧪 Os efeitos estão agindo...");
+                        juiz.notificarSubscribers();
+
+                        for (int i = heroi.getListaEfeitos().size() - 1; i >= 0;  i--) { //garante que o efeito seja removido da lista do heroi caso acabe a duração
+                            Efeitos efeito = heroi.getListaEfeitos().get(i);
+                            PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
+                            if (efeito.getAcumulos() == 0) {
+                                juiz.desinscrever(efeito);
+                                heroi.getListaEfeitos().remove(i);
+                                }
                         }
-                    }
-                    for (int i = heroi.getListaEfeitos().size() - 1; i >= 0; i--) { //efeito no heroi
-                        Efeitos efeito = heroi.getListaEfeitos().get(i);
-                        PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
-                        
-                        if (efeito.getAcumulos() <= 0) {
-                            juiz.desinscrever(efeito);
-                            heroi.getListaEfeitos().remove(i);
+                        for (int i = heroi.getListaEfeitos().size() - 1; i >= 0; i--) { //efeito no heroi
+                            Efeitos efeito = heroi.getListaEfeitos().get(i);
+                            PrintsMain.printEfeitoAgindo(heroi.getNome(), efeito.getNome(), efeito.getAcumulos());
+                            
+                            if (efeito.getAcumulos() <= 0) {
+                                juiz.desinscrever(efeito);
+                                heroi.getListaEfeitos().remove(i);
+                            }
                         }
+                        for (int i = inimigo.getListaEfeitos().size() - 1; i >= 0; i--) { // efeito no inimigo
+                            Efeitos efeito = inimigo.getListaEfeitos().get(i);
+                            PrintsMain.printEfeitoAgindo(inimigo.getNome(), efeito.getNome(), efeito.getAcumulos());
+                            if (efeito.getAcumulos() <= 0) {
+                                juiz.desinscrever(efeito);
+                                inimigo.getListaEfeitos().remove(i);
+                            }
                     }
-                    for (int i = inimigo.getListaEfeitos().size() - 1; i >= 0; i--) { // efeito no inimigo
-                        Efeitos efeito = inimigo.getListaEfeitos().get(i);
-                        PrintsMain.printEfeitoAgindo(inimigo.getNome(), efeito.getNome(), efeito.getAcumulos());
-                        if (efeito.getAcumulos() <= 0) {
-                            juiz.desinscrever(efeito);
-                            inimigo.getListaEfeitos().remove(i);
-                        }
-                    }
-                } 
+                    } 
+                }
+                
                 System.out.println();
                 Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                 contadorRound++;
             }
 
-            if (heroi.estaVivo() == true && inimigo.estaVivo() == false) { //Inimigo morreu
+            if (heroi.estaVivo() == true && inimigosVivos(inimigos) == false) { //Inimigos morreram
                  Prints.PrintsMain.printHeroiVenceu(heroi);
                 break;
             }
-            if (heroi.estaVivo() == false && inimigo.estaVivo() == true){ //Heroi morreu
-                Prints.PrintsMain.printInimigoVenceu(inimigo);
+            if (heroi.estaVivo() == false && inimigosVivos(inimigos) == true){ //Heroi morreu
+                Prints.PrintsMain.printInimigoVenceu(inimigos);
                 break;
             }
-            if (heroi.estaVivo() == false && inimigo.estaVivo() == false){ //empate
+            if (heroi.estaVivo() == false && inimigosVivos(inimigos) == false){ //empate
                 Prints.PrintsMain.printEmpate();
                 break;
             }
