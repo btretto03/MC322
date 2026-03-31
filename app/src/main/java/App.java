@@ -274,6 +274,7 @@ public class App {
                     }
                 }
 
+//------------------------------AÇÕES PÓS USUÁRIO-----------------------------------------
                 Jogo.Aux.limparTela();
                 PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, inimigos, vidaInimigosInicio);
 
@@ -297,7 +298,7 @@ public class App {
 
                 inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> i.atacar(heroi));    
 
-                
+//-------------------------------EXECUÇÃO EFEITOS------------------------------------------
                 boolean haEfeitos = heroi.getListaEfeitos().size() > 0;
                 if (!haEfeitos) {
                     for (Inimigo inimigo : inimigos) {
