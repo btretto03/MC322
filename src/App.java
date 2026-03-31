@@ -42,35 +42,89 @@ public class App {
         return false;
     }
     public static void main(String[] args)  {
-        Publisher juiz = new Publisher();
-        Prints.PrintsMain.printInicial();
-    
 
 //----------------------------------INSTANCIAMENTO------------------------------------------
+        Publisher juiz = new Publisher();
+        Prints.PrintsMain.printInicial();
         String escolhaheroi = Heroi.escolherHeroi(inputs);
+        Heroi heroi = new Heroi(escolhaheroi, 50, 0);
         limparTela();
-        String escolhainimigo = Inimigo.escolherInimigo(inputs);
-        
-        Heroi heroi = new Heroi(escolhaheroi, 50, 0); //definindo as classes
+
+//----------------------------------ESCOLHA DO MODO------------------------------------------
+        System.out.println("\n-----------------------------------------");
+        System.out.println("        🥊 ESCOLHA O MODO DE JOGO 🥊");
+        System.out.println("-----------------------------------------");
+        System.out.println(" [1] (Fácil) 1 VS 1 (Um oponente)");
+        System.out.println(" [2] (Difícil) 1 VS 2 (Dois oponentes)");
+        System.out.println(" [3] 🎲 Ir na Sorte (Pode vir 1 ou 2)");
+        System.out.println("-----------------------------------------");
+        System.out.print("Sua escolha: ");
+        int modo = inputs.nextInt();
         ArrayList<Inimigo> inimigos = new ArrayList<>();
-        inimigos.add(new Inimigo(escolhainimigo, 50, 0));
 
-//----------------------------------DOIS INIMIGOS------------------------------------------
-        int inimigoSecundario = (int) (Math.random() * 7) + 1;
+        switch (modo) {
+            case 1:
+                limparTela();
+                System.out.println("🥊 MODO 1 VS 1 SELECIONADO 🥊\n");
+                String inimigo = Inimigo.escolherInimigo(inputs);
+                inimigos.add(new Inimigo(inimigo, 50, 0));
+                break;
 
-        if (inimigoSecundario <= 3){ //se o valor aleatório for entre 0 e 3, cria um novo inimigo
-            Scanner pseudoInput = new Scanner(String.valueOf(inimigoSecundario));
-            String nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
+            case 2:
+                limparTela();
+                System.out.println("🥊 MODO 1 VS 2 SELECIONADO 🥊\n");
+                System.out.println("➡️ Escolha o PRIMEIRO oponente:");
+                String inimigo1 = Inimigo.escolherInimigo(inputs);
+                
+                limparTela();
+                System.out.println("➡️ Escolha o SEGUNDO oponente:");
+                String inimigo2 = Inimigo.escolherInimigo(inputs);
 
-            while (nomeSecundario == escolhainimigo) {
-                inimigoSecundario = (int) (Math.random() * 3) + 1;
-                pseudoInput = new Scanner(String.valueOf(inimigoSecundario));
-                nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
-            }
+                inimigos.add(new Inimigo(inimigo1, 25, 0));
+                inimigos.add(new Inimigo(inimigo2, 25, 0));
+                break;
 
-            inimigos.add(new Inimigo(nomeSecundario, 25, 0));
-            inimigos.get(0).setVida(25);
+            case 3:
+                limparTela();
+                System.out.println("🎲 MODO SORTE SELECIONADO 🎲\n");
+                System.out.println("➡️ Escolha seu oponente principal:");
+                String inimigoSorte = Inimigo.escolherInimigo(inputs);
+                inimigos.add(new Inimigo(inimigoSorte, 50, 0));
+
+                int inimigoSecundario = (int) (Math.random() * 7) + 1;
+                if (inimigoSecundario <= 3) { // 2 inimigos
+                    Scanner pseudoInput = new Scanner(String.valueOf(inimigoSecundario));
+                    String nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
+
+                    while (nomeSecundario.equals(inimigoSorte)) {
+                        inimigoSecundario = (int) (Math.random() * 3) + 1;
+                        pseudoInput = new Scanner(String.valueOf(inimigoSecundario));
+                        nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
+                    }
+
+                    inimigos.add(new Inimigo(nomeSecundario, 25, 0));
+                    inimigos.get(0).setVida(25);
+                    
+                    limparTela();
+                    System.out.println("🎲 Você deu azar! Um segundo lutador entrou na arena: " + nomeSecundario + "!");
+                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                } else {
+                    limparTela();
+                    System.out.println("🎲 Você deu sorte! Apenas o " + inimigoSorte + " entrou na arena hoje!");
+                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                }
+                break;
+
+            default:
+                limparTela();
+                System.out.println("⚠️ Opção inválida! Modo 1 VS 1 selecionado por padrão.\n");
+                String inimigoDefault = Inimigo.escolherInimigo(inputs);
+                inimigos.add(new Inimigo(inimigoDefault, 50, 0));
+                break;
         }
+
+            
+                
 
 //----------------------------------BARALHO E PILHAS------------------------------------------
         ArrayList<Carta> Baralho = new ArrayList<>();
