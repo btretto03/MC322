@@ -9,38 +9,8 @@ import Efeitos.*;
 import Jogo.Publisher;
 
 public class App {
-    public static void limparTela() {
-        System.out.print("\033[H\033[2J\033[3J");
-        System.out.flush();
-    }
     public static Scanner inputs = new Scanner(System.in);
 
-    public static Inimigo escolherAlvo (ArrayList<Inimigo> inimigos){
-        while (true) {
-            if(inimigos.size() > 1){
-                Prints.PrintsMain.printEscolhaAlvo(inimigos);
-                int inimigoEscolhido = inputs.nextInt();
-
-                if (inimigoEscolhido != 1 && inimigoEscolhido != 2){
-                    System.out.println("⚠️ Opção inválida!");
-                    continue;
-                }
-
-                return inimigos.get(inimigoEscolhido - 1);
-            }
-            return inimigos.get(0);
-        }
-        
-    }
-
-    public static boolean inimigosVivos (ArrayList<Inimigo> inimigos){
-        for (Inimigo inimigo : inimigos){
-            if (inimigo.estaVivo()){
-                return true;
-            }
-        }
-        return false;
-    }
     public static void main(String[] args)  {
 
 //----------------------------------INSTANCIAMENTO------------------------------------------
@@ -48,35 +18,28 @@ public class App {
         Prints.PrintsMain.printInicial();
         String escolhaheroi = Heroi.escolherHeroi(inputs);
         Heroi heroi = new Heroi(escolhaheroi, 50, 0);
-        limparTela();
+        Jogo.Aux.limparTela();
 
 //----------------------------------ESCOLHA DO MODO------------------------------------------
-        System.out.println("\n-----------------------------------------");
-        System.out.println("        🥊 ESCOLHA O MODO DE JOGO 🥊");
-        System.out.println("-----------------------------------------");
-        System.out.println(" [1] (Fácil) 1 VS 1 (Um oponente)");
-        System.out.println(" [2] (Difícil) 1 VS 2 (Dois oponentes)");
-        System.out.println(" [3] 🎲 Ir na Sorte (Pode vir 1 ou 2)");
-        System.out.println("-----------------------------------------");
-        System.out.print("Sua escolha: ");
+        Prints.PrintsMain.printEscolhaModo();
         int modo = inputs.nextInt();
         ArrayList<Inimigo> inimigos = new ArrayList<>();
 
         switch (modo) {
             case 1:
-                limparTela();
+                Jogo.Aux.limparTela();
                 System.out.println("🥊 MODO 1 VS 1 SELECIONADO 🥊\n");
                 String inimigo = Inimigo.escolherInimigo(inputs);
                 inimigos.add(new Inimigo(inimigo, 50, 0));
                 break;
 
             case 2:
-                limparTela();
+                Jogo.Aux.limparTela();
                 System.out.println("🥊 MODO 1 VS 2 SELECIONADO 🥊\n");
                 System.out.println("➡️ Escolha o PRIMEIRO oponente:");
                 String inimigo1 = Inimigo.escolherInimigo(inputs);
                 
-                limparTela();
+                Jogo.Aux.limparTela();
                 System.out.println("➡️ Escolha o SEGUNDO oponente:");
                 String inimigo2 = Inimigo.escolherInimigo(inputs);
 
@@ -85,7 +48,7 @@ public class App {
                 break;
 
             case 3:
-                limparTela();
+                Jogo.Aux.limparTela();
                 System.out.println("🎲 MODO SORTE SELECIONADO 🎲\n");
                 System.out.println("➡️ Escolha seu oponente principal:");
                 String inimigoSorte = Inimigo.escolherInimigo(inputs);
@@ -105,26 +68,23 @@ public class App {
                     inimigos.add(new Inimigo(nomeSecundario, 25, 0));
                     inimigos.get(0).setVida(25);
                     
-                    limparTela();
+                    Jogo.Aux.limparTela();
                     System.out.println("🎲 Você deu azar! Um segundo lutador entrou na arena: " + nomeSecundario + "!");
                     Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                 } else {
-                    limparTela();
+                    Jogo.Aux.limparTela();
                     System.out.println("🎲 Você deu sorte! Apenas o " + inimigoSorte + " entrou na arena hoje!");
                     Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                 }
                 break;
 
             default:
-                limparTela();
+                Jogo.Aux.limparTela();
                 System.out.println("⚠️ Opção inválida! Modo 1 VS 1 selecionado por padrão.\n");
                 String inimigoDefault = Inimigo.escolherInimigo(inputs);
                 inimigos.add(new Inimigo(inimigoDefault, 50, 0));
                 break;
         }
-
-            
-                
 
 //----------------------------------BARALHO E PILHAS------------------------------------------
         ArrayList<Carta> Baralho = new ArrayList<>();
@@ -177,7 +137,8 @@ public class App {
                 }
             }
 
-            if (heroi.estaVivo() == true && inimigosVivos(inimigos)) { //Os dois vivos
+            if (heroi.estaVivo() == true && Jogo.Aux.inimigosVivos
+            (inimigos)) { //Os dois vivos
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
                 int[] vidaInimigosInicio = new int[2];
 
@@ -187,14 +148,14 @@ public class App {
 
                 int usouEfeito = 0; //variavel que guarda se o heroi usou efeito
 
-                limparTela();
+                Jogo.Aux.limparTela();
                 Prints.PrintsMain.printNovoRound(contadorRound);
                 inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> i.anuncio(heroi));
                 Prints.PrintsMain.digiteParaContinuar(inputs, 0);
 
 //----------------------------------ESCOLHAS USUÁRIO------------------------------------------
                 while (heroi.getEnergia() > 0 && mao.size() > 0) {
-                    limparTela();
+                    Jogo.Aux.limparTela();
                     
                     Prints.PrintsMain.printNovoRound(contadorRound);
                     Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), inimigos);
@@ -214,7 +175,7 @@ public class App {
                     PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
                     
                     if (!heroi.verificaMao(mao)){
-                        limparTela();
+                        Jogo.Aux.limparTela();
                         
                         Prints.PrintsMain.printFimEnergia();
                         Prints.PrintsMain.digiteParaContinuar(inputs, 0);
@@ -232,13 +193,13 @@ public class App {
 
 //----------------------------------ESCOLHA EFEITOS------------------------------------------
                    if (num == 99 && furia >= 3) {
-                        limparTela();
+                        Jogo.Aux.limparTela();
                         
                         Prints.PrintsMain.menuEfeito();
                         
                         int escolha = inputs.nextInt();
                         if (escolha == 0) {
-                            limparTela();
+                            Jogo.Aux.limparTela();
                             System.out.println("❌ Efeito especial cancelado.");
                             continue;
                         }
@@ -248,11 +209,11 @@ public class App {
 
                         switch (escolha) {
                             case 1:
-                                alvoEfeito = escolherAlvo(inimigos);
+                                alvoEfeito = Jogo.Aux.escolherAlvo(inimigos, inputs);
                                 efeito = new Sangramento("Sangramento", 3, alvoEfeito);
                                 break;
                             case 2:
-                                alvoEfeito = escolherAlvo(inimigos);
+                                alvoEfeito = Jogo.Aux.escolherAlvo(inimigos, inputs);
                                 efeito = new Provocacao("Provocacao", 3, alvoEfeito);
                                 break;
                             case 3:
@@ -270,13 +231,13 @@ public class App {
                             acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (3X) no " +alvoEfeito.getNome() + "!");
                         }
                         
-                        limparTela();
+                        Jogo.Aux.limparTela();
                         continue;
                     }
 
 //----------------------------------ESCOLHA INVÁLDA------------------------------------------
                     if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
-                        limparTela();
+                        Jogo.Aux.limparTela();
                         if(num >= mao.size()){
                             System.out.println("⚠️ Opção inválida!");
                         } else {
@@ -297,8 +258,8 @@ public class App {
                         acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + escudoAdicionado + ".");
                         
                     } else { 
-                        Entidade alvoCarta = escolherAlvo(inimigos);
-                        limparTela();
+                        Entidade alvoCarta = Jogo.Aux.escolherAlvo(inimigos, inputs);
+                        Jogo.Aux.limparTela();
                        /*  if (cartaEscolhida instanceof CartaEfeito && cartaEscolhida.getNome().equals("Adrenalina")) {
                             alvoCarta = heroi;
                         } */
@@ -313,15 +274,16 @@ public class App {
                     }
                 }
 
-                limparTela();
+                Jogo.Aux.limparTela();
                 PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, inimigos, vidaInimigosInicio);
 
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
                 }
 
-                if (!inimigosVivos(inimigos)) { //Inimigos morreram antes de atacar
-                    limparTela();
+                if (!Jogo.Aux.inimigosVivos
+                    (inimigos)) { //Inimigos morreram antes de atacar
+                    Jogo.Aux.limparTela();
                     Prints.PrintsMain.printHeroiVenceu(heroi);
                     return;
                 }
@@ -377,15 +339,18 @@ public class App {
                 contadorRound++;
             }
 
-            if (heroi.estaVivo() == true && inimigosVivos(inimigos) == false) { //Inimigos morreram
+            if (heroi.estaVivo() == true && Jogo.Aux.inimigosVivos
+            (inimigos) == false) { //Inimigos morreram
                  Prints.PrintsMain.printHeroiVenceu(heroi);
                 break;
             }
-            if (heroi.estaVivo() == false && inimigosVivos(inimigos) == true){ //Heroi morreu
+            if (heroi.estaVivo() == false && Jogo.Aux.inimigosVivos
+            (inimigos) == true){ //Heroi morreu
                 Prints.PrintsMain.printInimigoVenceu(inimigos);
                 break;
             }
-            if (heroi.estaVivo() == false && inimigosVivos(inimigos) == false){ //empate
+            if (heroi.estaVivo() == false && Jogo.Aux.inimigosVivos
+            (inimigos) == false){ //empate
                 Prints.PrintsMain.printEmpate();
                 break;
             }

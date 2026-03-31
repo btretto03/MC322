@@ -74,6 +74,17 @@ public class PrintsMain {
         System.out.println("🪫 Infelizmente " + nome + " não tem energia suficiente! Digite -1 para voltar a jogada");
     }
 
+    public static void printEscolhaModo (){
+         System.out.println("\n-----------------------------------------");
+        System.out.println("        🥊 ESCOLHA O MODO DE JOGO 🥊");
+        System.out.println("-----------------------------------------");
+        System.out.println(" [1] (Fácil) 1 VS 1 (Um oponente)");
+        System.out.println(" [2] (Difícil) 1 VS 2 (Dois oponentes)");
+        System.out.println(" [3] 🎲 Ir na Sorte (Pode vir 1 ou 2)");
+        System.out.println("-----------------------------------------");
+        System.out.print("Sua escolha: ");
+    }
+
     public static void menuEfeito() {
         System.out.println("\n\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
         System.out.println("         ⚡ \u001B[31;1mEfeito especial\u001B[0m ⚡");
