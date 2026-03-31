@@ -213,7 +213,7 @@ public class App {
                             juiz.inscrever(efeito);
                             furia -= 3; // Gasta a fúria
                             usouEfeito = 1; // Avisa o inimigo para retaliar
-                            acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (Por três rodadas) no " +alvoEfeito.getNome() + "!");
+                            acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (3X) no " +alvoEfeito.getNome() + "!");
                         }
                         
                         limparTela();

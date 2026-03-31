@@ -35,7 +35,18 @@ flowchart LR
 As listas não são embaralhadas no sentido de realizar um shuffle na posição das cartas dentro do array. Nesse caso, nós optamos pela geração de números pseudo-aleatórios contidos no range da quantidade de cartas disponíveis para serem o índice de acesso no array de compra, para simular a aleatoriedade causada por um embaralhamento. 
 
 ## Laboratório 3
-> Nessa implementação, foram adicionados os efeitos. Optamos pela lógica utilizada em jogos de luta, onde o jogador acumula uma certa Fúria
+> Nessa implementação, foram adicionados os efeitos. Optamos pela lógica utilizada em jogos de luta, onde o jogador acumula uma certa Fúria que, quando cheia, permite utilizar um efeito no inimigo.
+> O valor de fúria é limitado a 3, e a cada ataque realizado é somada de 1.
+
+### Efeitos
+> Foram adicionados três efeitos:
+>>Adrenalina: recupera vida do alvo ao longo das rodadas de duração.
+>>Provocação: reduz o escudo do alvo a cada rodada enquanto durar o efeito.
+>>Sangramento: causa dano ao alvo ao longo das rodadas de duração.
+
+### Seccionamento
+>> Algumas partes da main foram dividas em seções por comentários para facilitar a organização e manutenção do código. 
+
 
 ## 🪜 Estrutura do projeto
 ```
