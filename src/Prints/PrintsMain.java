@@ -36,7 +36,9 @@ public class PrintsMain {
     }
     public static void printStatus(String heroi, int vidaheroi, ArrayList<Inimigo> inimigos) {
         System.out.println(String.format("🟩 %s: ❤️  %d VIDA", heroi, vidaheroi));
-        inimigos.forEach(inimigo -> System.out.println(String.format("🟥 %s: ❤️  %d VIDA", inimigo.getNome(), inimigo.getVida())));
+        inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> System.out.println(String.format("🟥 %s: ❤️  %d VIDA", i.getNome(), i.getVida())));
+        inimigos.stream().filter(inimigo -> !inimigo.estaVivo()).forEach(i -> System.out.println(String.format("🟥 %s: 💀  FOI NOCAUTEADO", i.getNome())));
+
     }
 
     public static void printEnergiaEMenu(int energia, ArrayList<Carta> mao, int furia) {
@@ -200,14 +202,16 @@ public class PrintsMain {
 
     public static void printEscolhaAlvo (ArrayList<Inimigo> inimigos){
         System.out.println("\n\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
-        System.out.println("         ⚡ \u001B[31;1mEscolha seu alvo\u001B[0m ⚡");
+        System.out.println("          \u001B[31;1mEscolha seu alvo\u001B[0m ");
         System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
 
         for(int i = 0; i < inimigos.size(); i++){
-            System.out.println("[" + (i+1) + "]" + " " + inimigos.get(i).getNome() + "\n");
+            if (inimigos.get(i).estaVivo()){
+                System.out.println("[" + (i+1) + "]" + " " + inimigos.get(i).getNome() + "\n");
+            }
+        
         }
 
-        System.out.println(" [0] ❌ Cancelar");
         System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
         System.out.print("Sua escolha: \n");
     }
