@@ -1,5 +1,8 @@
 package Prints;
 
+/**
+ * Funcoes de impressao relacionadas a escolha e status de entidades.
+ */
 public class PrintsEntidades {
 private static String reset = "\u001B[0m";
     //private static String amarelo = "\u001B[33m";

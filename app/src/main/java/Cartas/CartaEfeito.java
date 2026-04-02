@@ -4,6 +4,9 @@ import Entidades.Entidade;
 import Efeitos.*;
 import Jogo.Publisher;
 
+/**
+ * Carta que aplica um efeito ao alvo escolhido.
+ */
 public class CartaEfeito extends Carta {
     private String tipoEfeito;
     private Publisher juiz;
@@ -14,6 +17,12 @@ public class CartaEfeito extends Carta {
         this.juiz = juiz;
     }
 
+    /**
+     * Instancia e aplica o efeito configurado nesta carta.
+     *
+     * @param alvo entidade que recebera o efeito
+     * @return acumulacao inicial do efeito aplicado
+     */
     @Override
    public int usar(Entidade alvo) {
         Efeitos novoEfeito;
@@ -34,6 +43,11 @@ public class CartaEfeito extends Carta {
         return novoEfeito.getAcumulos();
     }
 
+    /**
+     * Imprime os dados da carta no menu de rodada.
+     *
+     * @param indice posicao da carta na mao
+     */
     @Override
     public void printRodada(int indice) {
         System.out.println(String.format("[%d] %s (Custo: %d | Efeito: %s)", 

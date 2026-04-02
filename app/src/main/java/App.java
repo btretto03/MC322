@@ -7,9 +7,32 @@ import Prints.*;
 import Efeitos.*;
 import Jogo.Publisher;
 
+/**
+ * Classe principal da aplicacao e ponto de entrada do jogo.
+ *
+ * <p>Este arquivo coordena o ciclo completo de uma partida: selecao do heroi,
+ * configuracao dos inimigos, gerenciamento de baralho/mao e execucao dos rounds
+ * ate que uma condicao de fim de jogo seja atendida.</p>
+ */
 public class App {
+    /**
+     * Scanner compartilhado para leitura de entradas do usuario no terminal.
+     */
     public static Scanner inputs = new Scanner(System.in);
 
+    /**
+     * Inicia a aplicacao e executa o loop principal de combate.
+     *
+     * <p>Fluxo principal:</p>
+     * <ol>
+     *   <li>Instancia os objetos-base da partida (juiz, heroi e modo de jogo).</li>
+     *   <li>Prepara baralho, pilha de compra e pilha de descarte.</li>
+     *   <li>Executa rounds com escolhas do jogador, ataques inimigos e efeitos ativos.</li>
+     *   <li>Encerra quando heroi ou inimigos atingem condicao final.</li>
+     * </ol>
+     *
+     * @param args argumentos de linha de comando (nao utilizados)
+     */
     public static void main(String[] args)  {
         Prints.PrintsMain.printInicial2();
 //----------------------------------INSTANCIAMENTO------------------------------------------

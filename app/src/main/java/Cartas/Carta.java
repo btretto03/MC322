@@ -1,9 +1,13 @@
 package Cartas;
 import Entidades.Entidade;
 
+/**
+ * Classe base para todas as cartas utilizadas durante o combate.
+ */
 public abstract class Carta {
     protected String nome ;
     protected int custo; 
+    /** Texto resumido da acao da carta. */
     protected String descricao;
 
     public Carta(String nome, int custo, String descricao) {

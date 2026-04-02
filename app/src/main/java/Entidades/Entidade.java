@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import Efeitos.Efeitos;
 import Jogo.Publisher;
 
-public class Entidade {
+/**
+ * Classe abstrata de molde para qualquer participante de combate (heroi ou inimigo).
+ */
+public abstract class Entidade {
     protected String nome; 
     protected int vida;
     protected int escudo = 0;
@@ -17,6 +20,11 @@ public class Entidade {
     }
 
     //Métodos
+    /**
+     * Aplica dano considerando absorcao de escudo antes da vida.
+     *
+     * @param dano dano bruto recebido
+     */
     public void receberDano (int dano) {
         int escudoAtual = this.getEscudo();
         if(escudoAtual > 0) {
@@ -44,6 +52,12 @@ public class Entidade {
         this.escudo += escudo;
     }   
 
+    /**
+     * Adiciona um efeito na entidade ou acumula em um efeito existente.
+     *
+     * @param efeito efeito a adicionar
+     * @param juiz publicador de notificacoes dos efeitos
+     */
     public void adicionarEfeito(Efeitos efeito, Publisher juiz) {
         for (int i = 0; i < this.listaEfeitos.size(); i ++) {
             Efeitos efeitoLista = listaEfeitos.get(i);

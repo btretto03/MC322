@@ -10,12 +10,23 @@ import Cartas.CartaEscudo;
 import Entidades.Heroi;
 import Entidades.Inimigo;
 
+/**
+ * Funcoes utilitarias para apoio ao fluxo principal da partida.
+ */
 public class Aux {
+    /**
+     * Limpa a tela do terminal usando codigos ANSI.
+     */
     public static void limparTela() {
         System.out.print("\033[H\033[2J\033[3J");
         System.out.flush();
     }
     
+    /**
+     * Pausa a execucao por um intervalo em milissegundos.
+     *
+     * @param milisegundos tempo de espera em milissegundos
+     */
     public static void esperar(int milisegundos) {
         try {
             Thread.sleep(milisegundos);
@@ -23,6 +34,13 @@ public class Aux {
     }
     }
 
+    /**
+     * Permite ao jogador escolher qual inimigo sera alvo de um ataque ou efeito.
+     *
+     * @param inimigos lista de inimigos disponiveis
+     * @param inputs leitor de entrada do usuario
+     * @return inimigo selecionado
+     */
     public static Inimigo escolherAlvo (ArrayList<Inimigo> inimigos, java.util.Scanner inputs ){
         while (true) {
             if(inimigos.size() > 1){
@@ -41,6 +59,12 @@ public class Aux {
         
     }
 
+    /**
+     * Verifica se existe ao menos um inimigo vivo.
+     *
+     * @param inimigos lista de inimigos
+     * @return true se ao menos um inimigo estiver vivo
+     */
     public static boolean inimigosVivos (ArrayList<Inimigo> inimigos){
         for (Inimigo inimigo : inimigos){
             if (inimigo.estaVivo()){
@@ -49,6 +73,14 @@ public class Aux {
         }
         return false;
     }
+
+    /**
+     * Define modo de jogo e instancia inimigos correspondentes.
+     *
+     * @param inputs leitor de entrada do usuario
+     * @param heroi heroi da partida
+     * @return lista de inimigos configurada para o modo escolhido
+     */
     public static ArrayList<Inimigo> escolherModoDeJogo(Scanner inputs, Heroi heroi) {
         Prints.PrintsMain.printEscolhaModo();
         int modo = inputs.nextInt();
@@ -106,6 +138,15 @@ public class Aux {
         return baralho;
     }
 
+    /**
+     * Compra uma mao de ate 4 cartas a partir da pilha de compra.
+     *
+     * <p>Quando a pilha de compra esvazia, o descarte é embaralhado de volta virando a nova pilha de compra.</p>
+     *
+     * @param pilhaCompra pilha atual de compra
+     * @param pilhaDescarte pilha de descarte
+     * @return lista de cartas compradas para a mao
+     */
     public static ArrayList<Carta> comprarMao(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte) {
         ArrayList<Carta> mao = new ArrayList<>();
         
@@ -127,6 +168,13 @@ public class Aux {
         return mao;
     }
     
+    /**
+     * Avalia condicoes de fim de jogo e imprime o resultado correspondente.
+     *
+     * @param heroi heroi do jogador
+     * @param inimigos lista de inimigos da partida
+     * @return true se a partida terminou
+     */
     public static boolean verificarFimDeJogo(Heroi heroi, ArrayList<Inimigo> inimigos) {
         boolean heroiVivo = heroi.estaVivo();
         boolean temInimigosVivos = inimigosVivos(inimigos); 

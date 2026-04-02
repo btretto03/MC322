@@ -7,11 +7,11 @@
 ## 📌 Sobre o Projeto
 O objetivo deste projteo é desenvolver um sistema de batalhas via terminal, fortemente inspirado na logística do jogo "Slay the Spire". Para isso aplicamos os conceitos  da disciplina de Programação Orientada a Objetos (POO).
 
-## Laboratório 1
+## Terefa 1
 Para esta implementação, adaptamos a dinâmica de combate para o universo do UFC. O usuário pode escolher o seu lutador dentre as opções disponíveis para enfrentar o oponente. A lógica principal foi mantida: o jogador precisa gerenciar sua energia a cada turno para atacar ou levantar a guarda (representado pelas cartas de escudo), buscando nocautear o adversário antes de ser derrotado.
 
-## Laboratório 2
-Neste laboratório implementamos os conceitos de herança, classes abstratas e polimorfismo.
+## Terefa 2
+Nesta Terefa implementamos os conceitos de herança, classes abstratas e polimorfismo.
 
 A classe Carta é uma classe abstrata utilizada como superclasse para CartaDano e CartaEscudo. Da mesma forma, Entidade é uma classe abstrata utilizada como superclasse para Heroi e Inimigo.
 
@@ -34,7 +34,7 @@ flowchart LR
 > **Embaralhamento**  
 As listas não são embaralhadas no sentido de realizar um shuffle na posição das cartas dentro do array.
 
-## Laboratório 3
+## Terefa 3
 Nessa implementação, foram adicionados os efeitos. Optamos pela lógica utilizada em jogos de luta, onde o jogador acumula uma certa Fúria que, quando cheia, permite utilizar um efeito no inimigo.
 O valor de fúria é limitado a 3, e a cada ataque realizado é somada de 1.
 
@@ -60,51 +60,91 @@ Os efeitos duram **3 turnos** e trazem dinâmicas estratégicas para o combate:
 ### Seccionamento
 Algumas partes da main foram dividas em seções por comentários para facilitar a organização e manutenção do código. 
 
+## Tarefa 4
+Nesta tarefa, o foco maior está em organização e documentação. O projeto foi refatorado para se tornar um projeto baseado no gradle, uma ferramenta de build para java. Além disso, a documentação de classes, métodos e atributos, que não tinham implementação óbvia, foi adicionada no padrão javadoc.
+
+### Nova dinâmica
+- Desde a tarefa 3, o jogo conta com a possibilidade de lutar contra dois inimigos ao mesmo tempo. Sendo possível escolher no início da partida qual modo deseja jogar, 1v1, 1v2 ou aleatório, será sorteado se o jogo será 1v1 ou 1v2.
+
+### Documentação Javadoc
+- A documentação foi realizada com auxilio de LLm, que foi dito que seria permitido na aula de laboratório 05. Foi pedido ao modelo para que fosse realizado a documentação completa do projeto e, em seguida, o trabalho feito foi revisado e corrigido pelos membros do grupo. 
+
+- **Pontos de atenção:**
+> - Visando não poluir o projeto e optando por maior clareza, alguns métodos e parâmetros não foram documentados, principalemente aqueles com lógica curta e/ou nomes intuitivos. Exemplo: Construtores, getters, setters e prints óbvios.
+
+### Gradle
+Agora, o projeto é composto pelo Gradle, assim, tarefas como compilação, execução e geração de documentação devem ser realizadas com comandos próprios <br><br>
+
+>**Requisitos mínimos**
+>Java development kit
+>Gradle
+
+
+> **Compilação e Execução**
+> ```bash
+>#Na raíz do projeto
+>./gradlew build
+>./gradlew run
+> ```
+
+> **Geração de documentação**
+> ```bash
+>#Na raíz do projeto
+>./gradlew javadoc
+> ```
 
 ## 🪜 Estrutura do projeto
 ```
 .
+├── app
+│   ├── bin
+│   │   ├── main
+│   │   └── test
+│   ├── build
+│   │   ├── classes (.class files)
+│   │   ├── docs
+│   │   │   └── javadoc
+│   │   ├── resources
+│   │   │   └── main
+│   │   │       └── Printinicial.txt
+│   ├── build.gradle
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   │   ├── App.java
+│       │   │   ├── Cartas
+│       │   │   │   ├── CartaDano.java
+│       │   │   │   ├── CartaEfeito.java
+│       │   │   │   ├── CartaEscudo.java
+│       │   │   │   └── Carta.java
+│       │   │   ├── Efeitos
+│       │   │   │   ├── Adrenalina.java
+│       │   │   │   ├── Efeitos.java
+│       │   │   │   ├── Provocacao.java
+│       │   │   │   ├── Sangramento.java
+│       │   │   │   └── Subscriber.java
+│       │   │   ├── Entidades
+│       │   │   │   ├── Entidade.java
+│       │   │   │   ├── Heroi.java
+│       │   │   │   └── Inimigo.java
+│       │   │   ├── Jogo
+│       │   │   │   ├── Aux.java
+│       │   │   │   └── Publisher.java
+│       │   │   └── Prints
+│       │   │       ├── PrintsEntidades.java
+│       │   │       └── PrintsMain.java
+│       │   └── resources
+│       │       └── Printinicial.txt
+│       └── test
+│           └── java
+│               └── AppTest.java
+├── build/
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
 ├── README.md
-└── src
-    ├── App.java
-    ├── Cartas
-    │   ├── Carta.java
-    │   ├── CartaDano.java
-    │   ├── CartaEfeito.java
-    │   └── CartaEscudo.java
-    ├── Efeitos
-    │   ├── Adrenalina.java
-    │   ├── Efeitos.java
-    │   ├── Provocacao.java
-    │   └── Sangramento.java
-    ├── Entidades
-    │   ├── Entidade.java
-    │   ├── Heroi.java
-    │   └── Inimigo.java
-    ├── Jogo
-    │   └── Publisher.java
-    └── Prints
-        ├── PrintsEntidades.java
-        └── PrintsMain.java
+└── settings.gradle
 ```
-Onde:
-- src — contém todos os arquivos .java do projeto
-
 
 ## 🚀 Como compilar e executar
-
-O projeto foi feito para ser compilado e executado através de comandos, conforme solicitado. Para isso deve-se ter instalado:
-* Java Development Kit instalado.
-* Terminal compatível.
-
-Posteriormente, para compilar o código:
-No repositório da tarefa X, execute o comando abaixo. Ele gerará os arquivos compilados
-
-```bash
-javac -d bin $(find src -name "*.java")
-```
-
-```bash
-#Execução
-java -cp bin App
-```
+- Visite [Gradle](#gradle)

@@ -11,6 +11,9 @@ import Entidades.Heroi;
 import Entidades.Inimigo;
 import Efeitos.Efeitos;
 
+/**
+ * Colecao central de mensagens e telas exibidas no terminal durante a partida.
+ */
 public class PrintsMain {
 
     private static String reset = "\u001B[0m";
@@ -26,6 +29,9 @@ public class PrintsMain {
     private static String laranja = "\u001B[38;5;208m";
 
     
+    /**
+     * Exibe a abertura inicial do jogo com arte ASCII.
+     */
     public static void printInicial2() {
         System.out.print("\033[H\033[2J"); // limpa tela
         System.out.println(fundoSalmao + "                                              " + reset);
@@ -69,27 +75,49 @@ public class PrintsMain {
         Jogo.Aux.esperar(4000);
     }
     
+    /**
+     * Exibe mensagem de inicio da luta.
+     */
     public static void printInicioluta() {
         System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
 
     }
 
+    /**
+     * Exibe aviso de baralho vazio antes de reciclar descarte.
+     */
     public static void printBaralhoVazio() {
         System.out.println("🔄 Baralho vazio! Voltando o descarte para a pilha");
 
     }
 
+    /**
+     * Imprime cabecalho visual do round atual.
+     *
+     * @param contadorRound numero do round
+     */
     public static void printNovoRound(int contadorRound) {
         System.out.println(fundoSalmao + "                                        " + reset);
         System.out.println(fundoSalmao + "               ROUND " + contadorRound + "                  " + reset);
         System.out.println(fundoSalmao + "                                        " + reset);
     }
 
+    /**
+     * Exibe mensagem de fim do turno por falta de energia.
+     */
     public static void printFimEnergia() {
         System.out.println("\n-------------------------------------------------");
         System.out.println("\n🪫 Energia insuficiente para continuar. Rodada finalizada.\n");
         System.out.println("-------------------------------------------------");
     }
+
+    /**
+     * Imprime vida atual do heroi e dos inimigos.
+     *
+     * @param heroi nome do heroi
+     * @param vidaheroi vida atual do heroi
+     * @param inimigos lista de inimigos da partida
+     */
     public static void printStatus(String heroi, int vidaheroi, ArrayList<Inimigo> inimigos) {
         System.out.println(String.format("🟩 %s: ❤️  %d VIDA", heroi, vidaheroi));
         inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> System.out.println(String.format("🟥 %s: ❤️  %d VIDA", i.getNome(), i.getVida())));
@@ -97,6 +125,13 @@ public class PrintsMain {
 
     }
 
+    /**
+     * Imprime energia, barra de furia e cartas disponiveis na mao do jogador.
+     *
+     * @param energia energia atual do heroi
+     * @param mao cartas atuais na mao
+     * @param furia nivel de furia atual
+     */
     public static void printEnergiaEMenu(int energia, ArrayList<Carta> mao, int furia) {
         System.out.println("\n---------------------------------------");
         System.out.println("🔋 Energia: " + energia + "/6   🔥 Fúria: " + getBarraFuria(furia));
@@ -117,6 +152,13 @@ public class PrintsMain {
         System.out.println("⚠️ Opção inválida! Digite -1 para voltar a jogada");
     }
 
+    /**
+     * Imprime as acoes do jogador no round e dano total causado.
+     *
+     * @param acoes lista textual de acoes executadas
+     * @param inimigos lista de inimigos
+     * @param vidaInimigosInicio vida de cada inimigo no inicio do round
+     */
     public static void printAcoesDoRound(ArrayList<String> acoes, ArrayList<Inimigo> inimigos, int[] vidaInimigosInicio) {
         System.out.println(fundoSalmao + "\n 🥊SUAS AÇÕES NESSE ROUND🥊 \n" + reset);
         for (String acao : acoes) System.out.println(acao);
@@ -126,6 +168,15 @@ public class PrintsMain {
         System.out.println("----------------------------------------");
     }
 
+    /**
+     * Resume as acoes executadas por um inimigo no round.
+     *
+     * @param nome nome do inimigo
+     * @param dano dano preparado/aplicado
+     * @param escudo escudo ganho no round
+     * @param vidaRemovida vida removida do heroi
+     * @param escudoRemovido escudo removido do heroi
+     */
     public static void printAcoesInimigo(String nome, int dano, int escudo, int vidaRemovida, int escudoRemovido) {
         System.out.println(fundoSalmao + "\n 🥊AÇÕES DO INIMIGO NESSE ROUND🥊\n" + reset);
     
@@ -167,6 +218,9 @@ public class PrintsMain {
         System.out.print("Digite sua escolha: ");
     }
 
+    /**
+     * Exibe menu de escolha de efeito.
+     */
     public static void menuEfeito() {
         System.out.println("\n" + vermelhoNegrito + "----------------------------------------" + reset);
         System.out.println("         ⚡ " + vermelhoNegrito + "Efeito especial" + reset + " ⚡");
@@ -179,6 +233,15 @@ public class PrintsMain {
         System.out.print("Sua escolha: \n");
     }
 
+    /**
+     * Exibe mensagem anunciando o efeito especial aplicado pelo inimigo.
+     *
+     * @param nomeInimigo nome do inimigo
+     * @param tipo codigo do efeito aplicado: <br>
+     * 1 - Sangramento <br>
+     * 2 - Provocação <br>
+     * 3 - Adrenalina
+     */
     public static void printEfeitoInimigo(String nomeInimigo, int tipo) {
         System.out.println("\n 🥊Efeito especial de retaliação do inimigo🥊");
         System.out.println("\n💢 " + nomeInimigo.toUpperCase() + " ficou furioso porque você usou um Efeito Especial nele!\n");
@@ -197,6 +260,12 @@ public class PrintsMain {
         System.out.println("\n----------------------------------------");
     }
 
+    /**
+     * Pausa o fluxo ate o usuario digitar o valor esperado.
+     *
+     * @param inputs leitor de entrada do usuario
+     * @param caso 0 exige entrada 0, qualquer outro valor exige -1
+     */
     public static void digiteParaContinuar(java.util.Scanner inputs, int caso) {
         if (caso == 0) {
             System.out.println("Digite 0 para continuar a luta");
@@ -215,6 +284,14 @@ public class PrintsMain {
          }
     }
     
+    /**
+     * Exibe os efeitos ativos no heroi e nos inimigos.
+     *
+     * @param nomeHeroi nome do heroi
+     * @param efeitosHeroi efeitos ativos no heroi
+     * @param nomeInimigo nome do inimigo
+     * @param efeitosInimigo efeitos ativos no inimigo
+     */
     public static void printEfeitosLutadores(String nomeHeroi, ArrayList<Efeitos> efeitosHeroi, String nomeInimigo, ArrayList<Efeitos> efeitosInimigo) {
         System.out.println("-------------------------------------------------");
         System.out.print("🩸 Efeitos agindo em " + nomeHeroi + ": ");
@@ -293,6 +370,11 @@ public class PrintsMain {
         System.out.println(fundoVerdeClaro + espacos + reset);
     }
 
+    /**
+     * Exibe menu para selecao de alvo entre inimigos vivos.
+     *
+     * @param inimigos lista de inimigos disponiveis
+     */
     public static void printEscolhaAlvo (ArrayList<Inimigo> inimigos){
         System.out.println("\n" + vermelhoNegrito + "----------------------------------------" + reset);
         System.out.println("          " + vermelhoNegrito + "Escolha seu alvo" + reset + " ");
@@ -309,6 +391,9 @@ public class PrintsMain {
         System.out.print("Sua escolha: \n");
     }
 
+    /**
+     * Exibe banner de chegada de novo inimigo.
+     */
     public static void printNovoInimigo(){
         System.out.println(fundoSalmao + "                                                     " + reset);
         System.out.println(fundoSalmao + "                  NOVO INIMIGO                       " + reset);

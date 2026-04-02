@@ -2,6 +2,9 @@ package Efeitos;
 
 import Entidades.Entidade;
 
+/**
+ * Classe base para efeitos aplicados em entidades.
+ */
 public abstract class Efeitos implements Subscriber {
     protected String nome;
     protected int acumulos;
@@ -19,6 +22,9 @@ public abstract class Efeitos implements Subscriber {
         return this.nome + " " + this.acumulos + "x";
     }
 
+    /**
+     * Recebe notificacao do round e aplica o efeito.
+     */
     @Override
     public void serNotificado() {
         aplicarEfeito();
@@ -27,9 +33,11 @@ public abstract class Efeitos implements Subscriber {
     public String getNome() { 
         return nome; 
     }
+
     public int getAcumulos() { 
         return acumulos;
      }
+
     public void setAcumulos(int acumulos) { 
         this.acumulos = acumulos; 
     }

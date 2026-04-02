@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import Cartas.Carta;
 import Prints.PrintsEntidades;
 
+/**
+ * Entidade controlada pelo jogador.
+ */
 public class Heroi extends Entidade {
     private int energia;
     
@@ -11,6 +14,12 @@ public class Heroi extends Entidade {
         this.energia = 6;
     }
 
+    /**
+     * Exibe menu e retorna o nome do heroi escolhido.
+     *
+     * @param inputs leitor de entrada do usuario
+     * @return nome do heroi selecionado
+     */
     public static String escolherHeroi(java.util.Scanner inputs) {
         String escolhaheroi;
         PrintsEntidades.menuEscolhaHeroi();
@@ -37,6 +46,12 @@ public class Heroi extends Entidade {
         return escolhaheroi;
     }
 
+    /**
+     * Verifica se existe ao menos uma carta jogavel com a energia atual.
+     *
+     * @param mao cartas disponiveis na mao
+     * @return true quando ha alguma carta com custo compativel
+     */
     public boolean verificaMao (ArrayList<Carta> mao){
         int cartasInvalidas = 0;
         for (Carta i : mao){

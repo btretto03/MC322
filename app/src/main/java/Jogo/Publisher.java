@@ -3,6 +3,9 @@ package Jogo;
 import java.util.ArrayList;
 import Efeitos.Subscriber;
 
+/**
+ * Publicador simples para notificar subscribers de efeitos por round.
+ */
 public class Publisher {
     private ArrayList<Subscriber> inscritos = new ArrayList<>();
 
@@ -11,10 +14,14 @@ public class Publisher {
             inscritos.add(subs);
         }
     }
+
     public void desinscrever(Subscriber subs) {
         inscritos.remove(subs);
     }
     
+    /**
+     * Notifica todos os inscritos em ordem reversa de cadastro.
+     */
     public void notificarSubscribers() {
         for (int i = inscritos.size() - 1; i >= 0; i--) {
             inscritos.get(i).serNotificado();

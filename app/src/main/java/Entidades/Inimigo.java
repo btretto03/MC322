@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import Efeitos.*;
 import Jogo.Publisher;
 
+/**
+ * Entidade adversaria controlada por logica automatica.
+ */
 public class Inimigo extends Entidade {
     private int dano = 0;
 
@@ -14,6 +17,12 @@ public class Inimigo extends Entidade {
         super(nome, vida, escudo);
     }
 
+    /**
+     * Exibe menu e retorna o nome do inimigo escolhido.
+     *
+     * @param inputs leitor de entrada do usuario
+     * @return nome do inimigo selecionado
+     */
     public static String escolherInimigo(java.util.Scanner inputs) {
         String escolhainimigo;
 
@@ -42,6 +51,13 @@ public class Inimigo extends Entidade {
         return escolhainimigo;
     }
 
+    /**
+     * Configura uma luta com dois inimigos, manualmente ou por sorte.
+     *
+     * @param inputs leitor de entrada do usuario
+     * @param caso modo da escolha dupla
+     * @param inimigos lista que recebera os inimigos criados
+     */
     public static void escolherInimigoDuplo(java.util.Scanner inputs, int caso, ArrayList<Inimigo> inimigos) {
         switch(caso) {
             case 1: //escolher dois inimigos
@@ -101,6 +117,11 @@ public class Inimigo extends Entidade {
     }
     
 
+    /**
+     * Define e imprime a intencao de acao do inimigo no round atual.
+     *
+     * @param alvo heroi alvo para decisao da estrategia
+     */
     public void anuncio(Heroi alvo) {
         if (this.dano == 0 && this.escudo == 0) {
             int acao;
@@ -123,6 +144,11 @@ public class Inimigo extends Entidade {
         PrintsEntidades.printPretensoesInimigo(this.getNome(), this.dano, this.escudo);
     }
 
+    /**
+     * Executa o ataque do inimigo e imprime resumo da acao.
+     *
+     * @param alvo heroi que recebera o ataque
+     */
     public void atacar (Heroi alvo){
         int vidaAnterior = alvo.getVida();
         int escudoAnterior = alvo.getEscudo();
@@ -137,6 +163,12 @@ public class Inimigo extends Entidade {
         this.escudo = 0;
     }
 
+    /**
+     * Aplica um efeito especial aleatorio como retalhacao do inimigo.
+     *
+     * @param heroi heroi que pode receber o efeito
+     * @param juiz publicador de notificacoes de efeito
+     */
     public void usarEfeito(Heroi heroi, Publisher juiz) {
         int tipoEfeito = (int) (Math.random() * 3) + 1;
         PrintsMain.printEfeitoInimigo(this.getNome(), tipoEfeito);
