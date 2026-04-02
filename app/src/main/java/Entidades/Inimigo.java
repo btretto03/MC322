@@ -132,7 +132,7 @@ public class Inimigo extends Entidade {
         int vidaRemovida = vidaAnterior - alvo.getVida();
         int escudoRemovido = escudoAnterior - alvo.getEscudo();
         
-        PrintsEntidades.printAcoesInimigo(this.getNome(), this.dano, this.escudo, vidaRemovida, escudoRemovido);
+        PrintsMain.printAcoesInimigo(this.getNome(), this.dano, this.escudo, vidaRemovida, escudoRemovido);
         this.dano = 0;
         this.escudo = 0;
     }

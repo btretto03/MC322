@@ -118,10 +118,28 @@ public class PrintsMain {
     }
 
     public static void printAcoesDoRound(ArrayList<String> acoes, ArrayList<Inimigo> inimigos, int[] vidaInimigosInicio) {
-        System.out.println("\n 🥊SUAS AÇÕES NESSE ROUND🥊 \n");
+        System.out.println(fundoSalmao + "\n 🥊SUAS AÇÕES NESSE ROUND🥊 \n" + reset);
         for (String acao : acoes) System.out.println(acao);
         for (int i = 0; i < inimigos.size(); i++){
             System.out.println("\n 🩸 Vida removida do " + inimigos.get(i).getNome() + " nesse round: " + (vidaInimigosInicio[i] - inimigos.get(i).getVida()));
+        }
+        System.out.println("----------------------------------------");
+    }
+
+    public static void printAcoesInimigo(String nome, int dano, int escudo, int vidaRemovida, int escudoRemovido) {
+        System.out.println(fundoSalmao + "\n 🥊AÇÕES DO INIMIGO NESSE ROUND🥊\n" + reset);
+    
+        if (escudo != 0) {
+            System.out.println("🛡️ " + nome + " ganhou " + escudo + " de escudo!");
+        }
+        if (dano != 0) {
+            if (escudoRemovido > 0 && vidaRemovida > 0) {
+                System.out.println("💥 O ataque de " + dano + " derrubou a defesa (absorveu " + escudoRemovido + ") e atingiu " + vidaRemovida + " de vida.");
+            } else if (escudoRemovido > 0 && vidaRemovida == 0) {
+                System.out.println("🛡️ O inimigo atacou com " + dano + ", mas a defesa absorveu tudo!");
+            } else {
+                System.out.println("💥 " + nome + " acertou em cheio, tirando " + vidaRemovida + " de vida!");
+            }
         }
         System.out.println("----------------------------------------");
     }

@@ -59,7 +59,7 @@ public class Aux {
                 limparTela();
                 System.out.println("🥊 MODO 1 VS 1 SELECIONADO 🥊\n");
                 String inimigo = Inimigo.escolherInimigo(inputs);
-                inimigos.add(new Inimigo(inimigo, 2, 0));
+                inimigos.add(new Inimigo(inimigo, 50, 0));
                 break;
             case 2:
                 Inimigo.escolherInimigoDuplo(inputs, 1, inimigos);

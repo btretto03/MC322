@@ -19,7 +19,7 @@ private static String reset = "\u001B[0m";
         System.out.println("\n----------------------------------------" + reset);
         System.out.println("ESCOLHA SEU HERÓI:" + reset);
         System.out.println(" [1] 🏆 Alex Poatan (O 'Mãos de Pedra')" + reset);
-        System.out.println( " [2] 🥋 Anderson Silva( O 'Spider'" + reset);
+        System.out.println( " [2] 🥋 Anderson Silva( O 'Spider')" + reset);
         System.out.println(" [3] 🥊 Fabrício Werdum ( O 'Vai Cavalo')" + reset);
         System.out.println(branco +  " [4] ⌨️ Digite seu próprio nome");
         System.out.println("----------------------------------------" + reset);
@@ -59,22 +59,5 @@ private static String reset = "\u001B[0m";
         }
     }
 
-    public static void printAcoesInimigo(String nome, int dano, int escudo, int vidaRemovida, int escudoRemovido) {
-        System.out.println("\n 🥊AÇÕES DO INIMIGO NESSE ROUND🥊\n");
-    
-        if (escudo != 0) {
-            System.out.println("🛡️ " + nome + " ganhou " + escudo + " de escudo!");
-        }
-        if (dano != 0) {
-            if (escudoRemovido > 0 && vidaRemovida > 0) {
-                System.out.println("💥 O ataque de " + dano + " derrubou a defesa (absorveu " + escudoRemovido + ") e atingiu " + vidaRemovida + " de vida.");
-            } else if (escudoRemovido > 0 && vidaRemovida == 0) {
-                System.out.println("🛡️ O inimigo atacou com " + dano + ", mas a defesa absorveu tudo!");
-            } else {
-                System.out.println("💥 " + nome + " acertou em cheio, tirando " + vidaRemovida + " de vida!");
-            }
-        }
-        System.out.println("----------------------------------------");
-    }
 }
 
