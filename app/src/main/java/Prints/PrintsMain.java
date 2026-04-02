@@ -1,7 +1,8 @@
 package Prints;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import java.io.InputStream;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,10 @@ public class PrintsMain {
         Jogo.Aux.esperar(500);
 
         try {
-            File arquivo = new File("src/Prints/Printinicial.txt");
+            InputStream arquivo = PrintsMain.class.getClassLoader().getResourceAsStream("Printinicial.txt");
+            if (arquivo == null){
+                throw new FileNotFoundException();
+            }
             Scanner leitor = new Scanner(arquivo);
             int linhaAtual = 1;
 
