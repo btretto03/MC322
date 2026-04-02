@@ -75,8 +75,8 @@ Nesta tarefa, o foco maior está em organização e documentação. O projeto fo
 ### Gradle
 Agora, o projeto é composto pelo Gradle, assim, tarefas como compilação, execução e geração de documentação devem ser realizadas com comandos próprios <br><br>
 
->**Requisitos mínimos**
->Java development kit
+>**Requisitos mínimos**<br>
+>Java development kit<br>
 >Gradle
 
 
@@ -94,12 +94,11 @@ Agora, o projeto é composto pelo Gradle, assim, tarefas como compilação, exec
 > ```
 
 ## 🪜 Estrutura do projeto
+> - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
 ```
 .
 ├── app
-│   ├── bin
-│   │   ├── main
-│   │   └── test
+│   ├── bin/
 │   ├── build
 │   │   ├── classes (.class files)
 │   │   ├── docs
