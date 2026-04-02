@@ -1,10 +1,29 @@
 package Prints;
 
 public class PrintsEntidades {
+private static String reset = "\u001B[0m";
+    //private static String amarelo = "\u001B[33m";
+    private static String ciano = "\u001B[36m";
+    private static String branco = "\u001B[37m";
 
     public static void menuEscolhaHeroi() {
-        System.out.println("Escolha o seu herói: ");
-        System.out.println("[1] 🏆 Alex Poatan\n[2] 🥋 Anderson Silva\n[3] 🥊 Fabrício Werdum\n[4] ⌨️ Quero digitar o nome");
+        System.out.println("        🔥 SELECIONE SEU LUTADOR 🔥      ");
+  
+        
+        System.out.println("\nCOMO JOGAR:" + reset);
+        System.out.println(ciano + " • Use cartas de Dano para atacar e Escudo para se defender.");
+        System.out.println(" • Gerencie sua Energia, cada round você terá 6 de energia.");
+        System.out.println(" • Use golpes de Dano para carregar sua barra de FÚRIA.");
+        System.out.println(" • Com 3 de Fúria, você libera efeitos especiais potentes." + reset);
+        
+        System.out.println("\n----------------------------------------" + reset);
+        System.out.println("ESCOLHA SEU HERÓI:" + reset);
+        System.out.println(" [1] 🏆 Alex Poatan (O 'Mãos de Pedra')" + reset);
+        System.out.println( " [2] 🥋 Anderson Silva( O 'Spider'" + reset);
+        System.out.println(" [3] 🥊 Fabrício Werdum ( O 'Vai Cavalo')" + reset);
+        System.out.println(branco +  " [4] ⌨️ Digite seu próprio nome");
+        System.out.println("----------------------------------------" + reset);
+        System.out.print("Sua escolha: ");
     }
 
     public static void menuEscolhaInimigo() {
@@ -58,3 +77,4 @@ public class PrintsEntidades {
         System.out.println("----------------------------------------");
     }
 }
+

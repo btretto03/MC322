@@ -1,4 +1,8 @@
 package Prints;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import java.util.ArrayList;
 
 import Cartas.Carta;
@@ -7,12 +11,60 @@ import Entidades.Inimigo;
 import Efeitos.Efeitos;
 
 public class PrintsMain {
-    public static void printInicial() {
-        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "   🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊      " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                  " + "\u001B[0m");
-    }
 
+    private static String reset = "\u001B[0m";
+    private static String vermelho = "\u001B[31m";
+    private static String amarelo = "\u001B[33m";
+    private static String ciano = "\u001B[36m";
+    private static String italico = "\u001B[3m";
+    private static String fundoSalmao = "\u001B[48;5;210m";
+    private static String fundoVerdeClaro = "\u001B[48;5;193m";
+    private static String fundoVermelhoNegrito = "\u001B[41;1m";
+    private static String vermelhoNegrito = "\u001B[31;1m";
+    private static String branco = "\u001B[37m";
+    private static String laranja = "\u001B[38;5;208m";
+
+    
+    public static void printInicial2() {
+        System.out.print("\033[H\033[2J"); // limpa tela
+        System.out.println(fundoSalmao + "                                              " + reset);
+        Jogo.Aux.esperar(200);
+        System.out.println(fundoSalmao + " 🥊 ULTIMATE FIGHTING JAVA CHAMPIONSHIP 🥊    " + reset);
+        Jogo.Aux.esperar(200);
+        System.out.println(fundoSalmao + "                                              \n" + reset);
+    
+        Jogo.Aux.esperar(500);
+
+        try {
+            File arquivo = new File("src/Prints/Printinicial.txt");
+            Scanner leitor = new Scanner(arquivo);
+            int linhaAtual = 1;
+
+            while (leitor.hasNextLine()) {
+                Jogo.Aux.esperar(200); 
+                String linha = leitor.nextLine();
+                
+                if (linhaAtual <= 5) { //UFC
+                    System.out.println(vermelho + linha + reset);
+                } else {
+                    System.out.println(amarelo + linha + reset); //JAVA
+                }
+                linhaAtual++;
+            }
+            leitor.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado;"); //Java nao compila sem isso
+        }
+
+        Jogo.Aux.esperar(200);
+        System.out.println("\n🥊 BEM-VINDO AO OCTÓGONO JAVA  🥊\n");
+
+        Jogo.Aux.esperar(500);
+        System.out.println(ciano + italico + "   🕹️ Desenvolvido por: Bruno Antonio Tretto & João Felipe Denadai Madeira" + reset + "\n");
+        Jogo.Aux.esperar(4000);
+    }
+    
     public static void printInicioluta() {
         System.out.println("🔥 A LUTA VAI COMEÇAR! 🔥\n");
 
@@ -24,9 +76,9 @@ public class PrintsMain {
     }
 
     public static void printNovoRound(int contadorRound) {
-        System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "               ROUND " + contadorRound + "                  " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                        " + "\u001B[0m");
+        System.out.println(fundoSalmao + "                                        " + reset);
+        System.out.println(fundoSalmao + "               ROUND " + contadorRound + "                  " + reset);
+        System.out.println(fundoSalmao + "                                        " + reset);
     }
 
     public static void printFimEnergia() {
@@ -51,7 +103,7 @@ public class PrintsMain {
         }
         
         if (furia >= 3) {
-            System.out.println("\n\u001B[41;1m [99] ⚡ Liberar efeito especial \u001B[0m");
+            System.out.println("\n" + fundoVermelhoNegrito + " [99] ⚡ Liberar efeito especial " + reset);
         }
         
         System.out.print("\nEscolha uma carta ou -1 para passar: ");
@@ -74,26 +126,34 @@ public class PrintsMain {
         System.out.println("🪫 Infelizmente " + nome + " não tem energia suficiente! Digite -1 para voltar a jogada");
     }
 
-    public static void printEscolhaModo (){
-         System.out.println("\n-----------------------------------------");
-        System.out.println("        🥊 ESCOLHA O MODO DE JOGO 🥊");
-        System.out.println("-----------------------------------------");
-        System.out.println(" [1] (Fácil) 1 VS 1 (Um oponente)");
-        System.out.println(" [2] (Difícil) 1 VS 2 (Dois oponentes)");
-        System.out.println(" [3] 🎲 Ir na Sorte (Pode vir 1 ou 2)");
-        System.out.println("-----------------------------------------");
-        System.out.print("Sua escolha: ");
+    public static void printEscolhaModo() {
+        System.out.println("   ⚔️  Escolha o modo do confronto ⚔️    ");
+            System.out.println("\n----------------------------------------");
+
+        System.out.println("\nREGRAS:" + reset);
+        System.out.println(ciano + " • No modo 1 VS 2, sua vida é dobrada para compensar.");
+        System.out.println(" • Inimigos atacam em sequência e você escolherá qual atacar." + reset);
+
+        System.out.println("\n----------------------------------------");
+
+        System.out.println("DIFICULDADE:");
+        System.out.println(" [1] 🟢 MODO CLÁSSICO (1 VS 1)");
+        System.out.println(" [2] 🔴 DESAFIO DUPLO (1 VS 2)");
+        System.out.println(" [3] 🎲 Teste sua sorte (1 VS 1 ou 1 VS 2)");
+        
+        System.out.println("----------------------------------------");
+        System.out.print("Digite sua escolha: ");
     }
 
     public static void menuEfeito() {
-        System.out.println("\n\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
-        System.out.println("         ⚡ \u001B[31;1mEfeito especial\u001B[0m ⚡");
-        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.println("\n" + vermelhoNegrito + "----------------------------------------" + reset);
+        System.out.println("         ⚡ " + vermelhoNegrito + "Efeito especial" + reset + " ⚡");
+        System.out.println(vermelhoNegrito + "----------------------------------------" + reset);
         System.out.println(" [1] 🩸 Sangramento (Dano contínuo no inimigo)");
         System.out.println(" [2] 🗣️ Provocação  (Reduz escudo do inimigo)");
         System.out.println(" [3] 💉 Adrenalina  (Recupera sua vida)");
         System.out.println(" [0] ❌ Cancelar");
-        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.println(vermelhoNegrito + "----------------------------------------" + reset);
         System.out.print("Sua escolha: \n");
     }
 
@@ -159,13 +219,13 @@ public class PrintsMain {
         int blocos = Math.min(furia, 3); 
 
         if (blocos == 0) {
-            barra = "\u001B[37m[ ░░░░░░░░░░░░ ]\u001B[0m"; 
+            barra = branco + "[ ░░░░░░░░░░░░ ]" + reset; 
         } else if (blocos == 1) {
-             barra = "\u001B[33m[ ████░░░░░░░░ ]\u001B[0m"; 
+             barra = amarelo + "[ ████░░░░░░░░ ]" + reset; 
         } else if (blocos == 2) {
-            barra = "\u001B[38;5;208m[ ████████░░░░ ]\u001B[0m"; 
+            barra = laranja + "[ ████████░░░░ ]" + reset; 
         } else {
-            barra = "\u001B[31m[ ████████████ ] MAX!\u001B[0m";
+            barra = vermelho + "[ ████████████ ] MÁXIMO!" + reset;
         }
         return barra;
     }
@@ -175,9 +235,9 @@ public class PrintsMain {
     }
 
     public static void printEmpate() {
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                       EMPATE!                       " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+        System.out.println(fundoSalmao + "                                                     " + reset);
+        System.out.println(fundoSalmao + "                       EMPATE!                       " + reset);
+        System.out.println(fundoSalmao + "                                                     " + reset);
     }
 
     public static void printInimigoVenceu(ArrayList<Inimigo> inimigos) {
@@ -194,9 +254,9 @@ public class PrintsMain {
         String espacos = " ".repeat(tamanho); 
         String mensagem = "  💀 DERROTA... " + nome + " venceu. Tente novamente. 💀  ";
 
-        System.out.println("\u001B[48;5;210m" + espacos + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + mensagem + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + espacos + "\u001B[0m");
+        System.out.println(fundoSalmao + espacos + reset);
+        System.out.println(fundoSalmao + mensagem + reset);
+        System.out.println(fundoSalmao + espacos + reset);
     }
 
     public static void printHeroiVenceu(Heroi heroi) {
@@ -206,15 +266,15 @@ public class PrintsMain {
         String espacos = " ".repeat(tamanho); 
         String mensagem = "  🏆 VITÓRIA! " + nome + " Parabéns, você foi o campeão! 🏆  ";
 
-        System.out.println("\u001B[48;5;193m" + espacos + "\u001B[0m");
-        System.out.println("\u001B[48;5;193m" + mensagem + "\u001B[0m");
-        System.out.println("\u001B[48;5;193m" + espacos + "\u001B[0m");
+        System.out.println(fundoVerdeClaro + espacos + reset);
+        System.out.println(fundoVerdeClaro + mensagem + reset);
+        System.out.println(fundoVerdeClaro + espacos + reset);
     }
 
     public static void printEscolhaAlvo (ArrayList<Inimigo> inimigos){
-        System.out.println("\n\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
-        System.out.println("          \u001B[31;1mEscolha seu alvo\u001B[0m ");
-        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.println("\n" + vermelhoNegrito + "----------------------------------------" + reset);
+        System.out.println("          " + vermelhoNegrito + "Escolha seu alvo" + reset + " ");
+        System.out.println(vermelhoNegrito + "----------------------------------------" + reset);
 
         for(int i = 0; i < inimigos.size(); i++){
             if (inimigos.get(i).estaVivo()){
@@ -223,14 +283,13 @@ public class PrintsMain {
         
         }
 
-        System.out.println("\u001B[31;1m" + "----------------------------------------" + "\u001B[0m");
+        System.out.println(vermelhoNegrito + "----------------------------------------" + reset);
         System.out.print("Sua escolha: \n");
     }
 
     public static void printNovoInimigo(){
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                  NOVO INIMIGO                       " + "\u001B[0m");
-        System.out.println("\u001B[48;5;210m" + "                                                     " + "\u001B[0m");
+        System.out.println(fundoSalmao + "                                                     " + reset);
+        System.out.println(fundoSalmao + "                  NOVO INIMIGO                       " + reset);
+        System.out.println(fundoSalmao + "                                                     " + reset);
     }
 }
-

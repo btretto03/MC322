@@ -1,6 +1,9 @@
 package Entidades;
 
 import Prints.*;
+
+import java.util.ArrayList;
+
 import Efeitos.*;
 import Jogo.Publisher;
 
@@ -10,12 +13,9 @@ public class Inimigo extends Entidade {
     public Inimigo(String nome, int vida, int escudo) { //construtor
         super(nome, vida, escudo);
     }
-    
+
     public static String escolherInimigo(java.util.Scanner inputs) {
         String escolhainimigo;
-
-        System.out.print("\033[H\033[2J"); //limpar tela
-        System.out.flush();
 
         PrintsEntidades.menuEscolhaInimigo();
         int escolha2 = inputs.nextInt();
@@ -30,16 +30,76 @@ public class Inimigo extends Entidade {
                 escolhainimigo = "Jon Jones";
                 break;
             case 4:
-                System.out.print("Digite o nome do inimigo:\n");
+                
+                System.out.print("\nDigite o nome do inimigo:\n> ");
                 inputs.nextLine();
                 escolhainimigo = inputs.nextLine();
                 break;
             default:
-                System.out.println("⚠️Escolha inválida. O lutador será Popó por padrão.");
+                System.out.println("\n⚠️ Escolha inválida. O lutador será Popó por padrão.");
                 escolhainimigo = "Popó";
         }
         return escolhainimigo;
     }
+
+    public static void escolherInimigoDuplo(java.util.Scanner inputs, int caso, ArrayList<Inimigo> inimigos) {
+        switch(caso) {
+            case 1: //escolher dois inimigos
+                Jogo.Aux.limparTela();
+                System.out.println("🥊 MODO 1 VS 2 SELECIONADO 🥊\n");
+                System.out.println("➡️ Escolha o PRIMEIRO oponente:");
+                String inimigo1 = Inimigo.escolherInimigo(inputs);
+                Jogo.Aux.limparTela();
+                System.out.println("🥊 MODO 1 VS 2 SELECIONADO 🥊\n");
+                System.out.println("➡️ Escolha o SEGUNDO oponente:");
+                String inimigo2 = Inimigo.escolherInimigo(inputs);
+
+                while (inimigo1.equals(inimigo2)) {
+                    Jogo.Aux.limparTela();
+                    System.out.println("\n⚠️ O lutador " + inimigo1 + " já foi escolhido, tente novamente!");
+                    System.out.println("➡️ Escolha o SEGUNDO oponente:");
+                    inimigo2 = Inimigo.escolherInimigo(inputs);
+                }
+
+                inimigos.add(new Inimigo(inimigo1, 25, 0));
+                inimigos.add(new Inimigo(inimigo2, 25, 0));
+                break; 
+
+            case 2: //alatorio 
+                Jogo.Aux.limparTela();
+
+                System.out.println("🎲 MODO SORTE SELECIONADO 🎲\n");
+                System.out.println("➡️ Escolha seu oponente principal:");
+                
+                String inimigoSorte = Inimigo.escolherInimigo(inputs);
+                inimigos.add(new Inimigo(inimigoSorte, 50, 0));
+
+                int inimigoSecundario = (int) (Math.random() * 7) + 1;
+                if (inimigoSecundario <= 3) { // 2 inimigos
+                    java.util.Scanner pseudoInput = new java.util.Scanner(String.valueOf(inimigoSecundario));
+                    String nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
+
+                    while (nomeSecundario.equals(inimigoSorte)) {
+                        inimigoSecundario = (int) (Math.random() * 3) + 1;
+                        pseudoInput = new java.util.Scanner(String.valueOf(inimigoSecundario));
+                        nomeSecundario = Inimigo.escolherInimigo(pseudoInput);
+                    }
+
+                    inimigos.add(new Inimigo(nomeSecundario, 25, 0));
+                    inimigos.get(0).setVida(25);
+                    
+                    Jogo.Aux.limparTela();
+                    System.out.println("🎲 Você deu azar! Um segundo lutador entrou no octógono: " + nomeSecundario + "!");
+                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                } else {
+                    Jogo.Aux.limparTela();
+                    System.out.println("🎲 Você deu sorte! Apenas o " + inimigoSorte + " entrou no octógono!");
+                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                }
+                break;
+        }
+    }
+    
 
     public void anuncio(Heroi alvo) {
         if (this.dano == 0 && this.escudo == 0) {
