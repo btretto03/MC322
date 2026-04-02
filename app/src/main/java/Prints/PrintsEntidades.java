@@ -15,6 +15,9 @@ private static String reset = "\u001B[0m";
         System.out.println(" • Gerencie sua Energia, cada round você terá 6 de energia.");
         System.out.println(" • Use golpes de Dano para carregar sua barra de FÚRIA.");
         System.out.println(" • Com 3 de Fúria, você libera efeitos especiais potentes." + reset);
+        System.out.println("\n MODOS DISPONIVEIS:");
+        System.out.println(ciano + " • 1v1 - Herói e inimigo com 50 de vida cada.");
+        System.out.println(" • 1v2 - Herói com 100 de vida e inimigos com 25 cada." + reset);
         
         System.out.println("\n----------------------------------------" + reset);
         System.out.println("ESCOLHA SEU HERÓI:" + reset);

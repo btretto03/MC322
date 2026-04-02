@@ -139,9 +139,9 @@ public class App {
                     }
 
 //----------------------------------ESCOLHA INVÁLDA------------------------------------------
-                    if (num >= mao.size() || mao.get(num).getCusto() > heroi.getEnergia()) {
+                    if (num >= mao.size() || num < -1 || mao.get(num).getCusto() > heroi.getEnergia()) {
                         Jogo.Aux.limparTela();
-                        if(num >= mao.size()){
+                        if(num >= mao.size() || num < -1){
                             System.out.println("⚠️ Opção inválida!");
                         } else {
                             System.out.println("🪫 Infelizmente " + heroi.getNome() + " não tem energia suficiente!");

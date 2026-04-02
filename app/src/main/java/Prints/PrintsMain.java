@@ -134,7 +134,7 @@ public class PrintsMain {
         }
         if (dano != 0) {
             if (escudoRemovido > 0 && vidaRemovida > 0) {
-                System.out.println("💥 O ataque de " + dano + " derrubou a defesa (absorveu " + escudoRemovido + ") e atingiu " + vidaRemovida + " de vida.");
+                System.out.println("💥 O ataque de " + nome + " com " + dano + " de dano derrubou a defesa (absorveu " + escudoRemovido + ") e atingiu " + vidaRemovida + " de vida.");
             } else if (escudoRemovido > 0 && vidaRemovida == 0) {
                 System.out.println("🛡️ O inimigo atacou com " + dano + ", mas a defesa absorveu tudo!");
             } else {
