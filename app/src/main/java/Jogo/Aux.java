@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import Cartas.Carta;
+import Cartas.CartaCruzado;
 import Cartas.CartaDano;
 import Cartas.CartaEscudo;
+import Cartas.CartaJab;
 import Entidades.Heroi;
 import Entidades.Inimigo;
 
@@ -116,15 +118,21 @@ public class Aux {
     public static ArrayList<Carta> gerarBaralhoInicial() {
         ArrayList<Carta> baralho = new ArrayList<>();
         String[] nomeCartas = {
-            "Cruzado de direita", "Gancho de direita", "Gancho de esquerda",  "Cruzado de esquerda", 
-            "Jab", "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora", 
+            "Gancho de direita", "Gancho de esquerda",
+            "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora", 
             "Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", 
             "Guarda alta", "Guarda baixa", "Correr"
         };
         
+        CartaJab jab = new CartaJab();
+        CartaCruzado cruzado = new CartaCruzado();
+
+        baralho.add(jab);
+        baralho.add(cruzado);
+
         int custo = 1;
         for (int i = 0; i < nomeCartas.length; i++) {
-            if (i < 10) {
+            if (i < 7) {
                 baralho.add(new CartaDano(nomeCartas[i], custo));
             } else {
                 baralho.add(new CartaEscudo(nomeCartas[i], custo));

@@ -6,8 +6,13 @@ import Entidades.Entidade;
  */
 public class CartaDano extends Carta{
 
-    public CartaDano(String nome, int custo) {
-        super(nome, custo, "Causando dano");
+    public CartaDano(String nome, int custo, String descricao) {
+        super(nome, custo, descricao);
+    }
+
+    //criando um segundo construtor para ser possível escolher um valor diferente de descricao ou nao 
+    public CartaDano (String nome, int custo){
+        this(nome, custo, "Causando dano");
     }
 
     @Override
