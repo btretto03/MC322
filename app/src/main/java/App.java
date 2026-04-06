@@ -87,6 +87,9 @@ public class App {
                     Prints.PrintsMain.printStatus(escolhaheroi, heroi.getVida(), inimigos);
 
                     for (Inimigo inimigo : inimigos){
+                        if (!inimigo.estaVivo()){
+                            continue;
+                        }
                         if (heroi.getListaEfeitos().size() > 0 || inimigo.getListaEfeitos().size() > 0) {
                             PrintsMain.printEfeitosLutadores(heroi.getNome(), heroi.getListaEfeitos(), inimigo.getNome(), inimigo.getListaEfeitos());
                         }
@@ -146,15 +149,22 @@ public class App {
                                 efeito = new Adrenalina("Adrenalina", 3, heroi);
                                 alvoEfeito = heroi;
                                 break;
+                            case 4:
+                                alvoEfeito = Jogo.Aux.escolherAlvo(inimigos, inputs);
+                                efeito = new Nocaute("Nocaute", alvoEfeito);
+                                break;
                         }
-
 
                         if (efeito != null) {
                             alvoEfeito.adicionarEfeito(efeito, juiz);
                             juiz.inscrever(efeito);
                             furia -= 3; // Gasta a fúria
                             usouEfeito = 1; // Avisa o inimigo para retaliar
-                            acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (3X) no " +alvoEfeito.getNome() + "!");
+                            if (efeito.getNome() != "Nocaute"){
+                                acoesDoRoundHeroi.add("⚡ O golpe aplicou " + efeito.getNome() + " (3X) no " +alvoEfeito.getNome() + "!");
+                            } else {
+                                acoesDoRoundHeroi.add("🎯 Tentativa de K.O no " +alvoEfeito.getNome() + "!🎯");
+                            }
                         }
                         
                         Jogo.Aux.limparTela();
@@ -207,8 +217,7 @@ public class App {
                     pilhaDescarte.add(mao.remove(0));
                 }
 
-                if (!Jogo.Aux.inimigosVivos
-                    (inimigos)) { //Inimigos morreram antes de atacar
+                if (!Jogo.Aux.inimigosVivos(inimigos)) { //Inimigos morreram antes de atacar
                     Jogo.Aux.limparTela();
                     Prints.PrintsMain.printHeroiVenceu(heroi);
                     return;
@@ -237,6 +246,11 @@ public class App {
                 if (haEfeitos) {
                     System.out.println("🧪 Os efeitos estão agindo...");
                     juiz.notificarSubscribers();
+                    if (!Jogo.Aux.inimigosVivos(inimigos)) {
+                        Jogo.Aux.limparTela();
+                        Prints.PrintsMain.printHeroiVenceu(heroi);
+                        return;
+                    }
 
                     for (int i = heroi.getListaEfeitos().size() - 1; i >= 0; i--) { //efeito no heroi
                         Efeitos efeito = heroi.getListaEfeitos().get(i);

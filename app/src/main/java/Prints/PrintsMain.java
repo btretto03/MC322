@@ -228,6 +228,7 @@ public class PrintsMain {
         System.out.println(" [1] 🩸 Sangramento (Dano contínuo no inimigo)");
         System.out.println(" [2] 🗣️ Provocação  (Reduz escudo do inimigo)");
         System.out.println(" [3] 💉 Adrenalina  (Recupera sua vida)");
+        System.out.println(" [4] 😵 Nocaute  (1/10 de chance de derrubar o inimigo)");
         System.out.println(" [0] ❌ Cancelar");
         System.out.println(vermelhoNegrito + "----------------------------------------" + reset);
         System.out.print("Sua escolha: \n");
@@ -330,7 +331,20 @@ public class PrintsMain {
     }
 
     public static void printEfeitoAgindo(String nomeLutador, String nomeEfeito, int acumulos) {
-        System.out.println("⚡ " + nomeLutador + " está sob efeito de " + nomeEfeito + " (" + acumulos + "x)!");
+        if (nomeEfeito != "Nocaute"){
+            System.out.println("⚡ " + nomeLutador + " está sob efeito de " + nomeEfeito + " (" + acumulos + "x)!");
+        } else{
+            System.out.println("Tentativa de Nocaute em "+ nomeLutador +" !");
+        }
+    }
+
+    public static void printInimigoNocauteado (String nomeIimigo, boolean check){
+        System.out.println();
+        System.out.println();
+        System.out.println(fundoVermelhoNegrito + "        😵"+ nomeIimigo + " FOI NOCAUTEADO!😵            " + reset);
+        System.out.println();
+        System.out.println();
+        Jogo.Aux.esperar(1500);
     }
 
     public static void printEmpate() {

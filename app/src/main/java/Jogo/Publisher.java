@@ -1,6 +1,9 @@
 package Jogo;
 
 import java.util.ArrayList;
+
+import Efeitos.Efeitos;
+import Efeitos.Nocaute;
 import Efeitos.Subscriber;
 
 /**
@@ -24,7 +27,17 @@ public class Publisher {
      */
     public void notificarSubscribers() {
         for (int i = inscritos.size() - 1; i >= 0; i--) {
-            inscritos.get(i).serNotificado();
+            Subscriber inscrito = inscritos.get(i); 
+            if (inscrito instanceof Nocaute nocaute){
+                inscrito.serNotificado();
+                if (nocaute.getNocauteado()){
+                    break;
+                } else{
+                    desinscrever(nocaute);
+                }
+            } else{
+                inscrito.serNotificado();
+            }
         }
     }
 }
