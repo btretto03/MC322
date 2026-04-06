@@ -55,6 +55,7 @@ public class PrintsMain {
                 String linha = leitor.nextLine();
                 
                 if (linhaAtual <= 5) { //UFC
+                    Jogo.Aux.esperar(200); 
                     System.out.println(vermelho + linha + reset);
                 } else {
                     System.out.println(amarelo + linha + reset); //JAVA

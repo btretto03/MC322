@@ -1,8 +1,6 @@
 package Jogo;
 
 import java.util.ArrayList;
-
-import Efeitos.Efeitos;
 import Efeitos.Nocaute;
 import Efeitos.Subscriber;
 
