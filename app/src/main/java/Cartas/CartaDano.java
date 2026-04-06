@@ -6,15 +6,34 @@ import Entidades.Entidade;
  */
 public class CartaDano extends Carta{
 
+    /**
+     * Construtor da classe CartaDano.
+     *
+     * @param nome nome da carta
+     * @param custo custo de energia para usar a carta
+     * @param descricao descricao da acao da carta
+     */
     public CartaDano(String nome, int custo, String descricao) {
         super(nome, custo, descricao);
     }
 
     //criando um segundo construtor para ser possível escolher um valor diferente de descricao ou nao 
+    /**
+     * Construtor alternativo da classe CartaDano com descricao padrao.
+     *
+     * @param nome nome da carta
+     * @param custo custo de energia para usar a carta
+     */
     public CartaDano (String nome, int custo){
         this(nome, custo, "Causando dano");
     }
 
+    /**
+     * Usa a carta causando dano ao alvo.
+     *
+     * @param alvo a entidade alvo da carta
+     * @return o dano causado
+     */
     @Override
     public int usar(Entidade alvo) {
         int dano = this.getCusto() * 2;

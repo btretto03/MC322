@@ -9,6 +9,13 @@ import Prints.PrintsEntidades;
 public class Heroi extends Entidade {
     private int energia;
     
+    /**
+     * Construtor da classe Heroi.
+     *
+     * @param nome nome do heroi
+     * @param vida vida inicial do heroi
+     * @param escudo escudo inicial do heroi
+     */
     public Heroi(String nome, int vida, int escudo) { //construtor
         super(nome, vida, escudo);
         this.energia = 6;
@@ -67,10 +74,20 @@ public class Heroi extends Entidade {
     }
 
     //Getters e Setters
+    /**
+     * Retorna a energia do heroi.
+     *
+     * @return a energia do heroi
+     */
     public int getEnergia() {
         return energia;
     }
 
+    /**
+     * Define a energia do heroi.
+     *
+     * @param energia a nova energia do heroi
+     */
     public void setEnergia(int energia) {
         this.energia = energia;
     }   
