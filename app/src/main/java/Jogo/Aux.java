@@ -82,6 +82,7 @@ public class Aux {
      * @return lista de inimigos configurada para o modo escolhido
      */
     public static ArrayList<Inimigo> escolherModoDeJogo(Scanner inputs, Heroi heroi) {
+        limparTela();
         Prints.PrintsMain.printEscolhaModo();
         int modo = inputs.nextInt();
         ArrayList<Inimigo> inimigos = new ArrayList<>();
@@ -91,7 +92,7 @@ public class Aux {
                 limparTela();
                 System.out.println("🥊 MODO 1 VS 1 SELECIONADO 🥊\n");
                 String inimigo = Inimigo.escolherInimigo(inputs);
-                inimigos.add(new Inimigo(inimigo, 50, 0));
+                inimigos.add(new Inimigo(inimigo, 1, 0));
                 break;
             case 2:
                 Inimigo.escolherInimigoDuplo(inputs, 1, inimigos);

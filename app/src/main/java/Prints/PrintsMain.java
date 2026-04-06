@@ -354,7 +354,53 @@ public class PrintsMain {
         System.out.println(fundoSalmao + "                                                     " + reset);
     }
 
+    /**
+     * Exibe arte ASCII de derrota com cor e espera.
+     */
+    public static void printDerrota() {
+        try {
+            InputStream arquivo = PrintsMain.class.getClassLoader().getResourceAsStream("Derrota.txt");
+            if (arquivo == null) {
+                throw new FileNotFoundException();
+            }
+            Scanner leitor = new Scanner(arquivo);
+            while (leitor.hasNextLine()) {
+                System.out.println(vermelhoNegrito + leitor.nextLine() + reset);
+                Jogo.Aux.esperar(120);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("[Arquivo não encontrado");
+        }
+        Jogo.Aux.esperar(800);
+    }
+
+    /**
+     * Exibe arte ASCII de vitória com cor e espera.
+     */
+    public static void printVitoria() {
+        try {
+            InputStream arquivo = PrintsMain.class.getClassLoader().getResourceAsStream("Vitoria.txt");
+            if (arquivo == null) {
+                throw new FileNotFoundException();
+            }
+            Scanner leitor = new Scanner(arquivo);
+            while (leitor.hasNextLine()) {
+                System.out.println(amarelo + leitor.nextLine() + reset);
+                Jogo.Aux.esperar(120);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo de arte não encontrado");
+        }
+        Jogo.Aux.esperar(800);
+    }
+
     public static void printInimigoVenceu(ArrayList<Inimigo> inimigos) {
+        Jogo.Aux.limparTela();
+        printDerrota();
+        Jogo.Aux.esperar(2000);
+        
         String nome;
         
         if (inimigos.size() > 1){
@@ -374,10 +420,11 @@ public class PrintsMain {
     }
 
     public static void printHeroiVenceu(Heroi heroi) {
+        printVitoria();
         String nome = heroi.getNome();
         int tamanho = 49 + nome.length(); 
         
-        String espacos = " ".repeat(tamanho); 
+        String espacos = " ".repeat(tamanho);  
         String mensagem = "  🏆 VITÓRIA! " + nome + " Parabéns, você foi o campeão! 🏆  ";
 
         System.out.println(fundoVerdeClaro + espacos + reset);
