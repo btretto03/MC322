@@ -35,11 +35,11 @@ public class App {
      */
     public static void main(String[] args)  {
         Prints.PrintsMain.printInicial2();
+        Jogo.Aux.limparTela();
 //----------------------------------INSTANCIAMENTO------------------------------------------
         Publisher juiz = new Publisher();
         String escolhaheroi = Heroi.escolherHeroi(inputs);
         Heroi heroi = new Heroi(escolhaheroi, 50, 0);
-        Jogo.Aux.limparTela();
 
 //----------------------------------ESCOLHA DO MODO------------------------------------------
         ArrayList<Inimigo> inimigos = Jogo.Aux.escolherModoDeJogo(inputs, heroi);
