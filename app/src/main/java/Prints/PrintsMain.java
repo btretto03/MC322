@@ -123,7 +123,8 @@ public class PrintsMain {
         System.out.println(String.format("🟩 %s: ❤️  %d VIDA", heroi, vidaheroi));
         inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> System.out.println(String.format("🟥 %s: ❤️  %d VIDA", i.getNome(), i.getVida())));
         inimigos.stream().filter(inimigo -> !inimigo.estaVivo()).forEach(i -> System.out.println(String.format("🟥 %s: 💀  FOI NOCAUTEADO", i.getNome())));
-
+        System.out.println(); 
+        AnimacaoLuta.printLutadoresParados();
     }
 
     /**

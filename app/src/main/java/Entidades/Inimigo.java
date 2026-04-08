@@ -159,6 +159,13 @@ public class Inimigo extends Entidade {
         int escudoRemovido = escudoAnterior - alvo.getEscudo();
         
         PrintsMain.printAcoesInimigo(this.getNome(), this.dano, this.escudo, vidaRemovida, escudoRemovido);
+        Jogo.Aux.esperar(1500);
+        
+        if (this.dano > 0) {
+            Prints.AnimacaoLuta.animarGolpeInimigo(this.getNome());
+            Jogo.Aux.limparTela();
+        }
+
         this.dano = 0;
         this.escudo = 0;
     }

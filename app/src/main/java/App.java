@@ -214,6 +214,9 @@ public class App {
                     pilhaDescarte.add(cartaEscolhida);
 
                     if (cartaEscolhida instanceof CartaEscudo){
+                        //Jogo.Aux.limparTela();
+                        Prints.AnimacaoLuta.animarGolpeHeroi(cartaEscolhida.getNome());
+                        Jogo.Aux.limparTela();
                         int escudoAdicionado = cartaEscolhida.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
@@ -221,7 +224,10 @@ public class App {
                         
                     } else { 
                         Entidade alvoCarta = Jogo.Aux.escolherAlvo(inimigos, inputs);
+                        //Jogo.Aux.limparTela();
+                        Prints.AnimacaoLuta.animarGolpeHeroi(cartaEscolhida.getNome());
                         Jogo.Aux.limparTela();
+
                         int valor = cartaEscolhida.usar(alvoCarta);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + " em " + alvoCarta.getNome() + ".");
