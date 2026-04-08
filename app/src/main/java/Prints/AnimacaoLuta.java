@@ -1,89 +1,96 @@
 package Prints;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import Jogo.Aux;
 
 public class AnimacaoLuta {
-    
+
     public static void printLutadoresParados() {
-        imprimirTXT("LutaInterativa/1vs1/Heroi/Soco/LutaInicial.txt"); 
+        imprimirCenaFixo("1heroisoco.txt");
     }
 
     public static void animarGolpeHeroi(String nomeCarta) {
-        String pasta = mapearGolpeParaPasta(nomeCarta);
+        String nome = nomeCarta;
+        String arquivoAlvo = "1heroisoco.txt"; 
 
-        String[] nomesArquivos = {"LutaInicial.txt", "LutaAproximacao.txt", "LutaSoco.txt"};
-        
-        for (int i = 0; i < nomesArquivos.length; i++) {
-            if (i > 0) {
-                System.out.print("\033[7A"); 
-            } else {
-                Aux.limparTela();
-            }
-            
-            String caminho = "LutaInterativa/1vs1/Heroi/" + pasta + "/" + nomesArquivos[i];
-            imprimirTXT(caminho);
-            
-            if (i == nomesArquivos.length - 1) {
-                Aux.esperar(1500);
-            } else {
-                Aux.esperar(600);
-            }
+        if (nome.contains("chute")) {
+            arquivoAlvo = "1heroichute.txt";
+        } else if (nome.contains("voadora")) {
+            arquivoAlvo = "1heroivoadora.txt";
+        } else if (nome.contains("bloqueio")|| nome.contains("esquivo") || nome.contains("guarda")  || nome.contains("correr")) {
+            arquivoAlvo = "1heroidefesa.txt";
+        } else {
+            arquivoAlvo = "1heroisoco.txt";
         }
+        executarAnimacao(arquivoAlvo);
     }
 
     public static void animarGolpeInimigo(String nomeInimigo) {
-        String[] pastasAtaque = {"Soco", "Chute", "Voadora"};
-        String pasta = pastasAtaque[(int) (Math.random() * pastasAtaque.length)];
-        String[] nomesArquivos = {"LutaInicial.txt", "LutaAproximando.txt", "LutaSoco.txt"};
-
-        for (int i = 0; i < nomesArquivos.length; i++) {
-            if (i > 0) {
-                System.out.print("\033[7A");
-            } else {
-                Aux.limparTela();
-            }
-            
-            String caminho = "LutaInterativa/1vs1/Inimigo/" + pasta + "/" + nomesArquivos[i];
-            imprimirTXT(caminho);
-            
-            if (i == nomesArquivos.length - 1) {
-                Aux.esperar(1500);
-            } else {
-                Aux.esperar(600);
-            }
+        int acaoinimigo = (int)(Math.random() * 2);
+        if (acaoinimigo == 0) {
+            executarAnimacao("1inimigosoco.txt");
+        } else {
+            executarAnimacao("1inimigochute.txt");
         }
     }
 
-    private static String mapearGolpeParaPasta(String nomeCarta) {
-        String nome = nomeCarta.toLowerCase();
-        
-        if (nome.contains("chute")){ 
-            return "Chute";
-        }
-        if (nome.contains("voadora")){
-             return "Voadora";
-        }
-        if (nome.contains("bloqueio") || nome.contains("guarda") || nome.contains("esquiva")){
-             return "Defesa";
-        }
-        return "Soco"; 
+    public static void animarDefesaInimigo() {
+        executarAnimacao("1inimigodefesa.txt");
     }
 
-    private static void imprimirTXT(String caminhoArquivo) {
-        String caminhoCompleto = "src/main/java/Prints/" + caminhoArquivo;
-        File arquivo = new File(caminhoCompleto);
+    private static void executarAnimacao(String nomeArquivo) {
+
+        String caminho = "src/main/java/Prints/LutaInterativa/1vs1/" + nomeArquivo;
 
         try {
-            Scanner leitor = new Scanner(arquivo);
+            File f = new File(caminho);
+
+            if (!f.exists()) {
+                System.out.println("Arquivo não encontrado: " + nomeArquivo);
+                return;
+            }
+
+            Scanner leitor = new Scanner(f);
+            int contador = 0;
+
+            Aux.limparTela();
+
             while (leitor.hasNextLine()) {
                 System.out.println(leitor.nextLine());
+                contador++;
+
+                if (contador == 7) {
+                    Aux.esperar(500);
+                    Aux.limparTela();
+                    contador = 0;
+                }
             }
+            Aux.esperar(150);
             leitor.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("⚠️ Arte não encontrada em:\n" + arquivo.getAbsolutePath());
+            //Aux.limparTela();
+        } catch (Exception e) {
+            System.out.println("Erro ao abrir: " + nomeArquivo);
+        }
+    }
+
+    private static void imprimirCenaFixo(String nomeArquivo) {
+        String caminho = "src/main/java/Prints/LutaInterativa/1vs1/" + nomeArquivo;
+
+        try {
+            Scanner leitor = new Scanner(new File(caminho));
+
+            int linhas = 0;
+
+            while (leitor.hasNextLine() && linhas < 7) {
+                System.out.println(leitor.nextLine());
+                linhas ++;
+            }
+
+            leitor.close();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao mostrar Cena parada");
         }
     }
 }

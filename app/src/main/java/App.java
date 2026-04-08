@@ -216,21 +216,21 @@ public class App {
                     if (cartaEscolhida instanceof CartaEscudo){
                         //Jogo.Aux.limparTela();
                         Prints.AnimacaoLuta.animarGolpeHeroi(cartaEscolhida.getNome());
-                        Jogo.Aux.limparTela();
                         int escudoAdicionado = cartaEscolhida.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
                         acoesDoRoundHeroi.add("✨ " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + escudoAdicionado + ".");
-                        
+                        Jogo.Aux.esperar(1000);
                     } else { 
                         Entidade alvoCarta = Jogo.Aux.escolherAlvo(inimigos, inputs);
                         //Jogo.Aux.limparTela();
                         Prints.AnimacaoLuta.animarGolpeHeroi(cartaEscolhida.getNome());
-                        Jogo.Aux.limparTela();
+                        //Jogo.Aux.limparTela();
 
                         int valor = cartaEscolhida.usar(alvoCarta);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + " em " + alvoCarta.getNome() + ".");
+                        Jogo.Aux.esperar(1000);
                     }
                     if (cartaEscolhida instanceof CartaDano) {
                         if (furia < 3) { //toda vez que o heroi usa uma carta de dano ele ganha um ponto de furia (limite em 3)
@@ -241,6 +241,7 @@ public class App {
 
                 Jogo.Aux.limparTela();
                 PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, inimigos, vidaInimigosInicio);
+                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
 
                 while (mao.size() > 0) { //oq sobrou na mao
                     pilhaDescarte.add(mao.remove(0));
@@ -304,7 +305,7 @@ public class App {
             
             
                 System.out.println();
-                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                Jogo.Aux.esperar(300);
                 contadorRound++;
             }
 
