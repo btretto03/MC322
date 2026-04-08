@@ -11,7 +11,7 @@ public class AnimacaoLuta {
     }
 
     public static void animarGolpeHeroi(String nomeCarta) {
-        String nome = nomeCarta;
+        String nome = nomeCarta.toLowerCase().trim(); //pega o nome das cartas e padroniza para minusculo e sem espacos
         String arquivoAlvo = "1heroisoco.txt"; 
 
         if (nome.contains("chute")) {
