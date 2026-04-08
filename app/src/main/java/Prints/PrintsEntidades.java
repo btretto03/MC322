@@ -1,13 +1,18 @@
 package Prints;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Scanner;
+
 /**
  * Funcoes de impressao relacionadas a escolha e status de entidades.
  */
 public class PrintsEntidades {
 private static String reset = "\u001B[0m";
-    //private static String amarelo = "\u001B[33m";
+    private static String amarelo = "\u001B[33m";
     private static String ciano = "\u001B[36m";
     private static String branco = "\u001B[37m";
+    private static String laranja = "\u001B[38;5;208m";
 
     public static void menuEscolhaHeroi() {
         System.out.println("        🔥 SELECIONE SEU LUTADOR 🔥      ");
@@ -63,6 +68,75 @@ private static String reset = "\u001B[0m";
         }
         System.out.println("🛡️ " + nome + " levanta " + intensidade + " com " + escudo + " de escudo!\n");
         }
+    }
+
+    /**
+     * Imprime a arte ASCII do herói.
+     */
+    public static void printArteHeroi() {
+        try {
+            InputStream arquivo = PrintsEntidades.class.getClassLoader().getResourceAsStream("Heroi.txt");
+            if (arquivo == null) {
+                throw new FileNotFoundException();
+            }
+            Scanner leitor = new Scanner(arquivo);
+            
+            while (leitor.hasNextLine()) {
+                String linha = leitor.nextLine();
+                System.out.println(amarelo + linha + reset);
+                Jogo.Aux.esperar(150);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo Heroi.txt não encontrado");
+        }
+        Jogo.Aux.esperar(1500);
+    }
+
+    /**
+     * Imprime a arte ASCII do inimigo.
+     */
+    public static void printArteInimigo() {
+        try {
+            InputStream arquivo = PrintsEntidades.class.getClassLoader().getResourceAsStream("Inimigo.txt");
+            if (arquivo == null) {
+                throw new FileNotFoundException();
+            }
+            Scanner leitor = new Scanner(arquivo);
+            
+            while (leitor.hasNextLine()) {
+                String linha = leitor.nextLine();
+                System.out.println(laranja + linha + reset);
+                Jogo.Aux.esperar(150);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo Inimigo.txt não encontrado");
+        }
+        Jogo.Aux.esperar(1500);
+    }
+
+    /**
+     * Imprime a arte ASCII do segundo inimigo.
+     */
+    public static void printArteInimigo2() {
+        try {
+            InputStream arquivo = PrintsEntidades.class.getClassLoader().getResourceAsStream("Inimigo2.txt");
+            if (arquivo == null) {
+                throw new FileNotFoundException();
+            }
+            Scanner leitor = new Scanner(arquivo);
+            
+            while (leitor.hasNextLine()) {
+                String linha = leitor.nextLine();
+                System.out.println(laranja + linha + reset);
+                Jogo.Aux.esperar(150);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo Inimigo2.txt não encontrado");
+        }
+        Jogo.Aux.esperar(1500);
     }
 
 }

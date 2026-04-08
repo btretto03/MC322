@@ -40,9 +40,24 @@ public class App {
         Publisher juiz = new Publisher();
         String escolhaheroi = Heroi.escolherHeroi(inputs);
         Heroi heroi = new Heroi(escolhaheroi, 50, 0);
+        
+        Jogo.Aux.limparTela();
+        System.out.println("\n🏆 APRESENTANDO SEU LUTADOR! 🏆\n");
+        Prints.PrintsEntidades.printArteHeroi();
 
 //----------------------------------ESCOLHA DO MODO------------------------------------------
         ArrayList<Inimigo> inimigos = Jogo.Aux.escolherModoDeJogo(inputs, heroi);
+        
+        Jogo.Aux.limparTela();
+        System.out.println("\n Seus oponentes entraram no octógono! \n");
+        for (int i = 0; i < inimigos.size(); i++) {
+            System.out.println("⚔️ " + inimigos.get(i).getNome().toUpperCase() + "\n");
+            if (i == 0) {
+                Prints.PrintsEntidades.printArteInimigo();
+            } else if (i == 1) {
+                Prints.PrintsEntidades.printArteInimigo2();
+            }
+        }
 
 //----------------------------------BARALHO E PILHAS------------------------------------------
         ArrayList<Carta> baralho = Jogo.Aux.gerarBaralhoInicial();
@@ -57,6 +72,11 @@ public class App {
 
         while(true) { //Loop da luta
             heroi.setEnergia(6); //energia do heroi é resetada a cada Round
+            
+            // Aumenta energia se tiver 2 inimigos vivos
+            if (inimigos.stream().filter(inimigo -> inimigo.estaVivo()).count() >= 2) {
+                heroi.setEnergia(8);
+            }
             
             //resetando escudo a 0 em cada round
             heroi.setEscudo(0); 
@@ -101,7 +121,13 @@ public class App {
                             System.out.println("    " + acao);
                         }
                     }
-                    PrintsMain.printEnergiaEMenu(heroi.getEnergia(), mao, furia);
+                    int energiaMaxima;
+                    if (inimigos.stream().filter(inimigo -> inimigo.estaVivo()).count() >= 2) {
+                        energiaMaxima = 8;
+                    } else {
+                        energiaMaxima = 6;
+                    }
+                    PrintsMain.printEnergiaEMenu(heroi.getEnergia(), energiaMaxima, mao, furia);
                     
                     if (!heroi.verificaMao(mao)){
                         Jogo.Aux.limparTela();
@@ -196,9 +222,6 @@ public class App {
                     } else { 
                         Entidade alvoCarta = Jogo.Aux.escolherAlvo(inimigos, inputs);
                         Jogo.Aux.limparTela();
-                       /*  if (cartaEscolhida instanceof CartaEfeito && cartaEscolhida.getNome().equals("Adrenalina")) {
-                            alvoCarta = heroi;
-                        } */
                         int valor = cartaEscolhida.usar(alvoCarta);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + " em " + alvoCarta.getNome() + ".");

@@ -130,12 +130,13 @@ public class PrintsMain {
      * Imprime energia, barra de furia e cartas disponiveis na mao do jogador.
      *
      * @param energia energia atual do heroi
+     * @param energiaMaxima energia máxima do heroi
      * @param mao cartas atuais na mao
      * @param furia nivel de furia atual
      */
-    public static void printEnergiaEMenu(int energia, ArrayList<Carta> mao, int furia) {
+    public static void printEnergiaEMenu(int energia, int energiaMaxima, ArrayList<Carta> mao, int furia) {
         System.out.println("\n---------------------------------------");
-        System.out.println("🔋 Energia: " + energia + "/6   🔥 Fúria: " + getBarraFuria(furia));
+        System.out.println("🔋 Energia: " + energia + "/" + energiaMaxima + "   🔥 Fúria: " + getBarraFuria(furia));
         
         System.out.println("\nSuas opções:");
         for (int i = 0; i < mao.size(); i ++) {
