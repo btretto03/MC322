@@ -71,13 +71,13 @@ public class AnimacaoLuta {
     private static String aplicarEfeitoEmoji(String linha, String emojiBase, String nomeEfeito) {
             switch (nomeEfeito) {
                 case "Sangramento": 
-                    return linha.replace(emojiBase, emojiBase + "🩸"); 
+                    return linha.replace(" " + emojiBase , emojiBase + "🩸"); 
                 case "Adrenalina":  
-                    return linha.replace(emojiBase, emojiBase + "💉"); 
+                    return linha.replace(" " + emojiBase, emojiBase + "💉"); 
                 case "Provocacao":  
-                    return linha.replace(emojiBase, emojiBase + "🤬"); 
+                    return linha.replace(" " + emojiBase,"📢🫨"); 
                 case "Nocaute":     
-                    return linha.replace(emojiBase, emojiBase + "💫"); 
+                    return linha.replace(" " + emojiBase, emojiBase + "💫"); 
                 default:            
                     return linha;
             }

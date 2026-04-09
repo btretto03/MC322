@@ -125,7 +125,7 @@ public class Aux {
 
         int custo = 1;
         for (int i = 0; i < nomeCartas.length; i++) {
-            if (i < 13) {
+            if (i < 14) {
                 baralho.add(new CartaDano(nomeCartas[i], custo));
             } else {
                 baralho.add(new CartaEscudo(nomeCartas[i], custo));

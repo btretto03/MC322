@@ -279,6 +279,7 @@ public class App {
 
                 if (haEfeitos) {
                     System.out.println("🧪 Os efeitos estão agindo...");
+                    Jogo.Aux.esperar(300);
                     juiz.notificarSubscribers();
                     if (!Jogo.Aux.inimigosVivos(inimigos)) {
                         Jogo.Aux.limparTela();
