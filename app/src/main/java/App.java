@@ -177,7 +177,7 @@ public class App {
                                 break;
                             case 4:
                                 alvoEfeito = Jogo.Aux.escolherAlvo(inimigos, inputs);
-                                efeito = new Nocaute("Nocaute", alvoEfeito);
+                                efeito = new Nocaute("Nocaute", alvoEfeito, inimigos);
                                 break;
                         }
 

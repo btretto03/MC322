@@ -246,7 +246,8 @@ public class PrintsMain {
         System.out.println(" [1] 🩸 Sangramento (Dano contínuo no inimigo)");
         System.out.println(" [2] 🗣️ Provocação  (Reduz escudo do inimigo)");
         System.out.println(" [3] 💉 Adrenalina  (Recupera sua vida)");
-        System.out.println(" [4] 😵 Nocaute  (1/10 de chance de derrubar o inimigo)");
+        System.out.println(" [4] 😵 Nocaute  (10% de chance de derrubar o inimigo (1v1))");
+        System.out.println("                 (20% de chance de derrubar um inimigo (1v2))");
         System.out.println(" [0] ❌ Cancelar");
         System.out.println(vermelhoNegrito + "----------------------------------------" + reset);
         System.out.print("Sua escolha: \n");
@@ -357,12 +358,21 @@ public class PrintsMain {
     }
 
     public static void printInimigoNocauteado (String nomeIimigo, boolean check){
-        System.out.println();
-        System.out.println();
-        System.out.println(fundoVermelhoNegrito + "        😵"+ nomeIimigo + " FOI NOCAUTEADO!😵            " + reset);
-        System.out.println();
-        System.out.println();
-        Jogo.Aux.esperar(1500);
+        if (check){
+            System.out.println(fundoVermelhoNegrito);
+            System.out.println();
+            System.out.println("        😵"+ nomeIimigo + " FOI NOCAUTEADO!😵            ");
+            System.out.println();
+            System.out.println(reset);
+            Jogo.Aux.esperar(1500);
+        } else{
+            System.out.println();
+            System.out.println();
+            System.out.println(fundoVermelhoNegrito + "        TENTATIVA DE NOCAUTE EM "+ nomeIimigo + " FALHOU!😢​            " + reset);
+            System.out.println();
+            System.out.println();
+            Jogo.Aux.esperar(1500);
+        }
     }
 
     public static void printEmpate() {

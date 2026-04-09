@@ -72,7 +72,11 @@ Nesta tarefa, o foco principal foi a organização e a documentação do projeto
 
 - Cinco novas cartas foram adicionadas: **Joelhada**, **Cotovelada**, **Chute Alto**, **Chute Brasileiro** e **Clinch**.
 
-- Luta interativa: Figuras com stickman foram adicionadas para representar os lutadores. Eles são aparecem no cabeçalho dos rounds, 
+- **Luta interativa:** Figuras com stickman foram adicionadas para representar os lutadores. Eles aparecem no cabeçalho dos rounds, demonstrando  se estão sob algum efeito, e também após cada golpe, com animações.
+
+```
+
+```
 
 ### Documentação Javadoc
 - A documentação foi elaborada com auxílio de LLM, conforme orientação de que seu uso era permitido no laboratório 05.
