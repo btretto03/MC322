@@ -67,6 +67,8 @@ Nesta tarefa, o foco maior está em organização e documentação. O projeto fo
 ### Nova dinâmica
 - Desde a tarefa 3, o jogo conta com a possibilidade de lutar contra dois inimigos ao mesmo tempo. Sendo possível escolher no início da partida qual modo deseja jogar, 1v1, 1v2 ou aleatório, será sorteado se o jogo será 1v1 ou 1v2.
 
+- Novo efeito: **Nocaute**, ao ser usado, tem uma chance de 10% de eliminar o inimigo com um golpe no final do round.
+
 ### Documentação Javadoc
 - A documentação foi realizada com auxilio de LLm, que foi dito que seria permitido na aula de laboratório 05. Foi pedido ao modelo para que fosse realizado a documentação completa do projeto e, em seguida, o trabalho feito foi revisado e corrigido pelos membros do grupo. 
 

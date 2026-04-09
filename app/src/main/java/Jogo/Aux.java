@@ -117,10 +117,10 @@ public class Aux {
     public static ArrayList<Carta> gerarBaralhoInicial() {
         ArrayList<Carta> baralho = new ArrayList<>();
         String[] nomeCartas = {
-            "Gancho de direita", "Jab", "Cruzado de direita", "Cruzado de esquerda", "Gancho de esquerda",
+            "Gancho de direita", "Jab", "Joelhada", "Cotovelada", "Chute alto", "Chute brasileiro", "Cruzado de direita", "Cruzado de esquerda", "Gancho de esquerda",
             "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora", 
             "Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", 
-            "Guarda alta", "Guarda baixa", "Correr"
+            "Guarda alta", "Guarda baixa", "Correr", "Clinch"
         };
 
         int custo = 1;
