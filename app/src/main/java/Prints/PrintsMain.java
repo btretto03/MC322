@@ -119,12 +119,27 @@ public class PrintsMain {
      * @param vidaheroi vida atual do heroi
      * @param inimigos lista de inimigos da partida
      */
-    public static void printStatus(String heroi, int vidaheroi, ArrayList<Inimigo> inimigos) {
-        System.out.println(String.format("🟩 %s: ❤️  %d VIDA", heroi, vidaheroi));
-        inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> System.out.println(String.format("🟥 %s: ❤️  %d VIDA", i.getNome(), i.getVida())));
-        inimigos.stream().filter(inimigo -> !inimigo.estaVivo()).forEach(i -> System.out.println(String.format("🟥 %s: 💀  FOI NOCAUTEADO", i.getNome())));
-        System.out.println(); 
-        AnimacaoLuta.printLutadoresParados();
+    public static void printStatus(Heroi heroi, ArrayList<Inimigo> inimigos) {
+        System.out.println("🟩 " + heroi.getNome() + ": ❤️ " + heroi.getVida() + " VIDA");
+
+        inimigos.stream().filter(inimigo -> inimigo.estaVivo()).forEach(i -> System.out.println("🟥 " + i.getNome() + ": ❤️ " + i.getVida() + " VIDA"));
+        inimigos.stream().filter(inimigo -> !inimigo.estaVivo()).forEach(i -> System.out.println("🟥 " + i.getNome() + ": 💀 FOI NOCAUTEADO"));
+        System.out.println();
+        
+        boolean temEfeitoHeroi = !heroi.getListaEfeitos().isEmpty();
+        boolean temEfeitoInimigo = false;
+        for (Inimigo inimigo : inimigos) {
+            if (!inimigo.getListaEfeitos().isEmpty()) {
+                temEfeitoInimigo = true;
+                break;
+            }
+        }
+
+        if (temEfeitoHeroi || temEfeitoInimigo) {
+            AnimacaoLuta.printLutadoresEfeito(heroi, inimigos);
+        } else {
+            AnimacaoLuta.printLutadoresParados(inimigos);
+        }
     }
 
     /**
@@ -464,3 +479,4 @@ public class PrintsMain {
         System.out.println(fundoSalmao + "                                                     " + reset);
     }
 }
+
