@@ -62,39 +62,45 @@ Os efeitos duram **3 turnos** e trazem dinâmicas estratégicas para o combate:
 Algumas partes da main foram dividas em seções por comentários para facilitar a organização e manutenção do código. 
 
 ## Tarefa 4
-Nesta tarefa, o foco maior está em organização e documentação. O projeto foi refatorado para se tornar um projeto baseado no gradle, uma ferramenta de build para java. Além disso, a documentação de classes, métodos e atributos, que não tinham implementação óbvia, foi adicionada no padrão javadoc.
+Nesta tarefa, o foco principal foi a organização e a documentação do projeto. A aplicação foi refatorada para o padrão Gradle (ferramenta de build para Java), e a documentação em Javadoc foi expandida para classes, métodos e atributos cuja implementação não era autoexplicativa.
 
 ### Nova dinâmica
-- Desde a tarefa 3, o jogo conta com a possibilidade de lutar contra dois inimigos ao mesmo tempo. Sendo possível escolher no início da partida qual modo deseja jogar, 1v1, 1v2 ou aleatório, será sorteado se o jogo será 1v1 ou 1v2.
+- Mantivemos a possibilidade de enfrentar dois inimigos ao mesmo tempo (introduzida na Tarefa 3).
+- No início da partida, é possível escolher entre os modos **1v1**, **1v2** ou **aleatório**. No modo aleatório, o jogo sorteia entre 1v1 e 1v2.
 
-- Novo efeito: **Nocaute**, ao ser usado, tem uma chance de 10% de eliminar o inimigo com um golpe no final do round.
+- Novo efeito: **Nocaute**. Ao ser usado, há **10% de chance** de eliminar o inimigo ao final do round.
+
+- Cinco novas cartas foram adicionadas: **Joelhada**, **Cotovelada**, **Chute Alto**, **Chute Brasileiro** e **Clinch**.
+
+- Luta interativa: Figuras com stickman foram adicionadas para representar os lutadores. Eles são aparecem no cabeçalho dos rounds, 
 
 ### Documentação Javadoc
-- A documentação foi realizada com auxilio de LLm, que foi dito que seria permitido na aula de laboratório 05. Foi pedido ao modelo para que fosse realizado a documentação completa do projeto e, em seguida, o trabalho feito foi revisado e corrigido pelos membros do grupo. 
+- A documentação foi elaborada com auxílio de LLM, conforme orientação de que seu uso era permitido no laboratório 05.
+- O modelo foi utilizado para gerar uma primeira versão completa da documentação, que depois foi revisada e corrigida pelos membros do grupo.
 
 - **Pontos de atenção:**
-> - Visando não poluir o projeto e optando por maior clareza, alguns métodos e parâmetros não foram documentados, principalemente aqueles com lógica curta e/ou nomes intuitivos. Exemplo: Construtores, getters, setters e prints óbvios.
+> - Para evitar poluição visual e manter maior clareza, alguns métodos e parâmetros não foram documentados, principalmente os de lógica curta e/ou nomes intuitivos (ex: construtores, getters, setters e prints óbvios).
 
 ### Gradle
-Agora, o projeto é composto pelo Gradle, assim, tarefas como compilação, execução e geração de documentação devem ser realizadas com comandos próprios <br><br>
+Com a adoção do Gradle, tarefas como compilação, execução e geração de documentação devem ser feitas pelos comandos da ferramenta.
 
->**Requisitos mínimos**<br>
->Java development kit<br>
->Gradle
+> **Requisitos mínimos**
+> - Java Development Kit (JDK)
+> - Gradle
 
 
-> **Compilação e Execução**
-> ```bash
->#Na raíz do projeto
->./gradlew build
->./gradlew run
-> ```
+**Compilação e Execução**
+```bash
+# Na raiz do projeto
+./gradlew build
+./gradlew run
+```
 
-> **Geração de documentação**
-> ```bash
->#Na raíz do projeto
->./gradlew javadoc
-> ```
+**Geração de documentação**
+```bash
+# Na raiz do projeto
+./gradlew javadoc
+```
 
 ## 🪜 Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
