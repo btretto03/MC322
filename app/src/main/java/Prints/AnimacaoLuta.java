@@ -1,6 +1,5 @@
 package Prints;
-import Entidades.Heroi;
-import Entidades.Inimigo;
+import Entidades.*;
 import Jogo.Aux;
 
 import java.io.File;
@@ -31,6 +30,21 @@ public class AnimacaoLuta {
         } catch (Exception e) {
             System.out.println("Erro ao mostrar Cena parada");
         }
+    }
+
+    public static String printMorte(String linha, ArrayList<Inimigo> inimigos) {
+        for (int i = 0; i < 2; i ++) {
+            String emojiBase;
+            if (i == 0) {
+                emojiBase = "😠";
+            } else {
+                emojiBase = "😡";
+            }
+            if (!inimigos.get(i).estaVivo()) {
+                linha = linha.replace(emojiBase, "💀");
+            }
+        }
+        return linha;
     }
 
     public static void printLutadoresEfeito(Heroi heroi, ArrayList<Inimigo> inimigos) {
@@ -71,13 +85,13 @@ public class AnimacaoLuta {
     private static String aplicarEfeitoEmoji(String linha, String emojiBase, String nomeEfeito) {
             switch (nomeEfeito) {
                 case "Sangramento": 
-                    return linha.replace(" " + emojiBase , emojiBase + "🩸"); 
+                    return linha.replace("  " + emojiBase , emojiBase + "🩸"); 
                 case "Adrenalina":  
-                    return linha.replace(" " + emojiBase, emojiBase + "💉"); 
+                    return linha.replace("  " + emojiBase, emojiBase + "💉"); 
                 case "Provocacao":  
-                    return linha.replace(" " + emojiBase,"📢🫨"); 
+                    return linha.replace("  " + emojiBase,"📢🫨"); 
                 case "Nocaute":     
-                    return linha.replace(" " + emojiBase, emojiBase + "💫"); 
+                    return linha.replace("  " + emojiBase, emojiBase + "💫"); 
                 default:            
                     return linha;
             }
