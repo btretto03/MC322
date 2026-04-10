@@ -68,7 +68,7 @@ Nesta tarefa, o foco principal foi a organização e a documentação do projeto
 - Mantivemos a possibilidade de enfrentar dois inimigos ao mesmo tempo (introduzida na Tarefa 3).
 - No início da partida, é possível escolher entre os modos **1v1**, **1v2** ou **aleatório**. No modo aleatório, o jogo sorteia entre 1v1 e 1v2.
 
-- Novo efeito: **Nocaute**. Ao ser usado, há **10% de chance** de eliminar o inimigo ao final do round.
+- Novo efeito: **Nocaute**. Ao ser usado, há **10% de chance** de eliminar o inimigo ao final do round, se a luta for 1v1 e **10% de chance** de a luta for 1v2.
 
 - Cinco novas cartas foram adicionadas: **Joelhada**, **Cotovelada**, **Chute Alto**, **Chute Brasileiro** e **Clinch**.
 
@@ -106,6 +106,9 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 ./gradlew javadoc
 ```
 
+> A documentação gerada fica em `app/build/docs/javadoc/index.html`.
+
+
 ## 🪜 Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
 ```
@@ -118,7 +121,12 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 │   │   │   └── javadoc
 │   │   ├── resources
 │   │   │   └── main
-│   │   │       └── Printinicial.txt
+│   │   │       ├── Derrota.txt
+│   │   │       ├── Heroi.txt
+│   │   │       ├── Inimigo.txt
+│   │   │       ├── Inimigo2.txt
+│   │   │       ├── Printinicial.txt
+│   │   │       └── Vitoria.txt
 │   ├── build.gradle
 │   └── src
 │       ├── main
@@ -132,6 +140,7 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 │       │   │   ├── Efeitos
 │       │   │   │   ├── Adrenalina.java
 │       │   │   │   ├── Efeitos.java
+│       │   │   │   ├── Nocaute.java
 │       │   │   │   ├── Provocacao.java
 │       │   │   │   ├── Sangramento.java
 │       │   │   │   └── Subscriber.java
@@ -143,10 +152,19 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 │       │   │   │   ├── Aux.java
 │       │   │   │   └── Publisher.java
 │       │   │   └── Prints
+│       │   │       ├── AnimacaoLuta.java
 │       │   │       ├── PrintsEntidades.java
-│       │   │       └── PrintsMain.java
+│       │   │       ├── PrintsMain.java
+│       │   │       └── LutaInterativa/
+│       │   │           ├── 1vs1/
+│       │   │           └── 1vs2/
 │       │   └── resources
-│       │       └── Printinicial.txt
+│       │       ├── Derrota.txt
+│       │       ├── Heroi.txt
+│       │       ├── Inimigo.txt
+│       │       ├── Inimigo2.txt
+│       │       ├── Printinicial.txt
+│       │       └── Vitoria.txt
 │       └── test
 │           └── java
 │               └── AppTest.java
