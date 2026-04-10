@@ -7,6 +7,9 @@
 ## 📌 Sobre o Projeto
 O objetivo deste projteo é desenvolver um sistema de batalhas via terminal, fortemente inspirado na logística do jogo "Slay the Spire". Para isso aplicamos os conceitos  da disciplina de Programação Orientada a Objetos (POO).
 
+## 🎮 Como Jogar
+Para entender as regras da luta, os atributos das cartas e como funciona o sistema de Fúria e Efeitos 👉 [Acesse o Manual Completo do Jogo aqui](MANUAL_DO_JOGO.md) 
+
 ## 🧭 Sumário
 - [Tarefa 1](#tarefa-1)
 - [Tarefa 2](#tarefa-2)
