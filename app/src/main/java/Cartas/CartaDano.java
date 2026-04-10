@@ -11,7 +11,6 @@ public class CartaDano extends Carta{
      *
      * @param nome nome da carta
      * @param custo custo de energia para usar a carta
-     * @param descricao descricao da acao da carta
      */
     public CartaDano (String nome, int custo){
         super(nome, custo, "Causando dano");
