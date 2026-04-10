@@ -149,7 +149,7 @@ public class Inimigo extends Entidade {
      *
      * @param alvo heroi que recebera o ataque
      */
-    public void atacar (Heroi alvo, int qntInimigos, int indice){
+    public void atacar (Heroi alvo, ArrayList<Inimigo> inimigos, int indice){
         int vidaAnterior = alvo.getVida();
         int escudoAnterior = alvo.getEscudo();
 
@@ -161,11 +161,11 @@ public class Inimigo extends Entidade {
         PrintsMain.printAcoesInimigo(this.getNome(), this.dano, this.escudo, vidaRemovida, escudoRemovido);
 
         if (this.escudo > 0) {
-            Prints.AnimacaoLuta.animarDefesaInimigo(qntInimigos, indice);
+            Prints.AnimacaoLuta.animarDefesaInimigo(alvo, inimigos, indice);
         } 
 
         else if (this.dano > 0) {
-            Prints.AnimacaoLuta.animarGolpeInimigo(qntInimigos, indice);
+            Prints.AnimacaoLuta.animarGolpeInimigo(alvo, inimigos, indice);
         }
 
         this.dano = 0;

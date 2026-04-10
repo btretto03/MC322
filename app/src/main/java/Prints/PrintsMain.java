@@ -139,7 +139,7 @@ public class PrintsMain {
         if (temEfeitoHeroi || temEfeitoInimigo) {
             AnimacaoLuta.printLutadoresEfeito(heroi, inimigos);
         } else {
-            AnimacaoLuta.printLutadoresParados(inimigos);
+            AnimacaoLuta.printLutadoresParados(heroi, inimigos);
         }
     }
 

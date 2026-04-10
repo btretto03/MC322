@@ -215,7 +215,7 @@ public class App {
 
                     if (cartaEscolhida instanceof CartaEscudo){
                         //Jogo.Aux.limparTela();
-                        Prints.AnimacaoLuta.animarGolpeHeroi(cartaEscolhida.getNome(), inimigos.size(), 0);
+                        Prints.AnimacaoLuta.animarGolpeHeroi(heroi, inimigos, cartaEscolhida.getNome(), 0);
                         int escudoAdicionado = cartaEscolhida.usar(heroi);
                         heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
                         
@@ -225,7 +225,7 @@ public class App {
                         Entidade alvoCarta = Jogo.Aux.escolherAlvo(inimigos, inputs);
                         int alvo = inimigos.indexOf(alvoCarta);
                         //Jogo.Aux.limparTela();
-                        Prints.AnimacaoLuta.animarGolpeHeroi(cartaEscolhida.getNome(), inimigos.size(), alvo);
+                        Prints.AnimacaoLuta.animarGolpeHeroi(heroi, inimigos, cartaEscolhida.getNome(), alvo);
                         //Jogo.Aux.limparTela();
 
                         int valor = cartaEscolhida.usar(alvoCarta);
@@ -263,7 +263,7 @@ public class App {
 
                 for (int i = 0; i < inimigos.size(); i ++) {
                     if (inimigos.get(i).estaVivo()) {
-                        inimigos.get(i).atacar(heroi, inimigos.size(), i);
+                        inimigos.get(i).atacar(heroi, inimigos, i);
                     }
                 }
                 

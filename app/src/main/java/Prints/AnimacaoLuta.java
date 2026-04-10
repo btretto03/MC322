@@ -9,11 +9,11 @@ import java.util.Scanner;
 
 public class AnimacaoLuta {
 
-    public static void printLutadoresParados(ArrayList<Inimigo> inimigos) {
-        int qtdInimigos = inimigos.size();
+    public static void printLutadoresParados(Heroi heroi, ArrayList<Inimigo> inimigos) {
+        int qntInimigos = inimigos.size();
         String caminho;
 
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             caminho = "src/main/java/Prints/LutaInterativa/1vs2/2heroisoco1.txt";
         } else {
             caminho = "src/main/java/Prints/LutaInterativa/1vs1/1heroisoco.txt";
@@ -23,7 +23,10 @@ public class AnimacaoLuta {
             Scanner leitor = new Scanner(new File(caminho));
             int linhas = 0;
             while (leitor.hasNextLine() && linhas < 7) {
-                System.out.println(leitor.nextLine());
+                String linha = leitor.nextLine();
+                linha = printMorteHeroi(linha, heroi);
+                linha = printMorte(linha, inimigos);
+                System.out.println(linha);
                 linhas ++;
             }
             leitor.close();
@@ -33,16 +36,26 @@ public class AnimacaoLuta {
     }
 
     public static String printMorte(String linha, ArrayList<Inimigo> inimigos) {
-        for (int i = 0; i < 2; i ++) {
-            String emojiBase;
+        for (int i = 0; i < inimigos.size(); i++) {
+            String cabeca;
             if (i == 0) {
-                emojiBase = "😠";
+                cabeca = "😠";
+            } else if (i == 1) {
+                cabeca = "😡";
             } else {
-                emojiBase = "😡";
+                continue;
             }
+
             if (!inimigos.get(i).estaVivo()) {
-                linha = linha.replace(emojiBase, "💀");
+                linha = linha.replace(cabeca, "💀");
             }
+        }
+        return linha;
+    }
+
+    public static String printMorteHeroi(String linha, Heroi heroi) {
+        if (heroi != null && !heroi.estaVivo()) {
+            linha = linha.replace("😬", "💀");
         }
         return linha;
     }
@@ -61,6 +74,8 @@ public class AnimacaoLuta {
             while (leitor.hasNextLine() && linhas < 7) {
                 String linha = leitor.nextLine();
 
+                linha = printMorteHeroi(linha, heroi);
+
                 if (!heroi.getListaEfeitos().isEmpty()) { //efeito heroi
                     linha = aplicarEfeitoEmoji(linha, "😬", heroi.getListaEfeitos().get(0).getNome());
                 }
@@ -73,6 +88,8 @@ public class AnimacaoLuta {
                     linha = aplicarEfeitoEmoji(linha, "😡", inimigos.get(1).getListaEfeitos().get(0).getNome());
                 }
 
+                linha = printMorte(linha, inimigos);
+
 
                 System.out.println(linha);
                 linhas ++;
@@ -82,31 +99,32 @@ public class AnimacaoLuta {
         }
     }
 
-    private static String aplicarEfeitoEmoji(String linha, String emojiBase, String nomeEfeito) {
+    private static String aplicarEfeitoEmoji(String linha, String cabeca, String nomeEfeito) {
             switch (nomeEfeito) {
                 case "Sangramento": 
-                    return linha.replace("  " + emojiBase , emojiBase + "🩸"); 
+                    return linha.replace("  " + cabeca , cabeca + "🩸"); 
                 case "Adrenalina":  
-                    return linha.replace("  " + emojiBase, emojiBase + "💉"); 
+                    return linha.replace("  " + cabeca, cabeca + "💉"); 
                 case "Provocacao":  
-                    return linha.replace("  " + emojiBase,"📢🫨"); 
+                    return linha.replace("  " + cabeca,"📢🫨"); 
                 case "Nocaute":     
-                    return linha.replace("  " + emojiBase, emojiBase + "💫"); 
+                    return linha.replace("  " + cabeca, cabeca + "💫"); 
                 default:            
                     return linha;
             }
         }
 
-    public static void animarGolpeHeroi(String nomeCarta, int qtdInimigos, int alvo) {
+    public static void animarGolpeHeroi(Heroi heroi, ArrayList<Inimigo> inimigos, String nomeCarta, int alvo) {
+        int qntInimigos = inimigos.size();
         String nome = nomeCarta.toLowerCase().trim(); //pega o nome das cartas e padroniza para minusculo e sem espacos
         String prefixo, arquivo, sufixo, pasta;
                 
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             prefixo = "2";
         } else {
             prefixo = "1";
         }
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             sufixo = String.valueOf(alvo + 1);
         } else {
             sufixo = "";
@@ -121,25 +139,26 @@ public class AnimacaoLuta {
         } else {
             arquivo = prefixo + "heroisoco" + sufixo + ".txt";
         }
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             pasta = "1vs2/";
         } else {
             pasta = "1vs1/";
         }
-        executarAnimacao(pasta + arquivo);
+        executarAnimacao(pasta + arquivo, heroi, inimigos);
     }
 
-    public static void animarGolpeInimigo(int qtdInimigos, int inimigoIndex) {
+    public static void animarGolpeInimigo(Heroi heroi, ArrayList<Inimigo> inimigos, int inimigoIndex) {
+        int qntInimigos = inimigos.size();
         int acaoinimigo = (int)(Math.random() * 2);
         String prefixo, nomeInim, golpe, pasta;
 
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             prefixo = "2";
         } else {
             prefixo = "1";
         }
 
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             nomeInim = "inimigo" + (inimigoIndex + 1);
         } else {
             nomeInim = "inimigo";
@@ -149,35 +168,36 @@ public class AnimacaoLuta {
         } else {
             golpe = "chute.txt";
         }
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             pasta = "1vs2/";
         } else {
             pasta = "1vs1/";
         }
-        executarAnimacao(pasta + prefixo + nomeInim + golpe);
+        executarAnimacao(pasta + prefixo + nomeInim + golpe, heroi, inimigos);
     }
 
-    public static void animarDefesaInimigo(int qtdInimigos, int inimigoIndex) {
+    public static void animarDefesaInimigo(Heroi heroi, ArrayList<Inimigo> inimigos, int inimigoIndex) {
+        int qntInimigos = inimigos.size();
         String prefixo, nomeInim, pasta;
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             prefixo = "2";
         } else {
             prefixo = "1";
         }
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             nomeInim = "inimigo" + (inimigoIndex + 1);
         } else {
             nomeInim = "inimigo";
         }
-        if (qtdInimigos == 2) {
+        if (qntInimigos == 2) {
             pasta = "1vs2/";
         } else {
             pasta = "1vs1/";
         }
-        executarAnimacao(pasta + prefixo + nomeInim + "defesa.txt");
+        executarAnimacao(pasta + prefixo + nomeInim + "defesa.txt", heroi, inimigos);
     }
 
-   private static void executarAnimacao(String arquivo) {
+   private static void executarAnimacao(String arquivo, Heroi heroi, ArrayList<Inimigo> inimigos) {
         String caminho = "src/main/java/Prints/LutaInterativa/" + arquivo;
 
         try {
@@ -187,7 +207,12 @@ public class AnimacaoLuta {
             Aux.limparTela();
 
             while (leitor.hasNextLine()) {
-                System.out.println(leitor.nextLine());
+                String linha = leitor.nextLine();
+                linha = printMorteHeroi(linha, heroi);
+                if (inimigos != null) {
+                    linha = printMorte(linha, inimigos);
+                }
+                System.out.println(linha);
                 contador ++;
 
                 if (contador == 7) {
