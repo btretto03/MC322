@@ -116,8 +116,7 @@ public class PrintsMain {
     /**
      * Imprime vida atual do heroi e dos inimigos.
      *
-     * @param heroi nome do heroi
-     * @param vidaheroi vida atual do heroi
+     * @param heroi objeto heroi utilizado pelo jogador
      * @param inimigos lista de inimigos da partida
      */
     public static void printStatus(Heroi heroi, ArrayList<Inimigo> inimigos) {
