@@ -23,20 +23,10 @@ public abstract class Carta {
         this.descricao = descricao;
     }
 
-    /**
-     * Retorna a descricao da carta.
-     *
-     * @return a descricao da carta
-     */
     public String getDescricao() {
         return descricao;
     }
 
-    /**
-     * Define a descricao da carta.
-     *
-     * @param descricao a nova descricao da carta
-     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -56,38 +46,18 @@ public abstract class Carta {
      */
     public abstract void printRodada (int indice);
 
-    /**
-     * Retorna o nome da carta.
-     *
-     * @return o nome da carta
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     * Define o nome da carta.
-     *
-     * @param nome o novo nome da carta
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     * Retorna o custo da carta.
-     *
-     * @return o custo da carta
-     */
     public int getCusto() {
         return custo;
     }
 
-    /**
-     * Define o custo da carta.
-     *
-     * @param custo o novo custo da carta
-     */
     public void setCusto(int custo) {
         this.custo = custo;
     }

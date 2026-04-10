@@ -16,13 +16,6 @@ public class Nocaute extends Efeitos{
     private boolean nocauteado = false;
     private ArrayList <Inimigo> inimigos;
 
-    /**
-     * Cria o efeito de nocaute.
-     *
-     * @param nome nome do efeito (ex.: "Nocaute")
-     * @param dono entidade alvo do efeito
-     * @param inimigos lista de inimigos da luta (define o modo 1v1/1v2)
-     */
     public Nocaute(String nome, Entidades.Entidade dono, ArrayList <Inimigo> inimigos){
         super(nome, 1, dono);
         this.inimigos = inimigos;

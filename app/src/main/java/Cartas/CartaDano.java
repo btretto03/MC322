@@ -13,19 +13,8 @@ public class CartaDano extends Carta{
      * @param custo custo de energia para usar a carta
      * @param descricao descricao da acao da carta
      */
-    public CartaDano(String nome, int custo, String descricao) {
-        super(nome, custo, descricao);
-    }
-
-    //criando um segundo construtor para ser possível escolher um valor diferente de descricao ou nao 
-    /**
-     * Construtor alternativo da classe CartaDano com descricao padrao.
-     *
-     * @param nome nome da carta
-     * @param custo custo de energia para usar a carta
-     */
     public CartaDano (String nome, int custo){
-        this(nome, custo, "Causando dano");
+        super(nome, custo, "Causando dano");
     }
 
     /**

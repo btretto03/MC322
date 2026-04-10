@@ -74,20 +74,10 @@ public class Heroi extends Entidade {
     }
 
     //Getters e Setters
-    /**
-     * Retorna a energia do heroi.
-     *
-     * @return a energia do heroi
-     */
     public int getEnergia() {
         return energia;
     }
-
-    /**
-     * Define a energia do heroi.
-     *
-     * @param energia a nova energia do heroi
-     */
+    
     public void setEnergia(int energia) {
         this.energia = energia;
     }   

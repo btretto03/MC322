@@ -10,22 +10,12 @@ import Efeitos.Subscriber;
 public class Publisher {
     private ArrayList<Subscriber> inscritos = new ArrayList<>();
 
-    /**
-     * Inscreve um subscriber para receber notificacao ao final de cada round.
-     *
-     * @param subs subscriber a ser inscrito
-     */
     public void inscrever(Subscriber subs) {
         if (!inscritos.contains(subs)) {
             inscritos.add(subs);
         }
     }
 
-    /**
-     * Remove um subscriber da lista de notificacao.
-     *
-     * @param subs subscriber a ser removido
-     */
     public void desinscrever(Subscriber subs) {
         inscritos.remove(subs);
     }
