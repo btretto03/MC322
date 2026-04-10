@@ -10,7 +10,7 @@ public class Nocaute extends Efeitos{
     private ArrayList <Inimigo> inimigos;
 
     public Nocaute(String nome, Entidades.Entidade dono, ArrayList <Inimigo> inimigos){
-        super(nome, 0, dono);
+        super(nome, 1, dono);
         this.inimigos = inimigos;
     }
 
@@ -31,8 +31,11 @@ public class Nocaute extends Efeitos{
             setNocauteado(true);
             PrintsMain.printInimigoNocauteado(dono.getNome(), getNocauteado()); 
         } else{
+            PrintsMain.printInimigoNocauteado(dono.getNome(), getNocauteado()); 
             setNocauteado(false);
         }
+
+        this.setAcumulos(getAcumulos() - 1);
     }
 
     public void setNocauteado (boolean valor){

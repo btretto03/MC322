@@ -10,6 +10,7 @@ import Cartas.Carta;
 import Entidades.Heroi;
 import Entidades.Inimigo;
 import Efeitos.Efeitos;
+import Efeitos.Nocaute;
 
 /**
  * Colecao central de mensagens e telas exibidas no terminal durante a partida.
@@ -328,7 +329,17 @@ public class PrintsMain {
              System.out.print("Sem ação de efeito! ");
         }
         for (int i = 0; i < efeitosInimigo.size(); i++) {
-            System.out.print("[" + efeitosInimigo.get(i).getNome() + " " + efeitosInimigo.get(i).getAcumulos() + "x] ");
+            Efeitos efeito = efeitosInimigo.get(i);
+
+            if (efeito instanceof Nocaute nocaute){
+                if (nocaute.getNocauteado()){
+                    System.out.println("FOI NOCAUTEADO!!!");
+                } else {
+                    System.out.println("A tentativa de nocaute em " + nomeInimigo + " falhou 😔");
+                }
+            } else{
+                System.out.print("[" + efeitosInimigo.get(i).getNome() + " " + efeitosInimigo.get(i).getAcumulos() + "x] ");
+            }
         }
         System.out.println("\n-------------------------------------------------");
     }
@@ -352,8 +363,6 @@ public class PrintsMain {
     public static void printEfeitoAgindo(String nomeLutador, String nomeEfeito, int acumulos) {
         if (nomeEfeito != "Nocaute"){
             System.out.println("⚡ " + nomeLutador + " está sob efeito de " + nomeEfeito + " (" + acumulos + "x)!");
-        } else{
-            System.out.println("Tentativa de Nocaute em "+ nomeLutador +" !");
         }
     }
 

@@ -306,6 +306,7 @@ public class App {
                             }
                         }
                     }
+                    PrintsMain.digiteParaContinuar(inputs, 0);
                 }
                 System.out.println();
                 Jogo.Aux.esperar(300);
