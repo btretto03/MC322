@@ -6,9 +6,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Utilitario de exibicao para a "luta interativa".
+ *
+ * <p>Le arquivos de texto com quadros (frames) de stickman em
+ * {@code src/main/java/Prints/LutaInterativa/} e imprime no terminal, aplicando
+ * pequenas substituicoes (morte e efeitos) sobre os emojis dos lutadores.</p>
+ */
 public class AnimacaoLuta {
 
+    /**
+     * Imprime a cena parada (sem efeitos) com heroi e inimigos.
+     *
+     * @param heroi heroi exibido na cena
+     * @param inimigos inimigos exibidos na cena
+     */
     public static void printLutadoresParados(Heroi heroi, ArrayList<Inimigo> inimigos) {
         int qntInimigos = inimigos.size();
         String caminho;
@@ -35,6 +47,13 @@ public class AnimacaoLuta {
         }
     }
 
+    /**
+     * Substitui a "cabeca" dos inimigos por caveira quando algum estiver morto.
+     *
+     * @param linha linha do frame
+     * @param inimigos inimigos usados para decidir substituicoes
+     * @return linha possivelmente modificada
+     */
     public static String printMorte(String linha, ArrayList<Inimigo> inimigos) {
         for (int i = 0; i < inimigos.size(); i++) {
             String cabeca;
@@ -53,6 +72,13 @@ public class AnimacaoLuta {
         return linha;
     }
 
+    /**
+     * Substitui a "cabeca" do heroi por caveira caso ele esteja morto.
+     *
+     * @param linha linha do frame
+     * @param heroi heroi usado para decidir substituicoes
+     * @return linha possivelmente modificada
+     */
     public static String printMorteHeroi(String linha, Heroi heroi) {
         if (heroi != null && !heroi.estaVivo()) {
             linha = linha.replace("😬", "💀");
@@ -60,6 +86,13 @@ public class AnimacaoLuta {
         return linha;
     }
 
+    /**
+     * Imprime a cena parada (cabecalho) aplicando um emoji de efeito no primeiro
+     * efeito ativo de cada entidade.
+     *
+     * @param heroi heroi exibido na cena
+     * @param inimigos inimigos exibidos na cena
+     */
     public static void printLutadoresEfeito(Heroi heroi, ArrayList<Inimigo> inimigos) {
         int qntInimigos = inimigos.size();
         String caminho;
@@ -114,6 +147,15 @@ public class AnimacaoLuta {
             }
         }
 
+    /**
+     * Executa uma animacao de golpe/defesa do heroi, escolhendo o arquivo pelo
+     * nome da carta e pelo alvo (no modo 1v2).
+     *
+     * @param heroi heroi que executa o golpe
+     * @param inimigos inimigos presentes na luta
+     * @param nomeCarta nome da carta usada (define o tipo de animacao)
+     * @param alvo indice do inimigo alvo (0/1 no 1v2)
+     */
     public static void animarGolpeHeroi(Heroi heroi, ArrayList<Inimigo> inimigos, String nomeCarta, int alvo) {
         int qntInimigos = inimigos.size();
         String nome = nomeCarta.toLowerCase().trim(); //pega o nome das cartas e padroniza para minusculo e sem espacos
@@ -147,6 +189,13 @@ public class AnimacaoLuta {
         executarAnimacao(pasta + arquivo, heroi, inimigos);
     }
 
+    /**
+     * Executa uma animacao de golpe de um inimigo (soco ou chute aleatorio).
+     *
+     * @param heroi heroi alvo do golpe
+     * @param inimigos inimigos presentes na luta
+     * @param inimigoIndex indice do inimigo que ataca
+     */
     public static void animarGolpeInimigo(Heroi heroi, ArrayList<Inimigo> inimigos, int inimigoIndex) {
         int qntInimigos = inimigos.size();
         int acaoinimigo = (int)(Math.random() * 2);
@@ -176,6 +225,13 @@ public class AnimacaoLuta {
         executarAnimacao(pasta + prefixo + nomeInim + golpe, heroi, inimigos);
     }
 
+    /**
+     * Executa uma animacao de defesa do inimigo.
+     *
+     * @param heroi heroi presente na cena
+     * @param inimigos inimigos presentes na luta
+     * @param inimigoIndex indice do inimigo que defende
+     */
     public static void animarDefesaInimigo(Heroi heroi, ArrayList<Inimigo> inimigos, int inimigoIndex) {
         int qntInimigos = inimigos.size();
         String prefixo, nomeInim, pasta;
@@ -197,7 +253,11 @@ public class AnimacaoLuta {
         executarAnimacao(pasta + prefixo + nomeInim + "defesa.txt", heroi, inimigos);
     }
 
-   private static void executarAnimacao(String arquivo, Heroi heroi, ArrayList<Inimigo> inimigos) {
+       /**
+        * Carrega um arquivo de animacao e imprime em quadros, limpando a tela a cada
+        * bloco de linhas.
+        */
+       private static void executarAnimacao(String arquivo, Heroi heroi, ArrayList<Inimigo> inimigos) {
         String caminho = "src/main/java/Prints/LutaInterativa/" + arquivo;
 
         try {

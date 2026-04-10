@@ -114,6 +114,13 @@ public class Aux {
         return inimigos;
     }
 
+    /**
+     * Gera o baralho inicial do heroi.
+     *
+     * <p>Inclui cartas de dano e de escudo, com custo ciclico de 1 a 4.</p>
+     *
+     * @return lista com as cartas iniciais
+     */
     public static ArrayList<Carta> gerarBaralhoInicial() {
         ArrayList<Carta> baralho = new ArrayList<>();
         String[] nomeCartas = {
