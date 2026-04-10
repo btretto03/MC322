@@ -7,10 +7,24 @@
 ## 📌 Sobre o Projeto
 O objetivo deste projteo é desenvolver um sistema de batalhas via terminal, fortemente inspirado na logística do jogo "Slay the Spire". Para isso aplicamos os conceitos  da disciplina de Programação Orientada a Objetos (POO).
 
-## Terefa 1
+## 🧭 Sumário
+- [Tarefa 1](#tarefa-1)
+- [Tarefa 2](#tarefa-2)
+- [Tarefa 3](#tarefa-3)
+- [Tarefa 4](#tarefa-4)
+- [🪜 Estrutura do projeto](#estrutura-do-projeto)
+- [🚀 Como compilar e executar](#como-compilar-e-executar)
+
+---
+
+## 📚 Tarefas
+
+## Tarefa 1
 Para esta implementação, adaptamos a dinâmica de combate para o universo do UFC. O usuário pode escolher o seu lutador dentre as opções disponíveis para enfrentar o oponente. A lógica principal foi mantida: o jogador precisa gerenciar sua energia a cada turno para atacar ou levantar a guarda (representado pelas cartas de escudo), buscando nocautear o adversário antes de ser derrotado.
 
-## Terefa 2
+---
+
+## Tarefa 2
 Nesta Terefa implementamos os conceitos de herança, classes abstratas e polimorfismo.
 
 A classe Carta é uma classe abstrata utilizada como superclasse para CartaDano e CartaEscudo. Da mesma forma, Entidade é uma classe abstrata utilizada como superclasse para Heroi e Inimigo.
@@ -35,7 +49,9 @@ flowchart LR
 > **Embaralhamento**  
 As listas não são embaralhadas no sentido de realizar um shuffle na posição das cartas dentro do array.
 
-## Terefa 3
+---
+
+## Tarefa 3
 Nessa implementação, foram adicionados os efeitos. Optamos pela lógica utilizada em jogos de luta, onde o jogador acumula uma certa Fúria que, quando cheia, permite utilizar um efeito no inimigo.
 O valor de fúria é limitado a 3, e a cada ataque realizado é somada de 1.
 
@@ -60,6 +76,8 @@ Os efeitos duram **3 turnos** e trazem dinâmicas estratégicas para o combate:
 
 ### Seccionamento
 Algumas partes da main foram dividas em seções por comentários para facilitar a organização e manutenção do código. 
+
+---
 
 ## Tarefa 4
 Nesta tarefa, o foco principal foi a organização e a documentação do projeto. A aplicação foi refatorada para o padrão Gradle (ferramenta de build para Java), e a documentação em Javadoc foi expandida para classes, métodos e atributos cuja implementação não era autoexplicativa.
@@ -104,6 +122,8 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 ```
 
 > A documentação gerada fica em `app/build/docs/javadoc/index.html`.
+
+---
 
 
 ## 🪜 Estrutura do projeto
@@ -172,6 +192,8 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 ├── README.md
 └── settings.gradle
 ```
+
+---
 
 ## 🚀 Como compilar e executar
 - Visite [Gradle](#gradle)
