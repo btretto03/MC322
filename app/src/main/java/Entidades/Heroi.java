@@ -8,6 +8,7 @@ import Prints.PrintsEntidades;
  */
 public class Heroi extends Entidade {
     private int energia;
+    private int furia;
     
     /**
      * Construtor da classe Heroi.
@@ -81,4 +82,20 @@ public class Heroi extends Entidade {
     public void setEnergia(int energia) {
         this.energia = energia;
     }   
+
+    public void setFuria (int furia){
+        if (furia > 3){
+            this.furia = 3;
+        } else{
+            this.furia = furia;
+        }
+
+        if (this.furia < 0){
+            this.furia = 0;
+        }
+    }
+
+    public int getFuria(){
+        return this.furia;
+    }
 }
