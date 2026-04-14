@@ -17,9 +17,10 @@ public class Heroi extends Entidade {
      * @param vida vida inicial do heroi
      * @param escudo escudo inicial do heroi
      */
-    public Heroi(String nome, int vida, int escudo) { //construtor
+    public Heroi(String nome, int vida, int escudo, int furia) { //construtor
         super(nome, vida, escudo);
         this.energia = 6;
+        this.furia = furia;
     }
 
     /**
