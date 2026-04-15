@@ -28,6 +28,8 @@ public class HeroiTest {
             } else if (i == 3){
                 assertEquals("Fabrício Werdum", Heroi.escolherHeroi(inputs));
             } 
+
+            inputs.close();
         }
 
     }
