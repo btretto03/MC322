@@ -2,7 +2,6 @@ package Jogo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 import Cartas.Carta;
 import Cartas.CartaDano;
@@ -75,42 +74,32 @@ public class Aux {
     }
 
     /**
-     * Define modo de jogo e instancia inimigos correspondentes.
-     *
-     * @param inputs leitor de entrada do usuario
-     * @param heroi heroi da partida
-     * @return lista de inimigos configurada para o modo escolhido
+     * Gera os inimigos da fase baseando-se no nível atual da árvore utilizando switch case.
      */
-    public static ArrayList<Inimigo> escolherModoDeJogo(Scanner inputs, Heroi heroi) {
-        limparTela();
-        Prints.PrintsMain.printEscolhaModo();
-        int modo = inputs.nextInt();
+    public static ArrayList<Inimigo> prepararInimigos(int nivelAtual, String nomeOponente, String nomeIgnorado) {
         ArrayList<Inimigo> inimigos = new ArrayList<>();
 
-        switch (modo) {
-            case 1:
-                limparTela();
-                System.out.println("🥊 MODO 1 VS 1 SELECIONADO 🥊\n");
-                String inimigo = Inimigo.escolherInimigo(inputs);
-                inimigos.add(new Inimigo(inimigo, 50, 0));
-                break;
+        switch (nivelAtual) {
             case 2:
-                Inimigo.escolherInimigoDuplo(inputs, 1, inimigos);
+                inimigos.add(new Inimigo(nomeOponente, 1, 0));
                 break;
+
             case 3:
-                Inimigo.escolherInimigoDuplo(inputs, 2, inimigos);
+                inimigos.add(new Inimigo(nomeOponente, 1, 0));
                 break;
+
+            case 4:
+                inimigos.add(new Inimigo(nomeOponente, 1, 0)); 
+                inimigos.add(new Inimigo(nomeIgnorado, 1, 0)); 
+                break;
+            case 5:
+                inimigos.add(new Inimigo(nomeOponente, 1, 0));
+                break;
+
             default:
-                limparTela();
-                System.out.println("⚠️ Opção inválida! Modo 1 VS 1 selecionado por padrão.\n");
-                String inimigoDefault = Inimigo.escolherInimigo(inputs);
-                inimigos.add(new Inimigo(inimigoDefault, 50, 0));
                 break;
         }
 
-        if (inimigos.size() > 1) { 
-            heroi.setVida(heroi.getVida() * 2);
-        }
         return inimigos;
     }
 
@@ -127,8 +116,7 @@ public class Aux {
             "Gancho de direita", "Jab", "Joelhada", "Cotovelada", "Chute alto", "Chute brasileiro", "Cruzado de direita", "Cruzado de esquerda", "Gancho de esquerda",
             "Direto", "Chute baixo", "Chute frontal", "Guilhotina", "Voadora", 
             "Esquivo para direita", "Bloqueio", "Esquivo para esquerda", "Esquivo para trás", 
-            "Guarda alta", "Guarda baixa", "Correr", "Clinch"
-        };
+            "Guarda alta", "Guarda baixa", "Correr", "Clinch"};
 
         int custo = 1;
         for (int i = 0; i < nomeCartas.length; i++) {

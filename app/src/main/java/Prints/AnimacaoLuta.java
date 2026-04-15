@@ -148,13 +148,12 @@ public class AnimacaoLuta {
         }
 
     /**
-     * Executa uma animacao de golpe/defesa do heroi, escolhendo o arquivo pelo
-     * nome da carta e pelo alvo (no modo 1v2).
+     * Executa uma animacao de golpe/defesa do heroi.
      *
      * @param heroi heroi que executa o golpe
      * @param inimigos inimigos presentes na luta
      * @param nomeCarta nome da carta usada (define o tipo de animacao)
-     * @param alvo indice do inimigo alvo (0/1 no 1v2)
+     * @param alvo indice do inimigo alvo
      */
     public static void animarGolpeHeroi(Heroi heroi, ArrayList<Inimigo> inimigos, String nomeCarta, int alvo) {
         int qntInimigos = inimigos.size();

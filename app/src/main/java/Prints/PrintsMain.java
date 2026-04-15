@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import Cartas.Carta;
 import Entidades.Heroi;
 import Entidades.Inimigo;
+import Jogo.Aux;
 import Efeitos.Efeitos;
 import Efeitos.Nocaute;
 
@@ -16,7 +17,7 @@ import Efeitos.Nocaute;
  * Colecao central de mensagens e telas exibidas no terminal durante a partida.
  */
 public class PrintsMain {
-
+    private static  String roxo = "\u001B[35m";
     private static String reset = "\u001B[0m";
     private static String vermelho = "\u001B[31m";
     private static String amarelo = "\u001B[33m";
@@ -217,25 +218,37 @@ public class PrintsMain {
         System.out.println("🪫 Infelizmente " + nome + " não tem energia suficiente! Digite -1 para voltar a jogada");
     }
 
-    public static void printEscolhaModo() {
-        System.out.println("   ⚔️  Escolha o modo do confronto ⚔️    ");
-            System.out.println("\n----------------------------------------");
-
-        System.out.println("\nREGRAS:" + reset);
-        System.out.println(ciano + " • No modo 1 VS 2, sua vida é dobrada para compensar.");
-        System.out.println(" • Inimigos atacam em sequência e você escolherá qual atacar." + reset);
-
-        System.out.println("\n----------------------------------------");
-
-        System.out.println("DIFICULDADE:");
-        System.out.println(" [1] 🟢 MODO CLÁSSICO (1 VS 1)");
-        System.out.println(" [2] 🔴 DESAFIO DUPLO (1 VS 2)");
-        System.out.println(" [3] 🎲 Teste sua sorte (1 VS 1 ou 1 VS 2)");
-        
-        System.out.println("----------------------------------------");
-        System.out.print("Digite sua escolha: ");
+    public static void printInvasaoOctogono(String nomeBoss, String nomeIgnorado) {
+        Aux.limparTela();
+        System.out.println(fundoVermelhoNegrito + "                                                     " + reset);
+        System.out.println(fundoVermelhoNegrito + "              ALERTA DE INVASÃO! 🚨                  " + reset);
+        System.out.println(fundoVermelhoNegrito + "                                                     " + reset);
+        System.out.println("\n" + vermelhoNegrito + "O octógono foi invadido!" + reset);
+        Jogo.Aux.esperar(500);
+        System.out.println( nomeIgnorado + " não gostou de ficar de fora e apareceu");
+        Jogo.Aux.esperar(500);
+        System.out.println("💥 " + nomeIgnorado + " pulou a grade e se uniu a " + nomeBoss + "!");
+        System.out.println(amarelo + "⚠️ PREPARE-SE PARA UMA LUTA 2 VS 1! ⚠️" + reset);
+        Jogo.Aux.esperar(3000);
     }
-
+    public static void printLutaPeloCinturao(String campeao) {
+        Aux.limparTela();
+        Aux.esperar(200);
+        System.out.println("\n" + amarelo + "==========================================================" + reset);
+        Aux.esperar(200);
+        System.out.println(amarelo + "          🏆  A GRANDE FINAL DO UFC JAVA  🏆" + reset);
+        Aux.esperar(200);
+        System.out.println(amarelo + "==========================================================" + reset);
+        Aux.esperar(200);
+        System.out.println("\n" + vermelhoNegrito + "  ATENÇÃO: " + reset + "Você chegou à última luta!");
+        Aux.esperar(200);
+        System.out.println("  O cinturão peso-pesado do Java está em jogo.");
+        Aux.esperar(200);
+        System.out.println("\n  No octógono te espera o grande campeão: " + roxo + campeao + reset);
+        Aux.esperar(200);
+        System.out.println(amarelo + "==========================================================\n" + reset);
+        Aux.esperar(7000);
+    }
     /**
      * Exibe menu de escolha de efeito.
      */
@@ -455,12 +468,12 @@ public class PrintsMain {
     }
 
     public static void printHeroiVenceu(Heroi heroi) {
-        printVitoria();
+       //printVitoria();
         String nome = heroi.getNome();
         int tamanho = 49 + nome.length(); 
         
         String espacos = " ".repeat(tamanho);  
-        String mensagem = "  🏆 VITÓRIA! " + nome + " Parabéns, você foi o campeão! 🏆  ";
+        String mensagem = "VITÓRIA! " + nome + " Parabéns, você derrotou o adversário!";
 
         System.out.println(fundoVerdeClaro + espacos + reset);
         System.out.println(fundoVerdeClaro + mensagem + reset);

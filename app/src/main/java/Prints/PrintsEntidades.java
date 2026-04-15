@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import Jogo.Aux;
+
 /**
  * Funcoes de impressao relacionadas a escolha e status de entidades.
  */
@@ -15,25 +17,35 @@ private static String reset = "\u001B[0m";
     private static String laranja = "\u001B[38;5;208m";
 
     public static void menuEscolhaHeroi() {
-        System.out.println("        🔥 SELECIONE SEU LUTADOR 🔥      ");
-  
-        
         System.out.println("\nCOMO JOGAR:" + reset);
         System.out.println(ciano + " • Use cartas de Dano para atacar e Escudo para se defender.");
+        Aux.esperar(200);
         System.out.println(" • Gerencie sua Energia, cada round você terá 6 de energia.");
+        Aux.esperar(200);
         System.out.println(" • Use golpes de Dano para carregar sua barra de FÚRIA.");
+        Aux.esperar(200);
         System.out.println(" • Com 3 de Fúria, você libera efeitos especiais potentes." + reset);
-        System.out.println("\n MODOS DISPONIVEIS:");
-        System.out.println(ciano + " • 1v1 - Herói e inimigo com 50 de vida cada.");
-        System.out.println(" • 1v2 - Herói com 100 de vida e inimigos com 25 cada." + reset);
-        
-        System.out.println("\n----------------------------------------" + reset);
-        System.out.println("ESCOLHA SEU HERÓI:" + reset);
-        System.out.println(" [1] 🏆 Alex Poatan (O 'Mãos de Pedra')" + reset);
-        System.out.println( " [2] 🥋 Anderson Silva( O 'Spider')" + reset);
-        System.out.println(" [3] 🥊 Fabrício Werdum ( O 'Vai Cavalo')" + reset);
+        Aux.esperar(200);
+        System.out.println("\n========================================");
+        System.out.println("      🏆  REGRAS DO TORNEIO 🏆          ");
+        System.out.println("========================================");
+        Aux.esperar(200);
+        System.out.println("   Você avançará pelos caminhos da árvore de um torneio.");
+        Aux.esperar(200);
+        System.out.println("   Sua vida e o seu baralho são mantidos entre as lutas!");
+        Aux.esperar(200);
+        System.out.println("   Efeitos, Energia e Fúria são resetados a cada novo oponente.");
+        Aux.esperar(200);
+        System.out.println("----------------------------------------\n");
+        Aux.esperar(5000);
+        Aux.limparTela();
+
+        System.out.println("--------🔥 SELECIONE SEU LUTADOR 🔥--------");
+        System.out.println(" [1] 🏆 Alex Poatan (O 'Mãos de Pedra')" );
+        System.out.println( " [2] 🥋 Anderson Silva( O 'Spider')");
+        System.out.println(" [3] 🥊 Fabrício Werdum ( O 'Vai Cavalo')");
         System.out.println(branco +  " [4] ⌨️ Digite seu próprio nome");
-        System.out.println("----------------------------------------" + reset);
+        System.out.println("----------------------------------------");
         System.out.print("Sua escolha: ");
     }
 

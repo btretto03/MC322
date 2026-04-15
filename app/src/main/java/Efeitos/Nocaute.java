@@ -9,8 +9,7 @@ import Entidades.Inimigo;
  * Efeito especial que tenta nocautear (eliminar) o alvo ao final do round.
  *
  * <p>Quando notificado pelo {@link Jogo.Publisher}, o efeito sorteia uma chance
- * de nocaute e, se bem-sucedido, zera a vida do dono do efeito. A probabilidade
- * depende do modo (1v1 ou 1v2) e o resultado e exibido no terminal.</p>
+ * de nocaute e, se bem-sucedido, zera a vida do dono do efeito.</p>
  */
 public class Nocaute extends Efeitos{
     private boolean nocauteado = false;

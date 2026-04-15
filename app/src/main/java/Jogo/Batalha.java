@@ -1,20 +1,11 @@
 package Jogo;
 
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Cartas.Carta;
-import Cartas.CartaDano;
-import Cartas.CartaEscudo;
-import Efeitos.Adrenalina;
-import Efeitos.Efeitos;
-import Efeitos.Nocaute;
-import Efeitos.Provocacao;
-import Efeitos.Sangramento;
-import Entidades.Entidade;
-import Entidades.Heroi;
-import Entidades.Inimigo;
+import Cartas.*;
+import Efeitos.*;
+import Entidades.*;
 import Prints.PrintsMain;
 
 public class Batalha {
@@ -26,8 +17,7 @@ public class Batalha {
     private boolean usouEfeito;
 
 
-    public Batalha(ArrayList<Inimigo> inimigos, Heroi heroi, Publisher juiz, Scanner inputs){
-        this.inimigos = inimigos;
+    public Batalha(Heroi heroi, Publisher juiz, Scanner inputs){
         this.heroi = heroi;
         this.juiz = juiz;
         this.inputs = inputs;
@@ -101,6 +91,9 @@ public class Batalha {
 
     public void interacaoUsuario (ArrayList<Carta> mao, ArrayList<String> acoesDoRoundHeroi, int contadorRound,ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte){
         while (heroi.getEnergia() > 0 && mao.size() > 0){
+            if (!Jogo.Aux.inimigosVivos(inimigos)) {
+            return;
+            }
             Jogo.Aux.limparTela();
             Prints.PrintsMain.printNovoRound(contadorRound);
             PrintsMain.printStatus(heroi, inimigos);
@@ -327,5 +320,64 @@ public class Batalha {
 
     public ArrayList<Inimigo> getInimigos (){
         return this.inimigos;
+    }
+
+    public void iniciarTorneio(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte) {
+        Arvore.Arvore mapa = new Arvore.Arvore("Início");
+        mapa.gerarFilhos();
+        javax.swing.tree.DefaultMutableTreeNode noAtual = mapa.getRaiz();
+        String lutadorIgnorado = "";
+
+        int nivelAtual = 1;
+        while (heroi.estaVivo() && nivelAtual < 5) {
+            nivelAtual ++;
+            Jogo.Aux.limparTela();
+            if (nivelAtual > 1) {
+             mapa.imprimirArvoreProgresso(noAtual.toString());
+        }
+
+            System.out.println("\nEscolha seu próximo desafio:");
+            int totalFilhos = noAtual.getChildCount();
+            for (int i = 0; i < totalFilhos; i ++) {
+                javax.swing.tree.DefaultMutableTreeNode filho = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(i);
+                System.out.println("[" + (i + 1) + "] " + filho.getUserObject());
+            }
+
+            int escolha = inputs.nextInt() - 1;
+            javax.swing.tree.DefaultMutableTreeNode proximoNo = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(escolha);
+            String nomeOponente = proximoNo.toString();
+
+            if (nivelAtual == 3) {
+                int direcao;
+                if (escolha == 0) { //esquerda
+                    direcao = 1;
+                }  else {  //direita
+                    direcao = 0;
+                }
+                lutadorIgnorado = noAtual.getChildAt(direcao).toString();
+            }
+            //Jogo.Aux.limparTela();
+            //mapa.imprimirArvoreProgresso(nomeOponente);
+             
+            if (nivelAtual == 4) {
+                Prints.PrintsMain.printInvasaoOctogono(nomeOponente, lutadorIgnorado);
+            }
+            if (nivelAtual == 5) {
+                Prints.PrintsMain.printLutaPeloCinturao(nomeOponente);
+            }
+
+            this.inimigos = Jogo.Aux.prepararInimigos(nivelAtual, nomeOponente, lutadorIgnorado);
+            this.Luta(pilhaCompra, pilhaDescarte);
+
+            if (!heroi.estaVivo()) {
+                break;
+            }
+
+            heroi.limparFimLuta();
+            noAtual = proximoNo;
+
+
+            PrintsMain.digiteParaContinuar(inputs, 0);
+        }
     }
 }

@@ -75,6 +75,18 @@ public class Heroi extends Entidade {
         }
     }
 
+    public void limparFimLuta() {
+        this.getListaEfeitos().clear(); 
+        this.setEnergia(0); 
+        this.setFuria(0);
+        this.setEscudo(0);
+        
+    }
+
+    public int getFuria(){
+        return this.furia;
+    }
+    
     //Getters e Setters
     public int getEnergia() {
         return energia;
@@ -94,9 +106,5 @@ public class Heroi extends Entidade {
         if (this.furia < 0){
             this.furia = 0;
         }
-    }
-
-    public int getFuria(){
-        return this.furia;
     }
 }
