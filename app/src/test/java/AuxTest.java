@@ -65,42 +65,39 @@ public class AuxTest {
         }
     } 
 
-    @Test
-    void inimigosVivos_2vivos_Test (){
-        ArrayList<Inimigo> inimigos = new ArrayList<>();
-        Inimigo inimigoTeste1 = new Inimigo("um", 1, 0);
-        Inimigo inimigoTeste2 = new Inimigo("dois", 1, 0);
+    @Nested
+    class inimigosVivosTest{
+        private ArrayList<Inimigo> inimigos;
 
-        inimigos.add(inimigoTeste1);
-        inimigos.add(inimigoTeste2);
+        @BeforeEach
+        void criarInimigosTeste (){
+            inimigos = new ArrayList<>();
+            Inimigo inimigoTeste1 = new Inimigo("um", 1, 0);
+            Inimigo inimigoTeste2 = new Inimigo("dois", 1, 0);
 
-        assertTrue(Jogo.Aux.inimigosVivos(inimigos));
-    }
+            inimigos.add(inimigoTeste1);
+            inimigos.add(inimigoTeste2);
+        }
 
-    @Test
-    void inimigosVivos_1vivo_Test (){
-        ArrayList<Inimigo> inimigos = new ArrayList<>();
-        Inimigo inimigoTeste1 = new Inimigo("um", 1, 0);
-        Inimigo inimigoTeste2 = new Inimigo("dois", 0, 0);
+        @Test
+        void doisVivos (){
+            assertTrue(Jogo.Aux.inimigosVivos(inimigos));
+        }
 
-        inimigos.add(inimigoTeste1);
-        inimigos.add(inimigoTeste2);
+        @Test
+        void umVivo (){
+            inimigos.get(1).setVida(0);
+            assertTrue(Jogo.Aux.inimigosVivos(inimigos));
+        }
 
-        assertTrue(Jogo.Aux.inimigosVivos(inimigos));
-    }
-
-    @Test
-    void inimigosVivos_0vivos_Test (){
-        ArrayList<Inimigo> inimigos = new ArrayList<>();
-        Inimigo inimigoTeste1 = new Inimigo("um", 0, 0);
-        Inimigo inimigoTeste2 = new Inimigo("dois", 0, 0);
-
-        inimigos.add(inimigoTeste1);
-        inimigos.add(inimigoTeste2);
-
-        assertFalse(Jogo.Aux.inimigosVivos(inimigos));
-    }
-
+        @Test
+        void zeroVivos (){
+            inimigos.get(0).setVida(0);
+            inimigos.get(1).setVida(0);
+            assertFalse(Jogo.Aux.inimigosVivos(inimigos));
+        }
+    } 
+    
     @Test
     void prepararInimigos_nivel2_Test (){        
         ArrayList<Inimigo> resultadoObtido = Jogo.Aux.prepararInimigos(2, "teste1", "teste2"); 
@@ -189,9 +186,25 @@ public class AuxTest {
         @Test
         //Ao comprar a sexta mao, a pilha de compras deve receber todas as cartas da pilhas de descarte
         void comprarSextaMao (){
-            mao = Jogo.Aux.comprarMao(pilhaCompra, pilhaDescarte);
+            assertEquals(22, pilhaCompra.size());
+            assertEquals(0, mao.size());
+            assertEquals(0, pilhaDescarte.size());
+
+            for(int i = 0; i < 6; i++){
+                mao = Jogo.Aux.comprarMao(pilhaCompra, pilhaDescarte);
+                if (i == 5){
+                    continue; //Condição para simular o caso imediatamente antes das cartas serem utilizadas
+                }
+                for (Carta carta : mao){
+                    pilhaDescarte.add(carta);
+                }
+            }
 
             assertEquals(18, pilhaCompra.size());
+            assertEquals(4, mao.size());
+            assertEquals(0, pilhaDescarte.size());
         }
     }
+
+
 }
