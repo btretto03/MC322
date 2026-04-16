@@ -52,6 +52,15 @@ jacocoTestReport {
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir('reports/jacoco')
     }
+
+    //Configuração adicionada para ignorar os métodos e classes exclusivos para print na contagem de cobertura de código
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                '**/Prints/**',
+            ])
+        }))
+    }
 }
 
 tasks.named('test') {
