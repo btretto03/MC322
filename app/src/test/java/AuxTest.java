@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import Entidades.Heroi;
@@ -154,5 +156,42 @@ public class AuxTest {
         Heroi heroi = new Heroi("teste", 1, 0, 0);
 
         assertFalse(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+    }
+
+    @Nested
+    class comprarMaoTest {
+        private ArrayList<Carta> pilhaCompra;
+        private ArrayList<Carta> pilhaDescarte;
+        private ArrayList<Carta> mao;
+
+        @BeforeEach
+        void configurarPilhas (){
+            pilhaCompra = Jogo.Aux.gerarBaralhoInicial();
+            pilhaDescarte = new ArrayList<>();
+            mao = new ArrayList<>();
+        }
+
+        //A pilha de compras inicia com 22 items
+        @Test
+        void comprarCincoMaos (){
+            for(int i = 0; i < 5; i++){
+                mao = Jogo.Aux.comprarMao(pilhaCompra, pilhaDescarte);
+                for (Carta carta : mao){
+                    pilhaCompra.remove(carta);
+                    pilhaDescarte.add(carta);
+                }
+            }
+
+            assertEquals(2, pilhaCompra.size());
+            assertEquals(20, pilhaDescarte.size());
+        }
+
+        @Test
+        //Ao comprar a sexta mao, a pilha de compras deve receber todas as cartas da pilhas de descarte
+        void comprarSextaMao (){
+            mao = Jogo.Aux.comprarMao(pilhaCompra, pilhaDescarte);
+
+            assertEquals(18, pilhaCompra.size());
+        }
     }
 }
