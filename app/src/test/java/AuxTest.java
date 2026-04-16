@@ -120,41 +120,47 @@ public class AuxTest {
     }
 
 
+    @Nested
+    class verificarFimDeJogoTest {
+        private ArrayList<Inimigo> inimigos;
+        private Heroi heroi;
 
-    @Test
-    void verificarFimDeJogo_Vitoria_Test (){
-        ArrayList<Inimigo> inimigos = new ArrayList<>();
-        Heroi heroi = new Heroi("teste", 1, 0, 0);
+        @BeforeEach
+        void criarInimigosTeste(){
+            inimigos = new ArrayList<>();
+            inimigos.add(new Inimigo("teste2", 0, 0));
+            heroi = new Heroi("teste", 0, 0, 0);
+        }
 
-        assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+        @Test
+        void Vitoria (){
+            heroi.setVida(1);
+            inimigos.get(0).setVida(0);
+            assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+        }
+
+        @Test
+        void Empate (){
+            heroi.setVida(0);
+            inimigos.get(0).setVida(0);
+            assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+        }
+
+        @Test
+        void Derrota (){
+            heroi.setVida(0);
+            inimigos.get(0).setVida(1);
+            assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+        }
+
+        @Test
+        void jogoContinua (){
+            heroi.setVida(1);
+            inimigos.get(0).setVida(1);
+            assertFalse(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+        }
     }
-
-    @Test
-    void verificarFimDeJogo_Empate_Test (){
-        ArrayList<Inimigo> inimigos = new ArrayList<>();
-        Heroi heroi = new Heroi("teste", 0, 0, 0);
-
-        assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
-    }
-
-    @Test
-    void verificarFimDeJogo_Derrota_Test (){
-        ArrayList<Inimigo> inimigos = new ArrayList<>();
-        inimigos.add(new Inimigo("tete2", 1, 0));
-        Heroi heroi = new Heroi("teste", 0, 0, 0);
-
-        assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
-    }
-
-    @Test
-    void verificarFimDeJogo_Falso_Test (){
-        ArrayList<Inimigo> inimigos = new ArrayList<>();
-        inimigos.add(new Inimigo("tete2", 1, 0));
-        Heroi heroi = new Heroi("teste", 1, 0, 0);
-
-        assertFalse(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
-    }
-
+    
     @Nested
     class comprarMaoTest {
         private ArrayList<Carta> pilhaCompra;
