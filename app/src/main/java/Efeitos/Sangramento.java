@@ -20,8 +20,9 @@ public class Sangramento extends Efeitos {
         int novaVida = vidaAtual - this.acumulos;
         if (novaVida < 0) {
             dono.setVida(0);
+        } else{
+            dono.setVida(novaVida);
         }
-        dono.setVida(novaVida);
         this.acumulos--;
     }
     

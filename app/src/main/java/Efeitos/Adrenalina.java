@@ -18,8 +18,10 @@ public class Adrenalina extends Efeitos {
         int novaVida = vidaAtual + this.acumulos;
         if (novaVida > 30) {
             novaVida = 30;
+        } else{
+            dono.setVida(novaVida);
         }
-        dono.setVida(novaVida);
+        
         this.acumulos--;
     }
     

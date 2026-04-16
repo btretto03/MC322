@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import Entidades.Heroi;
 import Cartas.Carta;
-import Cartas.CartaDano;
 import Entidades.Inimigo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
