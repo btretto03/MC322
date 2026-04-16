@@ -1,36 +1,22 @@
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import Entidades.Heroi;
-import Cartas.Carta;
-import Cartas.CartaDano;
 import Efeitos.Adrenalina;
 import Efeitos.Provocacao;
 import Efeitos.Sangramento;
-import Entidades.Inimigo;
 import Jogo.Publisher;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.ByteArrayInputStream;
-import java.security.PrivateKey;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class EfeitosTest {
     private Publisher juiz;
     private Heroi heroi;
-    private Inimigo inimigo;
 
     @BeforeEach
     void estadoInicial (){
         juiz = new Publisher();
         heroi = new Heroi("teste1", 0, 0, 0);
-        inimigo = new Inimigo("teste2", 0, 0);
     }
 
     @Nested

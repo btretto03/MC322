@@ -38,6 +38,10 @@ public abstract class Entidade {
         } else {
             this.vida -= dano;
         }
+
+        if (this.vida < 0){
+            this.vida =0;
+        }
     }
 
     public boolean estaVivo() {
