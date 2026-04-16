@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id'jacoco'
     id 'java'
 }
 
@@ -38,9 +39,25 @@ application {
     mainClass = 'App'
 }
 
+jacoco {
+    toolVersion = "0.8.12" // Versão estável para Java 21
+}
+
+// 2. Personalizando a geração do relatório
+jacocoTestReport {
+    dependsOn test // Garante que os testes rodam antes de tentar gerar o relatório
+    
+    reports {
+        xml.required = true  // Útil para integração com SonarQube/CI
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco')
+    }
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 run {

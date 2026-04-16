@@ -119,4 +119,40 @@ public class AuxTest {
 
         assertEquals(2, resultadoObtido.size());
     }
+
+
+
+    @Test
+    void verificarFimDeJogo_Vitoria_Test (){
+        ArrayList<Inimigo> inimigos = new ArrayList<>();
+        Heroi heroi = new Heroi("teste", 1, 0, 0);
+
+        assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+    }
+
+    @Test
+    void verificarFimDeJogo_Empate_Test (){
+        ArrayList<Inimigo> inimigos = new ArrayList<>();
+        Heroi heroi = new Heroi("teste", 0, 0, 0);
+
+        assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+    }
+
+    @Test
+    void verificarFimDeJogo_Derrota_Test (){
+        ArrayList<Inimigo> inimigos = new ArrayList<>();
+        inimigos.add(new Inimigo("tete2", 1, 0));
+        Heroi heroi = new Heroi("teste", 0, 0, 0);
+
+        assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+    }
+
+    @Test
+    void verificarFimDeJogo_Falso_Test (){
+        ArrayList<Inimigo> inimigos = new ArrayList<>();
+        inimigos.add(new Inimigo("tete2", 1, 0));
+        Heroi heroi = new Heroi("teste", 1, 0, 0);
+
+        assertFalse(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
+    }
 }
