@@ -100,7 +100,23 @@ public class AuxTest {
     }
 
     @Test
-    void prepararInimigosTest (){
-        
+    void prepararInimigos_nivel2_Test (){        
+        ArrayList<Inimigo> resultadoObtido = Jogo.Aux.prepararInimigos(2, "teste1", "teste2"); 
+
+        assertEquals(1, resultadoObtido.size());
+    }
+
+    @Test
+    void prepararInimigos_nivel3_Test (){        
+        ArrayList<Inimigo> resultadoObtido = Jogo.Aux.prepararInimigos(3, "teste1", "teste2"); 
+
+        assertEquals(1, resultadoObtido.size());
+    }
+
+    @Test
+    void prepararInimigos_nivel4_Test (){        
+        ArrayList<Inimigo> resultadoObtido = Jogo.Aux.prepararInimigos(4, "teste1", "teste2"); 
+
+        assertEquals(2, resultadoObtido.size());
     }
 }

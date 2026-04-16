@@ -27,10 +27,10 @@ public class Aux {
      * @param milisegundos tempo de espera em milissegundos
      */
     public static void esperar(int milisegundos) {
-        try {
-            Thread.sleep(milisegundos);
-        } catch (InterruptedException e) {
-    }
+    //     try {
+    //         Thread.sleep(milisegundos);
+    //     } catch (InterruptedException e) {
+    // }
     }
 
     /**
