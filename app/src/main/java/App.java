@@ -34,19 +34,31 @@ public class App {
      * @param args argumentos de linha de comando (nao utilizados)
      */
     public static void main(String[] args)  {
-        Prints.PrintsMain.printInicial2();
+        //Prints.PrintsMain.printInicial2();
         Aux.limparTela();
         int modo = Batalha.modoDeJogo(inputs);
         Jogo.Aux.limparTela();
 
         if (modo == 1) { //se carregou o save
             Jogo.Salvamento.VariaveisBatalha estado = Jogo.Salvamento.Salvamento.carregarPartida();
+            Jogo.Salvamento.EstadoTorneio torneioEstado = Jogo.Salvamento.Salvamento.carregarTorneio();
             if (estado != null && estado.heroi != null && estado.inimigos != null) {
                 Publisher juiz = new Publisher();
                 Batalha batalha = new Batalha(estado.heroi, juiz, inputs, estado.inimigos);
                 ArrayList<Carta> pilhaCompra = Jogo.Salvamento.Salvamento.carregarCartas(estado.pilhaCompra);
                 ArrayList<Carta> pilhaDescarte = Jogo.Salvamento.Salvamento.carregarCartas(estado.pilhaDescarte);
                 batalha.Luta(pilhaCompra, pilhaDescarte, estado.roundAtual);
+
+                if (batalha.jogadorSaiu() == 0 && estado.heroi.estaVivo()) {
+                    estado.heroi.limparFimLuta();
+                    batalha.iniciarTorneio(pilhaCompra, pilhaDescarte, torneioEstado);
+                    if (batalha.jogadorSaiu() == 0 && estado.heroi.estaVivo()) {
+                        Aux.limparTela();
+                        System.out.println("\n🏆 PARABÉNS! VOCÊ É O NOVO CAMPEÃO DO UFC JAVA!");
+                        Prints.PrintsMain.printVitoria();
+                    }
+                }
+
                 inputs.close();
                 return;
             }

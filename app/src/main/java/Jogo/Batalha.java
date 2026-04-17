@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Cartas.*;
 import Efeitos.*;
 import Entidades.*;
+import Jogo.Salvamento.EstadoTorneio;
 import Jogo.Salvamento.VariaveisBatalha;
 import Prints.PrintsMain;
 
@@ -16,7 +17,10 @@ public class Batalha {
     private int energiaMaxima;
     private Scanner inputs;
     private boolean usouEfeito;
-    private boolean jogadorSaiu;
+    private boolean jogadorSaiu; //save feito
+    private int torneioNivelAtual;
+    private ArrayList<Integer> torneioCaminho;
+    private String torneioLutadorIgnorado;
 
     public Batalha(Heroi heroi, Publisher juiz, Scanner inputs, ArrayList<Inimigo> inimigos){
         this.heroi = heroi;
@@ -24,6 +28,9 @@ public class Batalha {
         this.inputs = inputs;
         this.inimigos = inimigos;
         this.jogadorSaiu = false;
+        this.torneioNivelAtual = 1;
+        this.torneioCaminho = new ArrayList<>();
+        this.torneioLutadorIgnorado = "";
     }
 
     public int jogadorSaiu() {
@@ -31,10 +38,6 @@ public class Batalha {
             return 1;
         }
         return 0;
-    }
-
-    public void Luta (ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte){
-        Luta(pilhaCompra, pilhaDescarte, 1);
     }
 
     public void Luta (ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, int contadorRound){
@@ -143,6 +146,12 @@ public class Batalha {
                 batalha.pilhaDescarte = Jogo.Salvamento.Salvamento.salvarCartas(pilhaDescarte);
                 batalha.roundAtual = contadorRound;
                 Jogo.Salvamento.Salvamento.salvarPartida(batalha);
+
+                EstadoTorneio torneio = new EstadoTorneio();
+                torneio.nivelAtual = torneioNivelAtual;
+                torneio.caminho = new ArrayList<>(torneioCaminho);
+                torneio.lutadorIgnorado = torneioLutadorIgnorado;
+                Jogo.Salvamento.Salvamento.salvarTorneio(torneio);
 
                 System.out.println("\n👋 A partida foi salva, saindo do jogo!");
                 return;
@@ -357,12 +366,30 @@ public class Batalha {
     }
 
     public void iniciarTorneio(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte) {
+        iniciarTorneio(pilhaCompra, pilhaDescarte, null);
+    }
+
+    public void iniciarTorneio(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, EstadoTorneio estado) {
         Arvore.Arvore mapa = new Arvore.Arvore("Início");
         mapa.gerarFilhos();
         javax.swing.tree.DefaultMutableTreeNode noAtual = mapa.getRaiz();
         String lutadorIgnorado = "";
 
+        torneioCaminho.clear();
+        torneioNivelAtual = 1;
+        torneioLutadorIgnorado = "";
+
         int nivelAtual = 1;
+        if (estado != null) { //se o torneio ainda nao comecou
+            for (int indice : estado.caminho) {
+                noAtual = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(indice);
+                torneioCaminho.add(indice);
+            }
+            lutadorIgnorado = estado.lutadorIgnorado;
+            nivelAtual = estado.nivelAtual;
+            torneioNivelAtual = nivelAtual;
+            torneioLutadorIgnorado = lutadorIgnorado;
+        }
         while (heroi.estaVivo() && nivelAtual < 5) {
             if (jogadorSaiu) {
                 return;
@@ -384,6 +411,8 @@ public class Batalha {
             javax.swing.tree.DefaultMutableTreeNode proximoNo = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(escolha);
             String nomeOponente = proximoNo.toString();
 
+            torneioCaminho.add(escolha);
+
             if (nivelAtual == 3) {
                 int direcao;
                 if (escolha == 0) { //esquerda
@@ -393,6 +422,9 @@ public class Batalha {
                 }
                 lutadorIgnorado = noAtual.getChildAt(direcao).toString();
             }
+
+            torneioNivelAtual = nivelAtual;
+            torneioLutadorIgnorado = lutadorIgnorado;
              
             if (nivelAtual == 4) {
                 Prints.PrintsMain.printInvasaoOctogono(nomeOponente, lutadorIgnorado);
@@ -402,7 +434,7 @@ public class Batalha {
             }
 
             this.inimigos = Jogo.Aux.prepararInimigos(nivelAtual, nomeOponente, lutadorIgnorado);
-            this.Luta(pilhaCompra, pilhaDescarte);
+            this.Luta(pilhaCompra, pilhaDescarte, 1);
 
             if (jogadorSaiu) {
                 return;

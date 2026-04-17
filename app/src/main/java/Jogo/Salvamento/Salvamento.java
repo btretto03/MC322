@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 
 import Cartas.Carta;
@@ -13,11 +14,7 @@ import Cartas.CartaEscudo;
 
 public final class Salvamento {
 
-    private static Gson gson() {
-        return new Gson();
-    }
-
-    public static ArrayList<CartaSalva> salvarCartas(ArrayList<Carta> cartas) {
+    public static ArrayList<CartaSalva> salvarCartas(ArrayList<Carta> cartas) { //salva as cartas
         ArrayList<CartaSalva> novaListaCartas = new ArrayList<>();
         for (Carta c : cartas) {
             CartaSalva cs = new CartaSalva();
@@ -29,7 +26,7 @@ public final class Salvamento {
         return novaListaCartas;
     }
 
-    public static ArrayList<Carta> carregarCartas(ArrayList<CartaSalva> cartas) {
+    public static ArrayList<Carta> carregarCartas(ArrayList<CartaSalva> cartas) { //carrega as cartas de novo classificando elas por tipo novamente
         ArrayList<Carta> novaListaCartas = new ArrayList<>();
         for (CartaSalva cs : cartas) {
             String descricao = cs.descricao;
@@ -51,8 +48,7 @@ public final class Salvamento {
 
     public static void salvarPartida(VariaveisBatalha batalha) {
         System.out.println("\n💾 Salvando...");
-
-        Gson json = gson();
+        Gson json = new GsonBuilder().setPrettyPrinting().create();
 
         try (FileWriter writer = new FileWriter("save.json")) {
             json.toJson(batalha, writer);
@@ -63,12 +59,30 @@ public final class Salvamento {
     }
 
     public static VariaveisBatalha carregarPartida() {
-        Gson json = gson();
-
+        Gson json = new Gson();
         try (FileReader reader = new FileReader("save.json")) {
             return json.fromJson(reader, VariaveisBatalha.class);
         } catch (IOException e) {
             System.out.println("Erro no carregamento.");
+            return null;
+        }
+    }
+
+    public static void salvarTorneio(EstadoTorneio torneio) { //salva os dados da arvore do torneio
+        Gson json = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter("saveTorneio.json")) {
+            json.toJson(torneio, writer);
+        } catch (IOException e) {
+            System.out.println("Erro no salvamento do torneio.");
+        }
+    }
+
+    public static EstadoTorneio carregarTorneio() { //carrega o json do torneio
+        Gson json = new Gson();
+        try (FileReader reader = new FileReader("saveTorneio.json")) {
+            return json.fromJson(reader, EstadoTorneio.class);
+        } catch (IOException e) {
+            System.out.println("Erro no carregamento do torneio.");
             return null;
         }
     }
