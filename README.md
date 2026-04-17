@@ -15,6 +15,7 @@ Para entender as regras da luta, os atributos das cartas e como funciona o siste
 - [Tarefa 2](#tarefa-2)
 - [Tarefa 3](#tarefa-3)
 - [Tarefa 4](#tarefa-4)
+- [Tarefa 5](#tarefa-5)
 - [🪜 Estrutura do projeto](#estrutura-do-projeto)
 - [🚀 Como compilar e executar](#como-compilar-e-executar)
 
@@ -95,7 +96,6 @@ Nesta tarefa, o foco principal foi a organização e a documentação do projeto
 
 - **Luta interativa:** Figuras com stickman foram adicionadas para representar os lutadores. Eles aparecem no cabeçalho dos rounds, demonstrando  se estão sob algum efeito, e também após cada golpe, com animações.
 
-
 ### Documentação Javadoc
 - A documentação foi elaborada com auxílio de LLM, conforme orientação de que seu uso era permitido no laboratório 05.
 - O modelo foi utilizado para gerar uma primeira versão completa da documentação, que depois foi revisada e corrigida pelos membros do grupo.
@@ -109,6 +109,9 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 > **Requisitos mínimos**
 > - Java Development Kit (JDK)
 > - Gradle
+
+## Tarefa 5
+
 
 
 **Compilação e Execução**
@@ -128,7 +131,6 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 
 ---
 
-
 ## 🪜 Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
 ```
@@ -141,6 +143,7 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 │   │   │   └── javadoc
 │   │   ├── resources
 │   │   │   └── main
+│   │   │       ├── Arvore.txt
 │   │   │       ├── Derrota.txt
 │   │   │       ├── Heroi.txt
 │   │   │       ├── Inimigo.txt
@@ -152,6 +155,8 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 │       ├── main
 │       │   ├── java
 │       │   │   ├── App.java
+│       │   │   ├── Arvore/
+│       │   │   │   └── Arvore.java
 │       │   │   ├── Cartas
 │       │   │   │   ├── CartaDano.java
 │       │   │   │   ├── CartaEfeito.java
@@ -170,7 +175,13 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 │       │   │   │   └── Inimigo.java
 │       │   │   ├── Jogo
 │       │   │   │   ├── Aux.java
-│       │   │   │   └── Publisher.java
+│       │   │   │   ├── Batalha.java
+│       │   │   │   ├── Publisher.java
+│       │   │   │   └── Salvamento/
+│       │   │   │       ├── CartaSalva.java
+│       │   │   │       ├── EstadoTorneio.java
+│       │   │   │       ├── Salvamento.java
+│       │   │   │       └── VariaveisBatalha.java
 │       │   │   └── Prints
 │       │   │       ├── AnimacaoLuta.java
 │       │   │       ├── PrintsEntidades.java
@@ -179,6 +190,7 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 │       │   │           ├── 1vs1/
 │       │   │           └── 1vs2/
 │       │   └── resources
+│       │       ├── Arvore.txt
 │       │       ├── Derrota.txt
 │       │       ├── Heroi.txt
 │       │       ├── Inimigo.txt

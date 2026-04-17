@@ -3,10 +3,18 @@
 Bem-vindo ao Octógono JAVA! Este é um manual que contém todas as informações necessárias para você entender as mecânicas, gerenciar seu lutador e vencer a luta.
 
 ## 🥊 Modos de Jogo
-Logo ao iniciar a execução, você será levado ao menu de seleção de modos. O jogo suporta os seguintes cenários de combate:
-* **1 vs 1:**.
-* **1 vs 2:**.
-* **Aleatório:** O sistema sorteia automaticamente se você enfrentará um ou dois oponentes.
+Logo ao iniciar a execução, você poderá optar entre:
+* **Novo jogo:** começa uma nova campanha.
+* **Carregar jogo salvo:** carrega o último estado salvo (luta + torneio).
+
+## 🏆 Torneio (árvore de desafios)
+Ao começar uma campanha, você avança por uma árvore de desafios escolhendo o próximo oponente.
+O jogo usa suas escolhas para montar a próxima luta (e em certas fases existe um “lutador ignorado”, mostrado em eventos específicos).
+
+## 💾 Salvamento e carregament
+Quando você escolhe carrega um jogo salvo, o jogo:
+1. Restaura a luta do ponto exato do save.
+2. Após terminar a luta carregada, continua o torneio do mesmo ponto.
 
 ## ⚙️ Dinâmica de Turnos e Baralho
 O combate é inspirado em jogos de construção de deck (como *Slay the Spire*). 
