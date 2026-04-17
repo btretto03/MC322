@@ -164,7 +164,7 @@ public class PrintsMain {
             System.out.println("\n" + fundoVermelhoNegrito + " [99] ⚡ Liberar efeito especial " + reset);
         }
         
-        System.out.print("\nEscolha uma carta ou -1 para passar: ");
+        System.out.print("\nEscolha uma carta, -1 para passar, ou 5 para salvar e sair: ");
     }
 
     public static void printErroOpcao() {

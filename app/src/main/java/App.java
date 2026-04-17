@@ -20,7 +20,6 @@ public class App {
      * Scanner compartilhado para leitura de entradas do usuario no terminal.
      */
     public static Scanner inputs = new Scanner(System.in);
-
     /**
      * Inicia a aplicacao e executa o loop principal de combate.
      *
@@ -36,8 +35,10 @@ public class App {
      */
     public static void main(String[] args)  {
         Prints.PrintsMain.printInicial2();
-        
+        Aux.limparTela();
+        Batalha.modoDeJogo(inputs);
         Jogo.Aux.limparTela();
+
 //----------------------------------INSTANCIAMENTO------------------------------------------
         Publisher juiz = new Publisher();
         String escolhaheroi = Heroi.escolherHeroi(inputs);
@@ -53,7 +54,7 @@ public class App {
 //----------------------------------TORNEIO------------------------------------------        
         torneio.iniciarTorneio(pilhaCompra, pilhaDescarte);
 
-        if (heroi.estaVivo()) {
+        if (torneio.jogadorSaiu() == 0 && heroi.estaVivo()) {
             Aux.limparTela();
             System.out.println("\n🏆 PARABÉNS! VOCÊ É O NOVO CAMPEÃO DO UFC JAVA!");
             Prints.PrintsMain.printVitoria();

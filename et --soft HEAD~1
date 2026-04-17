@@ -1,0 +1,183 @@
+[33m1afe910[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/tarefa5[m[33m)[m feature: saving files prints implemented
+[33mbf41302[m[33m ([m[1;31morigin/feature/tarefa5[m[33m)[m Add: Add on tests
+[33m1cc938c[m Add: add tests for Efeitos
+[33ma3fd5eb[m Fix: Group tests using Nested decorator
+[33mb98a467[m Add: Add JaCoCo config os it ignores Prints directory
+[33m273049a[m Fix: group some tests using Nestd decorator
+[33m0989fa3[m Add: Add tests for comprarMao method
+[33m8fb2c0f[m Add: Add tests on AuxTest.java
+[33m1a91f76[m Add: Add new tests on AuxTest.java
+[33m7df05af[m Add: Create new tests for Aux class
+[33meb2f1ab[m Add: Add tests for Heroi
+[33ma083d17[m Sincronize feature/tarefa5 with origin/battle-tree
+[33m2909be9[m Add on Batalha (Finish principal battle methods)
+[33m3e54469[m Add on Batalhas (Start transition from App to Batalha)
+[33m95fd607[m Add on Jogos (Add new class Batalha to represents a unitary battle)
+[33m866e001[m[33m ([m[1;33mtag: [m[1;33mTarefa4-268060-258477[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Generates javadoc documentation
+[33mbb6fae9[m Fix (Fix some javadoc strings across whole project)
+[33m6f1ebc9[m Fix on PrintsMain (Fix a javadoc string)
+[33m572782c[m[33m ([m[1;31morigin/feature/Tarefa4[m[33m, [m[1;32mfeature/Tarefa4[m[33m)[m add: javadoc comments
+[33m1116e79[m feature: add game manual
+[33m628b8dc[m updating README
+[33m14fe539[m updating README
+[33m7810c21[m updating README
+[33mdf82d46[m feature: skull emoji when an enemy dies, it continues showing in the next prints till the end of the fight
+[33m546c8fc[m fix:presentation files
+[33m642309a[m Fix on main (Fix the 'efeitos agindo' print and adapts it to nocaute)
+[33md22eb6a[m[33m ([m[1;31morigin/luta-iterativa[m[33m)[m Add on prints (New case for failed nocaute)
+[33m32a1160[m Add on Nocaute (Add new atributte so Nocaute can see Inimigos array)
+[33md1a26e0[m fixing effects prints
+[33m71e665a[m fix:bug in adding new cards
+[33mc68af95[m Fix on Aux (Fix criaBaralhoInicial index)
+[33md5cf4b4[m Add (Add new card options)
+[33m1cfc6d5[m feature:ascii art in 1vs2 fight and effects
+[33mf15e8df[m fix:standardizing cards names to print correctly
+[33m906ce94[m feature:ascii prints to show the fight
+[33mcae6f54[m feaure: ascii print for attacks and defenses
+[33m2e38226[m feature: ascii art to show fighters strikes
+[33m4b2adc6[m feature:initial prints ASCII characters
+[33ma563ba7[m fix: final victory print
+[33m1589a27[m new ascii arts
+[33m530d443[m feature: ascii art in final prints
+[33m8335588[m fix: initial print
+[33m3347596[m debugging: initial print
+[33md7d7373[m updating javadoc comment files
+[33mcce4165[m Add feature (Add new 'nocaute' effect)
+[33mc13f093[m Add to Cartas (Add two new cards for specific attacks, add overloading to CartaDano)
+[33m95e0011[m add to readme (Add description to project structure diagram)
+[33m092b266[m Add (Add javadoc like documentation to the whole project, Add Tarefa4 description to readme)
+[33ma84656e[m Add on Prints and Main (Add features to print functions)
+[33m2ea4dfe[m Add on Prints/ (Add background color to printAcoesInimigo e printAcoesDoRound)
+[33m0b2a79e[m refactor on PrintsMain printInicial (Change the file reading logic so it works inside a gradle project)
+[33meb95252[m Refactor (Upload Dev branch code into gradle project)
+[33maaa8002[m Add to main (add divisories for better organization)
+[33mcd0b7b8[m Restore readme and update .gitignore
+[33m9b2eb9f[m Create gradle project
+[33m0e4c6b5[m refactor: main classes now in Aux package
+[33mb14c8f8[m feature: player can choose how many fighters
+[33m389471e[m updating README
+[33mce35ea2[m[33m ([m[1;33mtag: [m[1;33mtarefa3-268060-258477[m[33m, [m[1;32mmain[m[33m)[m Fix little mistake on a print
+[33mb7a307c[m Fix on main (Fix logic failures on effects section)
+[33m1823593[m Refactor (Refactor almost the whole project to accept two ennemies)
+[33me130f41[m Fix on main (Fixes limparTela for better terminal interaction
+[33m64f9ee0[m Fix on main (Reorganize code lines)
+[33m91be08f[m Add on Prints (Add some features to enhance UX)
+[33m2c6d079[m updating README
+[33mb41cd89[m refactoring: end game prints now is according to the lengh of customize players name
+[33m42b7b09[m feature:choose enemy and hero name
+[33m225d3a6[m refactor: Print low energy is now alone after round ends
+[33mcbf7103[m removing effects when it ends
+[33mcbe2cca[m fix: publisher
+[33m18eb773[m updating Entidades live
+[33mb458f80[m feature: add a round counter
+[33md8b56b3[m fixing prints
+[33m3d7bf2d[m refactoring: print novo round name
+[33m4e18e81[m debbuging: inimigo atack loop´
+[33mb78bca5[m feature: Inimigo tells his effect
+[33me657b63[m refactoring: effects now is available in cards to follow Tarefa03 rules
+[33m9cdf770[m debbuging: print FimEnergia
+[33m3079cfb[m feature: improve efeitos logic in  and its prints
+[33mb4a642e[m fixing publisher name to be in accord of what was asked by the teacher
+[33mf245d12[m feature: implement observer for combat effects as juiz
+[33m78fca29[m implement feature efeito in main and its prints on package printsMain
+[33m7eef44b[m refactoring: Entidade to receive effect
+[33m93298b3[m feature: efeitos  package added to the game
+[33m298f092[m refactor: unifying 0 and -1 loop methods
+[33ma917c8a[m refactor: unifying 0 and -1 loop methods
+[33m975e5b9[m fixing double print 'digite 0 para continuar' bug
+[33mdc79b97[m refactor: reuse ZeroParaContinuar method for turn passing and error
+[33m8e8d126[m improving function printzeroparacontinuar name
+[33m04dc3fc[m refactor: move 'press zero to continue' loop to PrintsMain
+[33me0f2eec[m refactor: moving  Inimigo prints to PrintsEntidades
+[33m0ae9b42[m refactor: move prints to PrintsMain to help us cleaning up App.java
+[33meb57ed8[m fix: import Heroi and Inimigo in PrintsMain
+[33m2d7c318[m refactor: fix Inimigo constructor
+[33m15a7bff[m refactor: resolve package visibility issues from App
+[33m344fd76[m test
+[33m66312cb[m removing prints from main and creating package Prints
+[33mfc4ed28[m removing comments
+[33mfae6b25[m Update combat print to use carta description
+[33mea3cabd[m Fix Carta constructor to include description
+[33m4a0f35f[m fix: shuffle the deck on reshuffle
+[33m84e170b[m fix: reset shields per round and fix post-death attacks
+[33mf07d963[m shuffle the deck when it finishes
+[33m964106a[m[33m ([m[1;33mtag: [m[1;33mTarefa02-268060-258477[m[33m, [m[1;31morigin/Joao[m[33m)[m finishing lab 2
+[33m516c172[m fixing prints
+[33mbb4d3e2[m adding draw case
+[33mbb77b49[m refactoring prints
+[33md06d65c[m updating README
+[33m96e5d68[m fixing prints
+[33mfe7dd78[m new feature: enemy thinks to attack
+[33mba539ea[m printing low energy if hero tries to use a card wich he hasnt got energy
+[33m7cb7171[m removing the aleatority of the attack and the shields
+[33m78485f3[m Add atacar method to Inimigo class. Fixes Round loops
+[33m1daea31[m Add to README
+[33mb8dd0af[m Add laboratório2 breafing to README
+[33m250d72e[m Fix method anuncio
+[33m4d15086[m Fix abstract methods on Cartas. Change some prints
+[33m3857269[m Fix on App.java e CartaDano (Fixes some prints)
+[33m0c6e0cf[m fixing prints
+[33m6e41f3c[m fixing prints
+[33mf806bf2[m fixing enemy attack
+[33m657fedd[m refactoring the usar method
+[33m2c33ec5[m Add features
+[33m83ab9a3[m edit print
+[33md8dcd73[m implementing error suport in card choice
+[33m31bd88d[m fixing bug to choose aleatory card
+[33m9955e65[m refactoring deck management and implement card draw logic
+[33mef1d20c[m Add to main (Implements logic to use mao and pilhaDescarte)
+[33mb0f96fb[m reactoring how we add cards to the deck
+[33ma03420c[m final prints out of main
+[33mf89d03d[m cleaning main, importing prints to the classes
+[33m200d2e2[m shield 0 in each round
+[33m4df4845[m fixing round prints
+[33m739c9af[m features
+[33mbb2d1fb[m adding names
+[33m8ac9071[m Add on Cartas (Creates abstract method usar)
+[33m1b33250[m Change on Inimigo (Adapts the class to extend Entidade)
+[33mb95b008[m Change on Heroi (Adapts the class to extend Entidade)
+[33mf2ac93e[m Add abstract class Carta and adapts CartaDano e CartaEscudo
+[33m8ab85c7[m Add new class (adds abstract class Entidade)
+[33maa6021e[m[33m ([m[1;33mtag: [m[1;33mTarefa01-258477-268060[m[33m)[m Change files
+[33mf985cb7[m[33m ([m[1;33mtag: [m[1;33mTarefa01-268060-258477[m[33m)[m Fix repo project structure
+[33mb9d3002[m Fix repo structure
+[33m81b020e[m Fix
+[33m587308c[m Add overall README
+[33m3eecbc0[m Add file (Enunciado)
+[33mfc75322[m Add to README
+[33m95e19c5[m improving prints
+[33m1e8c418[m improving final print
+[33ma3e9778[m fixing the print of the attaks in the round
+[33ma8ffbab[m fixing prints
+[33m1a58d10[m growing fighter damage
+[33mddae8cb[m fixing life print
+[33m70a4a54[m fixing initial printing bug
+[33ma476485[m cleaning terminal
+[33m47c354c[m styling the outputs
+[33m7de25d4[m initial prints
+[33m8cc5c31[m fixing the cards costs
+[33ma6b07a0[m Feature: choosing the fighters
+[33m83bb410[m keep cards value to the entire game
+[33mda7ce99[m fix main (Reset cards after each round)
+[33m15f1172[m Add to main (Add fight status update strings)
+[33md6632c0[m Add to main (Implements cards choice logic)
+[33m920d68a[m updating  README
+[33m51818ba[m updating  README
+[33m5eb48c0[m Add to main (object arrays for CartaDano and CartaEscudo)
+[33m32ba50c[m removing comments
+[33m3a98284[m Adding features
+[33m19734ed[m fishing features
+[33m7eef394[m fixing files name
+[33ma44c7a9[m Remove unnecessary constructor from classes
+[33m01b9d52[m add instance in getters and setter on Heroi and Inimigo
+[33m4914336[m fix receberDano on Heroi
+[33m31daa06[m fix receberDano on Inimigo
+[33mc69520c[m add logic ganharEscudo on Heroi
+[33m135b32d[m structure of Carta's classes
+[33me77617b[m fixing Heroi class with the statement
+[33md8c1b10[m ending Inimigo class
+[33m3535e29[m initial structure of classes Heroi and Inimigo
+[33m5ccd2d5[m Delete Tarefa01/.vscode directory
+[33m7694778[m creating files
+[33m25bd452[m creating java project
+[33m6348124[m first commit

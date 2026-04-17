@@ -15,17 +15,30 @@ public class Batalha {
     private int energiaMaxima;
     private Scanner inputs;
     private boolean usouEfeito;
+    private boolean jogadorSaiu;
 
 
     public Batalha(Heroi heroi, Publisher juiz, Scanner inputs){
         this.heroi = heroi;
         this.juiz = juiz;
         this.inputs = inputs;
+        this.jogadorSaiu = false;
+    }
+
+    public int jogadorSaiu() {
+        if (jogadorSaiu) {
+            return 1;
+        }
+        return 0;
     }
 
     public void Luta (ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte){
         int contadorRound = 1;
         while(true){
+
+            if (jogadorSaiu) {
+                return;
+            }
 
             if (Jogo.Aux.verificarFimDeJogo(heroi, inimigos)) {
                 break;
@@ -50,6 +63,10 @@ public class Batalha {
                 usouEfeito = false; 
 
                 interacaoUsuario(mao, acoesDoRoundHeroi, contadorRound, pilhaCompra, pilhaDescarte);
+
+                if (jogadorSaiu) {
+                    return;
+                }
 
                 Jogo.Aux.limparTela();
                 PrintsMain.printAcoesDoRound(acoesDoRoundHeroi, inimigos, vidaInimigosInicio);
@@ -113,6 +130,12 @@ public class Batalha {
             }
 
             int num = inputs.nextInt();
+            if (num == 5) {
+                jogadorSaiu = true;
+                Jogo.Salvamento.salvarPartidaEmAndamento(heroi, inimigos, pilhaCompra, pilhaDescarte, contadorRound);
+                System.out.println("\n👋 A partida foi salva, saindo do jogo!");
+                return;
+            }
             if (num == -1){
                 return;
             }
@@ -330,6 +353,9 @@ public class Batalha {
 
         int nivelAtual = 1;
         while (heroi.estaVivo() && nivelAtual < 5) {
+            if (jogadorSaiu) {
+                return;
+            }
             nivelAtual ++;
             Jogo.Aux.limparTela();
             if (nivelAtual > 1) {
@@ -356,8 +382,6 @@ public class Batalha {
                 }
                 lutadorIgnorado = noAtual.getChildAt(direcao).toString();
             }
-            //Jogo.Aux.limparTela();
-            //mapa.imprimirArvoreProgresso(nomeOponente);
              
             if (nivelAtual == 4) {
                 Prints.PrintsMain.printInvasaoOctogono(nomeOponente, lutadorIgnorado);
@@ -369,6 +393,10 @@ public class Batalha {
             this.inimigos = Jogo.Aux.prepararInimigos(nivelAtual, nomeOponente, lutadorIgnorado);
             this.Luta(pilhaCompra, pilhaDescarte);
 
+            if (jogadorSaiu) {
+                return;
+            }
+
             if (!heroi.estaVivo()) {
                 break;
             }
@@ -378,6 +406,40 @@ public class Batalha {
 
 
             PrintsMain.digiteParaContinuar(inputs, 0);
+        }
+    }
+
+    public static void modoDeJogo(Scanner inputs) {
+        System.out.println("🎮 Modo de jogo:");
+        System.out.println("[1] Começar um novo jogo");
+        System.out.println("[2] Carregar um jogo salvo");
+        System.out.print("Escolha uma opção: ");
+
+        String escolha = inputs.nextLine();
+
+        switch (escolha) {
+            case "1":
+                System.out.println("✅ Você escolheu: Novo jogo");
+                break;
+                
+            case "2":
+                System.out.println("✅ Você escolheu: Carregar jogo salvo");
+                System.out.println("\nDeseja carregar o último jogo que você não concluiu?");
+                System.out.println("[1] Sim");
+                System.out.println("[2] Não (começar novo jogo)");
+                System.out.print("Escolha uma opção: ");
+
+                String confirmar = inputs.nextLine().trim();
+
+                switch (confirmar) {
+                    case "1":
+                        System.out.println("Erro no carregamento, iniciando um novo jogo por enquanto.");
+                        break;
+                    case "2":
+                        System.out.println("✅ Ok! Iniciando um novo jogo.");
+                        break;
+                }
+                break;
         }
     }
 }
