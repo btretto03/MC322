@@ -36,14 +36,27 @@ public class App {
     public static void main(String[] args)  {
         Prints.PrintsMain.printInicial2();
         Aux.limparTela();
-        Batalha.modoDeJogo(inputs);
+        int modo = Batalha.modoDeJogo(inputs);
         Jogo.Aux.limparTela();
+
+        if (modo == 1) { //se carregou o save
+            Jogo.Salvamento.VariaveisBatalha estado = Jogo.Salvamento.Salvamento.carregarPartida();
+            if (estado != null && estado.heroi != null && estado.inimigos != null) {
+                Publisher juiz = new Publisher();
+                Batalha batalha = new Batalha(estado.heroi, juiz, inputs, estado.inimigos);
+                ArrayList<Carta> pilhaCompra = Jogo.Salvamento.Salvamento.carregarCartas(estado.pilhaCompra);
+                ArrayList<Carta> pilhaDescarte = Jogo.Salvamento.Salvamento.carregarCartas(estado.pilhaDescarte);
+                batalha.Luta(pilhaCompra, pilhaDescarte, estado.roundAtual);
+                inputs.close();
+                return;
+            }
+        }
 
 //----------------------------------INSTANCIAMENTO------------------------------------------
         Publisher juiz = new Publisher();
         String escolhaheroi = Heroi.escolherHeroi(inputs);
         Heroi heroi = new Heroi(escolhaheroi, 50, 0, 0);
-        Batalha torneio = new Batalha(heroi, juiz, inputs);
+        Batalha torneio = new Batalha(heroi, juiz, inputs, null);
         
 
 //----------------------------------BARALHO E PILHAS------------------------------------------

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Cartas.*;
 import Efeitos.*;
 import Entidades.*;
+import Jogo.Salvamento.VariaveisBatalha;
 import Prints.PrintsMain;
 
 public class Batalha {
@@ -17,11 +18,11 @@ public class Batalha {
     private boolean usouEfeito;
     private boolean jogadorSaiu;
 
-
-    public Batalha(Heroi heroi, Publisher juiz, Scanner inputs){
+    public Batalha(Heroi heroi, Publisher juiz, Scanner inputs, ArrayList<Inimigo> inimigos){
         this.heroi = heroi;
         this.juiz = juiz;
         this.inputs = inputs;
+        this.inimigos = inimigos;
         this.jogadorSaiu = false;
     }
 
@@ -33,7 +34,10 @@ public class Batalha {
     }
 
     public void Luta (ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte){
-        int contadorRound = 1;
+        Luta(pilhaCompra, pilhaDescarte, 1);
+    }
+
+    public void Luta (ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, int contadorRound){
         while(true){
 
             if (jogadorSaiu) {
@@ -132,7 +136,14 @@ public class Batalha {
             int num = inputs.nextInt();
             if (num == 5) {
                 jogadorSaiu = true;
-                Jogo.Salvamento.salvarPartidaEmAndamento(heroi, inimigos, pilhaCompra, pilhaDescarte, contadorRound);
+                VariaveisBatalha batalha = new VariaveisBatalha(); //salvando o estado atual da partida
+                batalha.heroi = heroi;
+                batalha.inimigos = inimigos;
+                batalha.pilhaCompra = Jogo.Salvamento.Salvamento.salvarCartas(pilhaCompra);
+                batalha.pilhaDescarte = Jogo.Salvamento.Salvamento.salvarCartas(pilhaDescarte);
+                batalha.roundAtual = contadorRound;
+                Jogo.Salvamento.Salvamento.salvarPartida(batalha);
+
                 System.out.println("\n👋 A partida foi salva, saindo do jogo!");
                 return;
             }
@@ -409,7 +420,7 @@ public class Batalha {
         }
     }
 
-    public static void modoDeJogo(Scanner inputs) {
+    public static int modoDeJogo(Scanner inputs) {
         System.out.println("🎮 Modo de jogo:");
         System.out.println("[1] Começar um novo jogo");
         System.out.println("[2] Carregar um jogo salvo");
@@ -420,7 +431,7 @@ public class Batalha {
         switch (escolha) {
             case "1":
                 System.out.println("✅ Você escolheu: Novo jogo");
-                break;
+                return 0;
                 
             case "2":
                 System.out.println("✅ Você escolheu: Carregar jogo salvo");
@@ -429,17 +440,18 @@ public class Batalha {
                 System.out.println("[2] Não (começar novo jogo)");
                 System.out.print("Escolha uma opção: ");
 
-                String confirmar = inputs.nextLine().trim();
+                String confirmar = inputs.nextLine();
 
                 switch (confirmar) {
                     case "1":
-                        System.out.println("Erro no carregamento, iniciando um novo jogo por enquanto.");
-                        break;
+                        return 1;
                     case "2":
                         System.out.println("✅ Ok! Iniciando um novo jogo.");
-                        break;
+                        return 0;
                 }
-                break;
+                return 0;
         }
+
+        return 0;
     }
 }
