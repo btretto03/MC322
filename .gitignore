@@ -7,3 +7,6 @@ build
 #Ignora arquivos gerados por compilação do projeto
 *.class
 *.jar
+
+#ignora os saves
+*.json
