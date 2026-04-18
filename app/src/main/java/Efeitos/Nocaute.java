@@ -2,6 +2,7 @@ package Efeitos;
 
 import Prints.PrintsMain;
 import java.util.ArrayList;
+import java.util.Random;
 
 import Entidades.Inimigo;
 
@@ -13,6 +14,7 @@ import Entidades.Inimigo;
  */
 public class Nocaute extends Efeitos{
     private boolean nocauteado = false;
+    private Random geradorAleatorio = new Random();
     private ArrayList <Inimigo> inimigos;
 
     public Nocaute(String nome, Entidades.Entidade dono, ArrayList <Inimigo> inimigos){
@@ -33,7 +35,7 @@ public class Nocaute extends Efeitos{
             probabilidade = 11;
         }
 
-        int tentativa = (int) Math.random() * probabilidade;
+        int tentativa = geradorAleatorio.nextInt(probabilidade);
 
         if (tentativa == 1){
             dono.setVida(0);
@@ -53,6 +55,10 @@ public class Nocaute extends Efeitos{
 
     public void setInimigos (ArrayList<Inimigo> inimigos){
         this.inimigos = inimigos;
+    }
+
+    public void setGeradorAleatorio (Random geradorAleatorio){
+        this.geradorAleatorio = geradorAleatorio;
     }
 
     public boolean getNocauteado(){
