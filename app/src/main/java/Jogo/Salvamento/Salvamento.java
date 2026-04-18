@@ -46,7 +46,11 @@ public final class Salvamento {
         return novaListaCartas;
     }
 
-    public static void salvarPartida(VariaveisBatalha batalha) {
+    public static void salvarPartida(VariaveisBatalha batalha, String caminhoArquivo) {
+        if (caminhoArquivo == null){
+            caminhoArquivo = "save.json";
+        }
+        
         System.out.println("\n💾 Salvando...");
         Gson json = new GsonBuilder().setPrettyPrinting().create();
 

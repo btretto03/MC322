@@ -145,7 +145,7 @@ public class Batalha {
                 batalha.pilhaCompra = Jogo.Salvamento.Salvamento.salvarCartas(pilhaCompra);
                 batalha.pilhaDescarte = Jogo.Salvamento.Salvamento.salvarCartas(pilhaDescarte);
                 batalha.roundAtual = contadorRound;
-                Jogo.Salvamento.Salvamento.salvarPartida(batalha);
+                Jogo.Salvamento.Salvamento.salvarPartida(batalha, null);
 
                 EstadoTorneio torneio = new EstadoTorneio();
                 torneio.nivelAtual = torneioNivelAtual;
@@ -485,5 +485,9 @@ public class Batalha {
         }
 
         return 0;
+    }
+
+    public void setUsouEfeito (boolean valor){
+        this.usouEfeito = valor;
     }
 }
