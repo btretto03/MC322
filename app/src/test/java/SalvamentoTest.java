@@ -1,19 +1,26 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import java.nio.file.Files;
 
 import Cartas.Carta;
 import Cartas.CartaDano;
 import Cartas.CartaEscudo;
 import Jogo.Salvamento.CartaSalva;
+import Jogo.Salvamento.EstadoTorneio;
+import Jogo.Salvamento.VariaveisBatalha;
 
 public class SalvamentoTest {
     
+    @TempDir
+    Path diretorioTemporario;
     @Nested
     class CartasTest {
         private ArrayList<Carta> cartasJogo;
@@ -80,5 +87,46 @@ public class SalvamentoTest {
             assertTrue(resultado.get(2) instanceof CartaEscudo);
         }
     
+    }
+
+    @Test
+    void salvarPartidaTest (){
+        VariaveisBatalha variaveisTeste = new VariaveisBatalha();
+        
+        Path arquivoTeste = diretorioTemporario.resolve("teste_save.json");
+
+        Jogo.Salvamento.Salvamento.salvarPartida(variaveisTeste, arquivoTeste.toString());
+        
+        assertTrue(Files.exists(arquivoTeste));
+    }
+
+    @Test
+    void salvarTorneioTest () throws Exception{
+        EstadoTorneio torneio = new EstadoTorneio();
+        torneio.lutadorIgnorado = "nome de teste";
+
+        Path caminhoArquivo = diretorioTemporario.resolve("teste_torneio.json");
+
+        Jogo.Salvamento.Salvamento.salvarTorneio(torneio, caminhoArquivo.toString());
+
+        assertTrue(Files.exists(caminhoArquivo));
+
+        String conteudoArquivo = Files.readString(caminhoArquivo);
+
+        assertTrue(conteudoArquivo.contains("nome de teste"));
+    }
+
+    @Test
+    void carregarTorneioTest (){
+        EstadoTorneio torneio = new EstadoTorneio();
+        torneio.lutadorIgnorado = "nome de teste";
+
+        Path caminhoArquivo = diretorioTemporario.resolve("teste_torneio.json");
+
+        Jogo.Salvamento.Salvamento.salvarTorneio(torneio, caminhoArquivo.toString());
+
+        EstadoTorneio resultado = Jogo.Salvamento.Salvamento.carregarTorneio(caminhoArquivo.toString());
+
+        assertEquals(torneio.lutadorIgnorado, resultado.lutadorIgnorado);
     }
 }

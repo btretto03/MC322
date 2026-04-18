@@ -50,11 +50,11 @@ public final class Salvamento {
         if (caminhoArquivo == null){
             caminhoArquivo = "save.json";
         }
-        
+
         System.out.println("\n💾 Salvando...");
         Gson json = new GsonBuilder().setPrettyPrinting().create();
 
-        try (FileWriter writer = new FileWriter("save.json")) {
+        try (FileWriter writer = new FileWriter(caminhoArquivo)) {
             json.toJson(batalha, writer);
             System.out.println("Partida salva");
         } catch (IOException e) {
@@ -72,18 +72,27 @@ public final class Salvamento {
         }
     }
 
-    public static void salvarTorneio(EstadoTorneio torneio) { //salva os dados da arvore do torneio
+    public static void salvarTorneio(EstadoTorneio torneio, String caminhoArquivo) { //salva os dados da arvore do torneio
+        if (caminhoArquivo == null){
+            caminhoArquivo = "saveTorneio.json";
+        }
+        
         Gson json = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter("saveTorneio.json")) {
+        try (FileWriter writer = new FileWriter(caminhoArquivo)) {
             json.toJson(torneio, writer);
         } catch (IOException e) {
             System.out.println("Erro no salvamento do torneio.");
         }
     }
 
-    public static EstadoTorneio carregarTorneio() { //carrega o json do torneio
+    public static EstadoTorneio carregarTorneio(String caminhoArquivo) { //carrega o json do torneio
+        
+        if (caminhoArquivo == null){
+            caminhoArquivo = "saveTorneio.json";
+        }
+        
         Gson json = new Gson();
-        try (FileReader reader = new FileReader("saveTorneio.json")) {
+        try (FileReader reader = new FileReader(caminhoArquivo)) {
             return json.fromJson(reader, EstadoTorneio.class);
         } catch (IOException e) {
             System.out.println("Erro no carregamento do torneio.");

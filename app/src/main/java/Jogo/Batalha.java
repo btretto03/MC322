@@ -151,7 +151,7 @@ public class Batalha {
                 torneio.nivelAtual = torneioNivelAtual;
                 torneio.caminho = new ArrayList<>(torneioCaminho);
                 torneio.lutadorIgnorado = torneioLutadorIgnorado;
-                Jogo.Salvamento.Salvamento.salvarTorneio(torneio);
+                Jogo.Salvamento.Salvamento.salvarTorneio(torneio, null);
 
                 System.out.println("\n👋 A partida foi salva, saindo do jogo!");
                 return;

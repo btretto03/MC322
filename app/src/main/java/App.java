@@ -41,7 +41,7 @@ public class App {
 
         if (modo == 1) { //se carregou o save
             Jogo.Salvamento.VariaveisBatalha estado = Jogo.Salvamento.Salvamento.carregarPartida();
-            Jogo.Salvamento.EstadoTorneio torneioEstado = Jogo.Salvamento.Salvamento.carregarTorneio();
+            Jogo.Salvamento.EstadoTorneio torneioEstado = Jogo.Salvamento.Salvamento.carregarTorneio(null);
             if (estado != null && estado.heroi != null && estado.inimigos != null) {
                 Publisher juiz = new Publisher();
                 Batalha batalha = new Batalha(estado.heroi, juiz, inputs, estado.inimigos);
