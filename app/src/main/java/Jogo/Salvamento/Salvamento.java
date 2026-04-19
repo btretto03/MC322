@@ -11,9 +11,17 @@ import Cartas.Carta;
 import Cartas.CartaDano;
 import Cartas.CartaEscudo;
 
-
+/**
+ * Utilitario responsavel por serializar e desserializar estados do jogo.
+ */
 public final class Salvamento {
 
+    /**
+     * Converte cartas de jogo para a representacao persistivel.
+     *
+     * @param cartas lista de cartas em memoria
+     * @return lista de cartas prontas para serializacao
+     */
     public static ArrayList<CartaSalva> salvarCartas(ArrayList<Carta> cartas) { //salva as cartas
         ArrayList<CartaSalva> novaListaCartas = new ArrayList<>();
         for (Carta c : cartas) {
@@ -26,6 +34,12 @@ public final class Salvamento {
         return novaListaCartas;
     }
 
+    /**
+     * Reconstroi cartas de jogo a partir da estrutura salva.
+     *
+     * @param cartas lista de cartas vindas do arquivo salvo
+     * @return lista de cartas tipadas para uso em jogo
+     */
     public static ArrayList<Carta> carregarCartas(ArrayList<CartaSalva> cartas) { //carrega as cartas de novo classificando elas por tipo novamente
         ArrayList<Carta> novaListaCartas = new ArrayList<>();
         for (CartaSalva cs : cartas) {
@@ -46,6 +60,12 @@ public final class Salvamento {
         return novaListaCartas;
     }
 
+    /**
+     * Salva o estado da batalha em formato JSON.
+     *
+     * @param batalha estado da batalha a ser salvo
+     * @param caminhoArquivo caminho de destino; se nulo usa save.json
+     */
     public static void salvarPartida(VariaveisBatalha batalha, String caminhoArquivo) {
         if (caminhoArquivo == null){
             caminhoArquivo = "save.json";
@@ -62,6 +82,11 @@ public final class Salvamento {
         }
     }
 
+    /**
+     * Carrega o estado da batalha salvo em save.json.
+     *
+     * @return estado carregado ou null em caso de erro
+     */
     public static VariaveisBatalha carregarPartida() {
         Gson json = new Gson();
         try (FileReader reader = new FileReader("save.json")) {
@@ -72,6 +97,12 @@ public final class Salvamento {
         }
     }
 
+    /**
+     * Salva o estado do torneio em formato JSON.
+     *
+     * @param torneio estado do torneio
+     * @param caminhoArquivo caminho de destino; se nulo usa saveTorneio.json
+     */
     public static void salvarTorneio(EstadoTorneio torneio, String caminhoArquivo) { //salva os dados da arvore do torneio
         if (caminhoArquivo == null){
             caminhoArquivo = "saveTorneio.json";
@@ -85,6 +116,12 @@ public final class Salvamento {
         }
     }
 
+    /**
+     * Carrega o estado do torneio a partir de um arquivo JSON.
+     *
+     * @param caminhoArquivo caminho do arquivo; se nulo usa saveTorneio.json
+     * @return estado carregado ou null em caso de erro
+     */
     public static EstadoTorneio carregarTorneio(String caminhoArquivo) { //carrega o json do torneio
         
         if (caminhoArquivo == null){

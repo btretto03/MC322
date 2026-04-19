@@ -14,8 +14,14 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Testes unitarios dos metodos utilitarios da classe Aux.
+ */
 public class AuxTest {
     
+    /**
+     * Valida selecao de alvo quando existem dois inimigos vivos.
+     */
     @Test
     void escolherAlvo_2vivos_Test(){
         ArrayList<Inimigo> inimigos = new ArrayList<>();
@@ -41,6 +47,9 @@ public class AuxTest {
         }
     }
 
+    /**
+     * Valida selecao de alvo quando apenas um inimigo esta vivo.
+     */
     @Test
     void escolherAlvo_1vivo_Test(){
         ArrayList<Inimigo> inimigos = new ArrayList<>();
@@ -64,10 +73,16 @@ public class AuxTest {
         }
     } 
 
+    /**
+     * Agrupa cenarios para verificacao de inimigos vivos.
+     */
     @Nested
     class inimigosVivosTest{
         private ArrayList<Inimigo> inimigos;
 
+        /**
+         * Inicializa dois inimigos vivos para os cenarios.
+         */
         @BeforeEach
         void criarInimigosTeste (){
             inimigos = new ArrayList<>();
@@ -78,17 +93,26 @@ public class AuxTest {
             inimigos.add(inimigoTeste2);
         }
 
+        /**
+         * Deve retornar verdadeiro quando ambos estao vivos.
+         */
         @Test
         void doisVivos (){
             assertTrue(Jogo.Aux.inimigosVivos(inimigos));
         }
 
+        /**
+         * Deve retornar verdadeiro quando ao menos um esta vivo.
+         */
         @Test
         void umVivo (){
             inimigos.get(1).setVida(0);
             assertTrue(Jogo.Aux.inimigosVivos(inimigos));
         }
 
+        /**
+         * Deve retornar falso quando nenhum inimigo esta vivo.
+         */
         @Test
         void zeroVivos (){
             inimigos.get(0).setVida(0);
@@ -97,6 +121,9 @@ public class AuxTest {
         }
     } 
     
+    /**
+     * Verifica preparacao de inimigos no nivel 2.
+     */
     @Test
     void prepararInimigos_nivel2_Test (){        
         ArrayList<Inimigo> resultadoObtido = Jogo.Aux.prepararInimigos(2, "teste1", "teste2"); 
@@ -104,6 +131,9 @@ public class AuxTest {
         assertEquals(1, resultadoObtido.size());
     }
 
+    /**
+     * Verifica preparacao de inimigos no nivel 3.
+     */
     @Test
     void prepararInimigos_nivel3_Test (){        
         ArrayList<Inimigo> resultadoObtido = Jogo.Aux.prepararInimigos(3, "teste1", "teste2"); 
@@ -111,6 +141,9 @@ public class AuxTest {
         assertEquals(1, resultadoObtido.size());
     }
 
+    /**
+     * Verifica preparacao de inimigos no nivel 4.
+     */
     @Test
     void prepararInimigos_nivel4_Test (){        
         ArrayList<Inimigo> resultadoObtido = Jogo.Aux.prepararInimigos(4, "teste1", "teste2"); 
@@ -119,11 +152,17 @@ public class AuxTest {
     }
 
 
+    /**
+     * Agrupa cenarios de validacao de fim de jogo.
+     */
     @Nested
     class verificarFimDeJogoTest {
         private ArrayList<Inimigo> inimigos;
         private Heroi heroi;
 
+        /**
+        * Configura o estado base com um heroi e um inimigo.
+        */
         @BeforeEach
         void criarInimigosTeste(){
             inimigos = new ArrayList<>();
@@ -131,6 +170,9 @@ public class AuxTest {
             heroi = new Heroi("teste", 0, 0, 0);
         }
 
+        /**
+         * Deve identificar vitoria quando inimigo cai e heroi sobrevive.
+         */
         @Test
         void Vitoria (){
             heroi.setVida(1);
@@ -138,6 +180,9 @@ public class AuxTest {
             assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
         }
 
+        /**
+         * Deve identificar empate quando ambos caem.
+         */
         @Test
         void Empate (){
             heroi.setVida(0);
@@ -145,6 +190,9 @@ public class AuxTest {
             assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
         }
 
+        /**
+         * Deve identificar derrota quando apenas o heroi cai.
+         */
         @Test
         void Derrota (){
             heroi.setVida(0);
@@ -152,6 +200,9 @@ public class AuxTest {
             assertTrue(Jogo.Aux.verificarFimDeJogo(heroi, inimigos));
         }
 
+        /**
+         * Deve manter a partida ativa quando ambos ainda estao vivos.
+         */
         @Test
         void jogoContinua (){
             heroi.setVida(1);
@@ -160,12 +211,18 @@ public class AuxTest {
         }
     }
     
+    /**
+     * Agrupa cenarios de compra de mao e reciclagem de pilhas.
+     */
     @Nested
     class comprarMaoTest {
         private ArrayList<Carta> pilhaCompra;
         private ArrayList<Carta> pilhaDescarte;
         private ArrayList<Carta> mao;
 
+        /**
+         * Configura baralho inicial e pilhas vazias para cada teste.
+         */
         @BeforeEach
         void configurarPilhas (){
             pilhaCompra = Jogo.Aux.gerarBaralhoInicial();
@@ -173,6 +230,9 @@ public class AuxTest {
             mao = new ArrayList<>();
         }
 
+        /**
+         * Valida estado das pilhas apos cinco compras de mao.
+         */
         //A pilha de compras inicia com 22 items
         @Test
         void comprarCincoMaos (){
@@ -188,6 +248,9 @@ public class AuxTest {
             assertEquals(20, pilhaDescarte.size());
         }
 
+        /**
+         * Verifica recicladem da pilha de descarte na sexta compra.
+         */
         @Test
         //Ao comprar a sexta mao, a pilha de compras deve receber todas as cartas da pilhas de descarte
         void comprarSextaMao (){

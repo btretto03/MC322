@@ -12,7 +12,13 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Testes unitarios de comportamentos da entidade Heroi.
+ */
 public class HeroiTest {
+    /**
+     * Valida o mapeamento da entrada para escolha de heroi.
+     */
     @Test
     void escolherHeroiTest (){
         for (int i = 1; i < 4; i++){
@@ -34,6 +40,9 @@ public class HeroiTest {
 
     }
 
+    /**
+     * Verifica que mao com energia suficiente e valida.
+     */
     @Test
     void verificaMao_valida_Test (){
         Heroi heroi = new Heroi("Teste", 1, 1, 1);
@@ -46,6 +55,9 @@ public class HeroiTest {
         assertTrue(heroi.verificaMao(mao));
     }
 
+    /**
+     * Verifica que mao sem energia suficiente e invalida.
+     */
     @Test
     void verificaMao_invalida_Test (){
         Heroi heroi = new Heroi("Teste", 1, 1, 1);

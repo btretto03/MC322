@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
+    /**
+     * Verifica se o ambiente de testes esta operacional.
+     */
     @Test
     void sanityCheck() {
         assertTrue(true);

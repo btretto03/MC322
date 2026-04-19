@@ -17,15 +17,25 @@ import Jogo.Salvamento.CartaSalva;
 import Jogo.Salvamento.EstadoTorneio;
 import Jogo.Salvamento.VariaveisBatalha;
 
+/**
+ * Testes de persistencia das rotinas de salvamento e carregamento.
+ */
 public class SalvamentoTest {
     
     @TempDir
     Path diretorioTemporario;
+
+    /**
+     * Agrupa cenarios de serializacao e desserializacao de cartas.
+     */
     @Nested
     class CartasTest {
         private ArrayList<Carta> cartasJogo;
         private ArrayList<CartaSalva> cartasSalvas;
 
+        /**
+         * Prepara cartas de jogo e cartas salvas para comparacao.
+         */
         @BeforeEach
         void inicializacao (){
             cartasJogo = new ArrayList<>();
@@ -59,6 +69,9 @@ public class SalvamentoTest {
             cartasSalvas.add(cartaSalvaTeste3);
         }
 
+        /**
+         * Verifica que os dados das cartas sao preservados no salvamento.
+         */
         @Test
         void salvarCartasTest (){
             ArrayList<CartaSalva> cartasSalvas = Jogo.Salvamento.Salvamento.salvarCartas(cartasJogo);
@@ -72,6 +85,9 @@ public class SalvamentoTest {
             }
         }
 
+        /**
+         * Verifica reconstrucao de cartas e identificacao correta de tipo.
+         */
         @Test
         void carregarCartasTest (){
             ArrayList<Carta> resultado = Jogo.Salvamento.Salvamento.carregarCartas(cartasSalvas);
@@ -89,6 +105,9 @@ public class SalvamentoTest {
     
     }
 
+    /**
+     * Deve criar arquivo de partida ao salvar variaveis de batalha.
+     */
     @Test
     void salvarPartidaTest (){
         VariaveisBatalha variaveisTeste = new VariaveisBatalha();
@@ -100,6 +119,9 @@ public class SalvamentoTest {
         assertTrue(Files.exists(arquivoTeste));
     }
 
+    /**
+     * Deve salvar torneio em arquivo contendo os dados esperados.
+     */
     @Test
     void salvarTorneioTest () throws Exception{
         EstadoTorneio torneio = new EstadoTorneio();
@@ -116,6 +138,9 @@ public class SalvamentoTest {
         assertTrue(conteudoArquivo.contains("nome de teste"));
     }
 
+    /**
+     * Deve carregar corretamente os dados de torneio previamente salvos.
+     */
     @Test
     void carregarTorneioTest (){
         EstadoTorneio torneio = new EstadoTorneio();

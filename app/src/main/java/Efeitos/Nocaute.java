@@ -2,7 +2,6 @@ package Efeitos;
 
 import Prints.PrintsMain;
 import java.util.ArrayList;
-import java.util.Random;
 
 import Entidades.Inimigo;
 

@@ -3,22 +3,38 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * Representa a arvore de progressao do torneio.
+ */
 public class Arvore {
     String vermelho = "\u001B[31m";
     String reset = "\u001B[0m";
 
     protected DefaultMutableTreeNode raiz;
     
+    /**
+     * Cria uma arvore com o nome informado na raiz.
+     *
+     * @param nome nome do no raiz
+     */
     public Arvore (String nome) {
         this.raiz = new DefaultMutableTreeNode(nome);
     }
 
+    /**
+     * Adiciona um filho direto ao no raiz da arvore.
+     *
+     * @param nome nome do novo no filho
+     */
     public void adicionarFilho(String nome) {
         DefaultMutableTreeNode novoFilho = new DefaultMutableTreeNode(nome);
         this.raiz.add(novoFilho);
     }
 
-public void gerarFilhos() {
+    /**
+     * Monta a estrutura fixa de lutadores usada no torneio.
+     */
+    public void gerarFilhos() {
         /** Trabalharemos com a seguinte árvore 
          * O        O      (cinturao)
          * \     /
@@ -65,6 +81,11 @@ public void gerarFilhos() {
         n8_caminhoVitor.add(c2_caminhoVitor);
     }
 
+    /**
+     * Imprime a arvore textual destacando o oponente atual.
+     *
+     * @param nomeOponente nome do oponente que deve ser realcado
+     */
     public void imprimirArvoreProgresso(String nomeOponente) {
         try {
             InputStream arquivo = Arvore.class.getClassLoader().getResourceAsStream("Arvore.txt");
@@ -89,10 +110,20 @@ public void gerarFilhos() {
         }
     }
 
+    /**
+     * Retorna a raiz da arvore de progresso.
+     *
+     * @return no raiz da arvore
+     */
     public DefaultMutableTreeNode getRaiz() {
         return raiz;
     }
 
+    /**
+     * Atualiza o no raiz da arvore.
+     *
+     * @param raiz novo no raiz
+     */
     public void setRaiz(DefaultMutableTreeNode raiz) {
         this.raiz = raiz;
     }
