@@ -110,10 +110,6 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 > - Java Development Kit (JDK)
 > - Gradle
 
-## Tarefa 5
-
-
-
 **Compilação e Execução**
 ```bash
 # Na raiz do projeto
@@ -130,6 +126,23 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 > A documentação gerada fica em `app/build/docs/javadoc/index.html`.
 
 ---
+
+## Tarefa 5
+Nesta tarefa, implementamos um sistema de progressão entre múltiplas batalhas e adicionamos testes automatizados para garantir a estabilidade do código com o crescimento do projeto.
+
+### Mapa e Progressão
+Modelamos o mapa do jogo utilizando uma estrutura de **Árvore**, onde cada nó representa um combate distinto. 
+- O jogador inicia no nó raiz e, segue percorrendo nós adjacentes progredindo pela campanha através do terminal.
+- A vida e o baralho do herói são mantidos ao longo da progressão no mapa. Elementos voláteis do combate, como a energia, fúria e efeitos, são reiniciados a cada novo nó.
+- A campanha termina em derrota caso a vida do herói chegue a zero, ou em vitória ao concluir com sucesso o nó final.
+
+### Testes Automatizados
+Introduzimos também testes unitários utilizando **JUnit**.
+- Para medir a eficácia desses testes, utilizamos a biblioteca **JaCoCo** via Gradle, garantindo a cobertura mínima exigida (40%) dos principais caminhos lógicos do código.
+
+### Salvamento dos dados (JSON)
+Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso o jogador opte por sair do jogo pelo menu interativo, seu progresso atual (incluindo vida, cartas do baralho e posição exata na árvore) é serializado e salvo em um arquivo **JSON**. Ao reiniciar a aplicação, os dados são carregados para que a luta continue do ponto em que parou.
+
 
 ## 🪜 Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
@@ -209,6 +222,3 @@ Com a adoção do Gradle, tarefas como compilação, execução e geração de d
 ```
 
 ---
-
-## 🚀 Como compilar e executar
-- Visite [Gradle](#gradle)
