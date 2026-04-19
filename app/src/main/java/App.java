@@ -67,7 +67,7 @@ public class App {
 //----------------------------------INSTANCIAMENTO------------------------------------------
         Publisher juiz = new Publisher();
         String escolhaheroi = Heroi.escolherHeroi(inputs);
-        Heroi heroi = new Heroi(escolhaheroi, 50, 0, 0);
+        Heroi heroi = new Heroi(escolhaheroi, 130, 0, 0);
         Batalha torneio = new Batalha(heroi, juiz, inputs, null);
         
 

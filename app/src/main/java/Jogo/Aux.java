@@ -82,19 +82,19 @@ public class Aux {
 
         switch (nivelAtual) {
             case 2:
-                inimigos.add(new Inimigo(nomeOponente, 1, 0));
+                inimigos.add(new Inimigo(nomeOponente, 20, 0));
                 break;
 
             case 3:
-                inimigos.add(new Inimigo(nomeOponente, 1, 0));
+                inimigos.add(new Inimigo(nomeOponente, 25, 0));
                 break;
 
             case 4:
-                inimigos.add(new Inimigo(nomeOponente, 1, 0)); 
-                inimigos.add(new Inimigo(nomeIgnorado, 1, 0)); 
+                inimigos.add(new Inimigo(nomeOponente, 30, 0)); 
+                inimigos.add(new Inimigo(nomeIgnorado, 25, 0)); 
                 break;
             case 5:
-                inimigos.add(new Inimigo(nomeOponente, 1, 0));
+                inimigos.add(new Inimigo(nomeOponente, 50, 0));
                 break;
 
             default:
