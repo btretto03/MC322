@@ -16,8 +16,8 @@ Para entender as regras da luta, os atributos das cartas e como funciona o siste
 - [Tarefa 3](#tarefa-3)
 - [Tarefa 4](#tarefa-4)
 - [Tarefa 5](#tarefa-5)
-- [🪜 Estrutura do projeto](#estrutura-do-projeto)
-- [🚀 Como compilar e executar](#como-compilar-e-executar)
+- [🪜 Estrutura do projeto](#Estrutura-do-projeto)
+- [🚀 Como compilar e executar](#Como-compilar-e-executar)
 
 ---
 
@@ -144,7 +144,7 @@ Introduzimos também testes unitários utilizando **JUnit**.
 Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso o jogador opte por sair do jogo pelo menu interativo, seu progresso atual (incluindo vida, cartas do baralho e posição exata na árvore) é serializado e salvo em um arquivo **JSON**. Ao reiniciar a aplicação, os dados são carregados para que a luta continue do ponto em que parou.
 
 
-## 🪜 Estrutura do projeto
+## Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
 ```
 .
@@ -220,5 +220,25 @@ Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso
 ├── README.md
 └── settings.gradle
 ```
-
 ---
+
+## Como compilar e executar:
+> **Requisitos mínimos**
+> - Java Development Kit (JDK)
+> - Gradle
+
+**Compilação e Execução**
+```bash
+# Na raiz do projeto
+./gradlew build
+./gradlew run
+```
+
+**Geração de documentação**
+```bash
+# Na raiz do projeto
+./gradlew javadoc
+```
+
+> A documentação gerada fica em `app/build/docs/javadoc/index.html`.
+
