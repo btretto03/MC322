@@ -1,14 +1,20 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
 import Entidades.Heroi;
+import Entidades.Inimigo;
 import Efeitos.Adrenalina;
+import Efeitos.Nocaute;
 import Efeitos.Provocacao;
 import Efeitos.Sangramento;
 import Jogo.Publisher;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class EfeitosTest {
     private Publisher juiz;
     private Heroi heroi;
@@ -113,6 +119,35 @@ public class EfeitosTest {
             juiz.notificarSubscribers();
 
             assertEquals(30, heroi.getVida());
+        }
+    }
+
+    @Nested
+    class NocauteTest {
+        private Nocaute nocaute;
+        private ArrayList<Inimigo> inimigos;
+
+        @BeforeEach
+        void configuracao (){
+            inimigos = new ArrayList<>();
+            nocaute = new Nocaute("NocauteTeste", heroi, inimigos);
+            heroi.setVida(10);
+        }
+
+        @Test
+        void Acontece (){
+            nocaute.setControleTeste(-1);
+            nocaute.aplicarEfeito();
+
+            assertFalse(heroi.estaVivo());
+        }
+
+        @Test
+        void naoAcontece (){
+            nocaute.setControleTeste(0);
+            nocaute.aplicarEfeito();
+
+            assertTrue(heroi.estaVivo());
         }
     }
 }

@@ -14,8 +14,8 @@ import Entidades.Inimigo;
  */
 public class Nocaute extends Efeitos{
     private boolean nocauteado = false;
-    private Random geradorAleatorio = new Random();
     private ArrayList <Inimigo> inimigos;
+    private int controleTeste = 1; //Variável criada para poder realizar teste na aplicação do efeito (0: Não aplica o efeito; -1: Aplica o efeito)
 
     public Nocaute(String nome, Entidades.Entidade dono, ArrayList <Inimigo> inimigos){
         super(nome, 1, dono);
@@ -27,6 +27,10 @@ public class Nocaute extends Efeitos{
      */
     @Override
     public void aplicarEfeito(){
+        if (controleTeste == 0){
+            return;
+        }
+
         int probabilidade;
 
         if (inimigos.size() == 2){
@@ -35,9 +39,9 @@ public class Nocaute extends Efeitos{
             probabilidade = 11;
         }
 
-        int tentativa = geradorAleatorio.nextInt(probabilidade);
+        int tentativa = (int)(Math.random() * probabilidade);
 
-        if (tentativa == 1){
+        if (tentativa == 1 || controleTeste == -1){
             dono.setVida(0);
             setNocauteado(true);
             PrintsMain.printInimigoNocauteado(dono.getNome(), getNocauteado()); 
@@ -57,8 +61,8 @@ public class Nocaute extends Efeitos{
         this.inimigos = inimigos;
     }
 
-    public void setGeradorAleatorio (Random geradorAleatorio){
-        this.geradorAleatorio = geradorAleatorio;
+    public void setControleTeste (int valor){
+        this.controleTeste = valor;
     }
 
     public boolean getNocauteado(){
