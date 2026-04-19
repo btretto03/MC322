@@ -10,3 +10,5 @@ build
 
 #ignora os saves
 *.json
+
+!gradle/wrapper/gradle-wrapper.jar
