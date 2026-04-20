@@ -212,7 +212,13 @@ Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso
 │       │       └── Vitoria.txt
 │       └── test
 │           └── java
-│               └── AppTest.java
+|               ├── AppTest.java
+|               ├── AuxTest.java
+|               ├── BatalhaTest.java
+|               ├── CartasTest.java
+|               ├── EfeitosTest.java
+|               ├── HeroiTest.java
+|               └── SalvamentoTest.java
 ├── build/
 ├── gradle.properties
 ├── gradlew
@@ -241,4 +247,5 @@ Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso
 ```
 
 > A documentação gerada fica em `app/build/docs/javadoc/index.html`.
+> Para consultar o reultado dos testes: `app/build/reports/jacoco/index.html`.
 
