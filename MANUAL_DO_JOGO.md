@@ -17,7 +17,7 @@ Quando você escolhe carrega um jogo salvo, o jogo:
 2. Após terminar a luta carregada, continua o torneio do mesmo ponto.
 
 ## ⚙️ Dinâmica de Turnos e Baralho
-O combate é inspirado em jogos de construção de deck (como *Slay the Spire*).
+O combate é inspirado em jogos de construção de deck (como *Slay the Spire*). 
 
 1. **Mão do Jogador:** A cada rodada, você saca uma quantidade específica de cartas da sua **Pilha de Compra**.
 2. **Energia:** Toda carta tem um custo. Você precisa gerenciar sua estamina/energia no turno para decidir se vai focar em atacar, defender ou se curar.

@@ -1,4 +1,4 @@
-package Evento;
+package Jogo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,12 +6,11 @@ import java.util.Scanner;
 import Cartas.*;
 import Efeitos.*;
 import Entidades.*;
-import Jogo.Publisher;
 import Jogo.Salvamento.EstadoTorneio;
 import Jogo.Salvamento.VariaveisBatalha;
 import Prints.PrintsMain;
 
-public class Batalha extends Evento {
+public class Batalha {
     private ArrayList<Inimigo> inimigos;
     private Heroi heroi;
     private Publisher juiz;
@@ -41,7 +40,7 @@ public class Batalha extends Evento {
         return 0;
     }
 
-    public void Luta(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, int contadorRound){
+    public void Luta (ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, int contadorRound){
         while(true){
 
             if (jogadorSaiu) {
@@ -367,10 +366,10 @@ public class Batalha extends Evento {
     }
 
     public void iniciarTorneio(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte) {
-        iniciar(pilhaCompra, pilhaDescarte, null);
+        iniciarTorneio(pilhaCompra, pilhaDescarte, null);
     }
 
-    public void iniciar(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, EstadoTorneio estado) {
+    public void iniciarTorneio(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, EstadoTorneio estado) {
         Arvore.Arvore mapa = new Arvore.Arvore("Início");
         mapa.gerarFilhos();
         javax.swing.tree.DefaultMutableTreeNode noAtual = mapa.getRaiz();

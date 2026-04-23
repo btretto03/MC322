@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import Efeitos.Sangramento;
 import Entidades.Heroi;
 import Entidades.Inimigo;
-import Evento.Batalha;
+import Jogo.Batalha;
 import Jogo.Publisher;
 
 /**
@@ -100,7 +100,7 @@ public class BatalhaTest {
 
             Scanner inputs = new Scanner(in);
 
-            assertEquals(0, Evento.Batalha.modoDeJogo(inputs));
+            assertEquals(0, Jogo.Batalha.modoDeJogo(inputs));
         }
 
         /**
@@ -113,7 +113,7 @@ public class BatalhaTest {
 
             Scanner inputs = new Scanner(in);
 
-            assertEquals(1, Evento.Batalha.modoDeJogo(inputs));
+            assertEquals(1, Jogo.Batalha.modoDeJogo(inputs));
         }
 
         /**
@@ -126,7 +126,7 @@ public class BatalhaTest {
 
             Scanner inputs = new Scanner(in);
 
-            assertEquals(0, Evento.Batalha.modoDeJogo(inputs));
+            assertEquals(0, Jogo.Batalha.modoDeJogo(inputs));
         }
 
         /**
@@ -139,7 +139,7 @@ public class BatalhaTest {
 
             Scanner inputs = new Scanner(in);
 
-            assertEquals(0, Evento.Batalha.modoDeJogo(inputs));
+            assertEquals(0, Jogo.Batalha.modoDeJogo(inputs));
         }
     }
 
