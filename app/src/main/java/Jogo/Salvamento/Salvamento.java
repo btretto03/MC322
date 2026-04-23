@@ -14,7 +14,7 @@ import Cartas.CartaEscudo;
 /**
  * Utilitario responsavel por serializar e desserializar estados do jogo.
  */
-public final class Salvamento {
+public class Salvamento {
 
     /**
      * Converte cartas de jogo para a representacao persistivel.

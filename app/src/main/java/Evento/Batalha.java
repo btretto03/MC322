@@ -41,6 +41,12 @@ public class Batalha extends Evento {
         return 0;
     }
 
+    @Override
+    public void iniciar(Heroi heroi, ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte) {
+        this.Luta(pilhaCompra, pilhaDescarte, 1);
+        return;
+    }
+
     public void Luta(ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte, int contadorRound){
         while(true){
 
@@ -454,7 +460,7 @@ public class Batalha extends Evento {
             }
             int escolhaMenu = inputs.nextInt();
             if (escolhaMenu == 6) {
-                abrirLoja();
+                new Loja(heroi, inputs).iniciar(heroi, pilhaCompra, pilhaDescarte);
                 nivelAtual--; 
                 continue;
             }
@@ -498,55 +504,6 @@ public class Batalha extends Evento {
 
             heroi.limparFimLuta();
             noAtual = proximoNo;
-        }
-    }
-
-    public void abrirLoja() {
-        while (true) {
-            Jogo.Aux.limparTela();
-            PrintsMain.printLoja(heroi.getOuro());
-
-            int escolha = inputs.nextInt();
-
-            if (escolha == 0) {
-                return;
-            }
-
-            if (escolha == 1) { // energetico
-                if (heroi.getOuro() >= 50) {
-                    heroi.setOuro(heroi.getOuro() - 50);
-                    heroi.setVida(heroi.getVida() + 10);
-                    System.out.println("\n✅ Você comprou um Energético! (+10 Vida)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
-            } else if (escolha == 2) { // bandagem
-                if (heroi.getOuro() >= 80) {
-                    heroi.setOuro(heroi.getOuro() - 80);
-                    heroi.setBonusDanoProximaLuta(3);
-                    System.out.println("\n✅ Você comprou uma Bandagem! (+3 dano em todos ataques na próxima luta)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
-            } else if (escolha == 3) { // protetor
-                if (heroi.getOuro() >= 60) {
-                    heroi.setOuro(heroi.getOuro() - 60);
-                    heroi.setEscudoInicioProximaLuta(15);
-                    System.out.println("\n✅ Você comprou um Protetor! (+15 escudo no 1º round da próxima luta)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
-            } else if (escolha == 4) { // +Vida
-                if (heroi.getOuro() >= 120) {
-                    heroi.setOuro(heroi.getOuro() - 120);
-                    heroi.setVida(heroi.getVida() + 20);
-                    System.out.println("\n✅ Você comprou um Kit Premium! (+20 Vida)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
-            }
-
-            PrintsMain.digiteParaContinuar(inputs, 0);
         }
     }
 
