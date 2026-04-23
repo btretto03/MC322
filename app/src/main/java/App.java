@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 import Cartas.*; // '.*'importa todas as classes do pacote 
 import Entidades.*;
+import Evento.Batalha;
 import Jogo.Aux;
-import Jogo.Batalha;
 import Jogo.Publisher;
 
 
@@ -51,7 +51,7 @@ public class App {
 
                 if (batalha.jogadorSaiu() == 0 && estado.heroi.estaVivo()) {
                     estado.heroi.limparFimLuta();
-                    batalha.iniciarTorneio(pilhaCompra, pilhaDescarte, torneioEstado);
+                    batalha.iniciar(pilhaCompra, pilhaDescarte, torneioEstado);
                     if (batalha.jogadorSaiu() == 0 && estado.heroi.estaVivo()) {
                         Aux.limparTela();
                         System.out.println("\n🏆 PARABÉNS! VOCÊ É O NOVO CAMPEÃO DO UFC JAVA!");
