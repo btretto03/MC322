@@ -59,6 +59,14 @@ public class Batalha extends Evento {
 
             if (heroi.estaVivo() == true && Jogo.Aux.inimigosVivos(inimigos)){
                 inicioRound();
+
+                if (contadorRound == 1) {
+                    if (heroi.getEscudoInicioProximaLuta() > 0) {
+                        heroi.ganharEscudo(heroi.getEscudoInicioProximaLuta());
+                        heroi.setEscudoInicioProximaLuta(0);
+                    }
+                }
+
                 ArrayList<Carta> mao = Jogo.Aux.comprarMao(pilhaCompra, pilhaDescarte);
                 ArrayList<String> acoesDoRoundHeroi = new ArrayList<>();
                 int[] vidaInimigosInicio = new int[2];
@@ -299,6 +307,12 @@ public class Batalha extends Evento {
             //Jogo.Aux.limparTela();
 
             int valor = cartaEscolhida.usar(alvoCarta);
+            if (cartaEscolhida instanceof CartaDano) {
+                if (heroi.getBonusDanoProximaLuta() > 0) {
+                    alvoCarta.receberDano(heroi.getBonusDanoProximaLuta());
+                    valor += heroi.getBonusDanoProximaLuta();
+                }
+            }
             heroi.setEnergia(heroi.getEnergia() - cartaEscolhida.getCusto());
             acoesDoRoundHeroi.add("💥 " + cartaEscolhida.getNome() + ": " + cartaEscolhida.getDescricao() + " de " + valor + " em " + alvoCarta.getNome() + ".");
             Jogo.Aux.esperar(1000);
@@ -406,6 +420,8 @@ public class Batalha extends Evento {
              mapa.imprimirArvoreProgresso(noAtual.toString());
         }
 
+            System.out.println("\n💰 Ouro atual: " + heroi.getOuro());
+
             System.out.println("\nEscolha seu próximo desafio:");
             int totalFilhos = noAtual.getChildCount();
             for (int i = 0; i < totalFilhos; i ++) {
@@ -413,7 +429,20 @@ public class Batalha extends Evento {
                 System.out.println("[" + (i + 1) + "] " + filho.getUserObject());
             }
 
-            int escolha = inputs.nextInt() - 1;
+            int escolhaMenu = inputs.nextInt();
+            if (escolhaMenu == 6) {
+                abrirLoja();
+                nivelAtual--; 
+                continue;
+            }
+
+            if (escolhaMenu < 1 || escolhaMenu > totalFilhos) {
+                System.out.println("⚠️ Opção inválida!");
+                nivelAtual--; 
+                continue;
+            }
+
+            int escolha = escolhaMenu - 1;
             javax.swing.tree.DefaultMutableTreeNode proximoNo = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(escolha);
             String nomeOponente = proximoNo.toString();
 
@@ -455,6 +484,62 @@ public class Batalha extends Evento {
 
 
             PrintsMain.digiteParaContinuar(inputs, 0);
+        }
+    }
+
+    public void abrirLoja() {
+        while (true) {
+            Jogo.Aux.limparTela();
+            PrintsMain.printLoja(heroi.getOuro());
+
+            int escolha = inputs.nextInt();
+
+            if (escolha == 0) {
+                return;
+            }
+
+            if (escolha == 1) { // energetico
+                if (heroi.getOuro() >= 50) {
+                    heroi.setOuro(heroi.getOuro() - 50);
+                    heroi.setVida(heroi.getVida() + 10);
+                    System.out.println("\n✅ Você comprou um Energético! (+10 Vida)");
+                } else {
+                    System.out.println("\n❌ Ouro insuficiente!");
+                }
+            } else if (escolha == 2) { // bandagem
+                if (heroi.getOuro() >= 80) {
+                    heroi.setOuro(heroi.getOuro() - 80);
+                    heroi.setBonusDanoProximaLuta(3);
+                    System.out.println("\n✅ Você comprou uma Bandagem! (+3 dano em todos ataques na próxima luta)");
+                } else {
+                    System.out.println("\n❌ Ouro insuficiente!");
+                }
+            } else if (escolha == 3) { // protetor
+                if (heroi.getOuro() >= 60) {
+                    heroi.setOuro(heroi.getOuro() - 60);
+                    heroi.setEscudoInicioProximaLuta(15);
+                    System.out.println("\n✅ Você comprou um Protetor! (+15 escudo no 1º round da próxima luta)");
+                } else {
+                    System.out.println("\n❌ Ouro insuficiente!");
+                }
+            } else if (escolha == 4) { // +Vida
+                if (heroi.getOuro() >= 120) {
+                    heroi.setOuro(heroi.getOuro() - 120);
+                    heroi.setVida(heroi.getVida() + 20);
+                    System.out.println("\n✅ Você comprou um Kit Premium! (+20 Vida)");
+                } else {
+                    System.out.println("\n❌ Ouro insuficiente!");
+                }
+            } else {
+                System.out.println("\n⚠️ Opção inválida!");
+            }
+
+            System.out.println("\nDigite 0 para continuar...");
+            int continuar = inputs.nextInt();
+            while (continuar != 0) {
+                System.out.print("⚠️ Valor inválido! Digite 0 para continuar: ");
+                continuar = inputs.nextInt();
+            }
         }
     }
 

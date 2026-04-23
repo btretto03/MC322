@@ -10,6 +10,8 @@ public class Heroi extends Entidade {
     private int energia;
     private int furia;
     private int ouro;
+    private int bonusDanoProximaLuta;
+    private int escudoInicioProximaLuta;
     
     /**
      * Construtor da classe Heroi.
@@ -39,6 +41,22 @@ public class Heroi extends Entidade {
 
     public void adicionarOuro(int quantidade) {
         ouro += quantidade;
+    }
+
+    public int getBonusDanoProximaLuta() {
+        return bonusDanoProximaLuta;
+    }
+
+    public void setBonusDanoProximaLuta(int bonusDanoProximaLuta) {
+        this.bonusDanoProximaLuta = bonusDanoProximaLuta;
+    }
+
+    public int getEscudoInicioProximaLuta() {
+        return escudoInicioProximaLuta;
+    }
+
+    public void setEscudoInicioProximaLuta(int escudoInicioProximaLuta) {
+        this.escudoInicioProximaLuta = escudoInicioProximaLuta;
     }
 
     /**
@@ -98,6 +116,7 @@ public class Heroi extends Entidade {
         this.setEnergia(0); 
         this.setFuria(0);
         this.setEscudo(0);
+        this.bonusDanoProximaLuta = 0;
         
     }
 

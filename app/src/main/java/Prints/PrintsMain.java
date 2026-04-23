@@ -480,6 +480,27 @@ public class PrintsMain {
         System.out.println(fundoVerdeClaro + espacos + reset);
     }
 
+    public static void printLoja(int ouro) {
+        try {
+            InputStream arquivo = PrintsMain.class.getClassLoader().getResourceAsStream("Loja.txt");
+            if (arquivo == null){
+                throw new FileNotFoundException();
+            }
+
+            Scanner leitor = new Scanner(arquivo);
+            while (leitor.hasNextLine()) {
+                String linha = leitor.nextLine();
+                if (linha.contains("XX")) {
+                    linha = linha.replace("XX", "" + ouro);
+                }
+                System.out.println(linha);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo de arte não encontrado");
+        }
+    }
+
     /**
      * Exibe menu para selecao de alvo entre inimigos vivos.
      *
