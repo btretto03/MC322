@@ -9,6 +9,7 @@ import Prints.PrintsEntidades;
 public class Heroi extends Entidade {
     private int energia;
     private int furia;
+    private int ouro;
     
     /**
      * Construtor da classe Heroi.
@@ -18,9 +19,26 @@ public class Heroi extends Entidade {
      * @param escudo escudo inicial do heroi
      */
     public Heroi(String nome, int vida, int escudo, int furia) { //construtor
+        this(nome, vida, escudo, furia, 0);
+    }
+
+    public Heroi(String nome, int vida, int escudo, int furia, int ouro) {
         super(nome, vida, escudo);
         this.energia = 6;
         this.furia = furia;
+        this.ouro = ouro;
+    }
+
+    public int getOuro() {
+        return ouro;
+    }
+
+    public void setOuro(int ouro) {
+        this.ouro = ouro;
+    }
+
+    public void adicionarOuro(int quantidade) {
+        ouro += quantidade;
     }
 
     /**

@@ -48,7 +48,11 @@ public class Batalha extends Evento {
                 return;
             }
 
+            boolean heroiVenceu = heroi.estaVivo() && !Jogo.Aux.inimigosVivos(inimigos);
             if (Jogo.Aux.verificarFimDeJogo(heroi, inimigos)) {
+                if (heroiVenceu) {
+                    heroi.adicionarOuro(40);
+                }
                 break;
             }
 
@@ -83,6 +87,7 @@ public class Batalha extends Evento {
                 limparMao(mao, pilhaDescarte);
 
                 if (!Jogo.Aux.inimigosVivos(inimigos)) { //Inimigos morreram antes de atacar
+                    heroi.adicionarOuro(40);
                     Jogo.Aux.limparTela();
                     Prints.PrintsMain.printHeroiVenceu(heroi);
                     return;
