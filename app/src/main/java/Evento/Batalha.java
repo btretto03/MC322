@@ -53,6 +53,7 @@ public class Batalha extends Evento {
                 if (heroiVenceu) {
                     heroi.adicionarOuro(40);
                 }
+                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                 break;
             }
 
@@ -98,13 +99,34 @@ public class Batalha extends Evento {
                     heroi.adicionarOuro(40);
                     Jogo.Aux.limparTela();
                     Prints.PrintsMain.printHeroiVenceu(heroi);
+                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
                     return;
                 }
 
                 acoesInimigo();
 
+                if (Jogo.Aux.verificarFimDeJogo(heroi, inimigos)) {
+                    boolean heroiVenceuAposInimigo = heroi.estaVivo() && !Jogo.Aux.inimigosVivos(inimigos);
+                    if (heroiVenceuAposInimigo) {
+                        heroi.adicionarOuro(40);
+                    }
+                    Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                    break;
+                }
+
+                Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+
                 if (verficaEfeitos()){
                     aplicaEfeitos();
+
+                    if (Jogo.Aux.verificarFimDeJogo(heroi, inimigos)) {
+                        boolean heroiVenceuAposEfeitos = heroi.estaVivo() && !Jogo.Aux.inimigosVivos(inimigos);
+                        if (heroiVenceuAposEfeitos) {
+                            heroi.adicionarOuro(40);
+                        }
+                        Prints.PrintsMain.digiteParaContinuar(inputs, 0);
+                        break;
+                    }
                 }
 
                 System.out.println();
@@ -135,6 +157,10 @@ public class Batalha extends Evento {
             Jogo.Aux.limparTela();
             Prints.PrintsMain.printNovoRound(contadorRound);
             PrintsMain.printStatus(heroi, inimigos);
+
+            if (heroi.getBonusDanoProximaLuta() > 0) {
+                System.out.println("Dano extra ativo: +" + heroi.getBonusDanoProximaLuta() + " dano em todos os ataques nesta luta");
+            }
 
             mostrarEfeitos();
 
@@ -343,9 +369,7 @@ public class Batalha extends Evento {
         System.out.println("🧪 Os efeitos estão agindo...");
         Jogo.Aux.esperar(300);
         juiz.notificarSubscribers();
-        if (!Jogo.Aux.inimigosVivos(inimigos)) {
-            Jogo.Aux.limparTela();
-            Prints.PrintsMain.printHeroiVenceu(heroi);
+        if (!heroi.estaVivo() || !Jogo.Aux.inimigosVivos(inimigos)) {
             return;
         }
 
@@ -422,22 +446,15 @@ public class Batalha extends Evento {
 
             System.out.println("\n💰 Ouro atual: " + heroi.getOuro());
 
-            System.out.println("\nEscolha seu próximo desafio:");
+            System.out.println("\nEscolha seu próximo desafio ou digite [6] para ir a loja:");
             int totalFilhos = noAtual.getChildCount();
             for (int i = 0; i < totalFilhos; i ++) {
                 javax.swing.tree.DefaultMutableTreeNode filho = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(i);
                 System.out.println("[" + (i + 1) + "] " + filho.getUserObject());
             }
-
             int escolhaMenu = inputs.nextInt();
             if (escolhaMenu == 6) {
                 abrirLoja();
-                nivelAtual--; 
-                continue;
-            }
-
-            if (escolhaMenu < 1 || escolhaMenu > totalFilhos) {
-                System.out.println("⚠️ Opção inválida!");
                 nivelAtual--; 
                 continue;
             }
@@ -481,9 +498,6 @@ public class Batalha extends Evento {
 
             heroi.limparFimLuta();
             noAtual = proximoNo;
-
-
-            PrintsMain.digiteParaContinuar(inputs, 0);
         }
     }
 
@@ -530,16 +544,9 @@ public class Batalha extends Evento {
                 } else {
                     System.out.println("\n❌ Ouro insuficiente!");
                 }
-            } else {
-                System.out.println("\n⚠️ Opção inválida!");
             }
 
-            System.out.println("\nDigite 0 para continuar...");
-            int continuar = inputs.nextInt();
-            while (continuar != 0) {
-                System.out.print("⚠️ Valor inválido! Digite 0 para continuar: ");
-                continuar = inputs.nextInt();
-            }
+            PrintsMain.digiteParaContinuar(inputs, 0);
         }
     }
 

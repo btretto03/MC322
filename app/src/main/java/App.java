@@ -34,7 +34,8 @@ public class App {
      * @param args argumentos de linha de comando (nao utilizados)
      */
     public static void main(String[] args)  {
-        //Prints.PrintsMain.printInicial2();
+        Aux.limparTela();
+        Prints.PrintsMain.printInicial2();
         Aux.limparTela();
         int modo = Batalha.modoDeJogo(inputs);
         Jogo.Aux.limparTela();

@@ -91,8 +91,6 @@ public class Inimigo extends Entidade {
 
         int vidaRemovida = vidaAnterior - alvo.getVida();
         int escudoRemovido = escudoAnterior - alvo.getEscudo();
-        
-        PrintsMain.printAcoesInimigo(this.getNome(), this.dano, this.escudo, vidaRemovida, escudoRemovido);
 
         if (this.escudo > 0) {
             Prints.AnimacaoLuta.animarDefesaInimigo(alvo, inimigos, indice);
@@ -101,6 +99,8 @@ public class Inimigo extends Entidade {
         else if (this.dano > 0) {
             Prints.AnimacaoLuta.animarGolpeInimigo(alvo, inimigos, indice);
         }
+
+        PrintsMain.printAcoesInimigo(this.getNome(), this.dano, this.escudo, vidaRemovida, escudoRemovido);
 
         this.dano = 0;
         this.escudo = 0;
