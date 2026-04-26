@@ -46,8 +46,9 @@ public class Aux {
             if(inimigos.size() > 1){
                 Prints.PrintsMain.printEscolhaAlvo(inimigos);
                 int inimigoEscolhido = inputs.nextInt();
+                Inimigo alvoEscolhido = inimigos.get(inimigoEscolhido - 1);
 
-                if (inimigoEscolhido != 1 && inimigoEscolhido != 2){
+                if (inimigoEscolhido != 1 && inimigoEscolhido != 2 || !alvoEscolhido.estaVivo()){
                     System.out.println("⚠️ Opção inválida!");
                     continue;
                 }
