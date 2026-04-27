@@ -501,6 +501,41 @@ public class PrintsMain {
         }
     }
 
+    public static void printDescobriuCaixa (){
+        try{
+            InputStream arquivo = PrintsMain.class.getClassLoader().getResourceAsStream("Caixa.txt");
+            if (arquivo == null){
+                throw new FileNotFoundException();
+            }
+            Scanner leitor = new Scanner(arquivo);
+            while (leitor.hasNextLine()) {
+                String linha = leitor.nextLine();
+                System.out.println(linha);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo de arte não encontrado");
+        }
+    }
+
+    public static void printResultadoCaixa (int resultado){
+        try{
+            String textoResultado = String.format("CaixaResultado", resultado, ".txt");
+            InputStream arquivo = PrintsMain.class.getClassLoader().getResourceAsStream(textoResultado);
+            if (arquivo == null){
+                throw new FileNotFoundException();
+            }
+            Scanner leitor = new Scanner(arquivo);
+            while (leitor.hasNextLine()) {
+                String linha = leitor.nextLine();
+                System.out.println(linha);
+            }
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo de arte não encontrado");
+        }
+    }
+
     /**
      * Exibe menu para selecao de alvo entre inimigos vivos.
      *
