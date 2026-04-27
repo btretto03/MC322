@@ -469,6 +469,16 @@ public class Batalha extends Evento {
             javax.swing.tree.DefaultMutableTreeNode proximoNo = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(escolha);
             String nomeOponente = proximoNo.toString();
 
+            if (nomeOponente.contains("BOX -> ")){
+                Escolha boxSurpresa = new Escolha(inputs);
+                Jogo.Aux.limparTela();
+                boxSurpresa.iniciar(heroi, pilhaCompra, pilhaDescarte);
+                
+                if (nomeOponente.contains("BOX -> ")){
+                    nomeOponente.replace("BOX -> ", "");
+                }
+            }
+
             torneioCaminho.add(escolha);
 
             if (nivelAtual == 3) {

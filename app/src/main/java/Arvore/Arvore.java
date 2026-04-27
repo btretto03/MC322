@@ -51,8 +51,8 @@ public class Arvore {
         this.raiz.add(n1);
         this.raiz.add(n2);
         DefaultMutableTreeNode n3 = new DefaultMutableTreeNode("C. Mcgregor");
-        DefaultMutableTreeNode n4 = new DefaultMutableTreeNode("C. Sonnen");
-        DefaultMutableTreeNode n5 = new DefaultMutableTreeNode("W. Silva");
+        DefaultMutableTreeNode n4 = new DefaultMutableTreeNode("BOX -> C. Sonnen");
+        DefaultMutableTreeNode n5 = new DefaultMutableTreeNode("BOX -> W. Silva");
         DefaultMutableTreeNode n6 = new DefaultMutableTreeNode("V. Belfort");
         
         n1.add(n3);
@@ -60,13 +60,14 @@ public class Arvore {
         n2.add(n5);
         n2.add(n6);
 
-        DefaultMutableTreeNode n7_caminhoConor = new DefaultMutableTreeNode("Jon Jones");
+        DefaultMutableTreeNode n7_caminhoConor = new DefaultMutableTreeNode("BOX -> Jon Jones");
         DefaultMutableTreeNode n7_caminhoSonnen = new DefaultMutableTreeNode("Jon Jones");
         DefaultMutableTreeNode n8_caminhoWanderlei = new DefaultMutableTreeNode("Bruce Lee");
-        DefaultMutableTreeNode n8_caminhoVitor = new DefaultMutableTreeNode("Bruce Lee");
+        DefaultMutableTreeNode n8_caminhoVitor = new DefaultMutableTreeNode("BOX -> Bruce Lee");
 
         n3.add(n7_caminhoConor);
         n4.add(n7_caminhoSonnen); 
+        
         n5.add(n8_caminhoWanderlei);
         n6.add(n8_caminhoVitor);
 

@@ -520,7 +520,7 @@ public class PrintsMain {
 
     public static void printResultadoCaixa (int resultado){
         try{
-            String textoResultado = String.format("CaixaResultado", resultado, ".txt");
+            String textoResultado = String.format("CaixaResultado%d.txt", resultado);
             InputStream arquivo = PrintsMain.class.getClassLoader().getResourceAsStream(textoResultado);
             if (arquivo == null){
                 throw new FileNotFoundException();
