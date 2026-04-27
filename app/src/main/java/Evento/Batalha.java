@@ -447,8 +447,8 @@ public class Batalha extends Evento {
             nivelAtual ++;
             Jogo.Aux.limparTela();
             if (nivelAtual > 1) {
-             mapa.imprimirArvoreProgresso(noAtual.toString());
-        }
+                mapa.imprimirArvoreProgresso(noAtual.toString());
+            }
 
             System.out.println("\n💰 Ouro atual: " + heroi.getOuro());
 
@@ -456,7 +456,11 @@ public class Batalha extends Evento {
             int totalFilhos = noAtual.getChildCount();
             for (int i = 0; i < totalFilhos; i ++) {
                 javax.swing.tree.DefaultMutableTreeNode filho = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(i);
-                System.out.println("[" + (i + 1) + "] " + filho.getUserObject());
+                String textoOpcao = filho.getUserObject().toString();
+                if (textoOpcao.contains("BOX -> ")) {
+                    textoOpcao = "📦BOX SURPRESA -> " + textoOpcao.replace("BOX -> ", "").trim();
+                }
+                System.out.println("[" + (i + 1) + "] " + textoOpcao);
             }
             int escolhaMenu = inputs.nextInt();
             if (escolhaMenu == 6) {
@@ -469,14 +473,12 @@ public class Batalha extends Evento {
             javax.swing.tree.DefaultMutableTreeNode proximoNo = (javax.swing.tree.DefaultMutableTreeNode) noAtual.getChildAt(escolha);
             String nomeOponente = proximoNo.toString();
 
-            if (nomeOponente.contains("BOX -> ")){
+            if (nomeOponente.contains("BOX -> ")) {
                 Escolha boxSurpresa = new Escolha(inputs);
                 Jogo.Aux.limparTela();
                 boxSurpresa.iniciar(heroi, pilhaCompra, pilhaDescarte);
-                
-                if (nomeOponente.contains("BOX -> ")){
-                    nomeOponente.replace("BOX -> ", "");
-                }
+
+                nomeOponente = nomeOponente.replace("BOX -> ", "").trim();
             }
 
             torneioCaminho.add(escolha);
@@ -488,7 +490,7 @@ public class Batalha extends Evento {
                 }  else {  //direita
                     direcao = 0;
                 }
-                lutadorIgnorado = noAtual.getChildAt(direcao).toString();
+                lutadorIgnorado = noAtual.getChildAt(direcao).toString().replace("BOX -> ", "").trim();
             }
 
             torneioNivelAtual = nivelAtual;
