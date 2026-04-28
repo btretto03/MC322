@@ -16,14 +16,13 @@ public class Escolha extends Evento {
 	@Override
 	public void iniciar(Heroi heroi, ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte) {
         Prints.PrintsMain.printDescobriuCaixa();
-		int escolha = input.nextInt();
-
+		
 		while (true){
+			int escolha = input.nextInt();
 			if (escolha == 1){
 				this.abrirCaixa(heroi);
 				break;
 			} else if (escolha == 2){
-				input.close();
 				return;
 			} else {
 				System.out.println("⚠️ Escolha inválida");
