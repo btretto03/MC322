@@ -153,7 +153,40 @@ Um sistema de loja foi implementado ao mapa, podendo ser acessada à qualquer mo
 
 ### Box surpresa
 Ao longo do mapa, forma adicionadas caixas. Ao passar por uma caixa, o jogador tem a opção de abri-la ou não. A caixa pode retornar resultados tanto positivos quanto negativos. 
-A Caixa está implementada na classe Escolha.java.
+A Caixa está implementada na classe Escolha.java. Foi adotado o padrão de projeto **Strategy**, onde cada consequência possível da caixa é uma estratégia independente.
+
+```mermaid
+classDiagram
+    direction TB
+    class Evento {
+        <<abstract>>
+        +iniciar()
+    }
+    
+    class Escolha {
+        -Scanner input
+        +iniciar()
+        +abrirCaixa(Heroi heroi)
+    }
+    
+    class EfeitoCaixa {
+        <<interface>>
+        +aplicar(Heroi heroi)
+    }
+    
+    class EfeitoCura {
+        +aplicar(Heroi heroi)
+    }
+    
+    class EfeitoDano {
+        +aplicar(Heroi heroi)
+    }
+    
+    Evento <|-- Escolha
+    Escolha --> EfeitoCaixa : strategy
+    EfeitoCaixa <|.. EfeitoCura
+    EfeitoCaixa <|.. EfeitoDano
+```
 
 ### Recompensas
 Ao final de cada batalha vencida, o herói recebe uma quantidade de ouro, que pode ser gasto na loja.
