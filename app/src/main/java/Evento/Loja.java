@@ -8,7 +8,7 @@ import Entidades.Heroi;
 import Jogo.Aux;
 import Prints.PrintsMain;
 
-public class Loja extends Evento {
+public class Loja extends Evento { //utilizarei o padrao strateegy
     private Heroi heroi;
     private Scanner inputs;
 
@@ -29,38 +29,37 @@ public class Loja extends Evento {
                 return;
             }
 
+            CompraLoja efeito;
+            int preco;
+            String mensagem;
             if (escolha == 1) { // energetico
-                if (this.heroi.getOuro() >= 50) {
-                    this.heroi.setOuro(this.heroi.getOuro() - 50);
-                    this.heroi.setVida(this.heroi.getVida() + 10);
-                    System.out.println("\n✅ Você comprou um Energético! (+10 Vida)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
+                efeito = new CompraEnergetico();
+                preco = 50;
+                mensagem = "\n✅ Você comprou um Energético! (+10 Vida)";
             } else if (escolha == 2) { // bandagem
-                if (this.heroi.getOuro() >= 80) {
-                    this.heroi.setOuro(this.heroi.getOuro() - 80);
-                    this.heroi.setBonusDanoProximaLuta(3);
-                    System.out.println("\n✅ Você comprou uma Bandagem! (+3 dano em todos ataques na próxima luta)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
+                efeito = new CompraBandagem();
+                preco = 80;
+                mensagem = "\n✅ Você comprou uma Bandagem! (+3 dano em todos ataques na próxima luta)";
             } else if (escolha == 3) { // protetor
-                if (this.heroi.getOuro() >= 60) {
-                    this.heroi.setOuro(this.heroi.getOuro() - 60);
-                    this.heroi.setEscudoInicioProximaLuta(15);
-                    System.out.println("\n✅ Você comprou um Protetor! (+15 escudo no 1º round da próxima luta)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
+                efeito = new CompraProtetor();
+                preco = 60;
+                mensagem = "\n✅ Você comprou um Protetor! (+15 escudo no 1º round da próxima luta)";
             } else if (escolha == 4) { // kit + vida
-                if (this.heroi.getOuro() >= 120) {
-                    this.heroi.setOuro(this.heroi.getOuro() - 120);
-                    this.heroi.setVida(this.heroi.getVida() + 20);
-                    System.out.println("\n✅ Você comprou um Kit Premium! (+20 Vida)");
-                } else {
-                    System.out.println("\n❌ Ouro insuficiente!");
-                }
+                efeito = new CompraKitPremium();
+                preco = 120;
+                mensagem = "\n✅ Você comprou um Kit Premium! (+20 Vida)";
+            } else {
+                System.out.println("⚠️ Escolha inválida");
+                PrintsMain.digiteParaContinuar(inputs, 0);
+                continue;
+            }
+
+            if (this.heroi.getOuro() >= preco) {
+                this.heroi.setOuro(this.heroi.getOuro() - preco);
+                efeito.aplicar(this.heroi);
+                System.out.println(mensagem);
+            } else {
+                System.out.println("\n❌ Ouro insuficiente!");
             }
 
             PrintsMain.digiteParaContinuar(inputs, 0);
