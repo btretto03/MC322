@@ -191,11 +191,6 @@ classDiagram
     EfeitoCaixa <|.. EfeitoDano
 ```
 
-### Recompensas
-Ao final de cada batalha vencida, o herói recebe uma quantidade de ouro, que pode ser gasto na loja.
-
-
-
 
 ## Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
@@ -230,10 +225,13 @@ Ao final de cada batalha vencida, o herói recebe uma quantidade de ouro, que po
 │       │   │   │   ├── Heroi.java
 │       │   │   │   └── Inimigo.java
 │       │   │   ├── Evento
-│       │   │   │   ├── Batalha.java
-│       │   │   │   ├── Escolha.java
-│       │   │   │   ├── Evento.java
-│       │   │   │   └── Loja.java
+|       |   |   |   ├── AplicarCaixa.java
+|       |   |   |   ├── Batalha.java
+|       |   |   |   ├── CaixaDano.java
+|       |   |   |   ├── CaixaVida.java
+|       |   |   |   ├── Escolha.java
+|       |   |   |   ├── Evento.java
+|       |   |   |   └── Loja.java
 │       │   │   ├── Jogo
 │       │   │   │   ├── Aux.java
 │       │   │   │   ├── Publisher.java
