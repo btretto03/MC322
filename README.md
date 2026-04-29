@@ -146,14 +146,17 @@ Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso
 ---
 
 ## Tarefa 6
-Nessa tarefa foram implementadas novas dinâmicas para o jogo, aumentando sua complexidade e jogabilidade.
+O foco principal da Tarefa 6 foi expandir a dinâmica do jogo. Para isso, adicionamos dois novos elementos de progressão ao longo da campanha: uma loja interativa e caixas surpresa espalhadas pelo mapa. Também introduzimos um sistema de recompensa, no qual o jogador é recompensado com moedas de ouro após cada vitória, podendo utilizá-las para adquirir melhorias na loja.
 
 ### Loja
-Um sistema de loja foi implementado ao mapa, podendo ser acessada à qualquer momento entre batalhas. Nela, o jogador pode comprar itens que deem vantagens para seu herói na(s) próxima(s) batalha(s).
+A loja pode ser visitada a qualquer momento enquanto o jogador navega pelo mapa. Lá, é possível gastar o ouro acumulado em itens que concedem vantagens estratégicas para os próximos confrontos.
+O sistema da loja foi desenvolvido na classe `Loja.java`. Em sua modelagem, utilizamos o padrão de projeto **[INSERIR PADRÃO]**, conforme ilustrado pelo diagrama UML da loja a seguir:
+
+
 
 ### Box surpresa
-Ao longo do mapa, forma adicionadas caixas. Ao passar por uma caixa, o jogador tem a opção de abri-la ou não. A caixa pode retornar resultados tanto positivos quanto negativos. 
-A Caixa está implementada na classe Escolha.java. Foi adotado o padrão de projeto **Strategy**, onde cada consequência possível da caixa é uma estratégia independente.
+As caixas surpresa são eventos aleatórios distribuídos pelos caminhos do mapa. Ao encontrar uma caixa, o jogador deve decidir se assume o risco de abri-la ou se a ignora. Caso opte por abri-la, a caixa revelará uma consequência aleatória, que pode ser positiva (como curar +15 de vida) ou negativa (como sofrer -15 de dano).
+Para organizar essa lógica de consequências, aplicamos o padrão de projeto **Strategy**. Com ele, cada possível resultado da caixa foi encapsulado em uma classe independente (uma "estratégia"). Assim, a classe principal `Escolha.java` fica responsável apenas por sortear qual estratégia será aplicada. O diagrama UML abaixo ilustra a adoção desse padrão:
 
 ```mermaid
 classDiagram
