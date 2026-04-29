@@ -1,7 +1,7 @@
-package Evento;
+package Evento.Loja;
 
 import Entidades.Heroi;
 
-public interface AplicarCaixa {
+public interface CompraLoja {
     public void aplicar(Heroi heroi);
 }

@@ -23,7 +23,7 @@ Ao finalizar a partida, o jogador pode visitar a **Loja** e gastar o ouro acumul
 - **Energético (50 ouro):** +10 de vida.
 - **Bandagem (80 ouro):** +3 de dano em todos os ataques na próxima luta.
 - **Protetor (60 ouro):** +15 de escudo no 1º round da próxima luta.
-- **Kit Premium (120 ouro):** +20 de vida.
+- **Kit Premium (90 ouro):** +20 de vida.
 
 ### 🎁 Caixa surpresa
 As caixas surpresa são eventos aleatórios pelo caminho.

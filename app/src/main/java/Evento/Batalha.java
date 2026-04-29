@@ -6,6 +6,8 @@ import java.util.Scanner;
 import Cartas.*;
 import Efeitos.*;
 import Entidades.*;
+import Evento.Caixa.Escolha;
+import Evento.Loja.Loja;
 import Jogo.Publisher;
 import Jogo.Salvamento.EstadoTorneio;
 import Jogo.Salvamento.VariaveisBatalha;

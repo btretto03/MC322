@@ -276,18 +276,20 @@ classDiagram
 │       │   │   │   ├── Heroi.java
 │       │   │   │   └── Inimigo.java
 │       │   │   ├── Evento
-|       |   |   |   ├── AplicarCaixa.java
 |       |   |   |   ├── Batalha.java
-|       |   |   |   ├── CaixaDano.java
-|       |   |   |   ├── CaixaVida.java
-|       |   |   |   ├── CompraBandagem.java
-|       |   |   |   ├── CompraEnergetico.java
-|       |   |   |   ├── CompraKitPremium.java
-|       |   |   |   ├── CompraLoja.java
-|       |   |   |   ├── CompraProtetor.java
-|       |   |   |   ├── Escolha.java
 |       |   |   |   ├── Evento.java
-|       |   |   |   └── Loja.java
+|       |   |   |   ├── Caixa
+|       |   |   |   |   ├── AplicarCaixa.java
+|       |   |   |   |   ├── CaixaDano.java
+|       |   |   |   |   ├── CaixaVida.java
+|       |   |   |   |   └── Escolha.java
+|       |   |   |   └── Loja
+|       |   |   |       ├── CompraBandagem.java
+|       |   |   |       ├── CompraEnergetico.java
+|       |   |   |       ├── CompraKitPremium.java
+|       |   |   |       ├── CompraLoja.java
+|       |   |   |       ├── CompraProtetor.java
+|       |   |   |       └── Loja.java
 │       │   │   ├── Jogo
 │       │   │   │   ├── Aux.java
 │       │   │   │   ├── Publisher.java

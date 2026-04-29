@@ -1,4 +1,4 @@
-package Evento;
+package Evento.Loja;
 
 import Entidades.Heroi;
 

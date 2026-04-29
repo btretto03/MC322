@@ -1,10 +1,11 @@
-package Evento;
+package Evento.Loja;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import Cartas.Carta;
 import Entidades.Heroi;
+import Evento.Evento;
 import Jogo.Aux;
 import Prints.PrintsMain;
 
@@ -46,7 +47,7 @@ public class Loja extends Evento { //utilizarei o padrao strateegy
                 mensagem = "\n✅ Você comprou um Protetor! (+15 escudo no 1º round da próxima luta)";
             } else if (escolha == 4) { // kit + vida
                 efeito = new CompraKitPremium();
-                preco = 120;
+                preco = 90;
                 mensagem = "\n✅ Você comprou um Kit Premium! (+20 Vida)";
             } else {
                 System.out.println("⚠️ Escolha inválida");
