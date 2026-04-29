@@ -11,7 +11,28 @@ Logo ao iniciar a execução, você poderá optar entre:
 Ao começar uma campanha, você avança por uma árvore de desafios escolhendo o próximo oponente.
 O jogo usa suas escolhas para montar a próxima luta (e em certas fases existe um “lutador ignorado”, mostrado em eventos específicos).
 
-## 💾 Salvamento e carregament
+## 🪙 Eventos
+Durante a progressão no torneio, você pode encontrar eventos especiais no caminho.
+
+### 🪙 Ouro
+- Ao vencer lutas, você recebe **moedas de ouro** (+40 por vitória).
+- Esse ouro pode ser usado para comprar melhorias na loja.
+
+### 🛒 Loja
+Ao finalizar a partida, o jogador pode visitar a **Loja** e gastar o ouro acumulado nos seguintes itens:
+- **Energético (50 ouro):** +10 de vida.
+- **Bandagem (80 ouro):** +3 de dano em todos os ataques na próxima luta.
+- **Protetor (60 ouro):** +15 de escudo no 1º round da próxima luta.
+- **Kit Premium (120 ouro):** +20 de vida.
+
+### 🎁 Caixa surpresa
+As caixas surpresa são eventos aleatórios pelo caminho.
+- Ao encontrar uma caixa, você decide se deseja abri-la ou ignorá-la.
+- Ao abrir, a caixa sorteia uma consequência:
+	- **Positiva:** curar +15 de vida.
+	- **Negativa:** sofrer -15 de vida.
+
+## 💾 Salvamento e carregamento
 Quando você escolhe carrega um jogo salvo, o jogo:
 1. Restaura a luta do ponto exato do save.
 2. Após terminar a luta carregada, continua o torneio do mesmo ponto.
