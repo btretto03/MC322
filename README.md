@@ -16,6 +16,7 @@ Para entender as regras da luta, os atributos das cartas e como funciona o siste
 - [Tarefa 3](#tarefa-3)
 - [Tarefa 4](#tarefa-4)
 - [Tarefa 5](#tarefa-5)
+- [Tarefa 6](#tarefa-6)
 - [🪜 Estrutura do projeto](#Estrutura-do-projeto)
 - [🚀 Como compilar e executar](#Como-compilar-e-executar)
 
@@ -149,14 +150,64 @@ Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso
 O foco principal da Tarefa 6 foi expandir a dinâmica do jogo. Para isso, adicionamos dois novos elementos de progressão ao longo da campanha: uma loja interativa e caixas surpresa espalhadas pelo mapa. Também introduzimos um sistema de recompensa, no qual o jogador é recompensado com moedas de ouro após cada vitória, podendo utilizá-las para adquirir melhorias na loja.
 
 ### Loja
-A loja pode ser visitada a qualquer momento enquanto o jogador navega pelo mapa. Lá, é possível gastar o ouro acumulado em itens que concedem vantagens estratégicas para os próximos confrontos.
-O sistema da loja foi desenvolvido na classe `Loja.java`. Em sua modelagem, utilizamos o padrão de projeto **[INSERIR PADRÃO]**, conforme ilustrado pelo diagrama UML da loja a seguir:
+A loja pode ser visitada a qualquer momento em que o jogador está no mapa de progressão. Lá, é possível gastar o ouro acumulado em itens que concedem bônus variados para os próximos confrontos.
+O sistema da loja foi desenvolvido na classe `Loja.java`. Para organizar a lógica dos itens, aplicamos o padrão de projeto **Strategy**. Com ele, cada item da loja foi encapsulado em uma classe independente, responsável apenas por aplicar seu efeito no herói. Assim, a classe principal `Loja.java` fica responsável por validar a escolha do jogador, verificar se há ouro suficiente e então escolher qual estratégia será aplicada.
+
+Fonte consultada: https://refactoring.guru/design-patterns/strategy
+
+O diagrama UML abaixo ilustra a adoção desse padrão:
+
+```mermaid
+classDiagram
+    direction TB
+
+    class Evento {
+        <<abstract>>
+        +iniciar()
+    }
+
+    class Loja {
+        -Heroi heroi
+        -Scanner inputs
+        +iniciar()
+    }
+
+    class CompraLoja {
+        <<interface>>
+        +aplicar(Heroi heroi)
+    }
+
+    class CompraEnergetico {
+        +aplicar(Heroi heroi)
+    }
+
+    class CompraBandagem {
+        +aplicar(Heroi heroi)
+    }
+
+    class CompraProtetor {
+        +aplicar(Heroi heroi)
+    }
+
+    class CompraKitPremium {
+        +aplicar(Heroi heroi)
+    }
+
+    Evento <|-- Loja
+    Loja --> CompraLoja : strategy
+    CompraLoja <|.. CompraEnergetico
+    CompraLoja <|.. CompraBandagem
+    CompraLoja <|.. CompraProtetor
+    CompraLoja <|.. CompraKitPremium
+```
 
 
 
 ### Box surpresa
 As caixas surpresa são eventos aleatórios distribuídos pelos caminhos do mapa. Ao encontrar uma caixa, o jogador deve decidir se assume o risco de abri-la ou se a ignora. Caso opte por abri-la, a caixa revelará uma consequência aleatória, que pode ser positiva (como curar +15 de vida) ou negativa (como sofrer -15 de dano).
 Para organizar essa lógica de consequências, aplicamos o padrão de projeto **Strategy**. Com ele, cada possível resultado da caixa foi encapsulado em uma classe independente (uma "estratégia"). Assim, a classe principal `Escolha.java` fica responsável apenas por sortear qual estratégia será aplicada. O diagrama UML abaixo ilustra a adoção desse padrão:
+
+Fonte consultada: https://refactoring.guru/design-patterns/strategy
 
 ```mermaid
 classDiagram
@@ -229,6 +280,11 @@ classDiagram
 |       |   |   |   ├── Batalha.java
 |       |   |   |   ├── CaixaDano.java
 |       |   |   |   ├── CaixaVida.java
+|       |   |   |   ├── CompraBandagem.java
+|       |   |   |   ├── CompraEnergetico.java
+|       |   |   |   ├── CompraKitPremium.java
+|       |   |   |   ├── CompraLoja.java
+|       |   |   |   ├── CompraProtetor.java
 |       |   |   |   ├── Escolha.java
 |       |   |   |   ├── Evento.java
 |       |   |   |   └── Loja.java
@@ -321,4 +377,3 @@ classDiagram
 
 > A documentação gerada fica em `app/build/docs/javadoc/index.html`.
 > Para consultar o reultado dos testes: `app/build/reports/jacoco/index.html`.
-
