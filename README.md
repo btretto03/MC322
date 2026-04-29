@@ -143,6 +143,23 @@ Introduzimos também testes unitários utilizando **JUnit**.
 ### Salvamento dos dados (JSON)
 Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso o jogador opte por sair do jogo pelo menu interativo, seu progresso atual (incluindo vida, cartas do baralho e posição exata na árvore) é serializado e salvo em um arquivo **JSON**. Ao reiniciar a aplicação, os dados são carregados para que a luta continue do ponto em que parou.
 
+---
+
+## Tarefa 6
+Nessa tarefa foram implementadas novas dinâmicas para o jogo, aumentando sua complexidade e jogabilidade.
+
+### Loja
+Um sistema de loja foi implementado ao mapa, podendo ser acessada à qualquer momento entre batalhas. Nela, o jogador pode comprar itens que deem vantagens para seu herói na(s) próxima(s) batalha(s).
+
+### Box surpresa
+Ao longo do mapa, forma adicionadas caixas. Ao passar por uma caixa, o jogador tem a opção de abri-la ou não. A caixa pode retornar resultados tanto positivos quanto negativos. 
+A Caixa está implementada na classe Escolha.java.
+
+### Recompensas
+Ao final de cada batalha vencida, o herói recebe uma quantidade de ouro, que pode ser gasto na loja.
+
+
+
 
 ## Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
@@ -150,25 +167,15 @@ Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso
 .
 ├── app
 │   ├── bin/
-│   ├── build
-│   │   ├── classes (.class files)
-│   │   ├── docs
-│   │   │   └── javadoc
-│   │   ├── resources
-│   │   │   └── main
-│   │   │       ├── Arvore.txt
-│   │   │       ├── Derrota.txt
-│   │   │       ├── Heroi.txt
-│   │   │       ├── Inimigo.txt
-│   │   │       ├── Inimigo2.txt
-│   │   │       ├── Printinicial.txt
-│   │   │       └── Vitoria.txt
+│   ├── build/
 │   ├── build.gradle
+│   ├── save.json
+│   ├── saveTorneio.json
 │   └── src
 │       ├── main
 │       │   ├── java
 │       │   │   ├── App.java
-│       │   │   ├── Arvore/
+│       │   │   ├── Arvore
 │       │   │   │   └── Arvore.java
 │       │   │   ├── Cartas
 │       │   │   │   ├── CartaDano.java
@@ -186,46 +193,78 @@ Como funcionalidade extra, implementamos o salvamento do estado da partida. Caso
 │       │   │   │   ├── Entidade.java
 │       │   │   │   ├── Heroi.java
 │       │   │   │   └── Inimigo.java
+│       │   │   ├── Evento
+│       │   │   │   ├── Batalha.java
+│       │   │   │   ├── Escolha.java
+│       │   │   │   ├── Evento.java
+│       │   │   │   └── Loja.java
 │       │   │   ├── Jogo
 │       │   │   │   ├── Aux.java
-│       │   │   │   ├── Batalha.java
 │       │   │   │   ├── Publisher.java
-│       │   │   │   └── Salvamento/
+│       │   │   │   └── Salvamento
 │       │   │   │       ├── CartaSalva.java
 │       │   │   │       ├── EstadoTorneio.java
 │       │   │   │       ├── Salvamento.java
 │       │   │   │       └── VariaveisBatalha.java
 │       │   │   └── Prints
 │       │   │       ├── AnimacaoLuta.java
+│       │   │       ├── LutaInterativa
+│       │   │       │   ├── 1vs1
+│       │   │       │   │   ├── 1heroichute.txt
+│       │   │       │   │   ├── 1heroidefesa.txt
+│       │   │       │   │   ├── 1heroisoco.txt
+│       │   │       │   │   ├── 1heroivoadora.txt
+│       │   │       │   │   ├── 1inimigochute.txt
+│       │   │       │   │   ├── 1inimigodefesa.txt
+│       │   │       │   │   └── 1inimigosoco.txt
+│       │   │       │   └── 1vs2
+│       │   │       │       ├── 2heroichute1.txt
+│       │   │       │       ├── 2heroichute2.txt
+│       │   │       │       ├── 2heroidefesa.txt
+│       │   │       │       ├── 2heroisoco1.txt
+│       │   │       │       ├── 2heroisoco2.txt
+│       │   │       │       ├── 2heroivoadora1.txt
+│       │   │       │       ├── 2heroivoadora2.txt
+│       │   │       │       ├── 2inimigo1chute.txt
+│       │   │       │       ├── 2inimigo1defesa.txt
+│       │   │       │       ├── 2inimigo1soco.txt
+│       │   │       │       ├── 2inimigo2chute.txt
+│       │   │       │       ├── 2inimigo2defesa.txt
+│       │   │       │       └── 2inimigo2soco.txt
 │       │   │       ├── PrintsEntidades.java
-│       │   │       ├── PrintsMain.java
-│       │   │       └── LutaInterativa/
-│       │   │           ├── 1vs1/
-│       │   │           └── 1vs2/
+│       │   │       └── PrintsMain.java
 │       │   └── resources
 │       │       ├── Arvore.txt
+│       │       ├── CaixaResultado1.txt
+│       │       ├── CaixaResultado2.txt
+│       │       ├── CaixaResultado3.txt
+│       │       ├── CaixaResultado4.txt
+│       │       ├── CaixaResultado5.txt
+│       │       ├── Caixa.txt
 │       │       ├── Derrota.txt
 │       │       ├── Heroi.txt
-│       │       ├── Inimigo.txt
 │       │       ├── Inimigo2.txt
+│       │       ├── Inimigo.txt
+│       │       ├── Loja.txt
 │       │       ├── Printinicial.txt
 │       │       └── Vitoria.txt
 │       └── test
 │           └── java
-|               ├── AppTest.java
-|               ├── AuxTest.java
-|               ├── BatalhaTest.java
-|               ├── CartasTest.java
-|               ├── EfeitosTest.java
-|               ├── HeroiTest.java
-|               └── SalvamentoTest.java
+│               ├── AppTest.java
+│               ├── AuxTest.java
+│               ├── BatalhaTest.java
+│               ├── CartasTest.java
+│               ├── EfeitosTest.java
+│               ├── HeroiTest.java
+│               └── SalvamentoTest.java
 ├── build/
+├── gradle/
 ├── gradle.properties
 ├── gradlew
 ├── gradlew.bat
+├── MANUAL_DO_JOGO.md
 ├── README.md
-└── settings.gradle
-```
+└── settings.gradle```
 ---
 
 ## Como compilar e executar:

@@ -12,6 +12,7 @@ public class Escolha extends Evento {
 	public Escolha (Scanner input){
 		this.input = input;
 	}
+	//Aplicar desing pattern strategy
 
 	@Override
 	public void iniciar(Heroi heroi, ArrayList<Carta> pilhaCompra, ArrayList<Carta> pilhaDescarte) {
@@ -37,25 +38,14 @@ public class Escolha extends Evento {
 		Jogo.Aux.limparTela();
 		Prints.PrintsMain.printResultadoCaixa(resultado);
 
-		switch (resultado) {
-			case 1:
-				heroi.setVida(heroi.getVida() + 15);
-				break;
-			case 2:
-				heroi.setVida(heroi.getVida() + 15);
-				break;
-			case 3:
-				heroi.setVida(heroi.getVida() - 15);
-				break;
-			case 4:
-				heroi.setVida(heroi.getVida() - 15);
-				break;
-			case 5:
-				heroi.setVida(heroi.getVida() - 15);
-				break;
-			default:
-				break;
+		AplicarCaixa efeito;
+		if (resultado <= 2) {
+			efeito = new CaixaVida();
+		} else {
+			efeito = new CaixaDano();
 		}
+		
+		efeito.aplicar(heroi);
 
 		while (input.nextInt() != 0) {
 			continue;
