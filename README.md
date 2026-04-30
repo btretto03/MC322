@@ -17,8 +17,8 @@ Para entender as regras da luta, os atributos das cartas e como funciona o siste
 - [Tarefa 4](#tarefa-4)
 - [Tarefa 5](#tarefa-5)
 - [Tarefa 6](#tarefa-6)
-- [🪜 Estrutura do projeto](#Estrutura-do-projeto)
-- [🚀 Como compilar e executar](#Como-compilar-e-executar)
+- [🪜 Estrutura do projeto](#estrutura-do-projeto)
+- [🚀 Como compilar e executar](#como-compilar-e-executar)
 
 ---
 
@@ -245,119 +245,31 @@ classDiagram
 
 ## Estrutura do projeto
 > - Diagrama simplificado da estrutura de pastas do projeto, indicando o caminho para arquivos essenciais.
-```
+```text
 .
 ├── app
-│   ├── bin/
-│   ├── build/
 │   ├── build.gradle
-│   ├── save.json
-│   ├── saveTorneio.json
+│   ├── save.json / saveTorneio.json
 │   └── src
 │       ├── main
 │       │   ├── java
-│       │   │   ├── App.java
-│       │   │   ├── Arvore
-│       │   │   │   └── Arvore.java
-│       │   │   ├── Cartas
-│       │   │   │   ├── CartaDano.java
-│       │   │   │   ├── CartaEfeito.java
-│       │   │   │   ├── CartaEscudo.java
-│       │   │   │   └── Carta.java
-│       │   │   ├── Efeitos
-│       │   │   │   ├── Adrenalina.java
-│       │   │   │   ├── Efeitos.java
-│       │   │   │   ├── Nocaute.java
-│       │   │   │   ├── Provocacao.java
-│       │   │   │   ├── Sangramento.java
-│       │   │   │   └── Subscriber.java
-│       │   │   ├── Entidades
-│       │   │   │   ├── Entidade.java
-│       │   │   │   ├── Heroi.java
-│       │   │   │   └── Inimigo.java
-│       │   │   ├── Evento
-|       |   |   |   ├── Batalha.java
-|       |   |   |   ├── Evento.java
-|       |   |   |   ├── Caixa
-|       |   |   |   |   ├── AplicarCaixa.java
-|       |   |   |   |   ├── CaixaDano.java
-|       |   |   |   |   ├── CaixaVida.java
-|       |   |   |   |   └── Escolha.java
-|       |   |   |   └── Loja
-|       |   |   |       ├── CompraBandagem.java
-|       |   |   |       ├── CompraEnergetico.java
-|       |   |   |       ├── CompraKitPremium.java
-|       |   |   |       ├── CompraLoja.java
-|       |   |   |       ├── CompraProtetor.java
-|       |   |   |       └── Loja.java
-│       │   │   ├── Jogo
-│       │   │   │   ├── Aux.java
-│       │   │   │   ├── Publisher.java
-│       │   │   │   └── Salvamento
-│       │   │   │       ├── CartaSalva.java
-│       │   │   │       ├── EstadoTorneio.java
-│       │   │   │       ├── Salvamento.java
-│       │   │   │       └── VariaveisBatalha.java
-│       │   │   └── Prints
-│       │   │       ├── AnimacaoLuta.java
-│       │   │       ├── LutaInterativa
-│       │   │       │   ├── 1vs1
-│       │   │       │   │   ├── 1heroichute.txt
-│       │   │       │   │   ├── 1heroidefesa.txt
-│       │   │       │   │   ├── 1heroisoco.txt
-│       │   │       │   │   ├── 1heroivoadora.txt
-│       │   │       │   │   ├── 1inimigochute.txt
-│       │   │       │   │   ├── 1inimigodefesa.txt
-│       │   │       │   │   └── 1inimigosoco.txt
-│       │   │       │   └── 1vs2
-│       │   │       │       ├── 2heroichute1.txt
-│       │   │       │       ├── 2heroichute2.txt
-│       │   │       │       ├── 2heroidefesa.txt
-│       │   │       │       ├── 2heroisoco1.txt
-│       │   │       │       ├── 2heroisoco2.txt
-│       │   │       │       ├── 2heroivoadora1.txt
-│       │   │       │       ├── 2heroivoadora2.txt
-│       │   │       │       ├── 2inimigo1chute.txt
-│       │   │       │       ├── 2inimigo1defesa.txt
-│       │   │       │       ├── 2inimigo1soco.txt
-│       │   │       │       ├── 2inimigo2chute.txt
-│       │   │       │       ├── 2inimigo2defesa.txt
-│       │   │       │       └── 2inimigo2soco.txt
-│       │   │       ├── PrintsEntidades.java
-│       │   │       └── PrintsMain.java
-│       │   └── resources
-│       │       ├── Arvore.txt
-│       │       ├── CaixaResultado1.txt
-│       │       ├── CaixaResultado2.txt
-│       │       ├── CaixaResultado3.txt
-│       │       ├── CaixaResultado4.txt
-│       │       ├── CaixaResultado5.txt
-│       │       ├── Caixa.txt
-│       │       ├── Derrota.txt
-│       │       ├── Heroi.txt
-│       │       ├── Inimigo2.txt
-│       │       ├── Inimigo.txt
-│       │       ├── Loja.txt
-│       │       ├── Printinicial.txt
-│       │       └── Vitoria.txt
-│       └── test
-│           └── java
-│               ├── AppTest.java
-│               ├── AuxTest.java
-│               ├── BatalhaTest.java
-│               ├── CartasTest.java
-│               ├── EfeitosTest.java
-│               ├── HeroiTest.java
-│               └── SalvamentoTest.java
-├── build/
-├── gradle/
+│       │   │   ├── App.java (Ponto de entrada)
+│       │   │   ├── Arvore/
+│       │   │   ├── Cartas/      # Lógica de dano, escudo e efeitos
+│       │   │   ├── Efeitos/     # Sangramento, adrenalina, nocaute, etc.
+│       │   │   ├── Entidades/   # Classes Heroi e Inimigo
+│       │   │   ├── Evento/      # Sistema de batalha, loja e caixas
+│       │   │   ├── Jogo/        # Sistema de salvamento e publishers
+│       │   │   └── Prints/      # Lógica de renderização da luta no terminal
+│       │   └── resources/       # Arquivos .txt das animações e telas
+│       └── test/                # Testes unitários das regras de negócio
+├── build.gradle
 ├── gradle.properties
-├── gradlew
-├── gradlew.bat
+├── gradlew / gradlew.bat
 ├── MANUAL_DO_JOGO.md
-├── README.md
-└── settings.gradle```
----
+└── README.md
+
+```
 
 ## Como compilar e executar:
 > **Requisitos mínimos**
