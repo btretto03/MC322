@@ -253,16 +253,16 @@ classDiagram
 │   └── src
 │       ├── main
 │       │   ├── java
-│       │   │   ├── App.java (Ponto de entrada)
+│       │   │   ├── App.java
 │       │   │   ├── Arvore/
 │       │   │   ├── Cartas/      # Lógica de dano, escudo e efeitos
 │       │   │   ├── Efeitos/     # Sangramento, adrenalina, nocaute, etc.
 │       │   │   ├── Entidades/   # Classes Heroi e Inimigo
 │       │   │   ├── Evento/      # Sistema de batalha, loja e caixas
 │       │   │   ├── Jogo/        # Sistema de salvamento e publishers
-│       │   │   └── Prints/      # Lógica de renderização da luta no terminal
+│       │   │   └── Prints/      # Lógica de prints da luta no terminal
 │       │   └── resources/       # Arquivos .txt das animações e telas
-│       └── test/                # Testes unitários das regras de negócio
+│       └── test/                # Testes unitários
 ├── build.gradle
 ├── gradle.properties
 ├── gradlew / gradlew.bat
