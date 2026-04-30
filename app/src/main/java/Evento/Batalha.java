@@ -449,7 +449,11 @@ public class Batalha extends Evento {
             nivelAtual ++;
             Jogo.Aux.limparTela();
             if (nivelAtual > 1) {
-                mapa.imprimirArvoreProgresso(noAtual.toString());
+                String auxiliar = noAtual.toString();
+                if (noAtual.toString().contains("BOX -> ")){
+                    auxiliar = noAtual.toString().replace("BOX -> ", "").trim();
+                }
+                mapa.imprimirArvoreProgresso(auxiliar);
             }
 
             System.out.println("\n💰 Ouro atual: " + heroi.getOuro());
